@@ -1,5 +1,6 @@
 package groep1;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -9,12 +10,12 @@ import org.junit.Test;
  */
 public class AppTest 
 {
-    /**
+    /*
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
+    public void firebaseCredsDoExist()
     {
-        assertTrue( true );
+        assertNotNull(getClass().getResourceAsStream("/firebase-creds.json"));
     }
 }
