@@ -1,17 +1,16 @@
 package counterfeiters;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class FileTest
 {
     /*
-     * Rigorous Test :-)
+     * Test if the firebase credits do exist
      */
     @Test
     public void firebaseCredsDoExist()
