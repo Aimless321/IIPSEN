@@ -1,4 +1,4 @@
-package groep1;
+package counterfeiters;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
