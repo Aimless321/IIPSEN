@@ -66,10 +66,19 @@
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
+          <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <configuration>
+                  <archive>
+                      <manifest>
+                          <mainClass>counterfeiters.main.App</mainClass>
+                      </manifest>
+                  </archive>
+                  <descriptorRefs>
+                      <descriptorRef>jar-with-dependencies</descriptorRef>
+                  </descriptorRefs>
+              </configuration>
+          </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
@@ -90,13 +99,15 @@
       </plugins>
     </pluginManagement>
 
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-      <testResource>
-        <directory>${project.basedir}/resources</directory>
-      </testResource>
-    </testResources>
+
+    <resources>
+      <resource>
+        <directory>resources</directory>
+      </resource>
+
+      <resource>
+        <directory>src/main/java/counterfeiters/views</directory>
+      </resource>
+    </resources>
   </build>
 </project>
