@@ -1,8 +1,5 @@
 package counterfeiters.events;
 
-import counterfeiters.models.LotteryTicket;
-
-import javax.swing.text.html.ImageView;
 import java.util.ArrayList;
 
 public class EventHandler {
