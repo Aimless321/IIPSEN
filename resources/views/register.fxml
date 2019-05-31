@@ -26,7 +26,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Button" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Register" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressRegister">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
