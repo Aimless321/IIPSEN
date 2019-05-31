@@ -15,7 +15,7 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) {
-        new RegisterView(primaryStage);
+        new LoginView(primaryStage);
 
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Counterfeiters");
