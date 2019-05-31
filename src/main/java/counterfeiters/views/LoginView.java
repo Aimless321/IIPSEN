@@ -22,7 +22,7 @@ public class LoginView implements Observer {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/register.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/login.fxml", stage);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
