@@ -1,19 +1,13 @@
 package counterfeiters.views;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class MainMenuView {
+public class MainMenuView implements Observer {
     private Stage stage;
 
     //Need an empty constructor for FXML
@@ -28,7 +22,7 @@ public class MainMenuView {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml");
+        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -40,17 +34,24 @@ public class MainMenuView {
     }
 
     @FXML
-    public void join(MouseEvent mouseEvent) {
+    public void pressJoinLobby(MouseEvent mouseEvent) {
         System.out.println("Join button pressed");
     }
 
     @FXML
-    public void create(MouseEvent mouseEvent) {
+    public void pressCreateLobby(MouseEvent mouseEvent) {
         System.out.println("Create button pressed");
+
+        new LobbyView(stage);
     }
 
     @FXML
-    public void load(MouseEvent mouseEvent) {
+    public void pressLoadGame(MouseEvent mouseEvent) {
         System.out.println("Load button pressed");
+    }
+
+    @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

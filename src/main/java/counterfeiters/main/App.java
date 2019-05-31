@@ -1,6 +1,5 @@
 package counterfeiters.main;
 
-import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -13,7 +12,7 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) {
-        new LobbyView(primaryStage);
+        new MainMenuView(primaryStage);
 
         primaryStage.setMaximized(true);
         primaryStage.show();
