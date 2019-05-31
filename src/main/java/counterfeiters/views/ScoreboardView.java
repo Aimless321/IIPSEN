@@ -12,6 +12,9 @@ import javafx.stage.Stage;
     public class ScoreboardView implements Observer {
         private Stage stage;
 
+        @FXML
+        private Text name;
+
         //Need an empty constructor for FXML
         public ScoreboardView() {
 
