@@ -28,11 +28,11 @@ public class MainMenuView {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/main-menu.fxml");
+        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml");
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
-        pane.setBackground(ViewUtilities.getBackground("/with-money-and-logo.png"));
+        pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
         Scene scene = new Scene(root, 1920, 1080);

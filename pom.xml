@@ -110,14 +110,6 @@
       <resource>
         <directory>resources</directory>
       </resource>
-
-      <resource>
-        <directory>resources/views</directory>
-      </resource>
-
-      <resource>
-        <directory>resources/background</directory>
-      </resource>
     </resources>
   </build>
 </project>
