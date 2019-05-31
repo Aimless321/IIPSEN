@@ -25,11 +25,11 @@ public class MainMenuView implements Observer {
         Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("Pane");
+        Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
         stage.setScene(scene);
     }
 
@@ -48,6 +48,8 @@ public class MainMenuView implements Observer {
     @FXML
     public void pressLoadGame(MouseEvent mouseEvent) {
         System.out.println("Load button pressed");
+
+        new ScoreboardView(stage);
     }
 
     @Override
