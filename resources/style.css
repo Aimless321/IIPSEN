@@ -5,6 +5,7 @@
 
 .green-button:hover {
     -fx-background-color: #5EA862;
+    -fx-cursor: hand;
 }
 
 .red-button {
@@ -14,4 +15,9 @@
 
 .red-button:hover {
     -fx-background-color: #A3050F;
+    -fx-cursor: hand;
+}
+
+.rules-button:hover {
+    -fx-cursor: hand;
 }
