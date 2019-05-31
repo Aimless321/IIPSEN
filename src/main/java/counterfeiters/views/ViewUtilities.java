@@ -2,9 +2,9 @@ package counterfeiters.views;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -23,10 +23,13 @@ public class ViewUtilities {
         return new Background(backgroundImage);
     }
 
-    public static Parent loadFxml(String path) {
+    public static Parent loadFxml(String path, Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.<Parent>load(ViewUtilities.class.getResourceAsStream(path));
+
+            Observer mainMenuView = (Observer)fxmlLoader.getController();
+            mainMenuView.setStage(stage);
 
             return root;
         } catch (IOException e) {

@@ -1,18 +1,14 @@
 package counterfeiters.views;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class LobbyView {
+public class LobbyView implements Observer {
     //The lobby title
     @FXML
     public Text title;
@@ -39,7 +35,7 @@ public class LobbyView {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/lobby.fxml");
+        Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -51,17 +47,24 @@ public class LobbyView {
     }
 
     @FXML
-    public void startButtonPressed() {
+    public void pressStart() {
         System.out.println("Start button pressed");
     }
 
     @FXML
-    public void leaveButtonPressed() {
+    public void pressLeave() {
         System.out.println("Leave button pressed");
+
+        new MainMenuView(stage);
     }
 
     @FXML
-    public void rulesButtonPressed() {
+    public void pressRules() {
         System.out.println("Rules button pressed");
+    }
+
+    @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 }

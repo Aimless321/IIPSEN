@@ -14,7 +14,7 @@
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="600.0" layoutX="1082.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" />
-      <ImageView styleClass="rules-button" fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMousePressed="#rulesButtonPressed" pickOnBounds="true" preserveRatio="true">
+      <ImageView styleClass="rules-button" fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMousePressed="#pressRules" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/icons/question-sign.png" />
          </image>
@@ -31,12 +31,12 @@
       </Text>
       <VBox alignment="TOP_CENTER" layoutX="1179.0" layoutY="704.0" prefHeight="136.0" prefWidth="311.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#startButtonPressed" prefHeight="44.0" prefWidth="310.0" styleClass="green-button" text="Start" textFill="WHITE">
+            <Button mnemonicParsing="false" onMouseClicked="#pressStart" prefHeight="44.0" prefWidth="310.0" styleClass="green-button" text="Start" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
             </Button>
-            <Button layoutX="11.0" layoutY="10.0" mnemonicParsing="false" onMousePressed="#leaveButtonPressed" prefHeight="44.0" prefWidth="310.0" styleClass="red-button" text="Leave" textFill="WHITE">
+            <Button layoutX="11.0" layoutY="10.0" mnemonicParsing="false" onMousePressed="#pressLeave" prefHeight="44.0" prefWidth="310.0" styleClass="red-button" text="Leave" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
