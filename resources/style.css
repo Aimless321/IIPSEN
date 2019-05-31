@@ -1,0 +1,17 @@
+.green-button {
+    -fx-background-color: #6dc371;
+    -fx-background-radius: 10;
+}
+
+.green-button:hover {
+    -fx-background-color: #5EA862;
+}
+
+.red-button {
+    -fx-background-color: #e30613;
+    -fx-background-radius: 10;
+}
+
+.red-button:hover {
+    -fx-background-color: #A3050F;
+}
