@@ -112,7 +112,11 @@
       </resource>
 
       <resource>
-        <directory>src/main/java/counterfeiters/views</directory>
+        <directory>resources/views</directory>
+      </resource>
+
+      <resource>
+        <directory>resources/background</directory>
       </resource>
     </resources>
   </build>
