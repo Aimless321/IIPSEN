@@ -21,12 +21,12 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressLogIn">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressRegister">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
