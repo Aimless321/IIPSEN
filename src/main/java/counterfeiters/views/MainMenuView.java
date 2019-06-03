@@ -1,6 +1,9 @@
 package counterfeiters.views;
 
+<<<<<<< HEAD
+=======
 import counterfeiters.controllers.MainMenuController;
+>>>>>>> development
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,7 +13,10 @@ import javafx.stage.Stage;
 
 public class MainMenuView implements Observer {
     private Stage stage;
+<<<<<<< HEAD
+=======
     private MainMenuController controller;
+>>>>>>> development
 
     //Need an empty constructor for FXML
     public MainMenuView() {
