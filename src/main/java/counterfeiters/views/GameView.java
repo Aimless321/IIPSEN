@@ -53,27 +53,27 @@ public class GameView implements Observer {
     }
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
-        System.out.println("Create button pressed");
+        System.out.println("Fly button pressed");
     }
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
-        System.out.println("Load button pressed");
+        System.out.println("Healer button pressed");
     }
 
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
-        System.out.println("Create button pressed");
+        System.out.println("Print button pressed");
     }
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-        System.out.println("Load button pressed");
+        System.out.println("Rules button pressed");
     }
 
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
-        System.out.println("Load button pressed");
+        System.out.println("Cards button pressed");
     }
 
     @Override

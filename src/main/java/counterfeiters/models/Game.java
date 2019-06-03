@@ -1,5 +1,6 @@
 package counterfeiters.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Game {
@@ -7,4 +8,6 @@ public class Game {
     private int numPlayers;
     private int round;
     private Date startTime;
+
+    ArrayList<Player> players = new ArrayList<Player>();
 }

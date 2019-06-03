@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.views.GameView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.ScoreboardView;
 import javafx.stage.Stage;
@@ -32,7 +33,7 @@ public class ApplicationController {
         gameController = new GameController(this);
 
         //Load first view
-        loadView(MainMenuView.class, stage, mainMenuController);
+        loadView(GameView.class, stage, gameController);
     }
 
     /**
