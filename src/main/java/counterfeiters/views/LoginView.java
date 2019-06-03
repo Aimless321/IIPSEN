@@ -36,15 +36,11 @@ public class LoginView implements Observer {
     @FXML
     public void pressLogIn() {
         System.out.println("LogIn button pressed");
-
-        new LoginView(stage);
     }
 
     @FXML
     public void pressRegister() {
         System.out.println("Register button pressed");
-
-        new RegisterView(stage);
     }
 
     @Override

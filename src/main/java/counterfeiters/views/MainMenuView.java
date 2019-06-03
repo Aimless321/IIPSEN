@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import counterfeiters.controllers.MainMenuController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,14 +10,16 @@ import javafx.stage.Stage;
 
 public class MainMenuView implements Observer {
     private Stage stage;
+    private MainMenuController controller;
 
     //Need an empty constructor for FXML
     public MainMenuView() {
 
     }
 
-    public MainMenuView(Stage primaryStage) {
+    public MainMenuView(Stage primaryStage, Object mainMenuController) {
         this.stage = primaryStage;
+        this.controller = (MainMenuController) mainMenuController;
 
         show();
     }
@@ -41,15 +44,11 @@ public class MainMenuView implements Observer {
     @FXML
     public void pressCreateLobby(MouseEvent mouseEvent) {
         System.out.println("Create button pressed");
-
-        new LobbyView(stage);
     }
 
     @FXML
     public void pressLoadGame(MouseEvent mouseEvent) {
         System.out.println("Load button pressed");
-
-        new ScoreboardView(stage);
     }
 
     @Override

@@ -41,16 +41,11 @@ import javafx.stage.Stage;
         @FXML
         public void pressBackMenu() {
             System.out.println("Start button pressed");
-
-            new MainMenuView(stage);
         }
 
         @FXML
         public void pressExitGame() {
             System.out.println("Leave button pressed");
-
-            System.exit(0);
-
         }
 
         @FXML

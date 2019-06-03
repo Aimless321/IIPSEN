@@ -36,8 +36,6 @@ public class RegisterView implements Observer {
     @FXML
     public void pressRegister() {
         System.out.println("Register button pressed");
-
-        new LoginView(stage);
     }
 
     @Override
