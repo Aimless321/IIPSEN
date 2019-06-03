@@ -12,7 +12,8 @@
 
 <!-- comment-->
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.ScoreboardView">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.ScoreboardView">
     <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
         <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMousePressed="#pressRules" pickOnBounds="true" preserveRatio="true" styleClass="rules-button">
@@ -37,7 +38,7 @@
                           <Font size="30.0" />
                       </font>
                   </Text>
-                  <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    $Cash" wrappingWidth="379.341796875">
+                  <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                       <font>
                           <Font size="30.0" />
                       </font>
@@ -71,7 +72,7 @@
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    $Cash" wrappingWidth="379.341796875">
+            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                <font>
                   <Font size="30.0" />
                </font>
@@ -90,7 +91,7 @@
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    $Cash" wrappingWidth="379.341796875">
+            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                <font>
                   <Font size="30.0" />
                </font>
@@ -98,4 +99,4 @@
          </children>
       </VBox>
     </children>
-</Pane>
+</AnchorPane>
