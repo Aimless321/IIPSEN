@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LoginView">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LoginView">
    <children>
-      <VBox alignment="CENTER" layoutX="424.0" layoutY="153.0" prefHeight="500.0" prefWidth="500.0">
+      <VBox alignment="CENTER" layoutX="710.0" layoutY="329.0" prefHeight="500.0" prefWidth="500.0">
          <children>
             <TextField alignment="CENTER" promptText="Username">
                <opaqueInsets>
@@ -21,12 +21,12 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressLogIn">
+            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#pressLogIn" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressRegister">
+            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#pressRegister" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
