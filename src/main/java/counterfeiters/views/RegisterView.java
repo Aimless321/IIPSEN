@@ -7,6 +7,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
+
 public class RegisterView implements Observer {
     private Stage stage;
 
@@ -29,7 +31,7 @@ public class RegisterView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
         stage.setScene(scene);
     }
 
