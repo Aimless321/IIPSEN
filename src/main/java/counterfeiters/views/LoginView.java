@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import counterfeiters.controllers.LoginController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,20 +10,22 @@ import javafx.stage.Stage;
 
 public class LoginView implements Observer {
     private Stage stage;
+    private LoginController controller;
 
     //Need an empty constructor for FXML
     public LoginView() {
 
     }
 
-    public LoginView(Stage primaryStage) {
+    public LoginView(Stage primaryStage, Object loginController) {
         this.stage = primaryStage;
+        this.controller = (LoginController) loginController;
 
         show();
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/login.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/login.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -47,5 +50,10 @@ public class LoginView implements Observer {
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public void setController(Object controller) {
+        this.controller = (LoginController) controller;
     }
 }

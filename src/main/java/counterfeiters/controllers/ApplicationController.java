@@ -2,6 +2,7 @@ package counterfeiters.controllers;
 
 import counterfeiters.views.MainMenuView;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -14,10 +15,18 @@ import java.lang.reflect.InvocationTargetException;
 public class ApplicationController {
     //Store all controllers
     public MainMenuController mainMenuController;
+    public LoginController loginController;
+    public RegisterController registerController;
+    public LobbyController lobbyController;
+    public ScoreboardController scoreboardController;
 
     public ApplicationController(Stage stage) {
         //Create all controllers
         mainMenuController = new MainMenuController(this);
+        lobbyController = new LobbyController(this);
+        scoreboardController = new ScoreboardController(this);
+        loginController = new LoginController(this);
+        registerController = new RegisterController(this);
 
         //Load first view
         loadView(MainMenuView.class, stage, mainMenuController);
