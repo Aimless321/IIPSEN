@@ -9,10 +9,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Helper functions for the views, handles the loading of FXML and backgrounds.
+ * @author Wesley Bijleveld
+ */
 public class ViewUtilities {
     public static double screenWidth = Screen.getPrimary().getBounds().getWidth();
     public static double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
+    /**
+     *
+     * @param path
+     * @return
+     */
     public static Background getBackground(String path) {
         //Load image with classloader
         Image image = new Image(ViewUtilities.class.getResourceAsStream(path));
@@ -27,6 +36,13 @@ public class ViewUtilities {
         return new Background(backgroundImage);
     }
 
+    /**
+     *
+     * @param path the (class)path to the fxml file
+     * @param stage stage where the view needs to be shown
+     * @param controller the controller of the view
+     * @return the parent loaded from the fxml file
+     */
     public static Parent loadFxml(String path, Stage stage, Object controller) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
