@@ -14,10 +14,12 @@ import java.lang.reflect.InvocationTargetException;
 public class ApplicationController {
     //Store all controllers
     public MainMenuController mainMenuController;
+    public LobbyController lobbyController;
 
     public ApplicationController(Stage stage) {
         //Create all controllers
         mainMenuController = new MainMenuController(this);
+        lobbyController = new LobbyController(this);
 
         //Load first view
         loadView(MainMenuView.class, stage, mainMenuController);
