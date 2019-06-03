@@ -27,13 +27,14 @@ public class ViewUtilities {
         return new Background(backgroundImage);
     }
 
-    public static Parent loadFxml(String path, Stage stage) {
+    public static Parent loadFxml(String path, Stage stage, Object controller) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.<Parent>load(ViewUtilities.class.getResourceAsStream(path));
 
-            Observer mainMenuView = (Observer)fxmlLoader.getController();
-            mainMenuView.setStage(stage);
+            Observer observer = (Observer)fxmlLoader.getController();
+            observer.setStage(stage);
+            observer.setController(controller);
 
             return root;
         } catch (IOException e) {

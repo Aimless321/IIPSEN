@@ -1,5 +1,6 @@
 package counterfeiters.main;
 
+import counterfeiters.controllers.ApplicationController;
 import counterfeiters.views.LoginView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.RegisterView;
@@ -15,7 +16,7 @@ public class App extends Application
 
     @Override
     public void start(Stage primaryStage) {
-        new LoginView(primaryStage);
+        new ApplicationController(primaryStage);
 
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Counterfeiters");
