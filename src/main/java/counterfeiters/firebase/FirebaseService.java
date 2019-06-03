@@ -9,6 +9,7 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -69,6 +70,21 @@ public class FirebaseService {
                 System.err.println("Cannot find document: " + document + " in collection: " + collection);
             }
         } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public List<QueryDocumentSnapshot> query(String collection, String key, String value) {
+        Query query = db.collection(collection).whereEqualTo(key, value);
+
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        try {
+            return querySnapshot.get().getDocuments();
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error executing query on: " + collection);
             e.printStackTrace();
         }
 
