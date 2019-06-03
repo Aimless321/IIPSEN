@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import counterfeiters.controllers.LobbyController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,20 +23,22 @@ public class LobbyView implements Observer {
     public Text name;
 
     private Stage stage;
+    private LobbyController controller;
 
     //Need an empty constructor for FXML
     public LobbyView() {
 
     }
 
-    public LobbyView(Stage primaryStage) {
+    public LobbyView(Stage primaryStage, Object lobbyController) {
         this.stage = primaryStage;
+        this.controller = (LobbyController)lobbyController;
 
         show();
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -64,5 +67,10 @@ public class LobbyView implements Observer {
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public void setController(Object controller) {
+        this.controller = (LobbyController)controller;
     }
 }
