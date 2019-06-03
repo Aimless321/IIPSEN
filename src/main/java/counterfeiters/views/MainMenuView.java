@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.MainMenuController;
+import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -59,5 +60,10 @@ public class MainMenuView implements Observer {
     @Override
     public void setController(Object controller) {
         this.controller = (MainMenuController) controller;
+    }
+
+    @Override
+    public void update(Observable observable) {
+
     }
 }

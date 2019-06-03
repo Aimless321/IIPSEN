@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LoginController;
+import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -55,5 +56,10 @@ public class LoginView implements Observer {
     @Override
     public void setController(Object controller) {
         this.controller = (LoginController) controller;
+    }
+
+    @Override
+    public void update(Observable observable) {
+
     }
 }
