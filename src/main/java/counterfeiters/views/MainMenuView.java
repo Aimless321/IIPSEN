@@ -25,7 +25,7 @@ public class MainMenuView implements Observer {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
@@ -54,5 +54,10 @@ public class MainMenuView implements Observer {
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public void setController(Object controller) {
+        this.controller = (MainMenuController) controller;
     }
 }
