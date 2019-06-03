@@ -54,8 +54,6 @@ public class LobbyView implements Observer {
     @FXML
     public void pressLeave() {
         System.out.println("Leave button pressed");
-
-        new MainMenuView(stage);
     }
 
     @FXML

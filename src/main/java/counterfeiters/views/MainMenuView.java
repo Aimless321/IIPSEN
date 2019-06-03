@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import counterfeiters.controllers.MainMenuController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,20 +10,22 @@ import javafx.stage.Stage;
 
 public class MainMenuView implements Observer {
     private Stage stage;
+    private MainMenuController controller;
 
     //Need an empty constructor for FXML
     public MainMenuView() {
 
     }
 
-    public MainMenuView(Stage primaryStage) {
+    public MainMenuView(Stage primaryStage, Object mainMenuController) {
         this.stage = primaryStage;
+        this.controller = (MainMenuController) mainMenuController;
 
         show();
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
@@ -41,19 +44,20 @@ public class MainMenuView implements Observer {
     @FXML
     public void pressCreateLobby(MouseEvent mouseEvent) {
         System.out.println("Create button pressed");
-
-        new LobbyView(stage);
     }
 
     @FXML
     public void pressLoadGame(MouseEvent mouseEvent) {
         System.out.println("Load button pressed");
-
-        new ScoreboardView(stage);
     }
 
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public void setController(Object controller) {
+        this.controller = (MainMenuController) controller;
     }
 }

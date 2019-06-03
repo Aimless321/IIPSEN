@@ -41,8 +41,6 @@ public class ScoreboardView implements Observer {
     @FXML
     public void pressBackMenu() {
         System.out.println("Start button pressed");
-
-        new MainMenuView(stage);
     }
 
     @FXML

@@ -7,8 +7,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
-
 public class RegisterView implements Observer {
     private Stage stage;
 
@@ -32,14 +30,13 @@ public class RegisterView implements Observer {
 
         //Show it on the screen
         Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
+
         stage.setScene(scene);
     }
 
     @FXML
     public void pressRegister() {
         System.out.println("Register button pressed");
-
-        new LoginView(stage);
     }
 
     @Override
