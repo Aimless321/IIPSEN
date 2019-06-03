@@ -26,10 +26,10 @@ public class GameView implements Observer {
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/game.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("AnchorPane");
+        Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
