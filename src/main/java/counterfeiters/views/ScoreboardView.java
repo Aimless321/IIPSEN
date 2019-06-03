@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import counterfeiters.controllers.ScoreboardController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 public class ScoreboardView implements Observer {
     private Stage stage;
+    private ScoreboardController controller;
 
     @FXML
     private Text name;
@@ -20,14 +22,15 @@ public class ScoreboardView implements Observer {
 
     }
 
-    public ScoreboardView(Stage primaryStage) {
+    public ScoreboardView(Stage primaryStage, Object controller) {
         this.stage = primaryStage;
+        this.controller = (ScoreboardController)controller;
 
         show();
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/scoreboard.fxml", stage);
+        Parent root = ViewUtilities.loadFxml("/views/scoreboard.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -59,5 +62,10 @@ public class ScoreboardView implements Observer {
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
+    }
+
+    @Override
+    public void setController(Object controller) {
+        this.controller = (ScoreboardController)controller;
     }
 }

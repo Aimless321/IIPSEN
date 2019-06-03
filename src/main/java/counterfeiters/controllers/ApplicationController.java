@@ -15,11 +15,12 @@ public class ApplicationController {
     //Store all controllers
     public MainMenuController mainMenuController;
     public LobbyController lobbyController;
-
+    public ScoreboardController scoreboardController;
     public ApplicationController(Stage stage) {
         //Create all controllers
         mainMenuController = new MainMenuController(this);
         lobbyController = new LobbyController(this);
+        scoreboardController = new ScoreboardController(this);
 
         //Load first view
         loadView(MainMenuView.class, stage, mainMenuController);
