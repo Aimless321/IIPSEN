@@ -13,6 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The interaction between all of the classes and the Firestore db.
+ * Uses the Singleton design pattern.
+ * Get a instance by using <b>FirebaseService.getInstance();</b>
+ * @author Wesley Bijleveld
+ */
 public class FirebaseService {
     public static FirebaseService instance = null;
 
@@ -54,6 +60,22 @@ public class FirebaseService {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setClass(String collection, String document, Object data) {
+        DocumentReference docRef = db.collection(collection).document(document);
+
+        ApiFuture<WriteResult> future = docRef.set(data);
+
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DocumentReference insert(String collection) {
+        return db.collection(collection).document();
     }
 
     public DocumentSnapshot get(String collection, String document) {
