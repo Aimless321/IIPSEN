@@ -1,10 +1,7 @@
 package counterfeiters.controllers;
 
-import counterfeiters.views.GameView;
 import counterfeiters.views.MainMenuView;
-import counterfeiters.views.ScoreboardView;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -33,7 +30,7 @@ public class ApplicationController {
         gameController = new GameController(this);
 
         //Load first view
-        loadView(GameView.class, stage, gameController);
+        loadView(MainMenuView.class, stage, mainMenuController);
     }
 
     /**
