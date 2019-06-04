@@ -28,6 +28,7 @@ public class ApplicationController {
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
         gameController = new GameController(this);
+
         //Load first view
         loadView(MainMenuView.class, stage, mainMenuController);
     }
