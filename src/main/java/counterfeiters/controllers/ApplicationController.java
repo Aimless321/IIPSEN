@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.MainMenuView;
+import counterfeiters.views.RegisterView;
 import javafx.stage.Stage;
 import sun.rmi.runtime.Log;
 
@@ -20,6 +21,7 @@ public class ApplicationController {
     public LobbyController lobbyController;
     public ScoreboardController scoreboardController;
     public GameController gameController;
+    public AccountController accountController;
 
     public ApplicationController(Stage stage) {
         //Create all controllers
@@ -29,8 +31,9 @@ public class ApplicationController {
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
         gameController = new GameController(this);
+        accountController = new AccountController(this);
         //Load first view
-        loadView(MainMenuView.class, stage, mainMenuController);
+        loadView(RegisterView.class, stage, registerController);
     }
 
     /**
