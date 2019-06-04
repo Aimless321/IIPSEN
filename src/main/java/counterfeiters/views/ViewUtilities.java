@@ -53,6 +53,7 @@ public class ViewUtilities {
             observer.setController(controller);
 
             //Tell the view it can now initialize, because it now contains all the data
+            observer.initialize();
 
             return root;
         } catch (IOException e) {
