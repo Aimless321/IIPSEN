@@ -11,4 +11,8 @@ public class GameController {
 
         game = new Game();
     }
+
+    public void deleteGame() {
+        game = new Game();
+    }
 }
