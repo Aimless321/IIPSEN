@@ -52,6 +52,8 @@ public class ViewUtilities {
             observer.setStage(stage);
             observer.setController(controller);
 
+            //Tell the view it can now initialize, because it now contains all the data
+
             return root;
         } catch (IOException e) {
             System.out.println("MainMenuView cannot find the fxml file");
