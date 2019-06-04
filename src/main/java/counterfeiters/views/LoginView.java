@@ -64,7 +64,7 @@ public class LoginView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void start() {
 
     }
 }

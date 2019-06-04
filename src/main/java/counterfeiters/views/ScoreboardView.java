@@ -76,7 +76,7 @@ public class ScoreboardView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void start() {
 
     }
 }

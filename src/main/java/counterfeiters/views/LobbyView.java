@@ -6,6 +6,7 @@ import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,6 +24,9 @@ public class LobbyView implements Observer {
     //First player name
     @FXML
     public Text name;
+
+    @FXML
+    public Button startButton;
 
     private Stage stage;
     private LobbyController controller;
@@ -59,6 +63,7 @@ public class LobbyView implements Observer {
     @FXML
     public void pressLeave() {
         System.out.println("Leave button pressed");
+        controller.leaveButtonPressed(stage);
     }
 
     @FXML
@@ -67,16 +72,8 @@ public class LobbyView implements Observer {
     }
 
     @Override
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    @Override
-    public void setController(Object controller) {
-        LobbyController lobbyController = (LobbyController)controller;
-        this.controller = lobbyController;
-
-        lobbyController.registerObserver(this);
+    public void start() {
+        startButton.visibleProperty().set(false);
     }
 
     @Override
@@ -90,7 +87,15 @@ public class LobbyView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
 
+    @Override
+    public void setController(Object controller) {
+        LobbyController lobbyController = (LobbyController)controller;
+        this.controller = lobbyController;
+
+        lobbyController.registerObserver(this);
     }
 }
