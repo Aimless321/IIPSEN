@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.ScoreboardController;
+import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -67,5 +68,10 @@ public class ScoreboardView implements Observer {
     @Override
     public void setController(Object controller) {
         this.controller = (ScoreboardController)controller;
+    }
+
+    @Override
+    public void update(Observable observable) {
+
     }
 }

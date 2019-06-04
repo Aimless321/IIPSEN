@@ -1,6 +1,8 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyController;
+import counterfeiters.models.Game;
+import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,7 +47,7 @@ public class LobbyView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1920, 1080);
+        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
         stage.setScene(scene);
     }
 
@@ -71,6 +73,19 @@ public class LobbyView implements Observer {
 
     @Override
     public void setController(Object controller) {
-        this.controller = (LobbyController)controller;
+        LobbyController lobbyController = (LobbyController)controller;
+        this.controller = lobbyController;
+
+        lobbyController.registerObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable) {
+        Game game = (Game)observable;
+
+        String playerName = game.getPlayers().get(0).getUserName();
+
+        name.setText(playerName);
+        title.setText(playerName + "'s Lobby");
     }
 }
