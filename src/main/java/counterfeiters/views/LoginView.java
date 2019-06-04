@@ -12,12 +12,10 @@ import javafx.stage.Stage;
 public class LoginView implements Observer {
     private Stage stage;
     private LoginController controller;
+    private Pane pane;
 
     //Need an empty constructor for FXML
-    public LoginView() {
-
-    }
-
+    public LoginView(){}
     public LoginView(Stage primaryStage, Object loginController) {
         this.stage = primaryStage;
         this.controller = (LoginController) loginController;
@@ -29,7 +27,7 @@ public class LoginView implements Observer {
         Parent root = ViewUtilities.loadFxml("/views/login.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("Pane");
+        Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
@@ -39,13 +37,15 @@ public class LoginView implements Observer {
     }
 
     @FXML
-    public void pressLogIn() {
-        System.out.println("LogIn button pressed");
+    public void pressLogIn()
+    {
+        controller.loginButtonPressed(stage);
     }
 
     @FXML
-    public void pressRegister() {
-        System.out.println("Register button pressed");
+    public void pressRegister()
+    {
+        controller.registerButtonPressed(stage);
     }
 
     @Override
