@@ -19,7 +19,7 @@ public class LobbyController {
         this.app = applicationController;
     }
 
-    public void registerObserver(Observer observer) {=
+    public void registerObserver(Observer observer) {
         app.gameController.registerObserver(observer);
     }
 
