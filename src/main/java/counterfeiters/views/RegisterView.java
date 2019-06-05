@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -88,5 +90,9 @@ public class RegisterView implements Observer {
     public void update(Observable observable) {
         Account account = (Account)observable;
         textField.setText(account.getTextField());
+    }
+
+    public void keyPressed(KeyEvent keyEvent) {
+        if(keyEvent.getCode() == KeyCode.ENTER){pressRegister();}
     }
 }
