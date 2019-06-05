@@ -14,8 +14,7 @@ public class LobbyController {
     }
 
     public void registerObserver(Observer observer) {
-        Game game = app.gameController.game;
-        game.registerObserver(observer);
+        app.gameController.registerObserver(observer);
     }
 
     public void leaveButtonPressed(Stage stage) {
@@ -33,10 +32,10 @@ public class LobbyController {
     }
 
     public void rulesButtonPressed() {
-
+        //TODO: Open the rules view
     }
 
     public void startButtonPressed() {
-
+        //TODO: Start game
     }
 }

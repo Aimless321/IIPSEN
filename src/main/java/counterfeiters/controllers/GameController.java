@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.models.Game;
+import counterfeiters.views.Observer;
 
 public class GameController {
     private ApplicationController app;
@@ -10,6 +11,10 @@ public class GameController {
         this.app = applicationController;
 
         game = new Game();
+    }
+
+    public void registerObserver(Observer observer) {
+        game.registerObserver(observer);
     }
 
     public void deleteGame() {
