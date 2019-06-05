@@ -14,6 +14,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Hier wordt de RegisterView aangemaakt door primarystage en registerController mee te geven als argumenten.
+ *
+ * Omdat registerController als Object wordt aangegeven moet het binnen de methode nog geconverteerd worden. Om het als object te kunnen aanroepen.
+ * Deze klasse maakt het mogelijk om verschillende methoden aan te roepen om een nieuwe gebruiker op te slaan.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 03-06-2019
+ * */
+
 public class RegisterView implements Observer {
     public TextField username;
     public PasswordField password;
@@ -32,16 +42,7 @@ public class RegisterView implements Observer {
 
     }
 
-    /**
-     * Hier wordt de RegisterView aangemaakt door primarystage en registerController mee te geven als argumenten.
-     * Omdat registerController als Object wordt aangegeven moet het binnen de methode nog geconverteerd worden.
-     * De registerController is eerder aangemaakt als object. Hiermee kan de view getoond worden.
-     *
-     * @author Ali Rezaa Ghariebiyan
-     * version 03-06-2019
-     * @return RegisterView
-     * @param
-     * */
+    //CONSTRUCTOR
     public RegisterView(Stage primaryStage, Object registerController) {
         this.stage = primaryStage;
         this.controller = (RegisterController) registerController;
@@ -62,6 +63,13 @@ public class RegisterView implements Observer {
         stage.setScene(scene);
     }
 
+    /**
+     * The values ​​entered in the input fields in the scene are retrieved.
+     * The RegisterController is called and the retrieved values ​​are sent as an argument.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 05-06-2019
+     * */
     @FXML
     public void pressRegister() {
         name = username.getText().toLowerCase().trim();
@@ -86,6 +94,12 @@ public class RegisterView implements Observer {
         registerController.registerObserver(this);
     }
 
+    /**
+     * This method is called in the 'account' model by the 'notifyAllObservers' method if an update is required.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * version 03-06-2019
+     * */
     @Override
     public void update(Observable observable) {
         Account account = (Account)observable;
@@ -99,5 +113,11 @@ public class RegisterView implements Observer {
     @Override
     public void start() {
 
+    }
+
+
+    @FXML
+    public void backToMenu() {
+        controller.backToLoginButtonPressed(this.stage); // Gaat terug naar het login scherm.
     }
 }
