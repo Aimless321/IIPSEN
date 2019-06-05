@@ -17,9 +17,7 @@ public class AccountController {
 
     public void loginPressed(String username, String password)
     {
-
-        account.login(username, password);
-
+        System.out.println(username);
 
     }
 

@@ -31,10 +31,8 @@ public class Account implements Observable{
 
     public void login(String username, String password)
         {
-            this.username = username;
-            this.password = password;
-
             System.out.println(username);
+            System.out.println(password);
 
         }
 

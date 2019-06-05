@@ -9,16 +9,18 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 import java.awt.*;
 
 public class LoginView implements Observer {
     public TextField username;
     public PasswordField password;
+    public Pane pane;
 
     private Stage stage;
     private LoginController controller;
-    private Pane pane;
+
 
     private String name;
     private String psword;
@@ -52,7 +54,7 @@ public class LoginView implements Observer {
         psword = password.getText().trim();
 
         controller.loginButtonPressed(name, psword);
-        System.out.println("Login pressed");
+
     }
 
     @FXML
