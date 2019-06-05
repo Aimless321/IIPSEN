@@ -92,4 +92,9 @@ public class LoginView implements Observer {
     public void update(Observable observable) {
 
     }
+
+    @Override
+    public void start() {
+
+    }
 }

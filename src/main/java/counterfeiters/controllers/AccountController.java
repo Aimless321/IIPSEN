@@ -1,23 +1,28 @@
 package counterfeiters.controllers;
 
 import counterfeiters.models.Account;
-import counterfeiters.views.MainMenuView;
-import javafx.stage.Stage;
+import counterfeiters.views.Observer;
 
 public class AccountController {
-    private Account account;
-    private ApplicationController app;
 
-    public AccountController(ApplicationController applicationController)
-    {
+    private ApplicationController app;
+    private Account account;
+
+    public AccountController(ApplicationController applicationController) {
         this.app = applicationController;
+        account = new Account();
     }
 
-    public void addUser(){}
+    public boolean checkCredentials(String username, String password, String passwordCheck){
+//        account.checkCredentials(username, password, passwordCheck);
+        if (account.checkCredentials(username, password, passwordCheck)){
+            return true;
+        }
+        else {return false;}
+    }
 
     public boolean loginPressed(String username, String password)
     {
-        account = new Account(username, password);
         if(account.checkCredentials(username, password))
         {
             return true;
@@ -26,4 +31,7 @@ public class AccountController {
 
     }
 
+    public void registerObserver(Observer observer) {
+        account.registerObserver(observer);
+    }
 }

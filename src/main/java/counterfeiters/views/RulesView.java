@@ -78,4 +78,9 @@ public class RulesView implements Observer {
     public void update(Observable observable) {
 
     }
+
+    @Override
+    public void start() {
+
+    }
 }

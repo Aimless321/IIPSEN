@@ -1,11 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
-import counterfeiters.views.MainMenuView;
-import counterfeiters.views.ScoreboardView;
 import javafx.stage.Stage;
-import org.apache.commons.codec.language.bm.Rule;
-
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -64,8 +60,8 @@ public class ApplicationController {
         }
     }
 
-    public void quit()
-    {
+
+    public void quit() {
         System.exit(0);
     }
 }

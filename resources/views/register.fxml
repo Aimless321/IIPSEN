@@ -6,23 +6,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.RegisterView">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.RegisterView">
    <children>
       <VBox alignment="CENTER" layoutX="710.0" layoutY="335.0" prefHeight="500.0" prefWidth="500.0">
          <children>
-            <TextField alignment="CENTER" promptText="Username">
+            <TextField fx:id="username" alignment="CENTER" promptText="Username">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <PasswordField alignment="CENTER" promptText="Password">
+            <PasswordField fx:id="password" alignment="CENTER" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <PasswordField alignment="CENTER" promptText="Password">
+            <PasswordField onKeyPressed="#keyPressed" fx:id="passwordCheck" alignment="CENTER" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -32,6 +32,11 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
+            <Text fx:id="textField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </Text>
          </children>
       </VBox>
    </children>
