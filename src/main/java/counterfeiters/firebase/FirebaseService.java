@@ -99,15 +99,16 @@ public class FirebaseService {
         return null;
     }
 
+    //Melissa
     public List<QueryDocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
         // [START fs_get_all_docs]
         //asynchronously retrieve all documents
 
         try {
-            ApiFuture<QuerySnapshot> future = db.collection(collection).get();
+            ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
 
-            if(future != null) {
-                List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+            if(collectionData != null) {
+                List<QueryDocumentSnapshot> documents = collectionData.get().getDocuments();
                 return documents;
             } else {
                 System.err.println("Cannot find collection: " + collection);

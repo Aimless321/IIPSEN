@@ -1,5 +1,6 @@
 package counterfeiters.views;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
@@ -30,6 +31,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.util.Callback;
@@ -38,6 +40,7 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
 
     @FXML
     public ListView<String> list;
+
     ObservableList<String> listView = FXCollections.observableArrayList("one", "two", "three");
 
     Image player_icon = new Image("icons/player.png");
@@ -79,10 +82,13 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
+        System.out.println("Rules button pressed");
     }
 
     @FXML
     public void pressBackButton(MouseEvent mouseEvent) {
+        System.out.println("Leave button pressed");
+        controller.backButtonPressed(stage);
     }
 
     @FXML
@@ -102,7 +108,6 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
 
     @Override
     public void update(Observable observable) {
-
     }
 
     @Override
@@ -115,8 +120,19 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
 
   //  }
 
+    public void updateObservableList(List<QueryDocumentSnapshot> lobbies){
+        listView.removeAll();
+
+        for(int i=0; i<lobbies.size();i++) {
+            listView.add(lobbies.get(i).getId());
+        }
+
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         list.setItems(listView);
         list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<?extends String>ov, String old,String newV)->{});
 

@@ -6,6 +6,7 @@ import com.google.cloud.firestore.DocumentReference;
 
 import counterfeiters.controllers.ApplicationController;
 import counterfeiters.firebase.FirebaseService;
+import counterfeiters.views.LobbyListView;
 import counterfeiters.views.Observer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -21,24 +22,30 @@ public class FirebaseModel implements Observable {
     private ArrayList<QueryDocumentSnapshot> lobbies = new ArrayList<QueryDocumentSnapshot>();
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    public FirebaseModel() {
+
+    }
+
+
     public DocumentSnapshot LoadGames(){
         return null;
     }
+
+
     public ArrayList<QueryDocumentSnapshot> loadLobbies(ArrayList<Observer> observers) {
         FirebaseService fb = FirebaseService.getInstance();
 
-
         return null;
     }
-    public List<QueryDocumentSnapshot> updateLobbies(ArrayList<Observer> observers) {
+
+    public ArrayList<QueryDocumentSnapshot> updateLobbies(ArrayList<Observer> observers) {
+    //return List<QueryDocumentSnapshot>
         FirebaseService fb = FirebaseService.getInstance();
+        lobbies.clear();
 
-        // retrieve all documents
-        fb.getAllDocumentsFromCollection("lobbies");
-
-
-
-        return null;
+        // retrieve all documents in lobbies
+        lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
+        return lobbies;
     }
 /*
     public List<QueryDocumentSnapshot> getAllDocuments() throws Exception {
@@ -64,11 +71,6 @@ public class FirebaseModel implements Observable {
     public void removeListener(InvalidationListener listener) {
 
     }
-    public void updateData(FirebaseModel updateLobbyList) {
-        //this.lobbies = updateLobbyList.getLobbies();
-
-        notifyAllObservers();
-    }
 
     public void registerObserver(Observer observer) {
         observers.add(observer);
@@ -76,12 +78,6 @@ public class FirebaseModel implements Observable {
 
     public void unregisterObserver(Observer observer) {
         observers.remove(observer);
-    }
-
-    public void notifyAllObservers() {
-        for(Observer obs : observers) {
-           // obs.update(this);
-        }
     }
 
     public void setObservers(ArrayList<Observer> observers) {
