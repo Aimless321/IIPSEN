@@ -48,28 +48,7 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" prefHeight="600.0" prefWidth="637.0">
-         <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="108.0" prefWidth="637.0" spacing="25.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="1." wrappingWidth="50.13671875">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-                  <ImageView fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@/players/croc.jpg" />
-                     </image>
-                  </ImageView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" fx:id="name" text="Name" wrappingWidth="379.341796875">
-                     <font>
-                        <Font size="30.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-         </children>
+      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" prefHeight="600.0" prefWidth="637.0" spacing="15">
       </VBox>
    </children>
 </Pane>

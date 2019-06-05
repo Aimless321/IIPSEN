@@ -1,6 +1,7 @@
 package counterfeiters.models;
 
 import counterfeiters.firebase.FirebaseService;
+import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,31 @@ public class Player {
 
     public int getScore() {
         return score;
+    }
+
+    public Image getImage(int playerNum) {
+        String imagePath;
+
+        switch(playerNum) {
+            case 1:
+                imagePath = "/players/croc.jpg";
+                break;
+            case 2:
+                imagePath = "/players/deer.jpg";
+                break;
+            case 3:
+                imagePath = "/players/herron.jpg";
+                break;
+            case 4:
+                imagePath = "/players/hippo.jpg";
+                break;
+            default:
+                imagePath = "/players/croc.jpg";
+                System.err.println("Invalid player number passed to Player.getImage()");
+                break;
+        }
+
+        return new Image(getClass().getResourceAsStream(imagePath));
     }
 
     //    public boolean hasPlaneTicket(){
