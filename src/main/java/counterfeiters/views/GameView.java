@@ -93,7 +93,7 @@ public class GameView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void start() {
 
     }
 }

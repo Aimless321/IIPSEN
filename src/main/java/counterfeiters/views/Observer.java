@@ -12,5 +12,5 @@ public interface Observer {
      * Called after the View has been fully filled with all of the data.
      * Can be used for registering the observer and initializing a screen
      */
-    public void initialize();
+    public void start();
 }

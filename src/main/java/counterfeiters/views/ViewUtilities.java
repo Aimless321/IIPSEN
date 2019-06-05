@@ -58,8 +58,8 @@ public class ViewUtilities {
             observer.setStage(stage);
             observer.setController(controller);
 
-            //Tell the view it can now initialize, because it now contains all the data
-            observer.initialize();
+            //Tell the view it can now start, because it now contains all the data
+            observer.start();
 
             return root;
         } catch (IOException e) {

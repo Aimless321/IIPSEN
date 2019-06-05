@@ -90,7 +90,7 @@ public class RegisterView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void start() {
 
     }
 }
