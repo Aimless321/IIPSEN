@@ -5,7 +5,7 @@ import counterfeiters.views.MainMenuView;
 import javafx.stage.Stage;
 
 public class AccountController {
-    private Account account = new Account();
+    private Account account;
     private ApplicationController app;
 
     public AccountController(ApplicationController applicationController)
@@ -14,11 +14,13 @@ public class AccountController {
     }
 
     public void addUser(){}
-    public void loginPressed(Stage stage)
+
+    public void loginPressed(String username, String password)
     {
 
-        app.loadView(MainMenuView.class, stage, app.mainMenuController);
-        account.login();
+        account.login(username, password);
+
+
     }
 
 }

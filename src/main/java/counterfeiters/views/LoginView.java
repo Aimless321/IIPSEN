@@ -5,14 +5,23 @@ import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+
 public class LoginView implements Observer {
+    public TextField username;
+    public PasswordField password;
+
     private Stage stage;
     private LoginController controller;
     private Pane pane;
+
+    private String name;
+    private String psword;
 
     //Need an empty constructor for FXML
     public LoginView(){}
@@ -39,7 +48,11 @@ public class LoginView implements Observer {
     @FXML
     public void pressLogIn()
     {
-        controller.loginButtonPressed(stage);
+        name = username.getText().toLowerCase().trim();
+        psword = password.getText().trim();
+
+        controller.loginButtonPressed(name, psword);
+        System.out.println("Login pressed");
     }
 
     @FXML
@@ -54,8 +67,10 @@ public class LoginView implements Observer {
     }
 
     @Override
-    public void setController(Object controller) {
+    public void setController(Object controller)
+    {
         this.controller = (LoginController) controller;
+
     }
 
     @Override
