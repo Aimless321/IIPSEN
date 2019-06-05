@@ -22,12 +22,10 @@
     -fx-cursor: hand;
 }
 
- {
-
-}
 
 .list-cell{
     -fx-font-size:28;
+    -fx-text-fill: white;
 }
 .list-view {
     -fx-background-color: transparent;
@@ -36,22 +34,19 @@
     -fx-background-color: transparent;
 }
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color:transparent;
+    -fx-background-color:#74451B;
     -fx-text-fill: white;
 }
 
 .list-cell:even:filled { /* <=== changed to even */
     -fx-background-color: #4D909C;
-    -fx-text-fill: white;
 }
 
 .list-cell:odd:filled {
     -fx-background-color: #5A7373;
-    -fx-text-fill: white;
 }
 
 .list-cell:filled:hover {
     -fx-background-color: #74451B;
-    -fx-text-fill: white;
     -fx-cursor: hand;
 }
