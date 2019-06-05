@@ -22,7 +22,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <PasswordField fx:id="passwordCheck" alignment="CENTER" promptText="Password">
+            <PasswordField onKeyPressed="#keyPressed" fx:id="passwordCheck" alignment="CENTER" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -32,7 +32,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
-            <Text fx:id="textField" strokeType="OUTSIDE" strokeWidth="0.0">
+            <Text fx:id="textField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

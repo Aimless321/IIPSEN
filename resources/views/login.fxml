@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LoginView">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LoginView">
    <children>
       <VBox alignment="CENTER" layoutX="710.0" layoutY="329.0" prefHeight="500.0" prefWidth="500.0">
          <children>
@@ -21,20 +22,14 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-<<<<<<< HEAD
             <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#pressLogIn" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE">
-=======
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #6dc371;" text="Login" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressLogIn">
->>>>>>> development
+
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
-<<<<<<< HEAD
             <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#pressRegister" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE">
-=======
-            <Button alignment="CENTER" mnemonicParsing="false" prefWidth="500.0" style="-fx-background-color: #018BB5;" text="Register" textAlignment="CENTER" textFill="WHITE" onMouseClicked="#pressRegister">
->>>>>>> development
+
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -42,4 +37,4 @@
          </children>
       </VBox>
    </children>
-</Pane>
+</AnchorPane>

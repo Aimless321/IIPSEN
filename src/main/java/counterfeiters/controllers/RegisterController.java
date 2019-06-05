@@ -1,23 +1,26 @@
 package counterfeiters.controllers;
 
-import counterfeiters.models.Account;
+import counterfeiters.views.LoginView;
 import counterfeiters.views.Observer;
+import javafx.stage.Stage;
 
 public class RegisterController {
     private ApplicationController app;
-    public Account account;
+    public LoginController loginController;
 
     public RegisterController(ApplicationController applicationController) {
         this.app = applicationController;
-        account = new Account();
     }
 
-    public void registerButtonPressed(String username, String password, String passwordCheck) {
-        app.accountController.addUser(username, password, passwordCheck);
+    public void registerButtonPressed(String username, String password, String passwordCheck, Stage stage) {
+//        app.accountController.checkCredentials(username, password, passwordCheck);
+        if (app.accountController.checkCredentials(username, password, passwordCheck)){
+//            app.accountController.checkCredentials(username, password, passwordCheck);
+            app.loadView(LoginView.class, stage, loginController);
+        }
     }
 
     public void registerObserver(Observer observer) {
-        Account account = app.registerController.account;
-        account.registerObserver(observer);
+        app.accountController.registerObserver(observer);
     }
 }
