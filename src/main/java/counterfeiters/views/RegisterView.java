@@ -88,4 +88,9 @@ public class RegisterView implements Observer {
         System.out.println("setting textfield");
         textField.setText("Wrong password");
     }
+
+    @Override
+    public void initialize() {
+
+    }
 }

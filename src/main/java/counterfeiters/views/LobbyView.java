@@ -88,4 +88,9 @@ public class LobbyView implements Observer {
         name.setText(playerName);
         title.setText(playerName + "'s Lobby");
     }
+
+    @Override
+    public void initialize() {
+
+    }
 }

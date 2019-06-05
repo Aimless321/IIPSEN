@@ -3,11 +3,8 @@ package counterfeiters.models;
 import com.google.cloud.firestore.DocumentReference;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Game implements Observable {
     private String gameId;

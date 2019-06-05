@@ -14,13 +14,19 @@ import java.io.IOException;
  * @author Wesley Bijleveld
  */
 public class ViewUtilities {
+    /**
+     * The width of the client's primary screen
+     */
     public static double screenWidth = Screen.getPrimary().getBounds().getWidth();
+    /**
+     * The height of the client's primary screen
+     */
     public static double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
     /**
-     *
-     * @param path
-     * @return
+     * Load a Background from a file that can be used for JavaFX Nodes
+     * @param path the (class)path to the background image
+     * @return Background object that sizes correctly
      */
     public static Background getBackground(String path) {
         //Load image with classloader
@@ -51,6 +57,9 @@ public class ViewUtilities {
             Observer observer = (Observer)fxmlLoader.getController();
             observer.setStage(stage);
             observer.setController(controller);
+
+            //Tell the view it can now initialize, because it now contains all the data
+            observer.initialize();
 
             return root;
         } catch (IOException e) {

@@ -76,4 +76,9 @@ public class MainMenuView implements Observer {
     public void update(Observable observable) {
 
     }
+
+    @Override
+    public void initialize() {
+
+    }
 }

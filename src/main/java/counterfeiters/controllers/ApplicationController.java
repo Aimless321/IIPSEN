@@ -3,7 +3,6 @@ package counterfeiters.controllers;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.RegisterView;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -32,6 +31,7 @@ public class ApplicationController {
         registerController = new RegisterController(this);
         gameController = new GameController(this);
         accountController = new AccountController(this);
+
         //Load first view
         loadView(RegisterView.class, stage, registerController);
     }
@@ -44,7 +44,7 @@ public class ApplicationController {
      * @param stage The stage where the view needs to be shown
      * @param controller The controller that handles the interaction of the view
      */
-    public void loadView(Class view, Stage stage, Object controller) {
+    public void loadView(Class<? extends counterfeiters.views.Observer> view, Stage stage, Object controller) {
         try {
             view.getDeclaredConstructor(Stage.class, Object.class).newInstance(stage, controller);
         } catch (InstantiationException e) {
