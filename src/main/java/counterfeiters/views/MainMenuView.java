@@ -78,7 +78,7 @@ public class MainMenuView implements Observer {
     }
 
     @Override
-    public void initialize() {
+    public void start() {
 
     }
 }

@@ -3,13 +3,23 @@ package counterfeiters.views;
 import counterfeiters.controllers.LobbyController;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
+import counterfeiters.models.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class LobbyView implements Observer {
     //The lobby title
@@ -20,9 +30,8 @@ public class LobbyView implements Observer {
     @FXML
     public VBox players;
 
-    //First player name
     @FXML
-    public Text name;
+    public Button startButton;
 
     private Stage stage;
     private LobbyController controller;
@@ -59,11 +68,68 @@ public class LobbyView implements Observer {
     @FXML
     public void pressLeave() {
         System.out.println("Leave button pressed");
+        controller.leaveButtonPressed(stage);
     }
 
     @FXML
     public void pressRules() {
         System.out.println("Rules button pressed");
+    }
+
+    @Override
+    public void start() {
+        startButton.visibleProperty().set(false);
+
+        controller.registerObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable) {
+        Game game = (Game)observable;
+
+        //Remove all players
+        Platform.runLater(() -> players.getChildren().clear());
+
+        //Add new players
+        List<Player> playerList = game.getPlayers();
+
+        int playerNum = 1;
+        for(Player player : playerList) {
+            //We cannot update it on this thread, so we run it later
+            Platform.runLater(() -> insertPlayerBox(player, playerNum));
+        }
+
+        //TODO: Check if this player is the host
+        if(true) {
+            startButton.visibleProperty().set(true);
+        }
+    }
+
+    public void insertPlayerBox(Player player, int playerNum) {
+        Text number = new Text(playerNum + ".");
+        number.setFont(new Font(30));
+        number.setFill(Color.WHITE);
+        number.setWrappingWidth(50);
+
+        ImageView playerImage = new ImageView(player.getImage(playerNum));
+        playerImage.setFitHeight(135);
+        playerImage.setFitWidth(135);
+        playerImage.setPreserveRatio(true);
+        playerImage.setPickOnBounds(true);
+
+        Text name = new Text(player.getUserName());
+        name.setFont(new Font(30));
+        name.setFill(Color.WHITE);
+        name.setWrappingWidth(380);
+
+        HBox playerBox = new HBox();
+        playerBox.setAlignment(Pos.CENTER_LEFT);
+        playerBox.setSpacing(25);
+        playerBox.setPrefSize(637, 135);
+
+        playerBox.getChildren().addAll(number, playerImage, name);
+
+        players.getChildren().add(playerBox);
     }
 
     @Override
@@ -75,22 +141,5 @@ public class LobbyView implements Observer {
     public void setController(Object controller) {
         LobbyController lobbyController = (LobbyController)controller;
         this.controller = lobbyController;
-
-        lobbyController.registerObserver(this);
-    }
-
-    @Override
-    public void update(Observable observable) {
-        Game game = (Game)observable;
-
-        String playerName = game.getPlayers().get(0).getUserName();
-
-        name.setText(playerName);
-        title.setText(playerName + "'s Lobby");
-    }
-
-    @Override
-    public void initialize() {
-
     }
 }
