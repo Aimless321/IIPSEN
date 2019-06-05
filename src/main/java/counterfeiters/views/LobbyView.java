@@ -4,6 +4,7 @@ import counterfeiters.controllers.LobbyController;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import counterfeiters.models.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -78,19 +79,24 @@ public class LobbyView implements Observer {
     @Override
     public void start() {
         startButton.visibleProperty().set(false);
+
+        controller.registerObserver(this);
     }
 
     @Override
     public void update(Observable observable) {
         Game game = (Game)observable;
 
+        //Remove all players
+        Platform.runLater(() -> players.getChildren().clear());
+
+        //Add new players
         List<Player> playerList = game.getPlayers();
 
         int playerNum = 1;
         for(Player player : playerList) {
-            insertPlayerBox(player, playerNum);
-
-            playerNum++;
+            //We cannot update it on this thread, so we run it later
+            Platform.runLater(() -> insertPlayerBox(player, playerNum));
         }
 
         //TODO: Check if this player is the host
@@ -135,7 +141,5 @@ public class LobbyView implements Observer {
     public void setController(Object controller) {
         LobbyController lobbyController = (LobbyController)controller;
         this.controller = lobbyController;
-
-        lobbyController.registerObserver(this);
     }
 }

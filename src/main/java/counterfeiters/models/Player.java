@@ -12,6 +12,10 @@ public class Player {
     private int score;
     private ArrayList<Card> cards = new ArrayList<>();
 
+    public Player() {
+
+    }
+
     public Player(boolean isLoggedIn, String userName, int playerId, int score) {
         this.isLoggedIn = isLoggedIn;
         this.userName = userName;
@@ -71,6 +75,23 @@ public class Player {
 
         return new Image(getClass().getResourceAsStream(imagePath));
     }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPlayerId(int playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 
     //    public boolean hasPlaneTicket(){
 //        return ;

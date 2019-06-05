@@ -14,6 +14,18 @@ public class Game implements Observable {
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    public Game() {
+
+    }
+
+    public Game(String gameId, int numPlayers, ArrayList<Player> players, int round, Date startTime, ArrayList<Observer> observers) {
+        this.gameId = gameId;
+        this.numPlayers = numPlayers;
+        this.players = players;
+        this.round = round;
+        this.startTime = startTime;
+    }
+
     public void createNewGame(Player player) {
         //Get the firebase service
         FirebaseService fb = FirebaseService.getInstance();
@@ -58,6 +70,12 @@ public class Game implements Observable {
         players.clear();
     }
 
+    public void updateData(Game updateGame) {
+        this.players = updateGame.getPlayers();
+
+        notifyAllObservers();
+    }
+
     public void registerObserver(Observer observer) {
         observers.add(observer);
     }
@@ -90,5 +108,29 @@ public class Game implements Observable {
 
     public Date getStartTime() {
         return startTime;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public void setNumPlayers(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setObservers(ArrayList<Observer> observers) {
+        this.observers = observers;
     }
 }
