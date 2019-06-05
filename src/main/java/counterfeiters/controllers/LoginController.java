@@ -12,9 +12,14 @@ public class LoginController {
         this.app = applicationController;
     }
 
-    public void loginButtonPressed(String username, String password)
+    public void loginButtonPressed(String username, String password, Stage stage)
     {
-        app.accountController.loginPressed(username, password);
+        if(app.accountController.loginPressed(username, password))
+        {
+            app.loadView(MainMenuView.class, stage, app.mainMenuController);
+        }
+
+
     }
 
     public void registerButtonPressed(Stage stage)

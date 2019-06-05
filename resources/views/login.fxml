@@ -16,7 +16,7 @@
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <PasswordField fx:id="password" alignment="CENTER" promptText="Password">
+            <PasswordField fx:id="password" alignment="CENTER" onKeyPressed="#pressKey" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

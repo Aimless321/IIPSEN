@@ -19,7 +19,8 @@ import java.util.Map;
  * Deze model maakt het mogelijk om de gegevens van een account te tonen.
  *
  * @author Ali Rezaa Ghariebiyan
- * version 03-06-2019
+ * @author Robin van den Berg
+ * version 05-06-2019
  */
 
 public class Account implements Observable{
@@ -39,26 +40,19 @@ public class Account implements Observable{
 
     public static void register(){}
 
-    public static boolean checkCredentials(String username, String password)
+    public boolean checkCredentials(String username, String password)
     {
-        FirebaseService fb = FirebaseService.getInstance();
+            FirebaseService fb = FirebaseService.getInstance();
 
+            String p = password;
+            String r = fb.get("users", username).getString("password");
 
-        fb.get("users", username);
-
-        String p = password;
-        String r = fb.get("users", username).getString("password");
-
-        if (r.equals(p)) {
-            System.out.println(true);
-            return true;
-        }
-        else
-        {
-            System.out.println(false);
-            return false;
-        }
+            if (r.equals(p)) {
+                return true;
+            }
+            else {return false;}
     }
+
 
     public static void addUser(String username, String password){}
     public static boolean checkInput(String username, String password){return true;}
@@ -80,7 +74,7 @@ public class Account implements Observable{
 
     public Account(String username, String password)
     {
-        checkCredentials(username, password);
+
         this.username = username;
         this.password = password;
 

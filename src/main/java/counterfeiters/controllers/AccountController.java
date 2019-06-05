@@ -15,11 +15,15 @@ public class AccountController {
 
     public void addUser(){}
 
-    public void loginPressed(String username, String password)
+    public boolean loginPressed(String username, String password)
     {
         account = new Account(username, password);
-    }
+        if(account.checkCredentials(username, password))
+        {
+            return true;
+        }
+        else{return false;}
 
-    
+    }
 
 }

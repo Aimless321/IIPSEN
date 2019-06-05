@@ -2,10 +2,13 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.LoginController;
 import counterfeiters.models.Observable;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -48,12 +51,22 @@ public class LoginView implements Observer {
     }
 
     @FXML
+    public void pressKey(KeyEvent event)
+    {
+        if(event.getCode() == KeyCode.ENTER)
+        {
+            pressLogIn();
+        }
+
+    }
+
+    @FXML
     public void pressLogIn()
     {
         name = username.getText().toLowerCase().trim();
         psword = password.getText().trim();
 
-        controller.loginButtonPressed(name, psword);
+        controller.loginButtonPressed(name, psword, this.stage);
 
     }
 
