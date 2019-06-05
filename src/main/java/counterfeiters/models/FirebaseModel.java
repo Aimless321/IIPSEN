@@ -4,8 +4,8 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.cloud.firestore.DocumentReference;
 
-import com.google.firebase.internal.FirebaseService;
 import counterfeiters.controllers.ApplicationController;
+import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -17,17 +17,43 @@ import java.util.Map;
 
 public class FirebaseModel implements Observable {
 
-    private ArrayList<Map> lobbies = new ArrayList<>();
+    FirebaseService fb = FirebaseService.getInstance();
+    private ArrayList<QueryDocumentSnapshot> lobbies = new ArrayList<QueryDocumentSnapshot>();
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public DocumentSnapshot LoadGames(){
         return null;
     }
-    public Map loadLobbies(ArrayList<Observer> observers) {
+    public ArrayList<QueryDocumentSnapshot> loadLobbies(ArrayList<Observer> observers) {
         FirebaseService fb = FirebaseService.getInstance();
 
 
+        return null;
     }
+    public List<QueryDocumentSnapshot> updateLobbies(ArrayList<Observer> observers) {
+        FirebaseService fb = FirebaseService.getInstance();
+
+        // retrieve all documents
+        fb.getAllDocumentsFromCollection("lobbies");
+
+
+
+        return null;
+    }
+/*
+    public List<QueryDocumentSnapshot> getAllDocuments() throws Exception {
+        // [START fs_get_all_docs]
+        //asynchronously retrieve all documents
+        ApiFuture<QuerySnapshot> future = fb.collection("cities").get();
+        // future.get() blocks on response
+        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
+        for (QueryDocumentSnapshot document : documents) {
+            System.out.println(document.getId() + " => " + document.toObject(City.class));
+        }
+        // [END fs_get_all_docs]
+        return documents;
+    }
+    */
 
     @Override
     public void addListener(InvalidationListener listener) {
@@ -39,7 +65,7 @@ public class FirebaseModel implements Observable {
 
     }
     public void updateData(FirebaseModel updateLobbyList) {
-        this.lobbies = updateLobbyList.getLobbies();
+        //this.lobbies = updateLobbyList.getLobbies();
 
         notifyAllObservers();
     }
@@ -54,7 +80,7 @@ public class FirebaseModel implements Observable {
 
     public void notifyAllObservers() {
         for(Observer obs : observers) {
-            obs.update(this);
+           // obs.update(this);
         }
     }
 
@@ -62,12 +88,6 @@ public class FirebaseModel implements Observable {
         this.observers = observers;
     }
 
-    public ArrayList<Map> getLobbies() {
-
-    }
-    public Map<String, Object> getDocumentAsMap() throws Exception {
-
-    }
 
 
 }

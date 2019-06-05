@@ -1,5 +1,9 @@
 package counterfeiters.controllers;
 
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.EventListener;
+import com.google.cloud.firestore.FirestoreException;
+import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.views.Observer;
@@ -19,8 +23,17 @@ public class LobbyListController {
     }
 
     public void updateData(Game updateGame) {
-        lobbyList.updateData();
+        //lobbyList.updateData();
     }
 
 
-}
+    public void registerListeners() {
+        FirebaseService fb = FirebaseService.getInstance();
+
+        //Listen for changes in the lobby
+        //fb.listen("lobbies", app.gameController.game.getGameId(), new EventListener<DocumentSnapshot>() {
+
+        };
+    }
+
+

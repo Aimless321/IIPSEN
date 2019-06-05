@@ -2,7 +2,7 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.Game;
-import javafx.beans.Observable;
+import counterfeiters.models.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -101,9 +101,19 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
     }
 
     @Override
-    public void update(java.util.Observable observable) {
+    public void update(Observable observable) {
 
     }
+
+    @Override
+    public void start() {
+
+    }
+
+  //  @Override
+   // public void update(java.util.Observable observable) {
+
+  //  }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
