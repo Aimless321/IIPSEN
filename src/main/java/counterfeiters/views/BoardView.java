@@ -109,4 +109,9 @@ public class BoardView implements Observer {
             blackMarketView.getChildren().add(imageview);
         }
     }
+
+    @Override
+    public void start() {
+
+    }
 }

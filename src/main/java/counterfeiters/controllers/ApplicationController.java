@@ -20,6 +20,7 @@ public class ApplicationController {
     public ScoreboardController scoreboardController;
     public BoardController boardController;
     public BlackMarketController blackMarketController;
+    public GameController gameController;
 
     public ApplicationController(Stage stage) {
         //Create all controllers
@@ -30,6 +31,7 @@ public class ApplicationController {
         registerController = new RegisterController(this);
         boardController = new BoardController(this);
         blackMarketController = new BlackMarketController(this);
+        gameController = new GameController(this);
 
         //Load first view
         loadView(BoardView.class, stage, boardController);

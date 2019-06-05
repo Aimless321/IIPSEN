@@ -58,4 +58,9 @@ public class RegisterView implements Observer {
     public void update(Observable observable) {
 
     }
+
+    @Override
+    public void start() {
+
+    }
 }
