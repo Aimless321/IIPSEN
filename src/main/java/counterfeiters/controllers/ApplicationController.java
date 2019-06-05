@@ -1,6 +1,6 @@
 package counterfeiters.controllers;
 
-import counterfeiters.views.MainMenuView;
+import counterfeiters.views.BoardView;
 import javafx.stage.Stage;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +18,8 @@ public class ApplicationController {
     public RegisterController registerController;
     public LobbyController lobbyController;
     public ScoreboardController scoreboardController;
-    public GameController gameController;
+    public BoardController boardController;
+    public BlackMarketController blackMarketController;
 
     public ApplicationController(Stage stage) {
         //Create all controllers
@@ -27,10 +28,11 @@ public class ApplicationController {
         scoreboardController = new ScoreboardController(this);
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
-        gameController = new GameController(this);
+        boardController = new BoardController(this);
+        blackMarketController = new BlackMarketController(this);
 
         //Load first view
-        loadView(MainMenuView.class, stage, mainMenuController);
+        loadView(BoardView.class, stage, boardController);
     }
 
     /**

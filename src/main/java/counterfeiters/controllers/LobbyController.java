@@ -12,7 +12,7 @@ public class LobbyController {
         }
 
     public void registerObserver(Observer observer) {
-        Game game = app.gameController.game;
-        game.registerObserver(observer);
+     //   Game game = app.gameController.game;
+     //   game.registerObserver(observer);
     }
 }

@@ -1,33 +1,40 @@
 package counterfeiters.views;
 
-import counterfeiters.controllers.GameController;
-import counterfeiters.controllers.MainMenuController;
+import counterfeiters.controllers.BlackMarketController;
+import counterfeiters.controllers.BoardController;
+import counterfeiters.models.BlackMarket;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class GameView implements Observer {
+public class BoardView implements Observer {
+
+    public HBox blackMarketView;
+
     private Stage stage;
-    private GameController controller;
+    private BoardController boardcontroller;
+    private BlackMarketController blackmarketcontroller;
 
     //Need an empty constructor for FXML
-    public GameView() {
+    public BoardView() {
 
     }
 
-    public GameView(Stage primaryStage, Object GameController) {
+    public BoardView(Stage primaryStage, Object BoardController) {
         this.stage = primaryStage;
-        this.controller = (counterfeiters.controllers.GameController) GameController;
+        this.boardcontroller = (BoardController) BoardController;
 
         show();
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/game.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/game.fxml", stage, boardcontroller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -52,6 +59,7 @@ public class GameView implements Observer {
     public void actionFieldFraud(MouseEvent mouseEvent) {
         System.out.println("Fraud button pressed");
     }
+
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
         System.out.println("Fly button pressed");
@@ -84,11 +92,21 @@ public class GameView implements Observer {
 
     @Override
     public void setController(Object controller) {
-        this.controller = (GameController) controller;
+        this.boardcontroller = (BoardController) controller;
+
+        BoardController boardController = (BoardController)controller;
+        this.boardcontroller = boardController;
+
+        boardController.registerObserver(this);
     }
 
     @Override
     public void update(Observable observable) {
-        
+        BlackMarket blackMarket = (BlackMarket)observable;
+
+        for (int i = 0; i < 7; i++) {
+            ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
+            blackMarketView.getChildren().add(imageview);
+        }
     }
 }
