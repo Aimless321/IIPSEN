@@ -13,7 +13,7 @@ public class AccountController {
         account = new Account();
     }
 
-    public boolean addUser(String username, String password, String passwordCheck){
+    public boolean checkCredentials(String username, String password, String passwordCheck){
 //        account.checkCredentials(username, password, passwordCheck);
         if (account.checkCredentials(username, password, passwordCheck)){
             return true;

@@ -1,6 +1,5 @@
 package counterfeiters.controllers;
 
-import counterfeiters.models.Account;
 import counterfeiters.views.LoginView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
@@ -14,9 +13,9 @@ public class RegisterController {
     }
 
     public void registerButtonPressed(String username, String password, String passwordCheck, Stage stage) {
-//        app.accountController.addUser(username, password, passwordCheck);
-        if (app.accountController.addUser(username, password, passwordCheck)){
-//            app.accountController.addUser(username, password, passwordCheck);
+//        app.accountController.checkCredentials(username, password, passwordCheck);
+        if (app.accountController.checkCredentials(username, password, passwordCheck)){
+//            app.accountController.checkCredentials(username, password, passwordCheck);
             app.loadView(LoginView.class, stage, loginController);
         }
     }

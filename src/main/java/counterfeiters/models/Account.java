@@ -3,7 +3,6 @@ package counterfeiters.models;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
-import counterfeiters.views.RegisterView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,29 +20,32 @@ public class Account implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private String textField;
 
-    public static void login(){}
-    public static void register(){}
-
     public boolean checkCredentials(String username, String password, String passwordCheck){
-        if (password.equals(passwordCheck)) {
-            if(verifyUser(username, password)){
-                verifyUser(username, password);
-                textField = "";
-                notifyAllObservers();
-                return true;
-            }
-            else{
-                System.out.println("naam bestaat");
-                textField = "Username already exist!";
+            if (username.isEmpty() || password.isEmpty() || passwordCheck.isEmpty()){
+                textField = "Incorrect Entry!";
                 notifyAllObservers();
                 return false;
             }
-        }
-        else {
-            textField = "Wrong password!";
-            notifyAllObservers();
-            return false;
-        }
+
+           if (!password.equals(passwordCheck)) {
+               textField = "Password does not match!";
+               notifyAllObservers();
+               return false;
+           }
+
+           if(verifyUser(username, password)) {
+               textField = "";
+               notifyAllObservers();
+               return true;
+           }
+           else{
+               System.out.println("naam bestaat");
+               textField = "Username already exist!";
+               notifyAllObservers();
+               return false;
+           }
+
+
     }
 
     public void registerObserver(Observer observer) {
@@ -64,7 +66,7 @@ public class Account implements Observable{
         List<QueryDocumentSnapshot> documents = fb.query("users", "username", username);
 
         if (documents.size() == 0){
-            saveUser(username, password);
+            addUser(username, password);
             return true;
         }
         else{
@@ -74,7 +76,7 @@ public class Account implements Observable{
         }
     }
 
-    public void saveUser(String username, String password){
+    public void addUser(String username, String password){
         FirebaseService fb = FirebaseService.getInstance();
 
         Map<String, Object> data = new HashMap<>();
