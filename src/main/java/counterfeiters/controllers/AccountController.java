@@ -21,7 +21,15 @@ public class AccountController {
         else {return false;}
     }
 
-    public void login(String username, String password){}
+    public boolean loginPressed(String username, String password)
+    {
+        if(account.checkCredentials(username, password))
+        {
+            return true;
+        }
+        else{return false;}
+
+    }
 
     public void registerObserver(Observer observer) {
         account.registerObserver(observer);
