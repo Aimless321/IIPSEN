@@ -9,6 +9,7 @@ import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RegisterView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,18 +30,34 @@ public class Account implements Observable{
     private RegisterView registerView;
     private ArrayList<Observer> observers = new ArrayList<>();
 
-    public void login(String username, String password)
-        {
-            System.out.println(username);
-            System.out.println(password);
+    public void login()
+    {
 
-        }
 
+
+    }
 
     public static void register(){}
 
-    public static boolean checkCredentials(String username, String password){
-        return true;
+    public static boolean checkCredentials(String username, String password)
+    {
+        FirebaseService fb = FirebaseService.getInstance();
+
+
+        fb.get("users", username);
+
+        String p = password;
+        String r = fb.get("users", username).getString("password");
+
+        if (r.equals(p)) {
+            System.out.println(true);
+            return true;
+        }
+        else
+        {
+            System.out.println(false);
+            return false;
+        }
     }
 
     public static void addUser(String username, String password){}
@@ -50,16 +67,20 @@ public class Account implements Observable{
         observers.add(observer);
     }
 
-    public Account(String username, String password, String passwordCheck) {
-        if(checkPassword(username,password, passwordCheck)) {
+    public Account() {}
+    public Account(String username, String password, String passwordCheck)
+    {
+        if(checkPassword(username,password, passwordCheck))
+        {
             this.username = username;
             this.password = password;
         }
     }
 
-    public Account() {}
+
     public Account(String username, String password)
     {
+        checkCredentials(username, password);
         this.username = username;
         this.password = password;
 

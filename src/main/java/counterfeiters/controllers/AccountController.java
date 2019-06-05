@@ -17,8 +17,9 @@ public class AccountController {
 
     public void loginPressed(String username, String password)
     {
-        System.out.println(username);
-
+        account = new Account(username, password);
     }
+
+    
 
 }
