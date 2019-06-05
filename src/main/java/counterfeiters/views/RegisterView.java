@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.RegisterController;
+import counterfeiters.models.Account;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -63,11 +64,11 @@ public class RegisterView implements Observer {
     public void pressRegister() {
         name = username.getText().toLowerCase().trim();
         psword = password.getText().trim();
-        pswordCheck = passwordCheck.getText();
-
-        controller.registerButtonPressed(name, psword, pswordCheck);
+        pswordCheck = passwordCheck.getText().trim();
 
         System.out.println("Register button pressed");
+
+        controller.registerButtonPressed(name, psword, pswordCheck, this.stage);
     }
 
     @Override
@@ -85,7 +86,7 @@ public class RegisterView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        System.out.println("setting textfield");
-        textField.setText("Wrong password");
+        Account account = (Account)observable;
+        textField.setText(account.getTextField());
     }
 }

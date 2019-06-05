@@ -18,78 +18,74 @@ import java.util.Map;
  */
 
 public class Account implements Observable{
-    private String username;
-    private String password;
-    private String textField;
-    private Account account;
-    private RegisterView registerView;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private String textField;
 
     public static void login(){}
     public static void register(){}
 
-    public static boolean checkCredentials(String username, String password){
-        return true;
-    }
-
-    public static void addUser(String username, String password){}
-    public static boolean checInput(String username, String password){return true;}
-
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    public Account(String username, String password, String passwordCheck) {
-        if(checkPassword(username,password, passwordCheck)) {
-            this.username = username;
-            this.password = password;
-        }
-    }
-
-    public Account() {}
-
-
-    @Override
-    public void notifyAllObservers() {
-        System.out.println(observers);
-        for(Observer observer : observers) {
-            System.out.println(observer);
-            System.out.println(observers.toString());
-            observer.update(this);
-            System.out.println("I've found a obsersver");
-        }
-        System.out.println("notifyAll:: wrong pass");
-    }
-
-    public boolean checkPassword(String username, String password, String passwordCheck) {
+    public boolean checkCredentials(String username, String password, String passwordCheck){
         if (password.equals(passwordCheck)) {
-            verifyUser(username, password);
-            return true;
+            if(verifyUser(username, password)){
+                verifyUser(username, password);
+                textField = "";
+                notifyAllObservers();
+                return true;
+            }
+            else{
+                System.out.println("naam bestaat");
+                textField = "Username already exist!";
+                notifyAllObservers();
+                return false;
+            }
         }
         else {
-            //TODO: Password komt niet overeen
+            textField = "Wrong password!";
             notifyAllObservers();
             return false;
         }
     }
 
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
 
-    public void verifyUser(String username, String password) {
+    @Override
+    public void notifyAllObservers() {
+//        System.out.println(observers);
+        for(Observer observer : observers) {
+            observer.update(this);
+        }
+    }
+
+    public boolean verifyUser(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
         List<QueryDocumentSnapshot> documents = fb.query("users", "username", username);
 
         if (documents.size() == 0){
-            Map<String, Object> data = new HashMap<>();
-            data.put("username", username);
-            data.put("password", password);
-
-            fb.set("users", username, data);
+            saveUser(username, password);
+            return true;
         }
-        //TODO: username is al in gebruik.
-//        else{
-//
-//        }
+        else{
+
+            notifyAllObservers();
+            return false;
+        }
     }
 
+    public void saveUser(String username, String password){
+        FirebaseService fb = FirebaseService.getInstance();
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("username", username);
+        data.put("password", password);
+
+        fb.set("users", username, data);
+        textField = "";
+    }
+
+    public String getTextField() {
+        return textField;
+    }
 }

@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.RegisterView;
 import javafx.stage.Stage;
@@ -57,5 +58,10 @@ public class ApplicationController {
             System.err.println("Exception thrown by " + view.toString());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return getClass().toString();
     }
 }
