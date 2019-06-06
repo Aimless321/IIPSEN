@@ -30,7 +30,6 @@
       <Image url="/icons/back-button.png"/>
    </ImageView>
    <ListView fx:id="list" layoutX="460.0" layoutY="390.0" prefHeight="400.0" prefWidth="1000.0" onMouseClicked="#clickOnLobby">
-
    </ListView>
    <VBox layoutX="1418.0" layoutY="648.0" prefHeight="200.0" prefWidth="167.0"/>
 </Pane>
