@@ -9,9 +9,15 @@ import counterfeiters.models.Player;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RulesView;
+import counterfeiters.views.ViewUtilities;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class LobbyController {
     private ApplicationController app;
@@ -42,7 +48,7 @@ public class LobbyController {
                     app.gameController.updateData(updateGame);
                 } else {
                     //Lobby has been deleted in firebase
-                    leaveButtonPressed();
+                    Platform.runLater(() -> gameDeleted());
                 }
             }
         });
@@ -61,6 +67,24 @@ public class LobbyController {
 
         //TODO: Go to the lobbylistview, not the mainmenu
         app.loadView(MainMenuView.class, app.mainMenuController);
+    }
+
+    public void gameDeleted() {
+        Alert popup = ViewUtilities.showPopup(Alert.AlertType.INFORMATION, "Info",
+                                "The host left the lobby, sending you back to the main menu.");
+
+        ButtonType button = new ButtonType("Ok");
+        popup.getButtonTypes().setAll(button);
+
+        popup.setOnCloseRequest(event -> {
+            //Remove the old game data, by creating a new game
+            app.gameController.deleteGame();
+
+            //TODO: Go to the lobbylistview, not the mainmenu
+            app.loadView(MainMenuView.class, app.mainMenuController);
+        });
+
+        popup.showAndWait();
     }
 
     public void rulesButtonPressed() {
