@@ -5,6 +5,7 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,15 +35,23 @@ public class Account implements Observable{
             {
                 return true;
             }
-            else{return false;}
+            else
+                {
+                    textField = "Password incorrect";
+                    notifyAllObservers();
+                    return false;
+                }
 
         }
         catch (Exception e)
         {
+            textField = "Username not found";
+            notifyAllObservers();
             System.out.println("username not found");
         }
         finally
         {
+
             System.out.println("probeer opnieuw");
         }
 
