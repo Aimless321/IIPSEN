@@ -73,7 +73,7 @@ public class LobbyView implements Observer {
 
     @FXML
     public void pressRules() {
-        System.out.println("Rules button pressed");
+        controller.rulesButtonPressed(stage);
     }
 
     @Override

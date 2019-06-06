@@ -8,6 +8,7 @@ import counterfeiters.models.Game;
 import counterfeiters.models.Player;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
 import javafx.stage.Stage;
 
 import javax.annotation.Nullable;
@@ -59,8 +60,8 @@ public class LobbyController {
         app.loadView(MainMenuView.class, stage, app.mainMenuController);
     }
 
-    public void rulesButtonPressed() {
-        //TODO: Open the rules view
+    public void rulesButtonPressed(Stage stage) {
+        app.loadView(RulesView.class, stage, app.rulesController);
     }
 
     public void startButtonPressed() {
