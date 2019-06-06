@@ -40,12 +40,15 @@ public class LobbyController {
                     Game updateGame = documentSnapshot.toObject(Game.class);
 
                     app.gameController.updateData(updateGame);
+                } else {
+                    //Lobby has been deleted in firebase
+                    leaveButtonPressed();
                 }
             }
         });
     }
 
-    public void leaveButtonPressed(Stage stage) {
+    public void leaveButtonPressed() {
         Game game = app.gameController.game;
 
         String localUsername = app.accountController.getUsername();
@@ -57,11 +60,11 @@ public class LobbyController {
         app.gameController.deleteGame();
 
         //TODO: Go to the lobbylistview, not the mainmenu
-        app.loadView(MainMenuView.class, stage, app.mainMenuController);
+        app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
-    public void rulesButtonPressed(Stage stage) {
-        app.loadView(RulesView.class, stage, app.rulesController);
+    public void rulesButtonPressed() {
+        app.loadView(RulesView.class, app.rulesController);
     }
 
     public void startButtonPressed() {

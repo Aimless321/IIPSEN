@@ -47,12 +47,12 @@ public class MainMenuView implements Observer {
     public void pressJoinLobby() {
         System.out.println("Join button pressed");
 
-        controller.joinLobbyPressed(stage);
+        controller.joinLobbyPressed();
     }
 
     @FXML
     public void pressCreateLobby() {
-        controller.createLobbyPressed(stage);
+        controller.createLobbyPressed();
     }
 
     @FXML

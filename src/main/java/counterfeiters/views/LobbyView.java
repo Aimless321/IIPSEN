@@ -67,12 +67,12 @@ public class LobbyView implements Observer {
 
     @FXML
     public void pressLeave() {
-        controller.leaveButtonPressed(stage);
+        controller.leaveButtonPressed();
     }
 
     @FXML
     public void pressRules() {
-        controller.rulesButtonPressed(stage);
+        controller.rulesButtonPressed();
     }
 
     @Override
