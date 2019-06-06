@@ -21,18 +21,36 @@ public class Account implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private String textField;
 
-    public boolean checkCredentials(String username, String password)
-    {
+    public boolean checkCredentials(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
         String p = password;
-        String r = fb.get("users", username).getString("password");
 
-        if (r.equals(p)) {
-            return true;
+        try
+        {
+            String r = fb.get("users", username).getString("password");
+
+            if (r.equals(p))
+            {
+                return true;
+            }
+            else{return false;}
+
         }
-        else {return false;}
+        catch (Exception e)
+        {
+            System.out.println("username not found");
+        }
+        finally
+        {
+            System.out.println("probeer opnieuw");
+        }
+
+        return false;
     }
+
+
+
 
     public boolean checkCredentials(String username, String password, String passwordCheck){
             if (username.isEmpty() || password.isEmpty() || passwordCheck.isEmpty()){
