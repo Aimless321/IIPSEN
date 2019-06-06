@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class    Player {
+public class Player {
     private String userName;
     private int playerId = 1;
     private int score;
