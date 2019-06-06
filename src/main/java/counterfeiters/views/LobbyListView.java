@@ -2,8 +2,11 @@ package counterfeiters.views;
 
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.controllers.LobbyListController;
+import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
+import counterfeiters.models.Player;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +33,9 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.util.Callback;
@@ -47,13 +52,10 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
     private Stage stage;
     private LobbyListController controller;
     private MouseEvent mouseEvent;
+    private ObservableList<ListRow> listRows;
 
-
-    //public ObservableList<Game> lobby = FXCollections.observableArrayList(
-    //       "Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
-
+    final ImageView playerIcon = new ImageView("icons/player.png");
     //Need an empty constructor for FXML
-
     public LobbyListView() {
 
 
@@ -69,13 +71,16 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
     public void show() {
         Parent root = ViewUtilities.loadFxml("/views/lobby_list.fxml", stage, controller);
 
-        ObservableList<ListRow> listRows = FXCollections.observableArrayList();
+        listRows = FXCollections.observableArrayList();
 
         // Add a sample Chess piece, a queen in this case
         listRows.addAll(new ListRow(
                 "12345",
                 new ImageView("icons/player.png"),"3")
         ,new ListRow("1243567",new ImageView("icons/player.png"),"2"));
+
+        playerIcon.setFitHeight(35);
+        playerIcon.setFitWidth(35);
 
         ListView<ListRow> lvListRow = new ListView<>();
         lvListRow.setLayoutX(460.0);
@@ -100,7 +105,7 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
                     Region region2 = new Region();
                     HBox.setHgrow(region2, Priority.ALWAYS);
 
-                    HBox horBox = new HBox(new Label(row.getId()), region1, region2, row.getIcon(),new Label(" " + row.getPlayerAmount()+ "/4"));
+                    HBox horBox = new HBox(new Label(row.getId()), region1, region2, playerIcon,new Label(" " + row.getPlayerAmount()+ "/4"));
 
                     // Create a HBox to hold our displayed value
                   //  HBox horBox = new HBox(5);
@@ -161,17 +166,27 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
 
     @Override
     public void update(Observable observable) {
+        FirebaseModel firebaseModel  = (FirebaseModel) observable;
+
+        //Platform.runLater(() -> listRows.clear());
+
+        //Add new rows for lobbylist
+        ArrayList<QueryDocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
+        listRows.clear();
+
+        for(int i=0; i<updatedLobbies.size();i++) {
+            //We cannot update it on this thread, so we run it later
+            ;//Integer.toString(i+1),
+            listRows.add(new ListRow(updatedLobbies.get(i).getString("gameId"),updatedLobbies.get(i).getString("lobbyName"),updatedLobbies.get(i).getString("playerAmount") ));
+        }
+
+
     }
 
     @Override
     public void start() {
 
     }
-
-  //  @Override
-   // public void update(java.util.Observable observable) {
-
-  //  }
 
     public void updateObservableList(List<QueryDocumentSnapshot> lobbies){
         //listView.removeAll();
@@ -192,30 +207,28 @@ public class LobbyListView extends ListView<String> implements Observer,Initiali
     }
 
     class ListRow {
-        private String id;
-        private ImageView playerIcon;
+        private String gameId;
+        private String lobbyName;
         private String playerAmount;
 
-        public ListRow(String id, ImageView playerIcon, String playerAmount) {
-            this.id = id;
-            this.playerIcon = playerIcon;
+        public ListRow(String gameId,String lobbyName, String playerAmount) {
+            this.lobbyName = lobbyName;
             this.playerAmount = playerAmount;
+            this.gameId = gameId;
 
-            //resize pic
-            this.playerIcon.setFitHeight(30);
-            this.playerIcon.setFitWidth(30);
         }
 
-        public String getId() {
-            return id;
+        public String getLobbyName() {
+            return lobbyName;
         }
 
-        public ImageView getIcon() {
-            return playerIcon;
-        }
 
         public String getPlayerAmount() {
             return playerAmount;
+        }
+
+        public String getId(){
+
         }
     }
 }

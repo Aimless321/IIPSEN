@@ -26,6 +26,10 @@ public class FirebaseModel implements Observable {
 
     }
 
+    public FirebaseModel(ArrayList<QueryDocumentSnapshot> lobbies,ArrayList<Observer> observers) {
+            this.lobbies = lobbies;
+
+    }
 
     public DocumentSnapshot LoadGames(){
         return null;
@@ -38,14 +42,14 @@ public class FirebaseModel implements Observable {
         return null;
     }
 
-    public ArrayList<QueryDocumentSnapshot> updateLobbies(ArrayList<Observer> observers) {
+    public void updateLobbies(ArrayList<Observer> observers) {
     //return List<QueryDocumentSnapshot>
         FirebaseService fb = FirebaseService.getInstance();
         lobbies.clear();
 
         // retrieve all documents in lobbies
         lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
-        return lobbies;
+        notifyAllObservers();
     }
 /*
     public List<QueryDocumentSnapshot> getAllDocuments() throws Exception {
@@ -62,6 +66,8 @@ public class FirebaseModel implements Observable {
     }
     */
 
+
+
     @Override
     public void addListener(InvalidationListener listener) {
 
@@ -72,6 +78,11 @@ public class FirebaseModel implements Observable {
 
     }
 
+    public void notifyAllObservers() {
+        for(Observer obs : observers) {
+            obs.update(this);
+        }
+    }
     public void registerObserver(Observer observer) {
         observers.add(observer);
     }
@@ -84,6 +95,14 @@ public class FirebaseModel implements Observable {
         this.observers = observers;
     }
 
+    public ArrayList<QueryDocumentSnapshot> getLobbies(){
+        return lobbies;
+    }
+
+
+    public int getNumPlayers() {
+        return numPlayers;
+    }
 
 
 }
