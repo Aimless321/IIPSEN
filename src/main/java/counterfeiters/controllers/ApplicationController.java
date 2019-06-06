@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.views.GameListView;
 import counterfeiters.views.LobbyListView;
 import javafx.stage.Stage;
 

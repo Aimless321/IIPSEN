@@ -13,59 +13,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LobbyListController {
-
     private ApplicationController app;
-    public FirebaseModel lobbyList;
+    public FirebaseModel firebaseModel;
 
     public LobbyListController(ApplicationController applicationController) {
         this.app = applicationController;
-        lobbyList = new FirebaseModel();
+        firebaseModel = new FirebaseModel();
     }
 
     public void registerObserver(Observer observer) {
-        lobbyList.registerObserver(observer);
-    }
-
-    public void updateData(Game updateGame) {
-        //lobbyList.updateData();
+        firebaseModel.registerObserver(observer);
     }
 
 
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
-        //Listen for changes in the lobby
-        //fb.listen("lobbies", app.gameController.game.getGameId(), new EventListener<DocumentSnapshot>() {
 
-        ArrayList<QueryDocumentSnapshot> listOfLobbies = new ArrayList<QueryDocumentSnapshot>();
-        listOfLobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
-
-        for(int i =0; i<listOfLobbies.size();i++) {
-            fb.listen("lobbies", listOfLobbies.get(i).getId(), new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @Nullable FirestoreException e) {
+        fb.listenToCollection("lobbies", new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirestoreException e) {
                     if (e != null) {
-                        System.err.println("Listen failed: " + e);
+                        System.err.println("Listen failed:" + e);
                         return;
                     }
 
-                    if (documentSnapshot != null && documentSnapshot.exists()) {
-                        Game updateGame = documentSnapshot.toObject(Game.class);
+                   // if(querySnapshot != null) {
+                    System.out.println(querySnapshot.toString());
+                    //Nu doorsturen naar de model voor update
+                    updateLobbies(firebaseModel);
+                System.out.println("check");
 
-                        app.gameController.updateData(updateGame);
-                    }
-                }
-            });
-        }
+               // }
+            }
+        });
 
+                //public void backButtonPressed(Stage stage) {
+                //to do
+                // }
 
     }
 
-    public void backButtonPressed(Stage stage) {
-        //TODO: Switch to the MainMenuView
+    public void updateLobbies(FirebaseModel firebaseModel) {firebaseModel.updateLobbies();
     }
-   // public void updateLobbies(FirebaseModel updateLobbyList) {lobbyList.updateLobbies(updateLobbyList);
-   // }
+
 }
+
+
+
 
 

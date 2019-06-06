@@ -8,8 +8,7 @@ import counterfeiters.controllers.ApplicationController;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.LobbyListView;
 import counterfeiters.views.Observer;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +18,14 @@ import java.util.Map;
 public class FirebaseModel implements Observable {
 
     FirebaseService fb = FirebaseService.getInstance();
-    private ArrayList<QueryDocumentSnapshot> lobbies = new ArrayList<QueryDocumentSnapshot>();
+    private ArrayList<DocumentSnapshot> lobbies = new ArrayList<DocumentSnapshot>();
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public FirebaseModel() {
 
     }
 
-    public FirebaseModel(ArrayList<QueryDocumentSnapshot> lobbies,ArrayList<Observer> observers) {
+    public FirebaseModel(ArrayList<DocumentSnapshot> lobbies,ArrayList<Observer> observers) {
             this.lobbies = lobbies;
 
     }
@@ -42,7 +41,7 @@ public class FirebaseModel implements Observable {
         return null;
     }
 
-    public void updateLobbies(ArrayList<Observer> observers) {
+    public void updateLobbies() {
     //return List<QueryDocumentSnapshot>
         FirebaseService fb = FirebaseService.getInstance();
         lobbies.clear();
@@ -67,22 +66,6 @@ public class FirebaseModel implements Observable {
     */
 
 
-
-    @Override
-    public void addListener(InvalidationListener listener) {
-
-    }
-
-    @Override
-    public void removeListener(InvalidationListener listener) {
-
-    }
-
-    public void notifyAllObservers() {
-        for(Observer obs : observers) {
-            obs.update(this);
-        }
-    }
     public void registerObserver(Observer observer) {
         observers.add(observer);
     }
@@ -91,18 +74,19 @@ public class FirebaseModel implements Observable {
         observers.remove(observer);
     }
 
-    public void setObservers(ArrayList<Observer> observers) {
-        this.observers = observers;
-    }
 
-    public ArrayList<QueryDocumentSnapshot> getLobbies(){
+
+    public void notifyAllObservers() {
+        for(Observer obs : observers) {
+            obs.update(this);
+        }
+    }
+    public ArrayList<DocumentSnapshot> getLobbies(){
         return lobbies;
     }
 
 
-    public int getNumPlayers() {
-        return numPlayers;
-    }
+
 
 
 }
