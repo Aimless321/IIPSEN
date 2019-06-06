@@ -3,6 +3,7 @@ package counterfeiters.controllers;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.EventListener;
 import com.google.cloud.firestore.FirestoreException;
+import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
@@ -21,6 +22,7 @@ import java.util.Optional;
 
 public class LobbyController {
     private ApplicationController app;
+    private ListenerRegistration listener;
 
     public LobbyController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -34,27 +36,29 @@ public class LobbyController {
         FirebaseService fb = FirebaseService.getInstance();
 
         //Listen for changes in the lobby
-        fb.listen("lobbies", app.gameController.game.getGameId(), new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirestoreException e) {
-                if (e != null) {
-                    System.err.println("Listen failed: " + e);
-                    return;
-                }
+        listener = fb.listen("lobbies", app.gameController.game.getGameId(),
+        (documentSnapshot, e) -> {
+            if (e != null) {
+                System.err.println("Listen failed: " + e);
+                return;
+            }
 
-                if (documentSnapshot != null && documentSnapshot.exists()) {
-                    Game updateGame = documentSnapshot.toObject(Game.class);
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                Game updateGame = documentSnapshot.toObject(Game.class);
 
-                    app.gameController.updateData(updateGame);
-                } else {
-                    //Lobby has been deleted in firebase
-                    Platform.runLater(() -> gameDeleted());
-                }
+                app.gameController.updateData(updateGame);
+            } else {
+                //Lobby has been deleted in firebase
+                Platform.runLater(this::gameDeleted);
+                listener.remove();
             }
         });
     }
 
     public void leaveButtonPressed() {
+        //Remove listener
+        listener.remove();
+
         Game game = app.gameController.game;
 
         String localUsername = app.accountController.getUsername();
