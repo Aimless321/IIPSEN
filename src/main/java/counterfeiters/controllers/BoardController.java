@@ -1,19 +1,23 @@
 package counterfeiters.controllers;
 
-import counterfeiters.models.Game;
+import counterfeiters.models.Board;
+import counterfeiters.models.Board;
 import counterfeiters.views.Observer;
 
 public class BoardController {
-    private ApplicationController app;
-    public Game game;
+    public ApplicationController app;
+    public Board board;
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
 
-        game = new Game();
+        board = new Board();
     }
 
     public void registerObserver(Observer observer) {
-        game.registerObserver(observer);
+        board.registerObserver(observer);
+        app.blackMarketController.registerObserver(observer);
     }
+
+
 }

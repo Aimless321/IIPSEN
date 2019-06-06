@@ -4,7 +4,7 @@ public class Lawyer extends Card{
     private String quality;
 
     public Lawyer(String quality) {
-            super("lawyer", quality + "-lawyer.png");
+            super("lawyer", "/cards/good-lawyer.png");
             this.quality = quality;
     }
 }

@@ -13,7 +13,8 @@ public abstract class Card {
     }
 
     public Image getImg() {
-        return new Image(getClass().getResourceAsStream(img));
+        Image image = new Image(getClass().getResourceAsStream(img));
+        return image;
     }
 
     public void setImg(String img) {

@@ -18,6 +18,7 @@ public class BlackMarket implements Observable{
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);
+        System.out.println("toegevoegd " + observer);
     }
 
     @Override
@@ -50,6 +51,8 @@ public class BlackMarket implements Observable{
             cardRow[i] = marketList.get(0);
             marketList.remove(0);
         }
+        notifyAllObservers();
+        System.out.println("notify uitgevoerd");
     }
 
     public Card getCard(int position) {

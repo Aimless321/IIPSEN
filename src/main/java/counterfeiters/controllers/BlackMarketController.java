@@ -16,7 +16,6 @@ public class BlackMarketController {
         blackmarket = new BlackMarket();
         fillMarket(3);
         blackmarket.shuffleMarket();
-        blackmarket.prepareView();
     }
 
     public void registerObserver(Observer observer) {
@@ -55,5 +54,9 @@ public class BlackMarketController {
                 blackmarket.addToMarket(n);
             }
         }
+    }
+
+    public void prepareView() {
+        blackmarket.prepareView();
     }
 }

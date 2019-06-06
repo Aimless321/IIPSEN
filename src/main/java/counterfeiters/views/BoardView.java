@@ -19,7 +19,6 @@ public class BoardView implements Observer {
 
     private Stage stage;
     private BoardController boardcontroller;
-    private BlackMarketController blackmarketcontroller;
 
     //Need an empty constructor for FXML
     public BoardView() {
@@ -29,7 +28,6 @@ public class BoardView implements Observer {
     public BoardView(Stage primaryStage, Object BoardController) {
         this.stage = primaryStage;
         this.boardcontroller = (BoardController) BoardController;
-
         show();
     }
 
@@ -93,11 +91,6 @@ public class BoardView implements Observer {
     @Override
     public void setController(Object controller) {
         this.boardcontroller = (BoardController) controller;
-
-        BoardController boardController = (BoardController)controller;
-        this.boardcontroller = boardController;
-
-        boardController.registerObserver(this);
     }
 
     @Override
@@ -108,10 +101,12 @@ public class BoardView implements Observer {
             ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
             blackMarketView.getChildren().add(imageview);
         }
+        System.out.println("update uitgevoerd");
     }
 
     @Override
     public void start() {
-
+        boardcontroller.registerObserver(this);
+        boardcontroller.app.blackMarketController.prepareView();
     }
 }
