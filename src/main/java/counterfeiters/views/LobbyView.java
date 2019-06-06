@@ -67,7 +67,6 @@ public class LobbyView implements Observer {
 
     @FXML
     public void pressLeave() {
-        System.out.println("Leave button pressed");
         controller.leaveButtonPressed(stage);
     }
 
@@ -99,7 +98,7 @@ public class LobbyView implements Observer {
         }
 
         //TODO: Check if this player is the host
-        if(true) {
+        if(game.checkHost()) {
             startButton.visibleProperty().set(true);
         }
     }

@@ -2,9 +2,11 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.MainMenuController;
 import counterfeiters.models.Observable;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -50,8 +52,6 @@ public class MainMenuView implements Observer {
 
     @FXML
     public void pressCreateLobby() {
-        System.out.println("Create button pressed");
-
         controller.createLobbyPressed(stage);
     }
 

@@ -12,6 +12,7 @@ public class Game implements Observable {
     private int numPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
+    private Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -27,9 +28,10 @@ public class Game implements Observable {
         DocumentReference lobbyDoc = fb.insert("lobbies");
 
         //Initialize variables
-        gameId = lobbyDoc.getId();
+        this.gameId = lobbyDoc.getId();
         addPlayer(player);
         this.lobbyName = player.getUserName() + "'s Lobby";
+        this.localPlayer = player;
 
         fb.setClass("lobbies", gameId, this);
 
@@ -80,10 +82,10 @@ public class Game implements Observable {
         return null;
     }
 
-    public boolean isPlayerHost(String username) {
+    public boolean checkHost() {
         Player host = players.get(0);
 
-        return host.getUserName().equals(username);
+        return host == localPlayer;
     }
 
     public void updateData(Game updateGame) {
