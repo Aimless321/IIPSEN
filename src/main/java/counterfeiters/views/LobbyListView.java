@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,25 +29,30 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 
-
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyListView extends ListView<String> implements Observer {
+public class LobbyListView implements Observer {
+
 
     @FXML
-    public ListView<String> list;
+    public Pane pane;
+    @FXML
+    public ScrollPane scrollPane;
+    @FXML
+    public VBox vBox;
 
     //ObservableList<String> listView = FXCollections.observableArrayList("one", "two", "three");
-
-
     private Stage stage;
     private LobbyListController controller;
     private MouseEvent mouseEvent;
     private ListRow listRowObject;
-    private ObservableList<ListRow> listRows = FXCollections.observableArrayList();
+    private List<ListRow> listRows = new ArrayList<>();
+    private int counter = 0;
 
     private Image playerIcon = new Image("icons/player.png");
 
@@ -63,76 +69,15 @@ public class LobbyListView extends ListView<String> implements Observer {
     }
 
     public void show() {
-
-
-
-        Parent root = ViewUtilities.loadFxml("/views/lobby_list.fxml", stage, controller);
-
-        ObservableList<ListRow> listRows = FXCollections.observableArrayList();
-
-        listRows.addAll(new ListRow(
-                        "12345"
-                        ,"blba","3",new ImageView("icons/player.png"))
-                ,new ListRow(
-                        "12345"
-                        ,"blba","3",new ImageView("icons/player.png")));
-
-        ListView<ListRow> lvListRow = new ListView<>();
-        lvListRow.setLayoutX(460.0);
-        lvListRow.setLayoutY(390.0);
-        lvListRow.setPrefHeight(400);
-        lvListRow.setPrefWidth(1000);
-        System.out.println("hallo");
-        // Setup the CellFactory
-        lvListRow.setCellFactory(listView -> new ListCell<ListRow>() {
-            @Override
-            protected void updateItem(ListRow row, boolean empty) {
-                super.updateItem(row, empty);
-
-                if (empty) {
-                    System.out.println("bijna");
-                    setGraphic(null);
-                } else {
-
-                    Region region1 = new Region();
-                    HBox.setHgrow(region1, Priority.ALWAYS);
-
-                    Region region2 = new Region();
-                    HBox.setHgrow(region2, Priority.ALWAYS);
-
-                    HBox horBox = new HBox(new Label(row.getId()), new Label(row.getLobbyName()), region1, region2, row.getIcon(),new Label(" " + row.getPlayerAmount()+ "/4"));
-
-                    // Create a HBox to hold our displayed value
-                  //  HBox horBox = new HBox(5);
-                  //  horBox.setAlignment(Pos.CENTER_LEFT);
-
-                    // Add the values from our piece to the HBox
-                    //Label idInRow = new Label(row.getId());
-                    //horBox.getChildren().addAll(
-                     //       row.getIcon(),
-                    //        idInRow
-                           //new Label("x " + piece.getCount())
-                    //);
-
-                    // Set the HBox as the display
-                    setGraphic(horBox);
-                    System.out.println("bijna");
-                }
-            }
-        });
-
-        // Bind our list of pieces to the ListView
-        lvListRow.setItems(listRows);
+        Parent root = ViewUtilities.loadFxml("/views/lobbylist.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane) root.lookup("Pane");
-        pane.getChildren().add(lvListRow);
+        Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
-        Scene scene = new Scene(root, 1920, 1080);
-        stage.setScene(scene);
-    }
-
+        //Show it on the screen
+        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
+        stage.setScene(scene);}
 
 
     @FXML
@@ -165,15 +110,61 @@ public class LobbyListView extends ListView<String> implements Observer {
     public void update(Observable observable) {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
 
-        //Platform.runLater(() -> listRows.clear());
+        Platform.runLater(() -> listRows.clear());
 
         //Add new rows for lobbylist
         ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
-        System.out.println("moiiiii");
-        listRows.clear();
-        for(int i=0; i<updatedLobbies.size();i++) {
-            listRows.add(new ListRow(updatedLobbies.get(i).getString("gameId"),updatedLobbies.get(i).getString("lobbyName"),updatedLobbies.get(i).getString("playerAmount"),new ImageView("icons/player.png") ));
+
+        for(DocumentSnapshot doc: updatedLobbies) {
+            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), new ImageView("icons/player.png"));
+            listRows.add(newListRow);
+
+            Platform.runLater(() -> addLobbyInView(newListRow));
         }
+
+    }
+
+    public void addLobbyInView(ListRow listRow){
+
+        counter ++;
+        Region region1 = new Region();
+        HBox.setHgrow(region1, Priority.ALWAYS);
+
+        Region region2 = new Region();
+        HBox.setHgrow(region2, Priority.ALWAYS);
+
+        Label gameId = new Label(listRow.getId());
+        gameId.setFont(new Font(30));
+        gameId.setTextFill(Color.WHITE);
+
+        Label lobbyName = new Label(listRow.getLobbyName());
+        lobbyName.setFont(new Font(30));
+        lobbyName.setTextFill(Color.WHITE);
+
+        Label playerAmount = new Label(" " + "/4");
+        playerAmount.setFont(new Font(30));
+        playerAmount.setTextFill(Color.WHITE);
+
+        HBox horBox = new HBox(gameId,lobbyName , region1, region2, listRow.getIcon(), playerAmount);
+
+
+        horBox.setStyle("-fx-pref-height: 60");
+        horBox.setStyle("-fx-pref-width: 900");
+       // horBox.setStyle("-fx-border-style: ");
+        horBox.setStyle("-fx-background-radius: 0.5");
+        horBox.setSpacing(25);
+
+        if (counter %2 == 0) {
+            horBox.setStyle("-fx-background-color: rgb(77, 144, 156)");
+        }
+        else {
+            horBox.setStyle("-fx-background-color: rgb(90, 115, 115)");
+        }
+
+        vBox.getChildren().add(horBox);
+
+
+
 
     }
 
@@ -184,24 +175,40 @@ public class LobbyListView extends ListView<String> implements Observer {
        controller.registerListeners();
     }
 
-    public void updateObservableList(List<QueryDocumentSnapshot> lobbies){
-        //listView.removeAll();
 
-       // for(int i=0; i<lobbies.size();i++) {
-       //     listView.add(lobbies.get(i).getId());
-       // }
+    class ListRow {
+        private String gameId;
+        private String lobbyName;
+        //private String playerAmount;
+        private ImageView playerIcon;
 
+        public ListRow(String gameId,String lobbyName, ImageView playerIcon) {
+            this.lobbyName = lobbyName;
+            //.playerAmount = playerAmount;
+            this.gameId = gameId;
+            this.playerIcon = playerIcon;
+
+            //resize pic
+            this.playerIcon.setFitHeight(35);
+            this.playerIcon.setFitWidth(35);
+
+        }
+
+        public String getLobbyName() {
+            return lobbyName;
+        }
+
+
+        //public String getPlayerAmount() {
+        //    return playerAmount;
+        //}
+
+        public String getId(){
+            return gameId;
+        }
+        public ImageView getIcon() {
+            return playerIcon;
+        }
     }
-
-
-   // @Override
-   // public void initialize(URL location, ResourceBundle resources) {
-
-        //list.setItems(listView);
-        //list.getSelectionModel().selectedItemProperty().addListener((ObservableValue<?extends String>ov, String old,String newV)->{});
-
-    //}
-
-
 
 }

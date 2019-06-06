@@ -41,7 +41,7 @@ public class LobbyListController {
                    // if(querySnapshot != null) {
                     System.out.println(querySnapshot.toString());
                     //Nu doorsturen naar de model voor update
-                    updateLobbies(firebaseModel);
+                    updateLobbiesModel(firebaseModel);
                 System.out.println("check");
 
                // }
@@ -54,7 +54,9 @@ public class LobbyListController {
 
     }
 
-    public void updateLobbies(FirebaseModel firebaseModel) {firebaseModel.updateLobbies();
+    public void updateLobbiesModel(FirebaseModel firebaseModel) {
+        System.out.println("controllerda lobbyupdate deyim");
+        firebaseModel.updateLobbies();
     }
 
 }
