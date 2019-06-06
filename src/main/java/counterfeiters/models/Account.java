@@ -47,12 +47,7 @@ public class Account implements Observable{
         {
             textField = "Username not found";
             notifyAllObservers();
-            System.out.println("username not found");
-        }
-        finally
-        {
 
-            System.out.println("probeer opnieuw");
         }
 
         return false;
