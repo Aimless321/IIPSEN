@@ -99,6 +99,8 @@ public class BoardView implements Observer {
 
         for (int i = 0; i < 7; i++) {
             ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
+            imageview.setFitWidth(111);
+            imageview.setPreserveRatio(true);
             blackMarketView.getChildren().add(imageview);
         }
         System.out.println("update uitgevoerd");
