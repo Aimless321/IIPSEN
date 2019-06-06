@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 public class RegisterController {
     private ApplicationController app;
-    public LoginController loginController;
 
     //CONSTRUCTOR
     public RegisterController(ApplicationController applicationController) {
@@ -29,12 +28,12 @@ public class RegisterController {
      * */
     public void registerButtonPressed(String username, String password, String passwordCheck, Stage stage) {
         if (app.accountController.checkCredentials(username, password, passwordCheck)){
-            app.loadView(LoginView.class, stage, loginController);
+            app.loadView(LoginView.class, stage, app.loginController);
         }
     }
 
     public void backToLoginButtonPressed(Stage stage){
-        app.loadView(LoginView.class, stage, loginController); //on click wordt de LoginView getoond.
+        app.loadView(LoginView.class, stage, app.loginController); //on click wordt de LoginView getoond.
     }
 
     public void registerObserver(Observer observer) {
