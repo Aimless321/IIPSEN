@@ -15,8 +15,7 @@ public class MainMenuController {
     public void createLobbyPressed(Stage stage) {
         app.loadView(LobbyView.class, stage, app.lobbyController);
 
-        //TODO: Add the right player from the accountcontroller
-        app.gameController.createGame(new Player(true, "WesleyBijleveld", 1, 10));
+        app.gameController.createGame(new Player(app.accountController.getUsername()));
     }
 
     public void joinLobbyPressed(Stage stage) {

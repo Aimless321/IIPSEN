@@ -31,6 +31,10 @@ public class AccountController {
 
     }
 
+    public String getUsername() {
+        return account.getUsername();
+    }
+
     public void registerObserver(Observer observer) {
         account.registerObserver(observer);
     }

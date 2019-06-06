@@ -48,9 +48,9 @@ public class LobbyController {
     public void leaveButtonPressed(Stage stage) {
         Game game = app.gameController.game;
 
-        //TODO: Get real player
-        Player player = game.getPlayers().get(0);
-
+        String localUsername = app.accountController.getUsername();
+        
+        Player player = game.getLocalPlayer(localUsername);
         player.leaveLobby(game);
 
         //Remove the old game data, by creating a new game

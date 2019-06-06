@@ -20,6 +20,7 @@ import java.util.Map;
 public class Account implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private String textField;
+    private String username;
 
     public boolean checkCredentials(String username, String password)
     {
@@ -29,6 +30,8 @@ public class Account implements Observable{
         String r = fb.get("users", username).getString("password");
 
         if (r.equals(p)) {
+            this.username = username;
+
             return true;
         }
         else {return false;}
@@ -104,5 +107,9 @@ public class Account implements Observable{
 
     public String getTextField() {
         return textField;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

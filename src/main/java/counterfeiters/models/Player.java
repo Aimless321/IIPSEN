@@ -5,10 +5,9 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Player {
-    private boolean isLoggedIn;
+public class    Player {
     private String userName;
-    private int playerId;
+    private int playerId = 1;
     private int score;
     private ArrayList<Card> cards = new ArrayList<>();
 
@@ -16,11 +15,8 @@ public class Player {
 
     }
 
-    public Player(boolean isLoggedIn, String userName, int playerId, int score) {
-        this.isLoggedIn = isLoggedIn;
+    public Player(String userName) {
         this.userName = userName;
-        this.playerId = playerId;
-        this.score = score;
     }
 
     public void leaveLobby(Game game) {
@@ -35,10 +31,6 @@ public class Player {
         }
     }
 
-    public boolean isLoggedIn() {
-        return isLoggedIn;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -51,10 +43,10 @@ public class Player {
         return score;
     }
 
-    public Image getImage(int playerNum) {
+    public Image findImagePath() {
         String imagePath;
 
-        switch(playerNum) {
+        switch(playerId) {
             case 1:
                 imagePath = "/players/croc.jpg";
                 break;
@@ -69,15 +61,11 @@ public class Player {
                 break;
             default:
                 imagePath = "/players/croc.jpg";
-                System.err.println("Invalid player number passed to Player.getImage()");
+                System.err.println("Invalid player number passed to Player.findImagePath()");
                 break;
         }
 
         return new Image(getClass().getResourceAsStream(imagePath));
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        isLoggedIn = loggedIn;
     }
 
     public void setUserName(String userName) {
