@@ -1,6 +1,7 @@
 package counterfeiters.models;
 
 import com.google.cloud.Tuple;
+import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.views.Observer;
 
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ public class PolicePawn{
     HashMap<Integer, Integer> xcoordinates= new HashMap<Integer, Integer>();
     HashMap<Integer, Integer> ycoordinates= new HashMap<Integer, Integer>();
 
+    public PolicePawn() {
+
+    }
 
     public PolicePawn(int players) {
         if (players == 3) {
@@ -39,10 +43,12 @@ public class PolicePawn{
         }
     }
 
+    @Exclude
     public int getXCoordinate() {
         return xcoordinates.get(pawnPosition);
     }
 
+    @Exclude
     public int getYCoordinate() {
         return ycoordinates.get(pawnPosition);
     }
@@ -51,5 +57,11 @@ public class PolicePawn{
         pawnPosition++;
     }
 
+    public int getPawnPosition() {
+        return pawnPosition;
+    }
 
+    public void setPawnPosition(int pawnPosition) {
+        this.pawnPosition = pawnPosition;
+    }
 }

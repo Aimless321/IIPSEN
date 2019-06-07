@@ -62,7 +62,7 @@ public class LobbyView implements Observer {
 
     @FXML
     public void pressStart() {
-        System.out.println("Start button pressed");
+        controller.startButtonPressed();
     }
 
     @FXML
@@ -109,7 +109,7 @@ public class LobbyView implements Observer {
         number.setFill(Color.WHITE);
         number.setWrappingWidth(50);
 
-        ImageView playerImage = new ImageView(player.findImagePath());
+        ImageView playerImage = new ImageView(player.getCharacterImagePath());
         playerImage.setFitHeight(135);
         playerImage.setFitWidth(135);
         playerImage.setPreserveRatio(true);

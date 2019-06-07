@@ -14,16 +14,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
    <children>
-      <ImageView pickOnBounds="true" preserveRatio="true">
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-         <image>
-            <Image url="@/background/game.png" />
-         </image>
-      </ImageView>
       <HBox fx:id="blackMarketView" alignment="TOP_RIGHT" layoutX="437.0" layoutY="21.0" prefHeight="163.0" prefWidth="1011.0" spacing="35.0">
          <padding>
             <Insets right="12.0" />
@@ -215,7 +207,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" layoutX="233.0" layoutY="197.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
+      <VBox id="henchman-hippo" alignment="TOP_CENTER" layoutX="233.0" layoutY="197.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -232,9 +224,14 @@
                   <Image url="@/henchman/hippo.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="36.0" layoutX="16.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/henchman/hippo.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="233.0" layoutY="740.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
+      <VBox id="henchman-croc" alignment="TOP_CENTER" layoutX="233.0" layoutY="740.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -251,9 +248,14 @@
                   <Image url="@/henchman/croc.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="36.0" layoutX="16.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/henchman/croc.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="1603.0" layoutY="742.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
+      <VBox id="henchman-deer" alignment="TOP_CENTER" layoutX="1603.0" layoutY="742.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -270,9 +272,14 @@
                   <Image url="@/henchman/deer.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="36.0" layoutX="16.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@/henchman/deer.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" layoutX="1603.0" layoutY="197.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
+      <VBox id="henchman-herron" alignment="TOP_CENTER" layoutX="1603.0" layoutY="197.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -285,6 +292,11 @@
                </image>
             </ImageView>
             <ImageView fitHeight="150.0" fitWidth="36.0" layoutX="16.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/henchman/herron.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="36.0" layoutX="16.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@/henchman/herron.png" />
                </image>

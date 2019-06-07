@@ -1,5 +1,6 @@
 package counterfeiters.models;
 
+import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 
@@ -43,28 +44,35 @@ public class Player {
         return score;
     }
 
-    public Image findImagePath() {
-        String imagePath;
+    @Exclude
+    public String getCharacterName() {
+        String charaterName;
 
-        switch(playerId) {
+        switch (playerId) {
             case 1:
-                imagePath = "/players/croc.jpg";
+                charaterName = "croc";
                 break;
             case 2:
-                imagePath = "/players/deer.jpg";
+                charaterName = "deer";
                 break;
             case 3:
-                imagePath = "/players/herron.jpg";
+                charaterName = "herron";
                 break;
             case 4:
-                imagePath = "/players/hippo.jpg";
+                charaterName = "hippo";
                 break;
             default:
-                imagePath = "/players/croc.jpg";
-                System.err.println("Invalid player number passed to Player.findImagePath()");
+                charaterName = "croc";
+                System.err.println("Invalid player number passed to Player.getCharacterName()");
                 break;
         }
 
+        return charaterName;
+    }
+
+    @Exclude
+    public Image getCharacterImagePath() {
+        String imagePath = "/players/" + getCharacterName() + ".jpg";
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 

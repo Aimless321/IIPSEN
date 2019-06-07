@@ -1,5 +1,6 @@
 package counterfeiters.models;
 
+import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.views.Observer;
 import javafx.scene.image.ImageView;
 
@@ -8,6 +9,8 @@ import java.util.Collections;
 
 public class BlackMarket {
     private ArrayList<Card> marketList;
+
+    @Exclude
     public Card[] cardRow = new Card[7];
 
     public BlackMarket() {

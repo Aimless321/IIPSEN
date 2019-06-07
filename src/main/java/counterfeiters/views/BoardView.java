@@ -3,16 +3,24 @@ package counterfeiters.views;
 import counterfeiters.controllers.BoardController;
 import counterfeiters.models.BlackMarket;
 import counterfeiters.models.Board;
+import counterfeiters.models.Henchman;
 import counterfeiters.models.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Set;
 
 import static java.lang.Thread.sleep;
 
@@ -20,6 +28,7 @@ public class BoardView implements Observer {
 
     public HBox blackMarketView;
     public ImageView policePawn;
+    public Pane pane;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -40,7 +49,7 @@ public class BoardView implements Observer {
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
-        pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
+        pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
 
         //Show it on the screen
         Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
@@ -50,12 +59,21 @@ public class BoardView implements Observer {
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
         System.out.println("Black market pressed");
+
+        Button btn = (Button) mouseEvent.getSource();
+        placeHenchman(btn);
     }
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
         System.out.println("Launder button pressed");
-        boardcontroller.advancePolice();
+
+        Button btn = (Button) mouseEvent.getSource();
+        if(btn.getStyleClass().get(0) == "police" ) {
+            boardcontroller.advancePolice();
+        }
+
+        placeHenchman(btn);
     }
 
     @FXML
@@ -66,16 +84,24 @@ public class BoardView implements Observer {
         if(btn.getStyleClass().get(0) == "police" ) {
             boardcontroller.advancePolice();
         }
+
+        placeHenchman(btn);
     }
 
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
         System.out.println("Fly button pressed");
+
+        Button btn = (Button) mouseEvent.getSource();
+        placeHenchman(btn);
     }
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
         System.out.println("Healer button pressed");
+
+        Button btn = (Button) mouseEvent.getSource();
+        placeHenchman(btn);
     }
 
     @FXML
@@ -86,16 +112,28 @@ public class BoardView implements Observer {
         if(btn.getStyleClass().get(0) == "police" ) {
             boardcontroller.advancePolice();
         }
+
+        placeHenchman(btn);
     }
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
         System.out.println("Rules button pressed");
+
+        Button btn = (Button) mouseEvent.getSource();
+        placeHenchman(btn);
     }
 
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
         System.out.println("Cards button pressed");
+
+        Button btn = (Button) mouseEvent.getSource();
+        placeHenchman(btn);
+    }
+
+    public void placeHenchman(Button btn) {
+        boardcontroller.henchmanPlaced(btn);
     }
 
     @Override
@@ -110,6 +148,8 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
+        System.out.println("Updating lobbyview");
+
         Board board = (Board)observable;
 
         for (int i = 0; i < 7; i++) {
@@ -121,6 +161,48 @@ public class BoardView implements Observer {
 
         policePawn.setX(board.policePawn.getXCoordinate());
         policePawn.setY(board.policePawn.getYCoordinate());
+
+        resetHenchman();
+
+        for(Henchman henchman : board.getHenchmen()) {
+            VBox henchmanbox  = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+            System.out.println("#henchman-" + henchman.getOwner());
+
+            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
+
+            ImageView henchmanImage = new ImageView(old.getImage());
+            henchmanImage.setLayoutX(henchman.x);
+            henchmanImage.setLayoutY(henchman.y);
+            henchmanImage.setFitHeight(36);
+            henchmanImage.setFitWidth(36);
+            henchmanImage.getStyleClass().add("henchman");
+
+            pane.getChildren().add(henchmanImage);
+        }
+    }
+
+    public void resetHenchman() {
+        Set<Node> nodes = pane.lookupAll(".henchman");
+
+        for(Node node : nodes) {
+            pane.getChildren().remove(node);
+        }
+
+        String[] henchmanBoxes = {"#henchman-croc", "#henchman-deer", "#henchman-herron", "#henchman-hippo"};
+        for (int i = 0; i < henchmanBoxes.length; i++) {
+            VBox box = (VBox) pane.lookup(henchmanBoxes[i]);
+
+            ObservableList<Node> children = box.getChildren();
+            while(children.size() < 4) {
+                ImageView oldImage = (ImageView)children.get(0);
+                ImageView newHenchman = new ImageView(oldImage.getImage());
+                newHenchman.setFitWidth(36);
+                newHenchman.setFitHeight(36);
+                children.add(0, newHenchman);
+
+                System.out.println("Adding new henchman");
+            }
+        }
     }
 
     @Override
@@ -128,5 +210,6 @@ public class BoardView implements Observer {
         boardcontroller.registerObserver(this);
         boardcontroller.prepareView();
 
+        boardcontroller.registerListeners();
     }
 }

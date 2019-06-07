@@ -41,7 +41,7 @@ public class ApplicationController {
         accountController = new AccountController(this);
 
         //Load first view
-        loadView(BoardView.class, boardController);
+        loadView(LoginView.class, loginController);
     }
 
     /**
