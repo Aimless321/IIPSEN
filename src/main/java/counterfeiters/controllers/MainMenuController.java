@@ -2,7 +2,6 @@ package counterfeiters.controllers;
 
 import counterfeiters.models.Player;
 import counterfeiters.views.LobbyView;
-import javafx.stage.Stage;
 
 public class MainMenuController {
     private ApplicationController app;

@@ -3,6 +3,7 @@ package counterfeiters.controllers;
 import counterfeiters.views.LoginView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -20,6 +21,7 @@ public class ApplicationController {
     public RegisterController registerController;
     public LobbyController lobbyController;
     public ScoreboardController scoreboardController;
+    public BoardController boardController;
     public GameController gameController;
     public RulesController rulesController;
     public AccountController accountController;
@@ -33,6 +35,7 @@ public class ApplicationController {
         scoreboardController = new ScoreboardController(this);
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
+        boardController = new BoardController(this);
         gameController = new GameController(this);
         rulesController = new RulesController(this);
         accountController = new AccountController(this);

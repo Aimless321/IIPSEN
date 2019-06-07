@@ -26,6 +26,9 @@ public class GameController {
         game.createNewGame(player);
 
         app.lobbyController.registerListeners();
+
+        //Give the game to the board aswell
+        app.boardController.board.game = game;
     }
 
     public void updateData(Game updateGame) {

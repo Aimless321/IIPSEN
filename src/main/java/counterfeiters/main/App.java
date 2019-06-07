@@ -1,10 +1,6 @@
 package counterfeiters.main;
 
 import counterfeiters.controllers.ApplicationController;
-import counterfeiters.views.LoginView;
-import counterfeiters.views.MainMenuView;
-import counterfeiters.views.RegisterView;
-import counterfeiters.views.ScoreboardView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

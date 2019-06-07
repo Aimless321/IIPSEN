@@ -1,8 +1,10 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +14,8 @@ public class Game implements Observable {
     private int numPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
-    private Player localPlayer;
+    @Exclude
+    public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -65,21 +68,6 @@ public class Game implements Observable {
         fb.delete("lobbies", gameId);
 
         players.clear();
-    }
-
-    /**
-     * Returns the player object of this client
-     * @param username the username of the local player
-     * @return a Player if he has been found in this game, null if not found
-     */
-    public Player getLocalPlayer(String username) {
-        for(Player player : players) {
-            if(player.getUserName().equals(username)) {
-                return player;
-            }
-        }
-
-        return null;
     }
 
     public boolean checkHost() {

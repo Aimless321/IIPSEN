@@ -3,20 +3,16 @@ package counterfeiters.views;
 import counterfeiters.controllers.LoginController;
 import counterfeiters.models.Account;
 import counterfeiters.models.Observable;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-
-import java.awt.*;
 
 public class LoginView implements Observer {
     public TextField username;

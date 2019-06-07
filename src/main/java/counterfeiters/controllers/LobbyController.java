@@ -1,24 +1,13 @@
 package counterfeiters.controllers;
 
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.EventListener;
-import com.google.cloud.firestore.FirestoreException;
 import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
-import counterfeiters.views.MainMenuView;
-import counterfeiters.views.Observer;
-import counterfeiters.views.RulesView;
-import counterfeiters.views.ViewUtilities;
+import counterfeiters.views.*;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class LobbyController {
     private ApplicationController app;
@@ -63,7 +52,7 @@ public class LobbyController {
 
         String localUsername = app.accountController.getUsername();
         
-        Player player = game.getLocalPlayer(localUsername);
+        Player player = game.localPlayer;
         player.leaveLobby(game);
 
         //Remove the old game data, by creating a new game
@@ -97,5 +86,6 @@ public class LobbyController {
 
     public void startButtonPressed() {
         //TODO: Start game
+        app.loadView(BoardView.class, app.boardController);
     }
 }

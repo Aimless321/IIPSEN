@@ -2,7 +2,6 @@ package counterfeiters.controllers;
 
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.RulesView;
-import javafx.stage.Stage;
 
 public class ScoreboardController {
     private ApplicationController app;
