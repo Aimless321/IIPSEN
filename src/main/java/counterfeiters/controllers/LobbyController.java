@@ -1,8 +1,5 @@
 package counterfeiters.controllers;
 
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.EventListener;
-import com.google.cloud.firestore.FirestoreException;
 import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
@@ -11,11 +8,6 @@ import counterfeiters.views.*;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class LobbyController {
     private ApplicationController app;

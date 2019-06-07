@@ -1,18 +1,15 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.BlackMarket;
 import counterfeiters.models.Board;
 import counterfeiters.models.Henchman;
 import counterfeiters.models.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -21,8 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.Set;
-
-import static java.lang.Thread.sleep;
 
 public class BoardView implements Observer {
 
@@ -148,8 +143,6 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        System.out.println("Updating lobbyview");
-
         Board board = (Board)observable;
 
         for (int i = 0; i < 7; i++) {
@@ -166,7 +159,6 @@ public class BoardView implements Observer {
 
         for(Henchman henchman : board.getHenchmen()) {
             VBox henchmanbox  = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
-            System.out.println("#henchman-" + henchman.getOwner());
 
             ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
 
@@ -199,8 +191,6 @@ public class BoardView implements Observer {
                 newHenchman.setFitWidth(36);
                 newHenchman.setFitHeight(36);
                 children.add(0, newHenchman);
-
-                System.out.println("Adding new henchman");
             }
         }
     }

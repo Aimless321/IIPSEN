@@ -2,8 +2,8 @@ package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
 import counterfeiters.views.Observer;
-import counterfeiters.views.BoardView;
 import javafx.stage.Stage;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**

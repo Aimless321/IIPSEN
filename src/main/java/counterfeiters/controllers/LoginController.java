@@ -3,7 +3,6 @@ package counterfeiters.controllers;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RegisterView;
-import javafx.stage.Stage;
 
 public class LoginController {
     private ApplicationController app;

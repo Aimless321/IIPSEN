@@ -5,7 +5,6 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

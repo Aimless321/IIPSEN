@@ -50,7 +50,6 @@ public class Board implements Observable{
 
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
-        System.out.println("Board data updated");
         notifyAllObservers();
     }
 

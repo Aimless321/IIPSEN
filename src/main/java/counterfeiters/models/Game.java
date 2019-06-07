@@ -4,6 +4,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
+
 import java.util.ArrayList;
 import java.util.Date;
 

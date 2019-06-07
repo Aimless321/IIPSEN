@@ -1,8 +1,5 @@
 package counterfeiters.models;
 
-import com.google.cloud.firestore.annotation.Exclude;
-import javafx.scene.image.Image;
-
 public class Henchman {
     private String owner;
     public double x;

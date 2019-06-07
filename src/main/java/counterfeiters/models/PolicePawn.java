@@ -1,10 +1,7 @@
 package counterfeiters.models;
 
-import com.google.cloud.Tuple;
 import com.google.cloud.firestore.annotation.Exclude;
-import counterfeiters.views.Observer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PolicePawn{

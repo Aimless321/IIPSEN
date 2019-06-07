@@ -3,9 +3,7 @@ package counterfeiters.controllers;
 import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
-import counterfeiters.models.Board;
 import counterfeiters.views.Observer;
-import javafx.application.Platform;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
