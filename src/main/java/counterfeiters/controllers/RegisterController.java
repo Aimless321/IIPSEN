@@ -26,7 +26,7 @@ public class RegisterController {
      * @version 05-06-2019
      * @return checkCredentials
      * */
-    public void registerButtonPressed(String username, String password, String passwordCheck, Stage stage) {
+    public void registerButtonPressed(String username, String password, String passwordCheck) {
         if (app.accountController.checkCredentials(username, password, passwordCheck)){
             app.loadView(LoginView.class, app.loginController);
         }
