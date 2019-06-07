@@ -59,7 +59,6 @@ public class LobbyListView implements Observer {
     private ListRow listRowObject;
     private List<ListRow> listRows = new ArrayList<>();
     private int counter = 0;
-
     private Image playerIcon = new Image("icons/player.png");
 
     //Need an empty constructor for FXML
@@ -75,6 +74,7 @@ public class LobbyListView implements Observer {
     }
 
     public void show() {
+
         Parent root = ViewUtilities.loadFxml("/views/lobbylist.fxml", stage, controller);
 
         //Find root pane and set background
@@ -87,18 +87,18 @@ public class LobbyListView implements Observer {
 
 
     @FXML
-    public void pressRules(MouseEvent mouseEvent) {
+    public void pressRules() {
         System.out.println("Rules button pressed");
     }
 
     @FXML
-    public void pressBackButton(MouseEvent mouseEvent) {
-        System.out.println("Leave button pressed");
+    public void pressBackButton() {
+        controller.leaveButtonPressed(stage);
         //controller.backButtonPressed(stage);
     }
 
     @FXML
-    public void clickOnLobby(MouseEvent mouseEvent) {
+    public void clickOnLobby() {
         //lobbyList.getItem()
     }
 
@@ -156,6 +156,7 @@ public class LobbyListView implements Observer {
                     if(mouseEvent.getClickCount() == 2){
                         System.out.println("Double clicked");
                         System.out.println(listRow.getId());
+                        controller.enterLobby(stage);
 
                     }
                 }

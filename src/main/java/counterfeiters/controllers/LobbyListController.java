@@ -5,6 +5,9 @@ import com.google.cloud.firestore.*;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
+import counterfeiters.models.Player;
+import counterfeiters.views.LobbyView;
+import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
 
@@ -55,9 +58,23 @@ public class LobbyListController {
     }
 
     public void updateLobbiesModel(FirebaseModel firebaseModel) {
-        System.out.println("controllerda lobbyupdate deyim");
         firebaseModel.updateLobbies();
     }
+
+    public void leaveButtonPressed(Stage stage) {
+        //TODO: Go to the mainmenu
+        app.loadView(MainMenuView.class, stage, app.mainMenuController);
+    }
+
+    public void enterLobby(Stage stage){
+        //TODO: Go to the LobbyView
+        app.loadView(LobbyView.class, stage, app.lobbyController);
+    }
+
+    public void rulesButtonPressed() {
+        //TODO: Open the rules view
+    }
+
 
 }
 

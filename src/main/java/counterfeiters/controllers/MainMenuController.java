@@ -1,7 +1,9 @@
 package counterfeiters.controllers;
 
+import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
+import counterfeiters.views.LobbyListView;
 import counterfeiters.views.LobbyView;
 import javafx.stage.Stage;
 
@@ -21,6 +23,7 @@ public class MainMenuController {
 
     public void joinLobbyPressed(Stage stage) {
 
+        app.lobbyListController.updateLobbiesModel(new FirebaseModel());
         //TODO: Switch to the LobbyListView
 
     }

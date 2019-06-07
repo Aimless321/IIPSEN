@@ -43,7 +43,6 @@ public class FirebaseModel implements Observable {
 
     public void updateLobbies() {
     //return List<QueryDocumentSnapshot>
-        System.out.println("üpadtelobbiesdeyim");
         FirebaseService fb = FirebaseService.getInstance();
         lobbies.clear();
 
