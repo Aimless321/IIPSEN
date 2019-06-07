@@ -28,10 +28,8 @@ public class LobbyListController {
         firebaseModel.registerObserver(observer);
     }
 
-
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
-
 
         fb.listenToCollection("lobbies", new EventListener<QuerySnapshot>() {
             @Override
@@ -40,21 +38,13 @@ public class LobbyListController {
                         System.err.println("Listen failed:" + e);
                         return;
                     }
-
-                   // if(querySnapshot != null) {
-                    System.out.println(querySnapshot.toString());
-                    //Nu doorsturen naar de model voor update
+                    //To the model for update
                     updateLobbiesModel(firebaseModel);
-                System.out.println("check");
+                    System.out.println("Something happened");
 
                // }
             }
         });
-
-                //public void backButtonPressed(Stage stage) {
-                //to do
-                // }
-
     }
 
     public void updateLobbiesModel(FirebaseModel firebaseModel) {
@@ -62,7 +52,7 @@ public class LobbyListController {
     }
 
     public void leaveButtonPressed(Stage stage) {
-        //TODO: Go to the mainmenu
+        //TODO: Go to the MainMenuView
         app.loadView(MainMenuView.class, stage, app.mainMenuController);
     }
 
@@ -72,9 +62,8 @@ public class LobbyListController {
     }
 
     public void rulesButtonPressed() {
-        //TODO: Open the rules view
+        //TODO: Go to the rules view
     }
-
 
 }
 

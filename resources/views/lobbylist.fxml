@@ -15,19 +15,19 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMouseEntered="#pressRules" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMouseClicked="#pressRules" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
          <image>
             <Image url="/icons/question-sign.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#pressBackButton" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="14.0" layoutY="17.0" onMouseClicked="#pressBackButton" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
          <image>
             <Image url="/icons/back-button.png" />
          </image>
       </ImageView>
-      <ScrollPane fx:id="scrollPane" layoutX="460.0" layoutY="390.0" prefHeight="400.0" prefWidth="1000.0" style="-fx-border-radius: 15px 5px 5px 15px">
+      <ScrollPane fx:id="scrollPane" layoutX="460.0" layoutY="390.0" prefHeight="400.0" prefWidth="1020.0">
          <content>
-            <VBox fx:id="vBox" prefHeight="380.0" prefWidth="980.0" style="-fx-border-radius: 15px 5px 5px 15px" />
+            <VBox fx:id="vBox" layoutX="460.0" layoutY="390.0" prefHeight="380.0" prefWidth="1000.0"/>
          </content>
       </ScrollPane>
    </children>

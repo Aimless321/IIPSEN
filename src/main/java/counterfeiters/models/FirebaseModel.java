@@ -42,29 +42,16 @@ public class FirebaseModel implements Observable {
     }
 
     public void updateLobbies() {
-    //return List<QueryDocumentSnapshot>
         FirebaseService fb = FirebaseService.getInstance();
-        lobbies.clear();
-
+        this.lobbies.clear();
+        System.out.println("after lobbies clear lobbies size:");
+        System.out.println(lobbies.size());
         // retrieve all documents in lobbies
-        lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
+        this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
+        System.out.println("after get all  lobbies size:");
+        System.out.println(lobbies.size());
         notifyAllObservers();
     }
-/*
-    public List<QueryDocumentSnapshot> getAllDocuments() throws Exception {
-        // [START fs_get_all_docs]
-        //asynchronously retrieve all documents
-        ApiFuture<QuerySnapshot> future = fb.collection("cities").get();
-        // future.get() blocks on response
-        List<QueryDocumentSnapshot> documents = future.get().getDocuments();
-        for (QueryDocumentSnapshot document : documents) {
-            System.out.println(document.getId() + " => " + document.toObject(City.class));
-        }
-        // [END fs_get_all_docs]
-        return documents;
-    }
-    */
-
 
     public void registerObserver(Observer observer) {
         observers.add(observer);
@@ -81,6 +68,7 @@ public class FirebaseModel implements Observable {
             obs.update(this);
         }
     }
+
     public ArrayList<DocumentSnapshot> getLobbies(){
         return lobbies;
     }

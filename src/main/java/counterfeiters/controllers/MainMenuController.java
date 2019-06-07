@@ -23,8 +23,8 @@ public class MainMenuController {
 
     public void joinLobbyPressed(Stage stage) {
 
-        app.lobbyListController.updateLobbiesModel(new FirebaseModel());
         //TODO: Switch to the LobbyListView
+        app.loadView(LobbyListView.class,stage,app.lobbyListController);
 
     }
 

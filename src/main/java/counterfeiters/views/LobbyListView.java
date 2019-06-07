@@ -1,44 +1,24 @@
 package counterfeiters.views;
 
 import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.sun.xml.internal.bind.v2.TODO;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.FirebaseModel;
-import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
-import counterfeiters.models.Player;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.layout.GridPane;
-
-import javafx.scene.layout.HBox;
-
-
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.fxml.FXML;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,14 +32,10 @@ public class LobbyListView implements Observer {
     @FXML
     public VBox vBox;
 
-    //ObservableList<String> listView = FXCollections.observableArrayList("one", "two", "three");
     private Stage stage;
     private LobbyListController controller;
-    private MouseEvent mouseEvent;
-    private ListRow listRowObject;
     private List<ListRow> listRows = new ArrayList<>();
     private int counter = 0;
-    private Image playerIcon = new Image("icons/player.png");
 
     //Need an empty constructor for FXML
     public LobbyListView() {
@@ -74,7 +50,6 @@ public class LobbyListView implements Observer {
     }
 
     public void show() {
-
         Parent root = ViewUtilities.loadFxml("/views/lobbylist.fxml", stage, controller);
 
         //Find root pane and set background
@@ -94,7 +69,6 @@ public class LobbyListView implements Observer {
     @FXML
     public void pressBackButton() {
         controller.leaveButtonPressed(stage);
-        //controller.backButtonPressed(stage);
     }
 
     @FXML
@@ -115,80 +89,124 @@ public class LobbyListView implements Observer {
     @Override
     public void update(Observable observable) {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
-
-        Platform.runLater(() -> listRows.clear());
-
+        Platform.runLater(() -> vBox.getChildren().clear());
+        listRows.clear();
+        System.out.println("listWows size after clearing in view:");
+        System.out.println(listRows.size());
         //Add new rows for lobbylist
         ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
 
-        for(DocumentSnapshot doc: updatedLobbies) {
-            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), new ImageView("icons/player.png"));
-            listRows.add(newListRow);
+        System.out.println("updateslobbies size in lobbylsitview:");
+        System.out.println(updatedLobbies.size());
 
-            Platform.runLater(() -> addLobbyInView(newListRow));
+
+        if (updatedLobbies.size() != 0) {
+            for(DocumentSnapshot doc: updatedLobbies) {
+                ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"),doc.get("numPlayers").toString(), new ImageView("icons/player.png"));
+                listRows.add(newListRow);
+                System.out.println("listrows size adding listrow objects:");
+                System.out.println(listRows.size());
+                Platform.runLater(() ->
+                        addLobbyInView(newListRow));
+            }
         }
-
+        else {
+            noLobbies ();
+        }
     }
 
-    public void addLobbyInView(ListRow listRow){
-        vBox.setStyle("-fx-background-color: tranparent");
-        counter = vBox.getChildren().size() +1;
+    public void noLobbies () {
+
+        vBox.setStyle("-fx-background-color: transparent");
         Region region1 = new Region();
         HBox.setHgrow(region1, Priority.ALWAYS);
 
         Region region2 = new Region();
         HBox.setHgrow(region2, Priority.ALWAYS);
 
+        Label noLobby = new Label("No Lobbies available.");
+        noLobby.setFont(new Font(30));
+        noLobby.setTextFill(Color.WHITE);
+
+        HBox horBox = new HBox(region1, noLobby,  region2);
+        horBox.setStyle("-fx-pref-height: 85");
+        horBox.setStyle("-fx-pref-width: 980");
+        horBox.setStyle("-fx-background-image: transparent");
+
+    }
+
+    public void addLobbyInView(ListRow listRow){
+
+        vBox.setStyle("-fx-background-color: transparent");
+        counter = vBox.getChildren().size() +1;
+        Region region1 = new Region();
+        region1.setStyle("-fx-pref-height: 120");
+        HBox.setHgrow(region1, Priority.ALWAYS);
+
+        Region region2 = new Region();
+        region2.setStyle("-fx-pref-height: 120");
+        HBox.setHgrow(region2, Priority.ALWAYS);
+
         Label lobbyName = new Label(" " + counter + ". " +listRow.getLobbyName());
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label numPlayers = new Label("   " + listRow.getNumPlayers() + "/4  ");
+        Label numPlayers = new Label(listRow.getNumPlayers() + "/4  ");
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, listRow.getIcon(), numPlayers);
+        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, listRow.getIcon(), new Label("  "));
 
+
+        horBox.setStyle("-fx-cursor: hand");
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
-                        System.out.println("Double clicked");
+                        System.out.println("Double clicked lobby");
                         System.out.println(listRow.getId());
                         controller.enterLobby(stage);
-
+                        //ergens moet nog game id moeten meegegeven worden voor de goeie lobby openen
                     }
                 }
             }
         });
 
+        //Add hover effects (doesnt work in css)
+        horBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    System.out.println("mouse entered");
+                    }
+                }
+            });
+        horBox.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    System.out.println("mouse exited");
+                }
+            }
+        });
 
 
-        horBox.setStyle("-fx-pref-height: 85");
+        horBox.setStyle("-fx-pref-height: 100");
         horBox.setStyle("-fx-pref-width: 980");
-        //horBox.setStyle("-fx-background-radius: 0.5");
 
-        //horBox.setSpacing(25);
         if (counter %2 == 0) {
-            //horBox.setStyle("-fx-background-color: rgb(77, 144, 156)");
-            horBox.setStyle("-fx-background-image: url(background/ligt_list.png)");
+            horBox.setStyle("-fx-background-image: url(background/light_back.JPG)");
         }
         else {
-            //horBox.setStyle("-fx-background-color: rgb(90, 115, 115)");
-            horBox.setStyle("-fx-background-image: url(background/dark_list.png)");
+            horBox.setStyle("-fx-background-image: url(background/dark_back.JPG)");
         }
 
         vBox.getChildren().add(horBox);
-
-
-
-
     }
 
     @Override
     public void start() {
-       //controller.loadLobbies();
        controller.registerObserver(this);
        controller.registerListeners();
     }

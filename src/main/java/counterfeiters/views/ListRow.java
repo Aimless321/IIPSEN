@@ -8,12 +8,12 @@ public class ListRow {
         private String numPlayers;
         private ImageView playerIcon;
 
-        public ListRow(String gameId,String lobbyName, ImageView playerIcon) {
+        public ListRow(String gameId,String lobbyName, String numPlayers, ImageView playerIcon) {
             this.lobbyName = lobbyName;
 
             this.gameId = gameId;
             this.playerIcon = playerIcon;
-            //this.numPlayers = numPlayers;
+            this.numPlayers = numPlayers;
 
             //resize pic
             this.playerIcon.setFitHeight(30);
