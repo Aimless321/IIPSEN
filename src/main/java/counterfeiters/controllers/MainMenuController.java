@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.models.Player;
+import counterfeiters.views.LobbyListView;
 import counterfeiters.views.LobbyView;
 
 public class MainMenuController {
@@ -18,6 +19,7 @@ public class MainMenuController {
 
     public void joinLobbyPressed() {
         //TODO: Switch to the LobbyListView
+        app.loadView(LobbyListView.class, app.lobbyListController);
 
     }
 
