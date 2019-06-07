@@ -8,22 +8,16 @@ import java.util.Date;
 
 public class Game implements Observable {
     private String gameId;
-    private int numPlayers = 1;
+    private String lobbyName;
+    private int numPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
+    private Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public Game() {
 
-    }
-
-    public Game(String gameId, int numPlayers, ArrayList<Player> players, int round, Date startTime, ArrayList<Observer> observers) {
-        this.gameId = gameId;
-        this.numPlayers = numPlayers;
-        this.players = players;
-        this.round = round;
-        this.startTime = startTime;
     }
 
     public void createNewGame(Player player) {
@@ -34,8 +28,10 @@ public class Game implements Observable {
         DocumentReference lobbyDoc = fb.insert("lobbies");
 
         //Initialize variables
-        gameId = lobbyDoc.getId();
-        players.add(player);
+        this.gameId = lobbyDoc.getId();
+        addPlayer(player);
+        this.lobbyName = player.getUserName() + "'s Lobby";
+        this.localPlayer = player;
 
         fb.setClass("lobbies", gameId, this);
 
@@ -43,9 +39,10 @@ public class Game implements Observable {
     }
 
     public void addPlayer(Player player) {
+        numPlayers++;
         players.add(player);
 
-        numPlayers++;
+        player.setPlayerId(numPlayers);
 
         updateFirebase();
     }
@@ -68,6 +65,27 @@ public class Game implements Observable {
         fb.delete("lobbies", gameId);
 
         players.clear();
+    }
+
+    /**
+     * Returns the player object of this client
+     * @param username the username of the local player
+     * @return a Player if he has been found in this game, null if not found
+     */
+    public Player getLocalPlayer(String username) {
+        for(Player player : players) {
+            if(player.getUserName().equals(username)) {
+                return player;
+            }
+        }
+
+        return null;
+    }
+
+    public boolean checkHost() {
+        Player host = players.get(0);
+
+        return host == localPlayer;
     }
 
     public void updateData(Game updateGame) {
@@ -130,7 +148,11 @@ public class Game implements Observable {
         this.startTime = startTime;
     }
 
-    public void setObservers(ArrayList<Observer> observers) {
-        this.observers = observers;
+    public String getLobbyName() {
+        return lobbyName;
+    }
+
+    public void setLobbyName(String lobbyName) {
+        this.lobbyName = lobbyName;
     }
 }

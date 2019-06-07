@@ -66,14 +66,14 @@ public class LoginView implements Observer {
         name = username.getText().toLowerCase().trim();
         psword = password.getText().trim();
 
-        controller.loginButtonPressed(name, psword, this.stage);
+        controller.loginButtonPressed(name, psword);
 
     }
 
     @FXML
     public void pressRegister()
     {
-        controller.registerButtonPressed(stage);
+        controller.registerButtonPressed();
     }
 
     @Override

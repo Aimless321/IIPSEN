@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
+import counterfeiters.views.Observer;
 import javafx.stage.Stage;
 import java.lang.reflect.InvocationTargetException;
 
@@ -11,6 +12,8 @@ import java.lang.reflect.InvocationTargetException;
  * @author Wesley Bijleveld
  */
 public class ApplicationController {
+    private Stage stage;
+
     //Store all controllers
     public MainMenuController mainMenuController;
     public LoginController loginController;
@@ -22,6 +25,8 @@ public class ApplicationController {
     public AccountController accountController;
 
     public ApplicationController(Stage stage) {
+        this.stage = stage;
+
         //Create all controllers
         mainMenuController = new MainMenuController(this);
         lobbyController = new LobbyController(this);
@@ -32,9 +37,8 @@ public class ApplicationController {
         rulesController = new RulesController(this);
         accountController = new AccountController(this);
 
-
         //Load first view
-        loadView(LoginView.class, stage, loginController);
+        loadView(LoginView.class, loginController);
     }
 
     /**
@@ -42,10 +46,9 @@ public class ApplicationController {
      * Example usage:<br>
      * - loadView(LobbyView.class, stage, controller)
      * @param view The class of the view you want to show
-     * @param stage The stage where the view needs to be shown
      * @param controller The controller that handles the interaction of the view
      */
-    public void loadView(Class<? extends counterfeiters.views.Observer> view, Stage stage, Object controller) {
+    public void loadView(Class<? extends Observer> view, Object controller) {
         try {
             view.getDeclaredConstructor(Stage.class, Object.class).newInstance(stage, controller);
         } catch (InstantiationException e) {

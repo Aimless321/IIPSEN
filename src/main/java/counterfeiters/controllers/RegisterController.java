@@ -12,11 +12,11 @@ public class RegisterController {
         this.app = applicationController;
     }
 
-    public void registerButtonPressed(String username, String password, String passwordCheck, Stage stage) {
+    public void registerButtonPressed(String username, String password, String passwordCheck) {
 //        app.accountController.checkCredentials(username, password, passwordCheck);
         if (app.accountController.checkCredentials(username, password, passwordCheck)){
 //            app.accountController.checkCredentials(username, password, passwordCheck);
-            app.loadView(LoginView.class, stage, loginController);
+            app.loadView(LoginView.class, loginController);
         }
     }
 

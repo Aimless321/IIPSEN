@@ -1,7 +1,10 @@
 package counterfeiters.views;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Screen;
@@ -68,5 +71,13 @@ public class ViewUtilities {
         }
 
         return null;
+    }
+
+    public static Alert showPopup(Alert.AlertType type, String title, String header) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+
+        return alert;
     }
 }

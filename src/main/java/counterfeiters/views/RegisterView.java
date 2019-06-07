@@ -70,7 +70,7 @@ public class RegisterView implements Observer {
 
         System.out.println("Register button pressed");
 
-        controller.registerButtonPressed(name, psword, pswordCheck, this.stage);
+        controller.registerButtonPressed(name, psword, pswordCheck);
     }
 
     @Override
