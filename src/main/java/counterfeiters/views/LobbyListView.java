@@ -2,12 +2,14 @@ package counterfeiters.views;
 
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.sun.xml.internal.bind.v2.TODO;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import counterfeiters.models.Player;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,7 +122,7 @@ public class LobbyListView implements Observer {
         ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
 
         for(DocumentSnapshot doc: updatedLobbies) {
-            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), doc.getString("numPlayers"), new ImageView("icons/player.png"));
+            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), new ImageView("icons/player.png"));
             listRows.add(newListRow);
 
             Platform.runLater(() -> addLobbyInView(newListRow));
@@ -129,7 +131,7 @@ public class LobbyListView implements Observer {
     }
 
     public void addLobbyInView(ListRow listRow){
-        vBox.setStyle("-fx-background-color: transparent");
+        vBox.setStyle("-fx-background-color: tranparent");
         counter = vBox.getChildren().size() +1;
         Region region1 = new Region();
         HBox.setHgrow(region1, Priority.ALWAYS);
@@ -154,10 +156,14 @@ public class LobbyListView implements Observer {
                     if(mouseEvent.getClickCount() == 2){
                         System.out.println("Double clicked");
                         System.out.println(listRow.getId());
+
                     }
                 }
             }
         });
+
+
+
         horBox.setStyle("-fx-pref-height: 85");
         horBox.setStyle("-fx-pref-width: 980");
         //horBox.setStyle("-fx-background-radius: 0.5");
@@ -185,42 +191,5 @@ public class LobbyListView implements Observer {
        controller.registerObserver(this);
        controller.registerListeners();
     }
-
-
-    class ListRow {
-        private String gameId;
-        private String lobbyName;
-        private String numPlayers;
-        private ImageView playerIcon;
-
-        public ListRow(String gameId,String lobbyName, String numPlayers, ImageView playerIcon) {
-            this.lobbyName = lobbyName;
-            //.playerAmount = playerAmount;
-            this.gameId = gameId;
-            this.playerIcon = playerIcon;
-            this.numPlayers = numPlayers;
-
-            //resize pic
-            this.playerIcon.setFitHeight(30);
-            this.playerIcon.setFitWidth(30);
-
-        }
-
-        public String getLobbyName() {
-            return lobbyName;
-        }
-
-
-        public String getNumPlayers() {
-           return numPlayers;
-        }
-
-        public String getId(){
-            return gameId;
-        }
-        public ImageView getIcon() {
-            return playerIcon;
-        }
-    }
-
 }
+
