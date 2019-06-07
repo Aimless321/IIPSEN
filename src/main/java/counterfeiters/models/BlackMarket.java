@@ -35,10 +35,39 @@ public class BlackMarket {
      */
     public void prepareView() {
         for (int i = 0; i < 7; i++) {
-            cardRow[i] = marketList.get(0);
-            marketList.remove(0);
+            placeCard(i);
         }
     }
+    public void refill() {
+        while(emptyChecker()) {
+            for (int i = 0; i < 7; i++) {
+                if (cardRow[i] == null) {
+                    for (int j = i; j < 7; j++) {
+                        if (j != 6) {
+                            cardRow[j] = cardRow[j + 1];
+                        } else {
+                            placeCard(j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void placeCard(int position) {
+        cardRow[position] = marketList.get(0);
+        marketList.remove(0);
+    }
+
+    public boolean emptyChecker() {
+        for (int i = 0; i < 7; i++) {
+            if (cardRow[i] == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     public Card getCard(int position) {
         return cardRow[position];

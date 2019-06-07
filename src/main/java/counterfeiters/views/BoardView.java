@@ -145,15 +145,9 @@ public class BoardView implements Observer {
     public void update(Observable observable) {
         Board board = (Board)observable;
 
-        for (int i = 0; i < 7; i++) {
-            ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
-            imageview.setFitWidth(111);
-            imageview.setPreserveRatio(true);
-            blackMarketView.getChildren().add(imageview);
-        }
+        updateBlackMarket(board);
 
-        policePawn.setX(board.policePawn.getXCoordinate());
-        policePawn.setY(board.policePawn.getYCoordinate());
+        updatePolicePawn(board);
 
         resetHenchman();
 
@@ -170,6 +164,17 @@ public class BoardView implements Observer {
             henchmanImage.getStyleClass().add("henchman");
 
             pane.getChildren().add(henchmanImage);
+        }
+    }
+
+    public void updatePolicePawn(Board board) {
+        policePawn.setX(board.policePawn.getXCoordinate());
+        policePawn.setY(board.policePawn.getYCoordinate());
+    }
+
+    public void updateBlackMarket(Board board) {
+        for (int i = 0; i < 7; i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
         }
     }
 
@@ -197,6 +202,13 @@ public class BoardView implements Observer {
 
     @Override
     public void start() {
+        for (int i = 0; i < 7; i++) {
+            ImageView imageview = new ImageView();
+            imageview.setFitWidth(111);
+            imageview.setPreserveRatio(true);
+            blackMarketView.getChildren().add(imageview);
+        }
+
         boardcontroller.registerObserver(this);
         boardcontroller.prepareView();
 
