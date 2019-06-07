@@ -41,7 +41,7 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressBackMenu() {
-        controller.menuButtonPressed(stage);
+        controller.menuButtonPressed();
     }
 
     @FXML
@@ -52,7 +52,7 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressRules() {
-        controller.rulesButtonPressed(stage);
+        controller.rulesButtonPressed();
     }
 
     @Override
