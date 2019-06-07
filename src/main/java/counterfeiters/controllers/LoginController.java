@@ -1,6 +1,5 @@
 package counterfeiters.controllers;
 
-import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RegisterView;
@@ -13,19 +12,19 @@ public class LoginController {
         this.app = applicationController;
     }
 
-    public void loginButtonPressed(String username, String password, Stage stage)
+    public void loginButtonPressed(String username, String password)
     {
         if(app.accountController.loginPressed(username, password))
         {
-            app.loadView(MainMenuView.class, stage, app.mainMenuController);
+            app.loadView(MainMenuView.class, app.mainMenuController);
         }
 
 
     }
 
-    public void registerButtonPressed(Stage stage)
+    public void registerButtonPressed()
     {
-        app.loadView(RegisterView.class, stage, app.registerController);
+        app.loadView(RegisterView.class, app.registerController);
     }
 
     public void registerObserver(Observer observer) {

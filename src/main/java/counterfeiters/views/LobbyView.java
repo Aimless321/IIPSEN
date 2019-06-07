@@ -67,13 +67,12 @@ public class LobbyView implements Observer {
 
     @FXML
     public void pressLeave() {
-        System.out.println("Leave button pressed");
-        controller.leaveButtonPressed(stage);
+        controller.leaveButtonPressed();
     }
 
     @FXML
     public void pressRules() {
-        System.out.println("Rules button pressed");
+        controller.rulesButtonPressed();
     }
 
     @Override
@@ -93,25 +92,24 @@ public class LobbyView implements Observer {
         //Add new players
         List<Player> playerList = game.getPlayers();
 
-        int playerNum = 1;
         for(Player player : playerList) {
             //We cannot update it on this thread, so we run it later
-            Platform.runLater(() -> insertPlayerBox(player, playerNum));
+            Platform.runLater(() -> insertPlayerBox(player));
         }
 
         //TODO: Check if this player is the host
-        if(true) {
+        if(game.checkHost()) {
             startButton.visibleProperty().set(true);
         }
     }
 
-    public void insertPlayerBox(Player player, int playerNum) {
-        Text number = new Text(playerNum + ".");
+    public void insertPlayerBox(Player player) {
+        Text number = new Text(player.getPlayerId() + ".");
         number.setFont(new Font(30));
         number.setFill(Color.WHITE);
         number.setWrappingWidth(50);
 
-        ImageView playerImage = new ImageView(player.getImage(playerNum));
+        ImageView playerImage = new ImageView(player.findImagePath());
         playerImage.setFitHeight(135);
         playerImage.setFitWidth(135);
         playerImage.setPreserveRatio(true);

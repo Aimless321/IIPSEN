@@ -11,17 +11,17 @@ public class ScoreboardController {
         this.app = applicationController;
     }
 
-    public void menuButtonPressed(Stage stage)
+    public void menuButtonPressed()
     {
-        app.loadView(MainMenuView.class, stage, app.mainMenuController);
+        app.loadView(MainMenuView.class, app.mainMenuController);
     }
     public void exitButtonPressed()
     {
         app.quit();
     }
 
-    public void rulesButtonPressed(Stage stage)
+    public void rulesButtonPressed()
     {
-        app.loadView(RulesView.class, stage, app.rulesController);
+        app.loadView(RulesView.class, app.rulesController);
     }
 }

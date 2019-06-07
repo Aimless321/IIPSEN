@@ -15,12 +15,13 @@ import java.util.Map;
  * Deze model maakt het mogelijk om de gegevens van een account te tonen.
  *
  * @author Ali Rezaa Ghariebiyan, Robin van den Berg
- * version 03-06-2019
+ * @version 05-06-2019
  */
 
 public class Account implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private String textField;
+    private String username;
 
     public boolean checkCredentials(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
@@ -33,6 +34,8 @@ public class Account implements Observable{
 
             if (r.equals(p))
             {
+                this.username = username;
+
                 return true;
             }
             else
@@ -52,10 +55,14 @@ public class Account implements Observable{
 
         return false;
     }
-
-
-
-
+    
+    /**
+     * Checks input, checks password, checks username. If it's wrong te view will be updated with a notification.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 05-06-2019
+     * @return verifyUser
+     * */
     public boolean checkCredentials(String username, String password, String passwordCheck){
             if (username.isEmpty() || password.isEmpty() || passwordCheck.isEmpty()){
                 textField = "Incorrect Entry!";
@@ -90,12 +97,18 @@ public class Account implements Observable{
 
     @Override
     public void notifyAllObservers() {
-//        System.out.println(observers);
         for(Observer observer : observers) {
             observer.update(this);
         }
     }
 
+    /**
+     * Checks whether the username doesn't exist and then calls the 'addUser' method else updates view.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 05-06-2019
+     * @return verification
+     * */
     public boolean verifyUser(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -106,13 +119,18 @@ public class Account implements Observable{
             return true;
         }
         else{
-
             notifyAllObservers();
             return false;
         }
     }
 
 
+    /**
+     *  Saves user in FireStore.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 05-06-2019
+     * */
     public void addUser(String username, String password){
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -125,6 +143,10 @@ public class Account implements Observable{
     }
 
     public String getTextField() {
-        return textField;
+        return textField; //Voor het wijzigen van het tekstveld voor foutmeldingen.
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

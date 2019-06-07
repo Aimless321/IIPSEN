@@ -43,11 +43,11 @@ public class FirebaseService {
         }
     }
 
-    public void listen(String collection, String document, EventListener<DocumentSnapshot> eventListener) {
+    public ListenerRegistration listen(String collection, String document, EventListener<DocumentSnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
         DocumentReference docRef = colRef.document(document);
 
-        docRef.addSnapshotListener(eventListener);
+        return docRef.addSnapshotListener(eventListener);
     }
 
     public void set(String collection, String document, Map<String, Object> data) {
