@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -22,6 +23,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.layout.GridPane;
@@ -33,6 +35,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,7 +120,7 @@ public class LobbyListView implements Observer {
         ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
 
         for(DocumentSnapshot doc: updatedLobbies) {
-            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), new ImageView("icons/player.png"));
+            ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), doc.getString("numPlayers"), new ImageView("icons/player.png"));
             listRows.add(newListRow);
 
             Platform.runLater(() -> addLobbyInView(newListRow));
@@ -125,40 +129,47 @@ public class LobbyListView implements Observer {
     }
 
     public void addLobbyInView(ListRow listRow){
-
-        counter ++;
+        vBox.setStyle("-fx-background-color: transparent");
+        counter = vBox.getChildren().size() +1;
         Region region1 = new Region();
         HBox.setHgrow(region1, Priority.ALWAYS);
 
         Region region2 = new Region();
         HBox.setHgrow(region2, Priority.ALWAYS);
 
-        Label gameId = new Label(listRow.getId());
-        gameId.setFont(new Font(30));
-        gameId.setTextFill(Color.WHITE);
-
-        Label lobbyName = new Label(listRow.getLobbyName());
+        Label lobbyName = new Label(" " + counter + ". " +listRow.getLobbyName());
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label playerAmount = new Label(" " + "/4");
-        playerAmount.setFont(new Font(30));
-        playerAmount.setTextFill(Color.WHITE);
+        Label numPlayers = new Label("   " + listRow.getNumPlayers() + "/4  ");
+        numPlayers.setFont(new Font(30));
+        numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(gameId,lobbyName , region1, region2, listRow.getIcon(), playerAmount);
+        HBox horBox = new HBox(lobbyName , region1, region2, listRow.getIcon(), numPlayers);
 
+        horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                    if(mouseEvent.getClickCount() == 2){
+                        System.out.println("Double clicked");
+                        System.out.println(listRow.getId());
+                    }
+                }
+            }
+        });
+        horBox.setStyle("-fx-pref-height: 85");
+        horBox.setStyle("-fx-pref-width: 980");
+        //horBox.setStyle("-fx-background-radius: 0.5");
 
-        horBox.setStyle("-fx-pref-height: 60");
-        horBox.setStyle("-fx-pref-width: 900");
-       // horBox.setStyle("-fx-border-style: ");
-        horBox.setStyle("-fx-background-radius: 0.5");
-        horBox.setSpacing(25);
-
+        //horBox.setSpacing(25);
         if (counter %2 == 0) {
-            horBox.setStyle("-fx-background-color: rgb(77, 144, 156)");
+            //horBox.setStyle("-fx-background-color: rgb(77, 144, 156)");
+            horBox.setStyle("-fx-background-image: url(background/ligt_list.png)");
         }
         else {
-            horBox.setStyle("-fx-background-color: rgb(90, 115, 115)");
+            //horBox.setStyle("-fx-background-color: rgb(90, 115, 115)");
+            horBox.setStyle("-fx-background-image: url(background/dark_list.png)");
         }
 
         vBox.getChildren().add(horBox);
@@ -179,18 +190,19 @@ public class LobbyListView implements Observer {
     class ListRow {
         private String gameId;
         private String lobbyName;
-        //private String playerAmount;
+        private String numPlayers;
         private ImageView playerIcon;
 
-        public ListRow(String gameId,String lobbyName, ImageView playerIcon) {
+        public ListRow(String gameId,String lobbyName, String numPlayers, ImageView playerIcon) {
             this.lobbyName = lobbyName;
             //.playerAmount = playerAmount;
             this.gameId = gameId;
             this.playerIcon = playerIcon;
+            this.numPlayers = numPlayers;
 
             //resize pic
-            this.playerIcon.setFitHeight(35);
-            this.playerIcon.setFitWidth(35);
+            this.playerIcon.setFitHeight(30);
+            this.playerIcon.setFitWidth(30);
 
         }
 
@@ -199,9 +211,9 @@ public class LobbyListView implements Observer {
         }
 
 
-        //public String getPlayerAmount() {
-        //    return playerAmount;
-        //}
+        public String getNumPlayers() {
+           return numPlayers;
+        }
 
         public String getId(){
             return gameId;
