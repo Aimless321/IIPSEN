@@ -1,21 +1,25 @@
 package counterfeiters.views;
 
-import counterfeiters.controllers.BlackMarketController;
 import counterfeiters.controllers.BoardController;
 import counterfeiters.models.BlackMarket;
+import counterfeiters.models.Board;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import static java.lang.Thread.sleep;
+
 public class BoardView implements Observer {
 
     public HBox blackMarketView;
+    public ImageView policePawn;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -51,11 +55,17 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
         System.out.println("Launder button pressed");
+        boardcontroller.advancePolice();
     }
 
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
+
         System.out.println("Fraud button pressed");
+        Button btn = (Button) mouseEvent.getSource();
+        if(btn.getStyleClass().get(0) == "police" ) {
+            boardcontroller.advancePolice();
+        }
     }
 
     @FXML
@@ -70,7 +80,12 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
+
         System.out.println("Print button pressed");
+        Button btn = (Button) mouseEvent.getSource();
+        if(btn.getStyleClass().get(0) == "police" ) {
+            boardcontroller.advancePolice();
+        }
     }
 
     @FXML
@@ -95,20 +110,23 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        BlackMarket blackMarket = (BlackMarket)observable;
+        Board board = (Board)observable;
 
         for (int i = 0; i < 7; i++) {
-            ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
+            ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
             imageview.setFitWidth(111);
             imageview.setPreserveRatio(true);
             blackMarketView.getChildren().add(imageview);
         }
-        System.out.println("update uitgevoerd");
+
+        policePawn.setX(board.policePawn.getXCoordinate());
+        policePawn.setY(board.policePawn.getYCoordinate());
     }
 
     @Override
     public void start() {
         boardcontroller.registerObserver(this);
-        boardcontroller.app.blackMarketController.prepareView();
+        boardcontroller.prepareView();
+
     }
 }

@@ -6,26 +6,12 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BlackMarket implements Observable{
-    private ArrayList<Observer> observers = new ArrayList<Observer>();
+public class BlackMarket {
     private ArrayList<Card> marketList;
     public Card[] cardRow = new Card[7];
 
     public BlackMarket() {
         this.marketList = new ArrayList<Card>();
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-        System.out.println("toegevoegd " + observer);
-    }
-
-    @Override
-    public void notifyAllObservers() {
-        for(Observer obs : observers) {
-            obs.update(this);
-        }
     }
 
     public void addToMarket(Card card) {
@@ -51,8 +37,6 @@ public class BlackMarket implements Observable{
             cardRow[i] = marketList.get(0);
             marketList.remove(0);
         }
-        notifyAllObservers();
-        System.out.println("notify uitgevoerd");
     }
 
     public Card getCard(int position) {

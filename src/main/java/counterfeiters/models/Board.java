@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
+    public BlackMarket blackmarket = new BlackMarket();
+    public PolicePawn policePawn = new PolicePawn(4);
 
 
     @Override
@@ -18,6 +20,11 @@ public class Board implements Observable{
         for(Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    public void prepareBlackMarket() {
+        blackmarket.prepareView();
+        notifyAllObservers();
     }
 
 //    public void checkActionField() {
@@ -36,7 +43,8 @@ public class Board implements Observable{
 //
 //    }
 //
-//    public void advancePolice() {
-//
-//    }
+    public void advancePolice() {
+        policePawn.advance();
+        notifyAllObservers();
+    }
 }

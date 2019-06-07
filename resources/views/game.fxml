@@ -167,7 +167,7 @@
             <Image url="@/icons/question-sign.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="64.0" fitWidth="48.0" layoutX="919.0" layoutY="362.0" onMouseClicked="#pressRules" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="policePawn" fitHeight="50.0" fitWidth="50.0" layoutX="918.0" layoutY="361.0" onMouseClicked="#pressRules" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
          </viewport>

@@ -19,7 +19,6 @@ public class ApplicationController {
     public LobbyController lobbyController;
     public ScoreboardController scoreboardController;
     public BoardController boardController;
-    public BlackMarketController blackMarketController;
     public GameController gameController;
 
     public ApplicationController(Stage stage) {
@@ -30,7 +29,6 @@ public class ApplicationController {
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
         boardController = new BoardController(this);
-        blackMarketController = new BlackMarketController(this);
         gameController = new GameController(this);
 
         //Load first view
