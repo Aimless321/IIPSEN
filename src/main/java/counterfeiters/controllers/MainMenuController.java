@@ -20,6 +20,7 @@ public class MainMenuController {
     }
 
     public void joinLobbyPressed(Stage stage) {
+
         //TODO: Switch to the LobbyListView
 
     }
