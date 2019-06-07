@@ -5,6 +5,7 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,21 +23,39 @@ public class Account implements Observable{
     private String textField;
     private String username;
 
-    public boolean checkCredentials(String username, String password)
-    {
+    public boolean checkCredentials(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
         String p = password;
-        String r = fb.get("users", username).getString("password");
 
-        if (r.equals(p)) {
-            this.username = username;
+        try
+        {
+            String r = fb.get("users", username).getString("password");
 
-            return true;
+            if (r.equals(p))
+            {
+                this.username = username;
+
+                return true;
+            }
+            else
+                {
+                    textField = "Password incorrect";
+                    notifyAllObservers();
+                    return false;
+                }
+
         }
-        else {return false;}
-    }
+        catch (Exception e)
+        {
+            textField = "Username not found";
+            notifyAllObservers();
 
+        }
+
+        return false;
+    }
+    
     /**
      * Checks input, checks password, checks username. If it's wrong te view will be updated with a notification.
      *

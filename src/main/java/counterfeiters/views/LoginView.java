@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LoginController;
+import counterfeiters.models.Account;
 import counterfeiters.models.Observable;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 
@@ -19,6 +21,7 @@ import java.awt.*;
 public class LoginView implements Observer {
     public TextField username;
     public PasswordField password;
+    public Text textField;
     public Pane pane;
 
     private Stage stage;
@@ -84,12 +87,15 @@ public class LoginView implements Observer {
     @Override
     public void setController(Object controller)
     {
-        this.controller = (LoginController) controller;
-
+        LoginController loginController = (LoginController) controller;
+        this.controller = loginController;
+        loginController.registerObserver(this);
     }
 
     @Override
     public void update(Observable observable) {
+        Account account = (Account)observable;
+        textField.setText(account.getTextField());
 
     }
 

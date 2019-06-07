@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.MainMenuView;
+import counterfeiters.views.Observer;
 import counterfeiters.views.RegisterView;
 import javafx.stage.Stage;
 
@@ -24,6 +25,10 @@ public class LoginController {
     public void registerButtonPressed()
     {
         app.loadView(RegisterView.class, app.registerController);
+    }
+
+    public void registerObserver(Observer observer) {
+        app.accountController.registerObserver(observer);
     }
 
 }
