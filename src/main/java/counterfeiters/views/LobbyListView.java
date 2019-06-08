@@ -102,7 +102,7 @@ public class LobbyListView implements Observer {
 
         if (updatedLobbies.size() != 0) {
             for(DocumentSnapshot doc: updatedLobbies) {
-                ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"),doc.get("numPlayers").toString(), new ImageView("icons/player.png"));
+                ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"),doc.get("numPlayers").toString(), new ImageView("icons/player.png"),doc.get("round").toString());
                 listRows.add(newListRow);
                 System.out.println("listrows size adding listrow objects:");
                 System.out.println(listRows.size());
