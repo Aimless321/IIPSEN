@@ -107,9 +107,19 @@ public class Game implements Observable {
         }
     }
 
-
-    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qId){
-        localPlayer.updateMoney(qualityOneMoney, qualityTwoMoney, qualityThreeMoney, totalRealMoney, totalBankMoney, qId);
+    /**
+     * Based on the indicated character, the correct method will be called for updating the money.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoney(int qId, String character, int amount){
+        if (character.equals("+")){
+            localPlayer.updateMoneyPlus(qId, amount);
+        }
+        if (character.equals("-")){
+            localPlayer.updateMoneyReduce(qId, amount);
+        }
         notifyAllObservers();
     }
 

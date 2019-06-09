@@ -186,6 +186,7 @@ public class BoardView implements Observer {
             this.qualityTwoMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityTwo()));
             this.qualityThreeMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityThree()));
             this.totalRealMoney.setText(String.valueOf(game.localPlayer.getRealMoney().getTotalMoney()));
+            this.totalBankMoney.setText(String.valueOf(game.localPlayer.getBahamasBank().getTotalBankMoney()));
         }
     }
 

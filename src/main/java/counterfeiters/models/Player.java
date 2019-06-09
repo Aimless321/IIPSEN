@@ -89,27 +89,55 @@ public class Player {
 
 
     /**
-     * This switch will call the right method based on the given id.
+     * This switch will call the right method based on the given id and it will add the right amount.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qualityId){
+    public void updateMoneyPlus(int qualityId, int amount){
         switch(qualityId) {
             case 1:
-                fakeMoney.setQualityOne(fakeMoney.getQualityOne() + qualityOneMoney);
+                fakeMoney.setQualityOne(fakeMoney.getQualityOne() + amount);
                 break;
             case 2:
-                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() + qualityTwoMoney);
+                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() + amount);
                 break;
             case 3:
-                fakeMoney.setQualityThree(fakeMoney.getQualityThree() + qualityThreeMoney);
+                fakeMoney.setQualityThree(fakeMoney.getQualityThree() + amount);
                 break;
             case 4:
-                realMoney.setTotalMoney(realMoney.getTotalMoney() + totalRealMoney);
+                realMoney.setTotalMoney(realMoney.getTotalMoney() + amount);
                 break;
             case 5:
-                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() + totalBankMoney);
+                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() + amount);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * This switch will call the right method based on the given id and it will reduce the right amount.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoneyReduce(int qualityId, int amount){
+        switch(qualityId) {
+            case 1:
+                fakeMoney.setQualityOne(fakeMoney.getQualityOne() - amount);
+                break;
+            case 2:
+                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() - amount);
+                break;
+            case 3:
+                fakeMoney.setQualityThree(fakeMoney.getQualityThree() - amount);
+                break;
+            case 4:
+                realMoney.setTotalMoney(realMoney.getTotalMoney() - amount);
+                break;
+            case 5:
+                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() - amount);
                 break;
             default:
                 break;

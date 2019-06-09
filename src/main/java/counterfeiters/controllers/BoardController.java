@@ -13,6 +13,8 @@ public class BoardController {
     public ApplicationController app;
     public Board board = new Board();
     private ListenerRegistration listener;
+    private String plus = "+";
+    private String min = "-";
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -76,27 +78,16 @@ public class BoardController {
     }
 
     /**
-     * By giving an Id and an amount. You can add money and the money will be updated in of the indicated parts.
-     * Calling the correct type of money is based on the give id.
+     * By giving an Id, right character and amount. You can add or reduce money and the money will be updated in the indicated part.
+     * Calling the correct type of money is based on the given id.
+     * Adding or reducing money depends on de given character.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoneyOnPositionPlus(int qId, int bedrag){
+    public void updateMoneyOnPosition(int qId, String character, int amount){
         Player player = app.gameController.game.localPlayer;
-        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() + bedrag,player.getFakeMoney().getQualityTwo() + bedrag,player.getFakeMoney().getQualityThree() + bedrag,player.getRealMoney().getTotalMoney() + bedrag,player.getBahamasBank().getTotalBankMoney() + bedrag, qId);
-    }
-
-    /**
-     * By giving an Id and an amount. You can reduce money and the money will be updated in of the indicated parts.
-     * Calling the correct type of money is based on the give id.
-     *
-     * @author Ali Rezaa Ghariebiyan
-     * @version 09-06-2019
-     * */
-    public void updateMoneyOnPositionMin(int qId, int bedrag){
-        Player player = app.gameController.game.localPlayer;
-        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() - bedrag,player.getFakeMoney().getQualityTwo() - bedrag,player.getFakeMoney().getQualityThree() - bedrag,player.getRealMoney().getTotalMoney() - bedrag,player.getBahamasBank().getTotalBankMoney() - bedrag, qId);
+        app.gameController.updateMoney(qId, character, amount);
     }
 
     public void henchmanPlaced(Button btn) {

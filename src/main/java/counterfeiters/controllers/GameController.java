@@ -35,7 +35,7 @@ public class GameController {
         game.updateData(updateGame);
     }
 
-    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qId){
-        game.updateMoney(qualityOneMoney, qualityTwoMoney, qualityThreeMoney, totalRealMoney, totalBankMoney, qId);
+    public void updateMoney(int qId, String character, int amount){
+        game.updateMoney(qId, character, amount);
     }
 }
