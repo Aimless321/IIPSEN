@@ -50,7 +50,7 @@ public class GameListView implements Observer{
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/lobbylist.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/game_list.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
@@ -88,6 +88,7 @@ public class GameListView implements Observer{
 
     @Override
     public void update(Observable observable) {
+
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
         Platform.runLater(() -> vBox.getChildren().clear());
         listRows.clear();
@@ -155,7 +156,7 @@ public class GameListView implements Observer{
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, , new Label("  "));
+        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, listRow.getIcon(), new Label("  "));
 
 
         horBox.setStyle("-fx-cursor: hand");
