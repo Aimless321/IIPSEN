@@ -168,6 +168,7 @@ public class LobbyListView implements Observer {
                         chosenGame = game.getGameId();
                         //controller.clickLobby(chosenGame);
                         System.out.println(chosenGame);
+                        controller.clickLobby(chosenGame);
                         //ergens moet nog game id moeten meegegeven worden voor de goeie lobby openen
                     }
                 }

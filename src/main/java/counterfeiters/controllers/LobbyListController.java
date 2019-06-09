@@ -18,6 +18,7 @@ import java.util.List;
 public class LobbyListController {
     private ApplicationController app;
     public FirebaseModel firebaseModel;
+    public Game chosenGame ;
 
     public LobbyListController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -61,10 +62,11 @@ public class LobbyListController {
         app.loadView(LobbyView.class, app.lobbyController);
     }
 
-    public void clickLobby(String chosenGame){
+    public void clickLobby(String chosenGameId){
         //TODO: Go to the LobbyView
 
-        //app.gameController.updateData(chosenGame);
+        chosenGame.setGameId(chosenGameId);
+        app.loadView(LobbyView.class, app.lobbyController);
     }
 
     public void rulesButtonPressed() {

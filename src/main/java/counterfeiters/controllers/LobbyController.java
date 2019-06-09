@@ -25,7 +25,7 @@ public class LobbyController {
         FirebaseService fb = FirebaseService.getInstance();
 
         //Listen for changes in the lobby
-        listener = fb.listen("lobbies", app.gameController.game.getGameId(),
+        listener = fb.listen("lobbies", app.lobbyListController.chosenGame.getGameId(),
         (documentSnapshot, e) -> {
             if (e != null) {
                 System.err.println("Listen failed: " + e);
