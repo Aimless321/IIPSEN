@@ -8,6 +8,16 @@
     -fx-cursor: hand;
 }
 
+.blue-button {
+    -fx-background-color: #018bb5;
+    -fx-background-radius: 10;
+}
+
+.blue-button:hover {
+    -fx-background-color: #017598;
+    -fx-cursor: hand;
+}
+
 .red-button {
     -fx-background-color: #e30613;
     -fx-background-radius: 10;
