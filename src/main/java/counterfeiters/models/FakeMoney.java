@@ -4,6 +4,12 @@ import counterfeiters.views.Observer;
 
 import java.util.ArrayList;
 
+/**
+ * This model will save the fakeMoney based on the quality
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 09-06-2019
+ * */
 public class FakeMoney implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private int qualityOne, qualityTwo, qualityThree;

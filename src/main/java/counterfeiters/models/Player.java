@@ -88,6 +88,12 @@ public class Player {
     }
 
 
+    /**
+     * This switch will call the right method based on the given id.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
     public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qualityId){
         switch(qualityId) {
             case 1:

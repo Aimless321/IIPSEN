@@ -4,6 +4,12 @@ import counterfeiters.views.Observer;
 
 import java.util.ArrayList;
 
+/**
+ * This model will save the realMoney.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 09-06-2019
+ * */
 public class RealMoney implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private int totalMoney;
