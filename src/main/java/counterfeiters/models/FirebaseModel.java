@@ -19,6 +19,7 @@ public class FirebaseModel implements Observable {
 
     FirebaseService fb = FirebaseService.getInstance();
     private ArrayList<DocumentSnapshot> lobbies = new ArrayList<DocumentSnapshot>();
+
     private ArrayList<Observer> observers = new ArrayList<>();
     private String lobbyOrGame;
 
@@ -62,7 +63,7 @@ public class FirebaseModel implements Observable {
         System.out.println("after lobbies clear lobbies size:");
         System.out.println(lobbies.size());
         // retrieve all documents in lobbies
-        this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
+        this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
         System.out.println("after get all  lobbies size:");
         System.out.println(lobbies.size());
         notifyAllObservers();

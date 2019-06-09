@@ -3,6 +3,7 @@ package counterfeiters.views;
 import com.google.cloud.firestore.DocumentSnapshot;
 import counterfeiters.controllers.GameListController;
 import counterfeiters.controllers.LobbyListController;
+import counterfeiters.models.Board;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Observable;
 import javafx.application.Platform;
@@ -103,7 +104,8 @@ public class GameListView implements Observer{
 
             if (updatedLobbies.size() != 0) {
                 for (DocumentSnapshot doc : updatedLobbies) {
-                    ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), doc.get("numPlayers").toString(), new ImageView("icons/player.png"), doc.get("round").toString());
+                    Board board = doc.toObject(Board.class);
+                    ListRow newListRow = new ListRow(board.game.getGameId(), board.game.getLobbyName(), String.valueOf(board.game.getNumPlayers()), new ImageView("icons/player.png"), String.valueOf(board.game.getRound()));
                     listRows.add(newListRow);
                     System.out.println("listrows size adding listrow objects:");
                     System.out.println(listRows.size());
@@ -130,7 +132,7 @@ public class GameListView implements Observer{
         noLobby.setTextFill(Color.WHITE);
 
         HBox horBox = new HBox(region1, noLobby,  region2);
-        horBox.setStyle("-fx-pref-height: 85");
+        horBox.setStyle("-fx-pref-height: 60");
         horBox.setStyle("-fx-pref-width: 980");
         horBox.setStyle("-fx-background-image: transparent");
 
@@ -193,7 +195,7 @@ public class GameListView implements Observer{
         });
 
 
-        horBox.setStyle("-fx-pref-height: 100");
+        horBox.setStyle("-fx-pref-height: 60");
         horBox.setStyle("-fx-pref-width: 980");
 
         if (counter %2 == 0) {
