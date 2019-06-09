@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class RealMoney implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
     private int totalMoney;
-    private String textField;
 
     public void setTotalMoney(int realMoney) {
         totalMoney = realMoney;

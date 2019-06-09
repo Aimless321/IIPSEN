@@ -75,6 +75,16 @@ public class BoardController {
         }
     }
 
+    public void updateMoneyOnPositionPlus(int qId, int bedrag){
+        Player player = app.gameController.game.localPlayer;
+        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() + bedrag,player.getFakeMoney().getQualityTwo() + bedrag,player.getFakeMoney().getQualityThree() + bedrag,player.getRealMoney().getTotalMoney() + bedrag,player.getBahamasBank().getTotalBankMoney() + bedrag, qId);
+    }
+
+    public void updateMoneyOnPositionMin(int qId, int bedrag){
+        Player player = app.gameController.game.localPlayer;
+        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() - bedrag,player.getFakeMoney().getQualityTwo() - bedrag,player.getFakeMoney().getQualityThree() - bedrag,player.getRealMoney().getTotalMoney() - bedrag,player.getBahamasBank().getTotalBankMoney() - bedrag, qId);
+    }
+
     public void henchmanPlaced(Button btn) {
         Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
 
@@ -82,13 +92,12 @@ public class BoardController {
         double posX = bounds.getMinX() + btn.getWidth()/3;
         double posY = bounds.getMinY() + btn.getHeight()/5;
         Player player = app.gameController.game.localPlayer;
-        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() + 50,2,3,4,5,1);
         board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
         board.prepareBlackMarket();
-        app.gameController.game.notifyAllObservers();
+        app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }
 
     public void advancePolice() {

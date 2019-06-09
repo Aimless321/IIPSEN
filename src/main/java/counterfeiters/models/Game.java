@@ -107,6 +107,7 @@ public class Game implements Observable {
         }
     }
 
+
     public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qId){
         localPlayer.updateMoney(qualityOneMoney, qualityTwoMoney, qualityThreeMoney, totalRealMoney, totalBankMoney, qId);
         notifyAllObservers();

@@ -145,26 +145,6 @@ public class BoardView implements Observer {
         this.boardcontroller = (BoardController) controller;
     }
 
-//    @Override
-//    public void update(Observable observable) {
-//        BlackMarket blackMarket = (BlackMarket)observable;
-//
-//        for (int i = 0; i < 7; i++) {
-//            ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
-//            imageview.setFitWidth(111);
-//            imageview.setPreserveRatio(true);
-//            blackMarketView.getChildren().add(imageview);
-//        }
-//
-//        qualityOneMoney.setText(String.valueOf(fakeMoney.getQualityOne()));
-//        qualityTwoMoney.setText(String.valueOf(fakeMoney.getQualityTwo()));
-//        qualityThreeMoney.setText(String.valueOf(fakeMoney.getQualityThree()));
-//        totalRealMoney.setText(String.valueOf(realMoney.getTotalMoney()));
-//        totalBankMoney.setText(String.valueOf(bahamasBank.getTotalBankMoney()));
-//
-//        System.out.println("update uitgevoerd");
-//    }
-
     @Override
     public void update(Observable observable) {
 
@@ -199,9 +179,12 @@ public class BoardView implements Observer {
                 pane.getChildren().add(henchmanImage);
             }
         }
+        // Als er game als observable dient voert die het volgende uit.
         if(observable instanceof Game){
             Game game = (Game) observable;
             this.qualityOneMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityOne()));
+            this.qualityTwoMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityTwo()));
+            this.qualityThreeMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityThree()));
             this.totalRealMoney.setText(String.valueOf(game.localPlayer.getRealMoney().getTotalMoney()));
         }
     }

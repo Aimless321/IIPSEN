@@ -13,6 +13,7 @@ public class Player {
 
     FakeMoney fakeMoney;
     RealMoney realMoney;
+    BahamasBank bahamasBank;
 
     private ArrayList<Card> cards = new ArrayList<>();
 
@@ -24,7 +25,9 @@ public class Player {
         this.userName = userName;
         this.fakeMoney = new FakeMoney();
         this.realMoney = new RealMoney();
+        this.bahamasBank = new BahamasBank();
         realMoney.setTotalMoney(200);
+        bahamasBank.setTotalBankMoney(0);
 
     }
 
@@ -84,22 +87,23 @@ public class Player {
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+
     public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qualityId){
         switch(qualityId) {
             case 1:
-                fakeMoney.setQualityOne(qualityOneMoney);
+                fakeMoney.setQualityOne(fakeMoney.getQualityOne() + qualityOneMoney);
                 break;
             case 2:
-                fakeMoney.setQualityTwo(qualityTwoMoney);
+                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() + qualityTwoMoney);
                 break;
             case 3:
-                fakeMoney.setQualityThree(qualityThreeMoney);
+                fakeMoney.setQualityThree(fakeMoney.getQualityThree() + qualityThreeMoney);
                 break;
             case 4:
-                realMoney.setTotalMoney(totalRealMoney);
+                realMoney.setTotalMoney(realMoney.getTotalMoney() + totalRealMoney);
                 break;
             case 5:
-
+                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() + totalBankMoney);
                 break;
             default:
                 break;
@@ -125,6 +129,8 @@ public class Player {
     public RealMoney getRealMoney(){
         return realMoney;
     }
+
+    public BahamasBank getBahamasBank(){return bahamasBank;}
 
 
     //    public boolean hasPlaneTicket(){
