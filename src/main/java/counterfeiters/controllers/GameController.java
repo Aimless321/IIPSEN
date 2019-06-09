@@ -4,6 +4,9 @@ import counterfeiters.models.Game;
 import counterfeiters.models.Player;
 import counterfeiters.views.Observer;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GameController {
     private ApplicationController app;
     public Game game;
@@ -21,6 +24,13 @@ public class GameController {
     public void deleteGame() {
         game = new Game();
     }
+
+    public Map<String, String> loadScores()
+    {
+        return game.loadScores();
+
+    }
+
 
     public void createGame(Player player) {
         game.createNewGame(player);
