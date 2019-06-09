@@ -50,6 +50,7 @@ public class MainMenuView implements Observer {
     @FXML
     public void pressCreateLobby() {
         controller.createLobbyPressed();
+
     }
 
     @FXML

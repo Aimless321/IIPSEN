@@ -16,6 +16,7 @@ public class Game implements Observable {
     private int round = 0;
     @Exclude
     public Player localPlayer;
+    private String localPlayerId = "23526353253sdg";
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -24,6 +25,7 @@ public class Game implements Observable {
     }
 
     public void createNewGame(Player player) {
+
         //Get the firebase service
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -32,14 +34,23 @@ public class Game implements Observable {
 
         //Initialize variables
         this.gameId = lobbyDoc.getId();
+//        localPlayerId = player.getPlayerId();
         addPlayer(player);
+
         this.lobbyName = player.getUserName() + "'s Lobby";
         this.localPlayer = player;
-
         fb.setClass("lobbies", gameId, this);
 
         notifyAllObservers();
     }
+//
+//    public Player getLocalPlayer(){
+//        for (Player player : players){
+//            if (player.getPlayerId() == localPlayerId)
+//                return player;
+//        }
+//        return null;
+//    }
 
     public void addPlayer(Player player) {
         numPlayers++;
@@ -94,6 +105,11 @@ public class Game implements Observable {
         for(Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qId){
+        localPlayer.updateMoney(qualityOneMoney, qualityTwoMoney, qualityThreeMoney, totalRealMoney, totalBankMoney, qId);
+        notifyAllObservers();
     }
 
     public String getGameId() {

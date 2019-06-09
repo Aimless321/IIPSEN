@@ -23,6 +23,7 @@ public class BoardController {
 
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
+        app.gameController.registerObserver(observer);
     }
 
     public void registerListeners() {
@@ -80,12 +81,14 @@ public class BoardController {
         //Calculate middle position of the button
         double posX = bounds.getMinX() + btn.getWidth()/3;
         double posY = bounds.getMinY() + btn.getHeight()/5;
-
+        Player player = app.gameController.game.localPlayer;
+        app.gameController.updateMoney(player.getFakeMoney().getQualityOne() + 50,2,3,4,5,1);
         board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
         board.prepareBlackMarket();
+        app.gameController.game.notifyAllObservers();
     }
 
     public void advancePolice() {

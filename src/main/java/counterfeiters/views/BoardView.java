@@ -1,9 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.Board;
-import counterfeiters.models.Henchman;
-import counterfeiters.models.Observable;
+import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -15,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Set;
@@ -24,6 +23,11 @@ public class BoardView implements Observer {
     public HBox blackMarketView;
     public ImageView policePawn;
     public Pane pane;
+    public Text qualityOneMoney;
+    public Text qualityTwoMoney;
+    public Text qualityThreeMoney;
+    public Text totalRealMoney;
+    public Text totalBankMoney;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -141,35 +145,64 @@ public class BoardView implements Observer {
         this.boardcontroller = (BoardController) controller;
     }
 
+//    @Override
+//    public void update(Observable observable) {
+//        BlackMarket blackMarket = (BlackMarket)observable;
+//
+//        for (int i = 0; i < 7; i++) {
+//            ImageView imageview = new ImageView(blackMarket.getCard(i).getImg());
+//            imageview.setFitWidth(111);
+//            imageview.setPreserveRatio(true);
+//            blackMarketView.getChildren().add(imageview);
+//        }
+//
+//        qualityOneMoney.setText(String.valueOf(fakeMoney.getQualityOne()));
+//        qualityTwoMoney.setText(String.valueOf(fakeMoney.getQualityTwo()));
+//        qualityThreeMoney.setText(String.valueOf(fakeMoney.getQualityThree()));
+//        totalRealMoney.setText(String.valueOf(realMoney.getTotalMoney()));
+//        totalBankMoney.setText(String.valueOf(bahamasBank.getTotalBankMoney()));
+//
+//        System.out.println("update uitgevoerd");
+//    }
+
     @Override
     public void update(Observable observable) {
-        Board board = (Board)observable;
 
-        for (int i = 0; i < 7; i++) {
-            ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
-            imageview.setFitWidth(111);
-            imageview.setPreserveRatio(true);
-            blackMarketView.getChildren().add(imageview);
+        if(observable instanceof Board) {
+            System.out.println("update from board" );
+            Board board = (Board) observable;
+
+            for (int i = 0; i < 7; i++) {
+                ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
+                imageview.setFitWidth(111);
+                imageview.setPreserveRatio(true);
+                blackMarketView.getChildren().add(imageview);
+            }
+
+            policePawn.setX(board.policePawn.getXCoordinate());
+            policePawn.setY(board.policePawn.getYCoordinate());
+
+            resetHenchman();
+
+            for (Henchman henchman : board.getHenchmen()) {
+                VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+
+                ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
+
+                ImageView henchmanImage = new ImageView(old.getImage());
+                henchmanImage.setLayoutX(henchman.x);
+                henchmanImage.setLayoutY(henchman.y);
+                henchmanImage.setFitHeight(36);
+                henchmanImage.setFitWidth(36);
+                henchmanImage.getStyleClass().add("henchman");
+
+                pane.getChildren().add(henchmanImage);
+            }
         }
-
-        policePawn.setX(board.policePawn.getXCoordinate());
-        policePawn.setY(board.policePawn.getYCoordinate());
-
-        resetHenchman();
-
-        for(Henchman henchman : board.getHenchmen()) {
-            VBox henchmanbox  = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
-
-            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
-
-            ImageView henchmanImage = new ImageView(old.getImage());
-            henchmanImage.setLayoutX(henchman.x);
-            henchmanImage.setLayoutY(henchman.y);
-            henchmanImage.setFitHeight(36);
-            henchmanImage.setFitWidth(36);
-            henchmanImage.getStyleClass().add("henchman");
-
-            pane.getChildren().add(henchmanImage);
+        if(observable instanceof Game){
+            Game game = (Game) observable;
+            this.qualityOneMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityOne()));
+            this.totalRealMoney.setText(String.valueOf(game.localPlayer.getRealMoney().getTotalMoney()));
         }
     }
 

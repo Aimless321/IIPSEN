@@ -10,6 +10,10 @@ public class Player {
     private String userName;
     private int playerId = 1;
     private int score;
+
+    FakeMoney fakeMoney;
+    RealMoney realMoney;
+
     private ArrayList<Card> cards = new ArrayList<>();
 
     public Player() {
@@ -18,6 +22,10 @@ public class Player {
 
     public Player(String userName) {
         this.userName = userName;
+        this.fakeMoney = new FakeMoney();
+        this.realMoney = new RealMoney();
+        realMoney.setTotalMoney(200);
+
     }
 
     public void leaveLobby(Game game) {
@@ -76,6 +84,28 @@ public class Player {
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qualityId){
+        switch(qualityId) {
+            case 1:
+                fakeMoney.setQualityOne(qualityOneMoney);
+                break;
+            case 2:
+                fakeMoney.setQualityTwo(qualityTwoMoney);
+                break;
+            case 3:
+                fakeMoney.setQualityThree(qualityThreeMoney);
+                break;
+            case 4:
+                realMoney.setTotalMoney(totalRealMoney);
+                break;
+            case 5:
+
+                break;
+            default:
+                break;
+        }
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -86,6 +116,14 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public FakeMoney getFakeMoney() {
+        return fakeMoney;
+    }
+
+    public RealMoney getRealMoney(){
+        return realMoney;
     }
 
 
