@@ -72,6 +72,10 @@ public class FirebaseModel implements Observable {
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
         System.out.println("after get all  lobbies size:");
         System.out.println(lobbies.size());
+        for (DocumentSnapshot doc: lobbies) {
+            Game game =doc.toObject(Game.class);
+            this.games.add(game);
+        }
         notifyAllObservers();
     }
 

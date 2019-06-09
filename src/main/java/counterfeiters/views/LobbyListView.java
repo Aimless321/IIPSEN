@@ -35,7 +35,6 @@ public class LobbyListView implements Observer {
 
     private Stage stage;
     private LobbyListController controller;
-    private List<ListRow> listRows = new ArrayList<>();
     private List<Game> games = new ArrayList<>();
 
     private int counter = 0;
