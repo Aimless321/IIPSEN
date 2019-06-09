@@ -3,6 +3,7 @@ package counterfeiters.views;
 import com.google.cloud.firestore.DocumentSnapshot;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.FirebaseModel;
+import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -35,7 +36,10 @@ public class LobbyListView implements Observer {
     private Stage stage;
     private LobbyListController controller;
     private List<ListRow> listRows = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
+
     private int counter = 0;
+    private String chosenGame;
 
     //Need an empty constructor for FXML
     public LobbyListView() {
@@ -95,20 +99,16 @@ public class LobbyListView implements Observer {
             System.out.println("listWows size after clearing in view:");
             System.out.println(listRows.size());
             //Add new rows for lobbylist
-            ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
+            ArrayList<Game> games = firebaseModel.getGames();
 
             System.out.println("updateslobbies size in lobbylsitview:");
-            System.out.println(updatedLobbies.size());
+            //System.out.println(updatedLobbies.size());
 
 
-            if (updatedLobbies.size() != 0) {
-                for (DocumentSnapshot doc : updatedLobbies) {
-                    ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), doc.get("numPlayers").toString(), new ImageView("icons/player.png"), doc.get("round").toString());
-                    listRows.add(newListRow);
-                    System.out.println("listrows size adding listrow objects:");
-                    System.out.println(listRows.size());
+            if (games.size() != 0) {
+                for (Game game : games) {
                     Platform.runLater(() ->
-                            addLobbyInView(newListRow));
+                            addLobbyInView(game));
                 }
             } else {
                 noLobbies();
@@ -136,7 +136,7 @@ public class LobbyListView implements Observer {
 
     }
 
-    public void addLobbyInView(ListRow listRow){
+    public void addLobbyInView(Game game){
 
         vBox.setStyle("-fx-background-color: transparent");
         counter = vBox.getChildren().size() +1;
@@ -148,15 +148,15 @@ public class LobbyListView implements Observer {
         region2.setStyle("-fx-pref-height: 120");
         HBox.setHgrow(region2, Priority.ALWAYS);
 
-        Label lobbyName = new Label(" " + counter + ". " +listRow.getLobbyName());
+        Label lobbyName = new Label(" " + counter + ". " +game.getLobbyName());
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label numPlayers = new Label(listRow.getNumPlayers() + "/4  ");
+        Label numPlayers = new Label(Integer.toString(game.getNumPlayers()) + "/4  ");
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, listRow.getIcon(), new Label("  "));
+        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, new ImageView("icons/player.png"), new Label("  "));
 
 
         horBox.setStyle("-fx-cursor: hand");
@@ -166,8 +166,9 @@ public class LobbyListView implements Observer {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
                         System.out.println("Double clicked lobby");
-                        System.out.println(listRow.getId());
-                        controller.enterLobby();
+                        chosenGame = game.getGameId();
+                        //controller.clickLobby(chosenGame);
+                        System.out.println(chosenGame);
                         //ergens moet nog game id moeten meegegeven worden voor de goeie lobby openen
                     }
                 }

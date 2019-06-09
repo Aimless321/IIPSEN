@@ -61,6 +61,12 @@ public class LobbyListController {
         app.loadView(LobbyView.class, app.lobbyController);
     }
 
+    public void clickLobby(String chosenGame){
+        //TODO: Go to the LobbyView
+
+        //app.gameController.updateData(chosenGame);
+    }
+
     public void rulesButtonPressed() {
         //TODO: Go to the rules view
     }
