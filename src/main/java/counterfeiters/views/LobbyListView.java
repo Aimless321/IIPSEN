@@ -95,9 +95,10 @@ public class LobbyListView implements Observer {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
         if (firebaseModel.lobbyOrGame().equals("lobby")) {
             Platform.runLater(() -> vBox.getChildren().clear());
-            listRows.clear();
+            //listRows.clear();
+            games.clear();
             System.out.println("listWows size after clearing in view:");
-            System.out.println(listRows.size());
+            System.out.println(games.size());
             //Add new rows for lobbylist
             ArrayList<Game> games = firebaseModel.getGames();
 
