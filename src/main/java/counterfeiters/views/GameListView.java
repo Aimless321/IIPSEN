@@ -88,31 +88,31 @@ public class GameListView implements Observer{
 
     @Override
     public void update(Observable observable) {
-
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
-        Platform.runLater(() -> vBox.getChildren().clear());
-        listRows.clear();
-        System.out.println("listWows size after clearing in view:");
-        System.out.println(listRows.size());
-        //Add new rows for lobbylist
-        ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
+        if (firebaseModel.lobbyOrGame().equals("game")) {
+            Platform.runLater(() -> vBox.getChildren().clear());
+            listRows.clear();
+            System.out.println("listWows size after clearing in view:");
+            System.out.println(listRows.size());
+            //Add new rows for lobbylist
+            ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
 
-        System.out.println("updateslobbies size in lobbylsitview:");
-        System.out.println(updatedLobbies.size());
+            System.out.println("updateslobbies size in lobbylsitview:");
+            System.out.println(updatedLobbies.size());
 
 
-        if (updatedLobbies.size() != 0) {
-            for(DocumentSnapshot doc: updatedLobbies) {
-                ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"),doc.get("numPlayers").toString(), new ImageView("icons/player.png"),doc.get("round").toString());
-                listRows.add(newListRow);
-                System.out.println("listrows size adding listrow objects:");
-                System.out.println(listRows.size());
-                Platform.runLater(() ->
-                        addGameInView(newListRow));
+            if (updatedLobbies.size() != 0) {
+                for (DocumentSnapshot doc : updatedLobbies) {
+                    ListRow newListRow = new ListRow(doc.getString("gameId"), doc.getString("lobbyName"), doc.get("numPlayers").toString(), new ImageView("icons/player.png"), doc.get("round").toString());
+                    listRows.add(newListRow);
+                    System.out.println("listrows size adding listrow objects:");
+                    System.out.println(listRows.size());
+                    Platform.runLater(() ->
+                            addGameInView(newListRow));
+                }
+            } else {
+                noLobbies();
             }
-        }
-        else {
-            noLobbies ();
         }
     }
 
