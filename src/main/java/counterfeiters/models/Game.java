@@ -7,6 +7,8 @@ import counterfeiters.views.Observer;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Game implements Observable {
     private String gameId;
@@ -18,6 +20,7 @@ public class Game implements Observable {
     public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private Game game;
 
     public Game() {
 
@@ -41,7 +44,41 @@ public class Game implements Observable {
         notifyAllObservers();
     }
 
-    public void addPlayer(Player player) {
+    public Map<String, String> loadScores() {
+        FirebaseService fb = FirebaseService.getInstance();
+
+
+        Game game = fb.get("games", "xRaEhTmY4vq83iCml19F").toObject(Game.class);
+        Map<String, String> scores = new HashMap();
+        ArrayList<Player> players = game.getGame().getPlayers();
+
+        for (int i = 0; i < players.size(); i++) {
+            String name = players.get(i).getUserName();
+            String score = Integer.toString(players.get(i).getScore());
+            scores.put(name, score);
+
+        }
+
+        for (String i : scores.keySet()) {
+            System.out.println(i + " " + scores.get(i));
+        }
+
+        Map<String, String> sortedScores = scores
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+
+        System.out.println(sortedScores);
+        System.out.println(scores);
+
+
+        return sortedScores;
+    }
+
+
+
+        public void addPlayer(Player player) {
         numPlayers++;
         players.add(player);
 
@@ -143,6 +180,8 @@ public class Game implements Observable {
     public int getRound() {
         return round;
     }
+
+    public Game getGame(){return game;}
 
     public Date getStartTime() {
         return startTime;

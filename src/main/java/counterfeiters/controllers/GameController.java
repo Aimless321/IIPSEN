@@ -4,6 +4,7 @@ import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
 import counterfeiters.views.Observer;
+import java.util.Map;
 
 /**
  * The controller of the game model.
@@ -27,6 +28,13 @@ public class GameController {
     public void deleteGame() {
         game = new Game();
     }
+
+    public Map<String, String> loadScores()
+    {
+        return game.loadScores();
+
+    }
+
 
     public void createGame(Player player) {
         game.createNewGame(player);
