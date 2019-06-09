@@ -95,19 +95,18 @@ public class LobbyListView implements Observer {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
         if (firebaseModel.lobbyOrGame().equals("lobby")) {
             Platform.runLater(() -> vBox.getChildren().clear());
-            //listRows.clear();
             games.clear();
             System.out.println("listWows size after clearing in view:");
             System.out.println(games.size());
-            //Add new rows for lobbylist
-            ArrayList<Game> games = firebaseModel.getGames();
+
+            //Add new games for lobbylist
+            ArrayList<Game> updatedGames = firebaseModel.getGames();
 
             System.out.println("updateslobbies size in lobbylsitview:");
             //System.out.println(updatedLobbies.size());
 
-
-            if (games.size() != 0) {
-                for (Game game : games) {
+            if (updatedGames.size() != 0) {
+                for (Game game : updatedGames) {
                     Platform.runLater(() ->
                             addLobbyInView(game));
                 }
@@ -153,7 +152,7 @@ public class LobbyListView implements Observer {
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label numPlayers = new Label(Integer.toString(game.getNumPlayers()) + "/4  ");
+        Label numPlayers = new Label(game.getNumPlayers() + "/4  ");
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
@@ -195,7 +194,7 @@ public class LobbyListView implements Observer {
         });
 
 
-        horBox.setStyle("-fx-pref-height: 100");
+        horBox.setStyle("-fx-pref-height: 30");
         horBox.setStyle("-fx-pref-width: 980");
 
         if (counter %2 == 0) {
