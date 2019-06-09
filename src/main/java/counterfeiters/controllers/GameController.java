@@ -26,10 +26,9 @@ public class GameController {
         game.createNewGame(player);
 
         app.lobbyController.registerListeners();
-    }
 
-    public void updateMoney(int qualityOneMoney, int qualityTwoMoney, int qualityThreeMoney, int totalRealMoney, int totalBankMoney, int qId){
-        game.updateMoney(qualityOneMoney, qualityTwoMoney, qualityThreeMoney, totalRealMoney, totalBankMoney, qId);
+        //Give the game to the board aswell
+        app.boardController.board.game = game;
     }
 
     public void updateData(Game updateGame) {

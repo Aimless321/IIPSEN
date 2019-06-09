@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,10 +18,7 @@ public class ScoreboardView implements Observer {
     private Text name;
 
     //Need an empty constructor for FXML
-    public ScoreboardView() {
-
-    }
-
+    public ScoreboardView() {}
     public ScoreboardView(Stage primaryStage, Object controller) {
         this.stage = primaryStage;
         this.controller = (ScoreboardController)controller;
@@ -34,7 +30,7 @@ public class ScoreboardView implements Observer {
         Parent root = ViewUtilities.loadFxml("/views/scoreboard.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("Pane");
+        Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/scoreboard.png"));
 
         //Show it on the screen
@@ -44,20 +40,18 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressBackMenu() {
-        System.out.println("Start button pressed");
+        controller.menuButtonPressed();
     }
 
     @FXML
     public void pressExitGame() {
-        System.out.println("Leave button pressed");
-
-        System.exit(0);
+        controller.exitButtonPressed();
 
     }
 
     @FXML
     public void pressRules() {
-        System.out.println("Rules button pressed");
+        controller.rulesButtonPressed();
     }
 
     @Override
@@ -72,6 +66,11 @@ public class ScoreboardView implements Observer {
 
     @Override
     public void update(Observable observable) {
+
+    }
+
+    @Override
+    public void start() {
 
     }
 }

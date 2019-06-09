@@ -1,8 +1,8 @@
 package counterfeiters.controllers;
 
-import counterfeiters.views.MainMenuView;
+import counterfeiters.views.LoginView;
+import counterfeiters.views.Observer;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -13,23 +13,39 @@ import java.lang.reflect.InvocationTargetException;
  * @author Wesley Bijleveld
  */
 public class ApplicationController {
+    private Stage stage;
+
     //Store all controllers
     public MainMenuController mainMenuController;
     public LoginController loginController;
     public RegisterController registerController;
     public LobbyController lobbyController;
+    public LobbyListController lobbyListController;
     public ScoreboardController scoreboardController;
+    public BoardController boardController;
+    public GameController gameController;
+    public RulesController rulesController;
+    public AccountController accountController;
+    public GameListController gameListController;
 
     public ApplicationController(Stage stage) {
+        this.stage = stage;
+
         //Create all controllers
         mainMenuController = new MainMenuController(this);
         lobbyController = new LobbyController(this);
+        lobbyListController = new LobbyListController(this);
         scoreboardController = new ScoreboardController(this);
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
+        boardController = new BoardController(this);
+        gameController = new GameController(this);
+        rulesController = new RulesController(this);
+        accountController = new AccountController(this);
+        gameListController = new GameListController(this);
 
         //Load first view
-        loadView(MainMenuView.class, stage, mainMenuController);
+        loadView(LoginView.class, loginController);
     }
 
     /**
@@ -37,10 +53,9 @@ public class ApplicationController {
      * Example usage:<br>
      * - loadView(LobbyView.class, stage, controller)
      * @param view The class of the view you want to show
-     * @param stage The stage where the view needs to be shown
      * @param controller The controller that handles the interaction of the view
      */
-    public void loadView(Class view, Stage stage, Object controller) {
+    public void loadView(Class<? extends Observer> view, Object controller) {
         try {
             view.getDeclaredConstructor(Stage.class, Object.class).newInstance(stage, controller);
         } catch (InstantiationException e) {
@@ -53,5 +68,10 @@ public class ApplicationController {
             System.err.println("Exception thrown by " + view.toString());
             e.printStackTrace();
         }
+    }
+
+
+    public void quit() {
+        System.exit(0);
     }
 }

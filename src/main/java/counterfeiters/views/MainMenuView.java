@@ -5,10 +5,13 @@ import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * View for the main menu screen
+ * @author Wesley Bijleveld
+ */
 public class MainMenuView implements Observer {
     private Stage stage;
     private MainMenuController controller;
@@ -38,18 +41,22 @@ public class MainMenuView implements Observer {
     }
 
     @FXML
-    public void pressJoinLobby(MouseEvent mouseEvent) {
+    public void pressJoinLobby() {
         System.out.println("Join button pressed");
+
+        controller.joinLobbyPressed();
     }
 
     @FXML
-    public void pressCreateLobby(MouseEvent mouseEvent) {
-        System.out.println("Create button pressed");
+    public void pressCreateLobby() {
+        controller.createLobbyPressed();
     }
 
     @FXML
-    public void pressLoadGame(MouseEvent mouseEvent) {
+    public void pressLoadGame() {
         System.out.println("Load button pressed");
+
+        controller.loadGamePressed();
     }
 
     @Override
@@ -64,6 +71,11 @@ public class MainMenuView implements Observer {
 
     @Override
     public void update(Observable observable) {
+
+    }
+
+    @Override
+    public void start() {
 
     }
 }

@@ -9,9 +9,17 @@ import com.google.firebase.cloud.FirestoreClient;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The interaction between all of the classes and the Firestore db.
+ * Uses the Singleton design pattern.
+ * Get a instance by using <b>FirebaseService.getInstance();</b>
+ * @author Wesley Bijleveld
+ */
 public class FirebaseService {
     public static FirebaseService instance = null;
 
@@ -36,11 +44,18 @@ public class FirebaseService {
         }
     }
 
-    public void listen(String collection, String document, EventListener<DocumentSnapshot> eventListener) {
+    public ListenerRegistration listen(String collection, String document, EventListener<DocumentSnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
         DocumentReference docRef = colRef.document(document);
 
-        docRef.addSnapshotListener(eventListener);
+        return docRef.addSnapshotListener(eventListener);
+    }
+
+    //listen to a whole collection
+    public void listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
+        CollectionReference colRef = db.collection(collection);
+
+        colRef.addSnapshotListener(eventListener);
     }
 
     public void set(String collection, String document, Map<String, Object> data) {
@@ -53,6 +68,22 @@ public class FirebaseService {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setClass(String collection, String document, Object data) {
+        DocumentReference docRef = db.collection(collection).document(document);
+
+        ApiFuture<WriteResult> future = docRef.set(data);
+
+        try {
+            future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public DocumentReference insert(String collection) {
+        return db.collection(collection).document();
     }
 
     public DocumentSnapshot get(String collection, String document) {
@@ -69,6 +100,42 @@ public class FirebaseService {
                 System.err.println("Cannot find document: " + document + " in collection: " + collection);
             }
         } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    //Melissa
+    public ArrayList<DocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
+        // [START fs_get_all_docs]
+        //asynchronously retrieve all documents
+
+        try {
+            ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
+
+            if(collectionData != null) {
+                List<QueryDocumentSnapshot> documentsList = collectionData.get().getDocuments();
+                ArrayList<DocumentSnapshot> documents = new ArrayList<DocumentSnapshot>(documentsList);
+                return documents;
+            } else {
+                System.err.println("Cannot find collection: " + collection);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<QueryDocumentSnapshot> query(String collection, String key, String value) {
+        Query query = db.collection(collection).whereEqualTo(key, value);
+
+        ApiFuture<QuerySnapshot> querySnapshot = query.get();
+
+        try {
+            return querySnapshot.get().getDocuments();
+        } catch (InterruptedException | ExecutionException e) {
+            System.err.println("Error executing query on: " + collection);
             e.printStackTrace();
         }
 
