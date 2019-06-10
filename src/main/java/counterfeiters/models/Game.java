@@ -3,6 +3,7 @@ package counterfeiters.models;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
+import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
 import java.util.ArrayList;
@@ -50,6 +51,12 @@ public class Game implements Observable {
         updateFirebase();
     }
 
+    public void roundChanged(int numRound) {
+        setRound(numRound);
+        updateFirebase();
+    }
+
+
     public void removePlayer(Player player) {
         players.remove(player);
 
@@ -79,8 +86,11 @@ public class Game implements Observable {
     public void updateData(Game updateGame) {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
-
+        this.round = updateGame.getRound();
+        System.out.println("this round is " + round);
+        //
         notifyAllObservers();
+
     }
 
     @Exclude
@@ -90,7 +100,6 @@ public class Game implements Observable {
                 return player;
             }
         }
-
         return null;
     }
 

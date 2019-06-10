@@ -3,6 +3,7 @@ package counterfeiters.controllers;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
+import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
 public class GameController {
@@ -58,5 +59,12 @@ public class GameController {
 
     public void updateData(Game updateGame) {
         game.updateData(updateGame);
+    }
+
+    public void setStartRound(int numRound) {
+        game.roundChanged(numRound);
+    }
+    public void startGame(){
+        app.loadView(BoardView.class, app.boardController);
     }
 }
