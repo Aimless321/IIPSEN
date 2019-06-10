@@ -44,34 +44,38 @@ public class Game implements Observable {
         notifyAllObservers();
     }
 
-    public Map<String, String> loadScores() {
+    public Map<String, Integer> loadScores() {
         FirebaseService fb = FirebaseService.getInstance();
 
 
         Game game = fb.get("games", "xRaEhTmY4vq83iCml19F").toObject(Game.class);
-        Map<String, String> scores = new HashMap();
+        Map<String, Integer> scores = new HashMap();
+        LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
         ArrayList<Player> players = game.getGame().getPlayers();
 
         for (int i = 0; i < players.size(); i++) {
             String name = players.get(i).getUserName();
-            String score = Integer.toString(players.get(i).getScore());
+            int score = (players.get(i).getScore());
             scores.put(name, score);
 
         }
 
-        for (String i : scores.keySet()) {
-            System.out.println(i + " " + scores.get(i));
+        for (Map.Entry<String, Integer> keys : scores.entrySet())
+        {
+            list.add(Integer.valueOf(keys.getValue()));
         }
+        Collections.sort(list, Collections.reverseOrder());
 
-        Map<String, String> sortedScores = scores
-                .entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByKey())
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
-
-        System.out.println(sortedScores);
-        System.out.println(scores);
-
+        for(Integer o1 : list){
+            for (Map.Entry<String, Integer> entry : scores.entrySet())
+            {
+                if(entry.getValue().equals(o1))
+                {
+                    sortedScores.put(entry.getKey(),o1);
+                }
+            }
+        }
 
         return sortedScores;
     }

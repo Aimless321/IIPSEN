@@ -29,7 +29,7 @@ public class GameController {
         game = new Game();
     }
 
-    public Map<String, String> loadScores()
+    public Map<String, Integer> loadScores()
     {
         return game.loadScores();
 

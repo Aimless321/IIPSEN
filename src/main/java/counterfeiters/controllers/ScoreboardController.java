@@ -25,7 +25,7 @@ public class ScoreboardController {
         app.gameController.registerObserver(observer);
     }
 
-    public Map<String, String> loadScores()
+    public Map<String, Integer> loadScores()
     {
         return app.gameController.game.loadScores();
 
