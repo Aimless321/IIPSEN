@@ -128,7 +128,7 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
@@ -138,12 +138,12 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>

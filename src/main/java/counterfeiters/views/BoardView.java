@@ -68,9 +68,9 @@ public class BoardView implements Observer {
         System.out.println("Launder button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
-            boardcontroller.advancePolice();
-        }
+
+        boardcontroller.advancePolice();
+
 
         placeHenchman(btn);
     }
@@ -80,9 +80,6 @@ public class BoardView implements Observer {
 
         System.out.println("Fraud button pressed");
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
-            boardcontroller.advancePolice();
-        }
 
         placeHenchman(btn);
     }
@@ -100,6 +97,11 @@ public class BoardView implements Observer {
         System.out.println("Healer button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
+
+        if(btn.getId().equals("police")) {
+            boardcontroller.advancePolice();
+        }
+
         placeHenchman(btn);
     }
 
@@ -108,7 +110,9 @@ public class BoardView implements Observer {
 
         System.out.println("Print button pressed");
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
+
+        if(btn.getId().equals("police")) {
+            System.out.println("herkend als police");
             boardcontroller.advancePolice();
         }
 
@@ -147,20 +151,13 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-
         if(observable instanceof Board) {
             System.out.println("update from board" );
             Board board = (Board) observable;
 
-            for (int i = 0; i < 7; i++) {
-                ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
-                imageview.setFitWidth(111);
-                imageview.setPreserveRatio(true);
-                blackMarketView.getChildren().add(imageview);
-            }
+            updateBlackMarket(board);
+            updatePolicePawn(board);
 
-            policePawn.setX(board.policePawn.getXCoordinate());
-            policePawn.setY(board.policePawn.getYCoordinate());
 
             resetHenchman();
 
@@ -190,6 +187,17 @@ public class BoardView implements Observer {
         }
     }
 
+    public void updatePolicePawn(Board board) {
+        policePawn.setX(board.policePawn.getXCoordinate());
+        policePawn.setY(board.policePawn.getYCoordinate());
+    }
+
+    public void updateBlackMarket(Board board) {
+        for (int i = 0; i < 7; i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
+        }
+    }
+
     public void resetHenchman() {
         Set<Node> nodes = pane.lookupAll(".henchman");
 
@@ -214,6 +222,13 @@ public class BoardView implements Observer {
 
     @Override
     public void start() {
+        for (int i = 0; i < 7; i++) {
+            ImageView imageview = new ImageView();
+            imageview.setFitWidth(111);
+            imageview.setPreserveRatio(true);
+            blackMarketView.getChildren().add(imageview);
+        }
+
         boardcontroller.registerObserver(this);
         boardcontroller.prepareView();
 
