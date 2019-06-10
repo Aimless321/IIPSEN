@@ -16,6 +16,7 @@ public class Game implements Observable {
     private int numPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
+    private int turn = 0;
     @Exclude
     public Player localPlayer;
     private Date startTime;
@@ -167,6 +168,15 @@ public class Game implements Observable {
         for(Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    public boolean checkYourTurn() {
+        return localPlayer.getPlayerId() == players.get(turn % players.size()).getPlayerId();
+    }
+
+    public void nextTurn() {
+        turn++;
+        notifyAllObservers();
     }
 
     public String getGameId() {

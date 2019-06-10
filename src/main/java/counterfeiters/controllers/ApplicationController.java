@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.views.LobbyView;
 import counterfeiters.views.LoginView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;

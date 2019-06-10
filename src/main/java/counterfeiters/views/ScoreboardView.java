@@ -85,7 +85,6 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressRules() {
-        setAccount();
         controller.rulesButtonPressed();
     }
 
