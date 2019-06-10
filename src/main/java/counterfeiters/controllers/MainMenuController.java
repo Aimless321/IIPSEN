@@ -2,7 +2,7 @@ package counterfeiters.controllers;
 
 import counterfeiters.models.FakeMoney;
 import counterfeiters.models.Player;
-import counterfeiters.models.RealMoney;
+import counterfeiters.views.GameListView;
 import counterfeiters.views.LobbyListView;
 import counterfeiters.views.LobbyView;
 
@@ -27,5 +27,6 @@ public class MainMenuController {
 
     public void loadGamePressed() {
         //TODO: Switch to the GameListView
+        app.loadView(GameListView.class, app.gameListController);
     }
 }

@@ -52,10 +52,10 @@ public class FirebaseService {
     }
 
     //listen to a whole collection
-    public void listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
+    public ListenerRegistration listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
 
-        colRef.addSnapshotListener(eventListener);
+        return colRef.addSnapshotListener(eventListener);
     }
 
     public void set(String collection, String document, Map<String, Object> data) {
@@ -107,17 +107,13 @@ public class FirebaseService {
     }
 
     //Melissa
-    public ArrayList<DocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
-        // [START fs_get_all_docs]
-        //asynchronously retrieve all documents
-
+    public List<QueryDocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
         try {
             ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
 
             if(collectionData != null) {
                 List<QueryDocumentSnapshot> documentsList = collectionData.get().getDocuments();
-                ArrayList<DocumentSnapshot> documents = new ArrayList<DocumentSnapshot>(documentsList);
-                return documents;
+                return documentsList;
             } else {
                 System.err.println("Cannot find collection: " + collection);
             }

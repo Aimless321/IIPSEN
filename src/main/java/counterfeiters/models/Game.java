@@ -89,8 +89,20 @@ public class Game implements Observable {
 
     public void updateData(Game updateGame) {
         this.players = updateGame.getPlayers();
+        this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
 
         notifyAllObservers();
+    }
+
+    @Exclude
+    private Player getPlayerFromUserName(String username) {
+        for (Player player : players) {
+            if(player.getUserName().equals(username)) {
+                return player;
+            }
+        }
+
+        return null;
     }
 
     public void registerObserver(Observer observer) {

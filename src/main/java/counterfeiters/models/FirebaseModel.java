@@ -20,6 +20,9 @@ public class FirebaseModel implements Observable {
     FirebaseService fb = FirebaseService.getInstance();
     private ArrayList<DocumentSnapshot> lobbies = new ArrayList<DocumentSnapshot>();
     private ArrayList<Observer> observers = new ArrayList<>();
+    private ArrayList<Game> gameslist = new ArrayList<>();
+
+    private String lobbyOrGame;
 
     public FirebaseModel() {
 
@@ -43,13 +46,39 @@ public class FirebaseModel implements Observable {
 
     public void updateLobbies() {
         FirebaseService fb = FirebaseService.getInstance();
+
+        lobbyOrGame = "lobby";
+        this.gameslist.clear();
         this.lobbies.clear();
+
         System.out.println("after lobbies clear lobbies size:");
-        System.out.println(lobbies.size());
+
         // retrieve all documents in lobbies
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
         System.out.println("after get all  lobbies size:");
         System.out.println(lobbies.size());
+        for (DocumentSnapshot doc: lobbies) {
+            Game game =doc.toObject(Game.class);
+            this.gameslist.add(game);
+        }
+        notifyAllObservers();
+    }
+
+    public void updateGames() {
+        FirebaseService fb = FirebaseService.getInstance();
+        lobbyOrGame = "game";
+        this.gameslist.clear();
+        this.lobbies.clear();
+        System.out.println("after lobbies clear lobbies size:");
+        System.out.println(lobbies.size());
+        // retrieve all documents in lobbies
+        this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
+        System.out.println("after get all  lobbies size:");
+        System.out.println(lobbies.size());
+        for (DocumentSnapshot doc: lobbies) {
+            Game game = doc.toObject(Board.class).game;
+            this.gameslist.add(game);
+        }
         notifyAllObservers();
     }
 
@@ -73,8 +102,14 @@ public class FirebaseModel implements Observable {
         return lobbies;
     }
 
+    public ArrayList<Game> getGames(){
+        return gameslist;
+    }
 
 
+    public String lobbyOrGame() {
+        return lobbyOrGame;
+    }
 
 
 }
