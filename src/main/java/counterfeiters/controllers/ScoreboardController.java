@@ -13,8 +13,6 @@ import java.util.*;
 
 public class ScoreboardController {
     private ApplicationController app;
-    Player player = new Player();
-    Game game = new Game();
 
 
     public ScoreboardController(ApplicationController applicationController) {
@@ -27,7 +25,7 @@ public class ScoreboardController {
 
     public Map<String, Integer> loadScores()
     {
-        return app.gameController.game.loadScores();
+        return app.gameController.loadScores();
 
     }
 
