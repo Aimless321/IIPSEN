@@ -54,14 +54,21 @@ public class BoardView implements Observer {
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
         System.out.println("Black market pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
         System.out.println("Launder button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
         if(btn.getStyleClass().get(0) == "police" ) {
@@ -69,46 +76,63 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
-
         System.out.println("Fraud button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
+
         Button btn = (Button) mouseEvent.getSource();
         if(btn.getStyleClass().get(0) == "police" ) {
             boardcontroller.advancePolice();
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
         System.out.println("Fly button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
         System.out.println("Healer button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
-
         System.out.println("Print button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
+
         Button btn = (Button) mouseEvent.getSource();
         if(btn.getStyleClass().get(0) == "police" ) {
             boardcontroller.advancePolice();
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
