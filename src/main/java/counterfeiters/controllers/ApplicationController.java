@@ -1,6 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
+import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
 
@@ -41,7 +42,7 @@ public class ApplicationController {
         accountController = new AccountController(this);
 
         //Load first view
-        loadView(LoginView.class, loginController);
+        loadView(MainMenuView.class, mainMenuController);
     }
 
     /**
