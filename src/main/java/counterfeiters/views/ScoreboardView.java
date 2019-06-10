@@ -45,6 +45,7 @@ public class ScoreboardView implements Observer {
         this.controller = (ScoreboardController)controller;
 
         show();
+
     }
 
     public void show() {
@@ -58,10 +59,12 @@ public class ScoreboardView implements Observer {
         Scene scene = new Scene(root, 1920, 1080);
         stage.setScene(scene);
 
+
+
     }
 
-    public void setAccount() {
-        Map<String, String> data = controller.loadScores();
+    public void showScores() {
+        Map<String, Integer> data = controller.loadScores();
         firstPlayer.setImage(new Image("/players/deer.jpg"));
         secondPlayer.setImage(new Image("/players/deer.jpg"));
         thirdPlayer.setImage(new Image("/players/deer.jpg"));
@@ -70,9 +73,9 @@ public class ScoreboardView implements Observer {
         secondPlayerName.setText((String)data.keySet().toArray()[1]);
         thirdPlayerName.setText((String)data.keySet().toArray()[2]);
 
-        firstPlayerCash.setText((String)data.values().toArray()[0]);
-        secondPlayerCash.setText((String)data.values().toArray()[1]);
-        thirdPlayerCash.setText((String)data.values().toArray()[2]);
+        firstPlayerCash.setText((String.valueOf(data.values().toArray()[0])));
+        secondPlayerCash.setText((String.valueOf(data.values().toArray()[1])));
+        thirdPlayerCash.setText((String.valueOf(data.values().toArray()[2])));
     }
 
 
@@ -86,7 +89,7 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressRules() {
-        setAccount();
+        showScores();
         controller.rulesButtonPressed(stage);
     }
 
