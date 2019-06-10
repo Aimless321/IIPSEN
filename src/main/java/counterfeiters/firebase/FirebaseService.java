@@ -52,10 +52,10 @@ public class FirebaseService {
     }
 
     //listen to a whole collection
-    public void listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
+    public ListenerRegistration listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
 
-        colRef.addSnapshotListener(eventListener);
+        return colRef.addSnapshotListener(eventListener);
     }
 
     public void set(String collection, String document, Map<String, Object> data) {

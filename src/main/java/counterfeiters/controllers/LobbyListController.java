@@ -19,6 +19,7 @@ public class LobbyListController {
     private ApplicationController app;
     public FirebaseModel firebaseModel;
     public Game chosenGame ;
+    private ListenerRegistration listener;
 
     public LobbyListController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -32,7 +33,7 @@ public class LobbyListController {
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
-        fb.listenToCollection("lobbies", new EventListener<QuerySnapshot>() {
+        listener = fb.listenToCollection("lobbies", new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirestoreException e) {
                     if (e != null) {
@@ -56,11 +57,15 @@ public class LobbyListController {
     }
 
     public void leaveButtonPressed() {
+        listener.remove();
+
         //TODO: Go to the MainMenuView
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
     public void clickLobby(String chosenGame){
+        listener.remove();
+
         app.gameController.joinGame(chosenGame);
 
         app.loadView(LobbyView.class, app.lobbyController);
