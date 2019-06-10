@@ -155,7 +155,9 @@ public class LobbyListView implements Observer {
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, new ImageView("icons/player.png"), new Label("  "));
+        ImageView icon = new ImageView("icons/player.png");
+
+        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, icon, new Label("  "));
 
 
         horBox.setStyle("-fx-cursor: hand");
