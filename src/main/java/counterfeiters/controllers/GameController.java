@@ -44,6 +44,18 @@ public class GameController {
         app.lobbyController.registerListeners();
     }
 
+    public void joinGame(String gameid) {
+        FirebaseService fb = FirebaseService.getInstance();
+        Game game = fb.get("lobbies", gameid).toObject(Game.class);
+
+        this.game = game;
+
+        //Firebase doesnt load the localplayer, so we have to set it
+        this.game.localPlayer = game.getPlayers().get(0);
+
+        app.lobbyController.registerListeners();
+    }
+
     public void updateData(Game updateGame) {
         game.updateData(updateGame);
     }

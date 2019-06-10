@@ -38,7 +38,7 @@ public class GameListController {
                     return;
                 }
                 //To the model for update
-                updateGamesModel(firebaseModel);
+                updateGamesModel();
                 System.out.println("Something happened");
 
                 // }
@@ -46,7 +46,7 @@ public class GameListController {
         });
     }
 
-    public void updateGamesModel(FirebaseModel firebaseModel) {
+    public void updateGamesModel() {
         firebaseModel.updateGames();
     }
 

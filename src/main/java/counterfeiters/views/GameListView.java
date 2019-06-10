@@ -5,10 +5,12 @@ import counterfeiters.controllers.GameListController;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.Board;
 import counterfeiters.models.FirebaseModel;
+import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -35,8 +37,11 @@ public class GameListView implements Observer{
 
     private Stage stage;
     private GameListController controller;
-    private List<ListRow> listRows = new ArrayList<>();
+    private List<Game> games = new ArrayList<>();
+
     private int counter = 0;
+    private String chosenGame;
+
 
     //Need an empty constructor for FXML
     public GameListView() {
@@ -92,25 +97,20 @@ public class GameListView implements Observer{
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
         if (firebaseModel.lobbyOrGame().equals("game")) {
             Platform.runLater(() -> vBox.getChildren().clear());
-            listRows.clear();
+            games.clear();
             System.out.println("listWows size after clearing in view:");
-            System.out.println(listRows.size());
+            System.out.println(games.size());
             //Add new rows for lobbylist
-            ArrayList<DocumentSnapshot> updatedLobbies = firebaseModel.getLobbies();
+            ArrayList<Game> updatedGames = firebaseModel.getGames();
 
             System.out.println("updateslobbies size in lobbylsitview:");
-            System.out.println(updatedLobbies.size());
+            System.out.println(updatedGames.size());
 
 
-            if (updatedLobbies.size() != 0) {
-                for (DocumentSnapshot doc : updatedLobbies) {
-                    Board board = doc.toObject(Board.class);
-                    ListRow newListRow = new ListRow(board.game.getGameId(), board.game.getLobbyName(), String.valueOf(board.game.getNumPlayers()), new ImageView("icons/player.png"), String.valueOf(board.game.getRound()));
-                    listRows.add(newListRow);
-                    System.out.println("listrows size adding listrow objects:");
-                    System.out.println(listRows.size());
+            if (updatedGames.size() != 0) {
+                for (Game game : updatedGames) {
                     Platform.runLater(() ->
-                            addGameInView(newListRow));
+                            addGameInView(game));
                 }
             } else {
                 noLobbies();
@@ -138,7 +138,7 @@ public class GameListView implements Observer{
 
     }
 
-    public void addGameInView(ListRow listRow){
+    public void addGameInView(Game game){
 
         vBox.setStyle("-fx-background-color: transparent");
         counter = vBox.getChildren().size() +1;
@@ -150,15 +150,20 @@ public class GameListView implements Observer{
         region2.setStyle("-fx-pref-height: 120");
         HBox.setHgrow(region2, Priority.ALWAYS);
 
-        Label lobbyName = new Label(" " + counter + ". " +listRow.getLobbyName());
+        Label lobbyName = new Label(" " + counter + ". " +game.getLobbyName());
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label numPlayers = new Label(listRow.getNumPlayers() + "/4  ");
+        Label numPlayers = new Label(String.valueOf(game.getNumPlayers()));
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, listRow.getIcon(), new Label("  "));
+        ImageView icon  = new ImageView("icons/player.png");
+        icon.setFitHeight(25);
+        icon.setFitWidth(25);
+
+        HBox horBox = new HBox(lobbyName, region1, region2, numPlayers, icon, new Label("  "));
+        horBox.setAlignment(Pos.CENTER_LEFT);
 
 
         horBox.setStyle("-fx-cursor: hand");
@@ -167,8 +172,7 @@ public class GameListView implements Observer{
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
-                        System.out.println(listRow.getId());
-                        controller.gameSelected(listRow.getId());
+                        controller.gameSelected(game.getGameId());
                     }
                 }
             }
@@ -209,6 +213,7 @@ public class GameListView implements Observer{
     @Override
     public void start() {
        controller.registerObserver(this);
+       controller.updateGamesModel();
        controller.registerListeners();
     }
 }
