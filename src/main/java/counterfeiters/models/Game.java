@@ -16,7 +16,6 @@ public class Game implements Observable {
     private int round = 0;
     @Exclude
     public Player localPlayer;
-    private String localPlayerId = "23526353253sdg";
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -34,7 +33,6 @@ public class Game implements Observable {
 
         //Initialize variables
         this.gameId = lobbyDoc.getId();
-//        localPlayerId = player.getPlayerId();
         addPlayer(player);
 
         this.lobbyName = player.getUserName() + "'s Lobby";
@@ -43,14 +41,6 @@ public class Game implements Observable {
 
         notifyAllObservers();
     }
-//
-//    public Player getLocalPlayer(){
-//        for (Player player : players){
-//            if (player.getPlayerId() == localPlayerId)
-//                return player;
-//        }
-//        return null;
-//    }
 
     public void addPlayer(Player player) {
         numPlayers++;

@@ -60,7 +60,10 @@ public class BoardView implements Observer {
         System.out.println("Black market pressed");
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+
+        if(boardcontroller.checkMoney(btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
@@ -89,7 +92,10 @@ public class BoardView implements Observer {
         System.out.println("Fly button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+
+        if(boardcontroller.checkMoney(btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
@@ -98,9 +104,9 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getId().equals("police")) {
-            boardcontroller.advancePolice();
-        }
+//        if(btn.getId().equals("police")) {
+//            boardcontroller.advancePolice();
+//        }
 
         placeHenchman(btn);
     }

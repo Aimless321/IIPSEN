@@ -36,7 +36,8 @@ public class BoardController {
 
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
-        app.gameController.registerObserver(observer);
+        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
+//        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
     }
 
     public void registerListeners() {
@@ -101,14 +102,24 @@ public class BoardController {
         app.gameController.updateMoney(qId, character, amount);
     }
 
-    public void henchmanPlaced(Button btn) {
-        Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+    public boolean checkMoney(String id){
+        int money = Integer.parseInt(id);
 
-        //Calculate middle position of the button
-        double posX = bounds.getMinX() + btn.getWidth()/3;
-        double posY = bounds.getMinY() + btn.getHeight()/5;
-        Player player = app.gameController.game.localPlayer;
-        board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
+        if (board.checkMoney(money)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void henchmanPlaced(Button btn) {
+            Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+
+            //Calculate middle position of the button
+            double posX = bounds.getMinX() + btn.getWidth() / 3;
+            double posY = bounds.getMinY() + btn.getHeight() / 5;
+            Player player = app.gameController.game.localPlayer;
+            updateMoneyOnPosition(4, min, 30);
+            board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
