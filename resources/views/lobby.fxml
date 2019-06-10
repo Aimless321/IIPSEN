@@ -28,7 +28,7 @@
       </Text>
       <VBox alignment="TOP_CENTER" layoutX="1179.0" layoutY="704.0" prefHeight="136.0" prefWidth="311.0" spacing="15.0">
          <children>
-            <Button fx:id="startButton" mnemonicParsing="false" onMouseClicked="#pressStart" prefHeight="44.0" prefWidth="310.0" styleClass="green-button" text="Start" textFill="WHITE">
+            <Button fx:id="startButton" mnemonicParsing="false" onMouseClicked="#pressStart" prefHeight="44.0" prefWidth="310.0" styleClass="green-button" text="Waiting for players..." textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
