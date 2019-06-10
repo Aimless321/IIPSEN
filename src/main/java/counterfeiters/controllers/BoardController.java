@@ -102,10 +102,10 @@ public class BoardController {
         app.gameController.updateMoney(qId, character, amount);
     }
 
-    public boolean checkMoney(String id){
+    public boolean checkActionField(String id){
         int money = Integer.parseInt(id);
 
-        if (board.checkMoney(money)) {
+        if (board.checkActionField(money)) {
             return true;
         }
         return false;

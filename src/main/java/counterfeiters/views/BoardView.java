@@ -61,7 +61,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(boardcontroller.checkMoney(btn.getId())) {
+        if(boardcontroller.checkActionField(btn.getId())) {
             placeHenchman(btn);
         }
     }
@@ -93,7 +93,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(boardcontroller.checkMoney(btn.getId())) {
+        if(boardcontroller.checkActionField(btn.getId())) {
             placeHenchman(btn);
         }
     }

@@ -55,10 +55,7 @@ public class Board implements Observable{
             notifyAllObservers();
             return true;
         }
-        else{
-//            soundWrong();
             return false;
-        }
     }
 
     public void updateFirebase() {
@@ -71,9 +68,15 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-//    public void checkActionField() {
-//
-//    }
+    public boolean checkActionField(int bedrag) {
+        if(checkMoney(bedrag)){
+            return true;
+        }
+        else {
+//            soundWrong();
+            return false;
+        }
+    }
 //
 //    public void actionFieldAction() {
 //
