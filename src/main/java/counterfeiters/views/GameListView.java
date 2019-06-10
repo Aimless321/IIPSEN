@@ -10,6 +10,7 @@ import counterfeiters.models.Observable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -153,11 +154,16 @@ public class GameListView implements Observer{
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label numPlayers = new Label(game.getNumPlayers() + "/4  ");
+        Label numPlayers = new Label(String.valueOf(game.getNumPlayers()));
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, new ImageView("icons/player.png"), new Label("  "));
+        ImageView icon  = new ImageView("icons/player.png");
+        icon.setFitHeight(25);
+        icon.setFitWidth(25);
+
+        HBox horBox = new HBox(lobbyName, region1, region2, numPlayers, icon, new Label("  "));
+        horBox.setAlignment(Pos.CENTER_LEFT);
 
 
         horBox.setStyle("-fx-cursor: hand");
@@ -210,6 +216,7 @@ public class GameListView implements Observer{
     @Override
     public void start() {
        controller.registerObserver(this);
+       controller.updateGamesModel();
        controller.registerListeners();
     }
 }

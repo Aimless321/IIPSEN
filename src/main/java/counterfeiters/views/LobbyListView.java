@@ -8,6 +8,7 @@ import counterfeiters.models.Observable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -155,10 +156,12 @@ public class LobbyListView implements Observer {
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
 
-        ImageView icon = new ImageView("icons/player.png");
+        ImageView icon  = new ImageView("icons/player.png");
+        icon.setFitHeight(25);
+        icon.setFitWidth(25);
 
-        HBox horBox = new HBox(lobbyName , region1, region2, numPlayers, icon, new Label("  "));
-
+        HBox horBox = new HBox(lobbyName, region1, region2, numPlayers, icon, new Label("  "));
+        horBox.setAlignment(Pos.CENTER_LEFT);
 
         horBox.setStyle("-fx-cursor: hand");
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -166,12 +169,7 @@ public class LobbyListView implements Observer {
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
-                        System.out.println("Double clicked lobby");
-                        chosenGame = game.getGameId();
-                        //controller.clickLobby(chosenGame);
-                        System.out.println(chosenGame);
-                        controller.clickLobby(chosenGame);
-                        //ergens moet nog game id moeten meegegeven worden voor de goeie lobby openen
+                        controller.clickLobby(game.getGameId());
                     }
                 }
             }
@@ -212,6 +210,7 @@ public class LobbyListView implements Observer {
     @Override
     public void start() {
        controller.registerObserver(this);
+       controller.updateLobbiesModel();
        controller.registerListeners();
     }
 }
