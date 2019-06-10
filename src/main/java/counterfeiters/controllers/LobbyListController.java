@@ -18,6 +18,7 @@ import java.util.List;
 public class LobbyListController {
     private ApplicationController app;
     public FirebaseModel firebaseModel;
+    public Game chosenGame ;
 
     public LobbyListController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -38,16 +39,19 @@ public class LobbyListController {
                         System.err.println("Listen failed:" + e);
                         return;
                     }
-                    //To the model for update
-                    updateLobbiesModel(firebaseModel);
-                    System.out.println("Something happened");
+
+                    if(querySnapshot != null && !querySnapshot.isEmpty()) {
+                        //To the model for update
+                        updateLobbiesModel();
+                        System.out.println("Something happened");
+                    }
 
                // }
             }
         });
     }
 
-    public void updateLobbiesModel(FirebaseModel firebaseModel) {
+    public void updateLobbiesModel() {
         firebaseModel.updateLobbies();
     }
 
@@ -56,8 +60,9 @@ public class LobbyListController {
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
-    public void enterLobby(){
-        //TODO: Go to the LobbyView
+    public void clickLobby(String chosenGame){
+        app.gameController.joinGame(chosenGame);
+
         app.loadView(LobbyView.class, app.lobbyController);
     }
 

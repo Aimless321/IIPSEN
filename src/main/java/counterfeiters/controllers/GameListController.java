@@ -4,6 +4,7 @@ import com.google.cloud.firestore.EventListener;
 import com.google.cloud.firestore.FirestoreException;
 import com.google.cloud.firestore.QuerySnapshot;
 import counterfeiters.firebase.FirebaseService;
+import counterfeiters.models.Board;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
@@ -37,7 +38,7 @@ public class GameListController {
                     return;
                 }
                 //To the model for update
-                updateGamesModel(firebaseModel);
+                updateGamesModel();
                 System.out.println("Something happened");
 
                 // }
@@ -45,7 +46,7 @@ public class GameListController {
         });
     }
 
-    public void updateGamesModel(FirebaseModel firebaseModel) {
+    public void updateGamesModel() {
         firebaseModel.updateGames();
     }
 
@@ -54,8 +55,11 @@ public class GameListController {
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
-    public void enterLobby(){
-        //TODO: Go to the LobbyView
+    public void gameSelected(String gameid){
+        Board board = app.boardController.createFromSaved(gameid);
+
+        app.gameController.loadFromSavedGame(board.game);
+
         app.loadView(LobbyView.class, app.lobbyController);
     }
 

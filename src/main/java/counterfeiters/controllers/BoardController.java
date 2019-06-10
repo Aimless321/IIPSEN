@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
@@ -19,6 +20,16 @@ public class BoardController {
 
         fillMarket(3);
         board.blackmarket.shuffleMarket();
+    }
+
+    public Board createFromSaved(String gameid) {
+        FirebaseService fb = FirebaseService.getInstance();
+        DocumentSnapshot documentSnapshot = fb.get("games", gameid);
+
+        Board savedBoard = documentSnapshot.toObject(Board.class);
+        this.board = savedBoard;
+
+        return savedBoard;
     }
 
     public void registerObserver(Observer observer) {
