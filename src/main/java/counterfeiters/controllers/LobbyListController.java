@@ -66,9 +66,12 @@ public class LobbyListController {
     public void clickLobby(String chosenGame){
         listener.remove();
 
-        app.gameController.joinGame(chosenGame);
+        FirebaseService fb = FirebaseService.getInstance();
+        Game game = fb.get("lobbies", chosenGame).toObject(Game.class);
 
-        app.loadView(LobbyView.class, app.lobbyController);
+            app.gameController.joinGame(chosenGame);
+            app.loadView(LobbyView.class, app.lobbyController);
+
     }
 
     public void rulesButtonPressed() {
