@@ -59,8 +59,6 @@ public class ScoreboardView implements Observer {
         Scene scene = new Scene(root, 1920, 1080);
         stage.setScene(scene);
 
-
-
     }
 
     public void showScores() {
@@ -73,11 +71,10 @@ public class ScoreboardView implements Observer {
         secondPlayerName.setText((String)data.keySet().toArray()[1]);
         thirdPlayerName.setText((String)data.keySet().toArray()[2]);
 
-        firstPlayerCash.setText((String.valueOf(data.values().toArray()[0])));
-        secondPlayerCash.setText((String.valueOf(data.values().toArray()[1])));
-        thirdPlayerCash.setText((String.valueOf(data.values().toArray()[2])));
+        firstPlayerCash.setText("$"+ data.values().toArray()[0]);
+        secondPlayerCash.setText("$"+ data.values().toArray()[1]);
+        thirdPlayerCash.setText("$"+ data.values().toArray()[2]);
     }
-
 
     @FXML
     public void pressBackMenu() {
@@ -89,7 +86,6 @@ public class ScoreboardView implements Observer {
 
     @FXML
     public void pressRules() {
-        showScores();
         controller.rulesButtonPressed(stage);
     }
 
@@ -110,6 +106,7 @@ public class ScoreboardView implements Observer {
 
     @Override
     public void start() {
+        showScores();
 
     }
 }

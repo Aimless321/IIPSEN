@@ -52,7 +52,7 @@ public class Game implements Observable {
         FirebaseService fb = FirebaseService.getInstance();
 
 
-        Game game = fb.get("games", "xRaEhTmY4vq83iCml19F").toObject(Game.class);
+        Game game = fb.get("games", "NsEoFJ2rkgbZtq8zXXex").toObject(Game.class);
         Map<String, Integer> scores = new HashMap();
         LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
         ArrayList<Integer> list = new ArrayList<>();
@@ -71,12 +71,12 @@ public class Game implements Observable {
         }
         Collections.sort(list, Collections.reverseOrder());
 
-        for(Integer o1 : list){
+        for(Integer score : list){
             for (Map.Entry<String, Integer> entry : scores.entrySet())
             {
-                if(entry.getValue().equals(o1))
+                if(entry.getValue().equals(score))
                 {
-                    sortedScores.put(entry.getKey(),o1);
+                    sortedScores.put(entry.getKey(),score);
                 }
             }
         }

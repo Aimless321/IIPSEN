@@ -31,7 +31,6 @@ public class GameController {
 
     }
 
-
     public void createGame(Player player) {
         game.createNewGame(player);
 
