@@ -167,10 +167,8 @@ public class GameListView implements Observer{
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
-                        System.out.println("Double clicked lobby");
                         System.out.println(listRow.getId());
-                        controller.enterLobby();
-                        //ergens moet nog game id moeten meegegeven worden voor de goeie lobby openen
+                        controller.gameSelected(listRow.getId());
                     }
                 }
             }
