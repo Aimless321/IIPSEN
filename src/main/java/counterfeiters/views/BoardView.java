@@ -64,9 +64,9 @@ public class BoardView implements Observer {
         System.out.println("Launder button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
-            boardcontroller.advancePolice();
-        }
+
+        boardcontroller.advancePolice();
+
 
         placeHenchman(btn);
     }
@@ -76,9 +76,6 @@ public class BoardView implements Observer {
 
         System.out.println("Fraud button pressed");
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
-            boardcontroller.advancePolice();
-        }
 
         placeHenchman(btn);
     }
@@ -96,6 +93,11 @@ public class BoardView implements Observer {
         System.out.println("Healer button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
+
+        if(btn.getId().equals("police")) {
+            boardcontroller.advancePolice();
+        }
+
         placeHenchman(btn);
     }
 
@@ -104,7 +106,9 @@ public class BoardView implements Observer {
 
         System.out.println("Print button pressed");
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
+
+        if(btn.getId().equals("police")) {
+            System.out.println("herkend als police");
             boardcontroller.advancePolice();
         }
 
