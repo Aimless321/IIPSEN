@@ -164,12 +164,19 @@ public class LobbyListView implements Observer {
         horBox.setAlignment(Pos.CENTER_LEFT);
 
         horBox.setStyle("-fx-cursor: hand");
+
+
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                     if(mouseEvent.getClickCount() == 2){
-                        controller.clickLobby(game.getGameId());
+                        if(game.getNumPlayers() <4){
+                            controller.clickLobby(game.getGameId());
+                        }
+                        else {
+                            System.out.println("Lobby is full");
+                        }
                     }
                 }
             }
@@ -202,6 +209,12 @@ public class LobbyListView implements Observer {
         }
         else {
             horBox.setStyle("-fx-background-image: url(background/dark_back.JPG)");
+        }
+
+        if(game.getNumPlayers()>=4){
+            horBox.setStyle("-fx-background-image: url(background/red-back.JPG)");
+            numPlayers.setTextFill(Color.DARKRED);
+
         }
 
         vBox.getChildren().add(horBox);
