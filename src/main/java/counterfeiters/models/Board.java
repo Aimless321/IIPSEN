@@ -1,6 +1,7 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
+import com.sun.xml.internal.bind.v2.TODO;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
@@ -46,7 +47,13 @@ public class Board implements Observable{
         updateFirebase();
     }
 
-    //Hier gaat iets fout
+
+    /**
+     * This method checks whether the user has enought money, If this is the case, the money wil de deducted from his account.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
     public boolean checkMoney(int id, int bedrag){
         System.out.println("checkMoney");
 
@@ -69,6 +76,12 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
+    /**
+     * By giving the right moneyQuality and quantity, the method for the check can be called up.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
     public boolean checkActionField(int id, int bedrag) {
         System.out.println("Board.checkActionField");
 
@@ -76,6 +89,7 @@ public class Board implements Observable{
             return true;
         }
         else {
+            //TODO: add sound
 //            soundWrong();
             return false;
         }

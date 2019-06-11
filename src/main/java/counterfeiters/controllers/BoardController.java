@@ -102,6 +102,12 @@ public class BoardController {
         app.gameController.updateMoney(qId, character, amount);
     }
 
+    /**
+     * By giving the right moneyQuality and quantity, the method for the check can be called up.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
     public boolean checkActionField(int moneyId, String id){
         System.out.println("checkActionField");
 
