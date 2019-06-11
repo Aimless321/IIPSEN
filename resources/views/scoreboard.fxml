@@ -22,17 +22,16 @@
         </Text>
         <VBox fx:id="players" layoutX="878.0" layoutY="351.0" prefHeight="230.0" prefWidth="157.0">
             <children>
-                  <ImageView fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
-                      <image>
-                          <Image url="@/players/croc.jpg"/>
-                      </image>
-                  </ImageView>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
+                  <ImageView fx:id="firstPlayer" fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/players/croc.jpg" />
+               </image></ImageView>
+                  <Text fx:id="firstPlayerName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
                       <font>
                           <Font size="30.0" />
                       </font>
                   </Text>
-                  <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
+                  <Text fx:id="firstPlayerCash" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                       <font>
                           <Font size="30.0" />
                       </font>
@@ -56,17 +55,17 @@
       </HBox>
       <VBox fx:id="players" layoutX="456.0" layoutY="275.0" prefHeight="230.0" prefWidth="157.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="secondPlayer" fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/players/deer.jpg" />
                </image>
             </ImageView>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
+            <Text fx:id="secondPlayerName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
+            <Text fx:id="secondPlayerCash" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                <font>
                   <Font size="30.0" />
                </font>
@@ -75,17 +74,17 @@
       </VBox>
       <VBox fx:id="players" layoutX="1302.0" layoutY="275.0" prefHeight="230.0" prefWidth="157.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thirdPlayer" fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@/players/herron.jpg" />
                </image>
             </ImageView>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
+            <Text fx:id="thirdPlayerName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="    Name" wrappingWidth="153.13671875">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text fx:id="name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
+            <Text fx:id="thirdPlayerCash" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="379.341796875">
                <font>
                   <Font size="30.0" />
                </font>
@@ -94,4 +93,3 @@
       </VBox>
     </children>
 </AnchorPane>
-

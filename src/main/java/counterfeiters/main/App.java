@@ -14,6 +14,9 @@ public class App extends Application
     public void start(Stage primaryStage) {
         new ApplicationController(primaryStage);
 
+       // final ObservableList lobbies = FXCollections.observableArrayList("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
+
+
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Counterfeiters");
         primaryStage.show();

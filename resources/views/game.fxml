@@ -5,46 +5,70 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
    <children>
       <HBox fx:id="blackMarketView" alignment="TOP_RIGHT" layoutX="437.0" layoutY="21.0" prefHeight="163.0" prefWidth="1011.0" spacing="35.0">
          <padding>
             <Insets right="12.0" />
          </padding>
       </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="1011.0" spacing="30.0">
+         <children>
+            <Text fx:id="qualityOneMoney" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="qualityTwoMoney" layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="qualityThreeMoney" layoutX="273.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="totalRealMoney" layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
       <HBox layoutX="447.0" layoutY="201.0" prefHeight="52.0" prefWidth="994.0">
          <children>
-            <Button mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="7">
+            <Button id="60" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="7">
                <HBox.margin>
                   <Insets right="35.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="6">
+            <Button id="60" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="6">
                <HBox.margin>
                   <Insets right="35.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="5">
+            <Button id="50" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="5">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="4">
+            <Button id="40" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="4">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="110.0" styleClass="3">
+            <Button id="30" layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="110.0" styleClass="3">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="109.0" styleClass="2">
+            <Button id="20" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="109.0" styleClass="2">
                <HBox.margin>
                   <Insets right="37.0" />
                </HBox.margin>
             </Button>
-            <Button layoutX="123.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="1">
+            <Button id="10" layoutX="123.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="1">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -90,12 +114,12 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="4">
+            <Button id="30"  layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="4">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
@@ -105,12 +129,12 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
+            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
@@ -338,36 +362,12 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="TOP_CENTER" layoutX="439.0" layoutY="1010.0" prefHeight="26.0" prefWidth="1011.0" spacing="30.0">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="x 0" textAlignment="CENTER" wrappingWidth="227.74609375">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <Text layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x 0" textAlignment="CENTER" wrappingWidth="227.74609375">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <Text layoutX="273.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x 0" textAlignment="CENTER" wrappingWidth="227.74609375">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-            <Text layoutX="402.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0" textAlignment="CENTER" wrappingWidth="227.74609375">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </Text>
-         </children>
-      </HBox>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1527.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/money/1.png" />
          </image>
       </ImageView>
-      <Text layoutX="1513.0" layoutY="1043.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$ 0" textAlignment="CENTER" wrappingWidth="227.74609375">
+      <Text fx:id="totalBankMoney" layoutX="1513.0" layoutY="1043.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>

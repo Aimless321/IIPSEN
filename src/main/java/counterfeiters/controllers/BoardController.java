@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
@@ -13,6 +14,8 @@ public class BoardController {
     public ApplicationController app;
     public Board board = new Board();
     private ListenerRegistration listener;
+    private String plus = "+";
+    private String min = "-";
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -21,8 +24,20 @@ public class BoardController {
         board.blackmarket.shuffleMarket();
     }
 
+    public Board createFromSaved(String gameid) {
+        FirebaseService fb = FirebaseService.getInstance();
+        DocumentSnapshot documentSnapshot = fb.get("games", gameid);
+
+        Board savedBoard = documentSnapshot.toObject(Board.class);
+        this.board = savedBoard;
+
+        return savedBoard;
+    }
+
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
+//        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
+        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
     }
 
     public void registerListeners() {
@@ -74,18 +89,52 @@ public class BoardController {
         }
     }
 
+    /**
+     * By giving an Id, right character and amount. You can add or reduce money and the money will be updated in the indicated part.
+     * Calling the correct type of money is based on the given id.
+     * Adding or reducing money depends on de given character.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoneyOnPosition(int qId, String character, int amount){
+        Player player = app.gameController.game.localPlayer;
+        app.gameController.updateMoney(qId, character, amount);
+    }
+
+    /**
+     * By giving the right moneyQuality and quantity, the method for the check can be called up.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
+    public boolean checkActionField(int moneyId, String id){
+
+
+        int money = Integer.parseInt(id);
+
+        if (board.checkActionField(moneyId, money)) {
+            //TODO: Fout
+            app.gameController.game.notifyAllObservers();
+            return true;
+        }
+        return false;
+    }
+
     public void henchmanPlaced(Button btn) {
-        Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+            Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
 
-        //Calculate middle position of the button
-        double posX = bounds.getMinX() + btn.getWidth()/3;
-        double posY = bounds.getMinY() + btn.getHeight()/5;
-
-        board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
+            //Calculate middle position of the button
+            double posX = bounds.getMinX() + btn.getWidth() / 3;
+            double posY = bounds.getMinY() + btn.getHeight() / 5;
+            Player player = app.gameController.game.localPlayer;
+            //updateMoneyOnPosition(4, min, 30);
+            board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
         board.prepareBlackMarket();
+        app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }
 
     public void advancePolice() {

@@ -20,11 +20,13 @@ public class ApplicationController {
     public LoginController loginController;
     public RegisterController registerController;
     public LobbyController lobbyController;
+    public LobbyListController lobbyListController;
     public ScoreboardController scoreboardController;
     public BoardController boardController;
     public GameController gameController;
     public RulesController rulesController;
     public AccountController accountController;
+    public GameListController gameListController;
 
     public ApplicationController(Stage stage) {
         this.stage = stage;
@@ -32,6 +34,7 @@ public class ApplicationController {
         //Create all controllers
         mainMenuController = new MainMenuController(this);
         lobbyController = new LobbyController(this);
+        lobbyListController = new LobbyListController(this);
         scoreboardController = new ScoreboardController(this);
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
@@ -39,13 +42,14 @@ public class ApplicationController {
         gameController = new GameController(this);
         rulesController = new RulesController(this);
         accountController = new AccountController(this);
+        gameListController = new GameListController(this);
 
         //Load first view
         loadView(LoginView.class, loginController);
     }
 
     /**
-     * Handles the switching of views, and passes the controller to it.
+     * Created a new instance of a Class, by calling the constructor with a stage and controller.<br>
      * Example usage:<br>
      * - loadView(LobbyView.class, stage, controller)
      * @param view The class of the view you want to show

@@ -5,8 +5,8 @@ import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
+
 
 public class Game implements Observable {
     private String gameId;
@@ -14,16 +14,19 @@ public class Game implements Observable {
     private int numPlayers = 0;
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
+    private int turn = 0;
     @Exclude
     public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
+    private Game game;
 
     public Game() {
 
     }
 
     public void createNewGame(Player player) {
+
         //Get the firebase service
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -33,13 +36,60 @@ public class Game implements Observable {
         //Initialize variables
         this.gameId = lobbyDoc.getId();
         addPlayer(player);
+
         this.lobbyName = player.getUserName() + "'s Lobby";
         this.localPlayer = player;
-
         fb.setClass("lobbies", gameId, this);
 
         notifyAllObservers();
     }
+
+    /**
+     * This method loads the scores in the scoreboard view
+     * The scores are stored in a hashmap.
+     * The hashmap is stored in an arraylist and sorted.
+     * The arraylist is stored in a linkedHashMap.
+     * The linkedHashMap returns to the scoreboard view.
+     *
+     * @author Robin van den Berg
+     */
+
+    public Map<String, Integer> loadScores() {
+        FirebaseService fb = FirebaseService.getInstance();
+
+
+        Game game = fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
+        Map<String, Integer> scores = new HashMap();
+        LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Player> players = game.getPlayers();
+
+        for (int i = 0; i < players.size(); i++) {
+            String name = players.get(i).getUserName();
+            int score = (players.get(i).getScore());
+            scores.put(name, score);
+
+        }
+
+        for (Map.Entry<String, Integer> keys : scores.entrySet())
+        {
+            list.add(Integer.valueOf(keys.getValue()));
+        }
+        Collections.sort(list, Collections.reverseOrder());
+
+        for(Integer score : list){
+            for (Map.Entry<String, Integer> entry : scores.entrySet())
+            {
+                if(entry.getValue().equals(score))
+                {
+                    sortedScores.put(entry.getKey(),score);
+                }
+            }
+        }
+
+        return sortedScores;
+    }
+
 
     public void addPlayer(Player player) {
         numPlayers++;
@@ -50,6 +100,12 @@ public class Game implements Observable {
         updateFirebase();
     }
 
+    public void roundChanged(int numRound) {
+        setRound(numRound);
+        updateFirebase();
+    }
+
+
     public void removePlayer(Player player) {
         players.remove(player);
 
@@ -58,11 +114,17 @@ public class Game implements Observable {
         updateFirebase();
     }
 
+    /**
+     * Write this object to the firebase.
+     */
     public void updateFirebase() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("lobbies", gameId, this);
     }
 
+    /**
+     * Delete the lobby.
+     */
     public void delete() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.delete("lobbies", gameId);
@@ -70,16 +132,44 @@ public class Game implements Observable {
         players.clear();
     }
 
+    /**
+     * Check if the localclient is the host.
+     * @return true/false
+     */
     public boolean checkHost() {
         Player host = players.get(0);
 
         return host == localPlayer;
     }
 
+    /**
+     * Update the data in this model,
+     * Is used to add/remove players to the view when someone joins/leaves.
+     * @param updateGame
+     */
     public void updateData(Game updateGame) {
         this.players = updateGame.getPlayers();
+        this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
+        this.round = updateGame.getRound();
 
+        //
         notifyAllObservers();
+
+    }
+
+    /**
+     * Get a player from a username.
+     * @param username username of the player.
+     * @return Player
+     */
+    @Exclude
+    private Player getPlayerFromUserName(String username) {
+        for (Player player : players) {
+            if(player.getUserName().equals(username)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     public void registerObserver(Observer observer) {
@@ -94,6 +184,31 @@ public class Game implements Observable {
         for(Observer obs : observers) {
             obs.update(this);
         }
+    }
+
+    public boolean checkYourTurn() {
+        return localPlayer.getPlayerId() == players.get(turn % players.size()).getPlayerId();
+    }
+
+    public void nextTurn() {
+        turn++;
+        notifyAllObservers();
+    }
+
+    /**
+     * Based on the indicated character, the correct method will be called for updating the money.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoney(int qId, String character, int amount){
+        if (character.equals("+")){
+            localPlayer.updateMoneyPlus(qId, amount);
+        }
+        if (character.equals("-")){
+            localPlayer.updateMoneyReduce(qId, amount);
+        }
+        notifyAllObservers();
     }
 
     public String getGameId() {
@@ -111,6 +226,8 @@ public class Game implements Observable {
     public int getRound() {
         return round;
     }
+
+    public Game getGame(){return game;}
 
     public Date getStartTime() {
         return startTime;

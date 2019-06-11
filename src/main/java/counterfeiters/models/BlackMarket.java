@@ -9,7 +9,7 @@ public class BlackMarket {
     private ArrayList<Card> marketList;
 
     @Exclude
-    public Card[] cardRow = new Card[7];
+    public ArrayList<Card> cardRow = new ArrayList<>();
 
     public BlackMarket() {
         this.marketList = new ArrayList<Card>();
@@ -35,12 +35,33 @@ public class BlackMarket {
      */
     public void prepareView() {
         for (int i = 0; i < 7; i++) {
-            cardRow[i] = marketList.get(0);
+            cardRow.add(marketList.get(0));
             marketList.remove(0);
         }
     }
+    public void refill() {
+        while(emptyChecker()) {
+            for (int i = 0; i < 7; i++) {
+                if (cardRow.get(i) == null) {
+                    for (int j = i; j < 7; j++) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean emptyChecker() {
+        for (int i = 0; i < 7; i++) {
+            if (cardRow.get(i) == null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public Card getCard(int position) {
-        return cardRow[position];
+        return cardRow.get(position);
     }
 }

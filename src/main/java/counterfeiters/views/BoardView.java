@@ -6,6 +6,7 @@ import counterfeiters.models.Henchman;
 import counterfeiters.models.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Set;
@@ -24,6 +26,11 @@ public class BoardView implements Observer {
     public HBox blackMarketView;
     public ImageView policePawn;
     public Pane pane;
+    public Text qualityOneMoney;
+    public Text qualityTwoMoney;
+    public Text qualityThreeMoney;
+    public Text totalRealMoney;
+    public Text totalBankMoney;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -53,67 +60,104 @@ public class BoardView implements Observer {
 
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
-        System.out.println("Black market pressed");
+
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
+
+        if(boardcontroller.checkActionField(4, btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
-        System.out.println("Launder button pressed");
 
-        Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
-            boardcontroller.advancePolice();
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
         }
 
+        Button btn = (Button) mouseEvent.getSource();
+
+        boardcontroller.advancePolice();
+
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
 
-        System.out.println("Fraud button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
+
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
+        if(btn.getStyleClass().get(0).equals("police")) {
             boardcontroller.advancePolice();
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
-        System.out.println("Fly button pressed");
+
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+
+        boardcontroller.board.game.nextTurn();
+
+        if(boardcontroller.checkActionField(4, btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
-        System.out.println("Healer button pressed");
+
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
+
+        if(btn.getId().equals("police")) {
+            boardcontroller.advancePolice();
+        }
+
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
 
-        System.out.println("Print button pressed");
+        if(!boardcontroller.board.game.checkYourTurn()) {
+            return;
+        }
+
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0) == "police" ) {
+
+        if(btn.getId().equals("police")) {
+
             boardcontroller.advancePolice();
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-        System.out.println("Rules button pressed");
+
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
@@ -121,7 +165,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
-        System.out.println("Cards button pressed");
+
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
@@ -143,22 +187,17 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        Board board = (Board)observable;
 
-        for (int i = 0; i < 7; i++) {
-            ImageView imageview = new ImageView(board.blackmarket.getCard(i).getImg());
-            imageview.setFitWidth(111);
-            imageview.setPreserveRatio(true);
-            blackMarketView.getChildren().add(imageview);
-        }
+        Board board = (Board) observable;
 
-        policePawn.setX(board.policePawn.getXCoordinate());
-        policePawn.setY(board.policePawn.getYCoordinate());
+
+        updateBlackMarket(board);
+        updatePolicePawn(board);
 
         resetHenchman();
 
-        for(Henchman henchman : board.getHenchmen()) {
-            VBox henchmanbox  = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+        for (Henchman henchman : board.getHenchmen()) {
+            VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
 
             ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
 
@@ -171,6 +210,31 @@ public class BoardView implements Observer {
 
             pane.getChildren().add(henchmanImage);
         }
+        // Als er game als observable dient voert die het volgende uit.
+        this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
+        this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
+        this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));
+        this.totalRealMoney.setText(String.valueOf(board.game.localPlayer.getRealMoney().getTotalMoney()));
+
+        this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
+    }
+
+    public void updateBlackMarket(Board board) {
+        for (int i = 0; i < 7; i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
+        }
+    }
+
+    public void updatePolicePawn(Board board) {
+        policePawn.setX(board.policePawn.getXCoordinate());
+        policePawn.setY(board.policePawn.getYCoordinate());
+
+        Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
+
+        policePawn.setX(bounds.getMinX());
+
+        //Pawn is too low, so set it a big higher
+        policePawn.setY(bounds.getMaxY()-20);
     }
 
     public void resetHenchman() {
@@ -197,6 +261,13 @@ public class BoardView implements Observer {
 
     @Override
     public void start() {
+        for (int i = 0; i < 7; i++) {
+            ImageView imageview = new ImageView();
+            imageview.setFitWidth(111);
+            imageview.setPreserveRatio(true);
+            blackMarketView.getChildren().add(imageview);
+        }
+
         boardcontroller.registerObserver(this);
         boardcontroller.prepareView();
 

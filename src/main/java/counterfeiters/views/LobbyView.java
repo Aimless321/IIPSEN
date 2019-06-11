@@ -77,11 +77,14 @@ public class LobbyView implements Observer {
 
     @Override
     public void start() {
-        startButton.visibleProperty().set(false);
-
+        startButton.setVisible(false);
         controller.registerObserver(this);
     }
 
+    /**
+     * Updates and checks if the player is the host, if so adds the start button
+     * @param observable is the game from the lobby
+     */
     @Override
     public void update(Observable observable) {
         Game game = (Game)observable;
@@ -97,10 +100,32 @@ public class LobbyView implements Observer {
             Platform.runLater(() -> insertPlayerBox(player));
         }
 
-        //TODO: Check if this player is the host
+        //TODO: Check if this player is the host and if there are 3 or more players
         if(game.checkHost()) {
+
+            if (playerList.size()>=3){
+                startButton.getText().replace("Waiting for players...","Start");
+                //startButton.setText("Start");
+                startButton.setDisable(false);
+            }
+            else {
+                startButton.setText("Waiting for players...");
+                startButton.setDisable(true);
+            }
             startButton.visibleProperty().set(true);
         }
+
+        if (game.getRound() == 1) {
+
+            Platform.runLater(() -> controller.startTheGame());
+        }
+        else {
+
+        }
+
+        //For testing
+        //startButton.setVisible(true);
+        //startButton.setDisable(false);
     }
 
     public void insertPlayerBox(Player player) {
