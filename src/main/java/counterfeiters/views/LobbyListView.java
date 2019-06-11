@@ -214,7 +214,6 @@ public class LobbyListView implements Observer {
         if(game.getNumPlayers()>=4){
             horBox.setStyle("-fx-background-image: url(background/red-back.JPG)");
             numPlayers.setTextFill(Color.DARKRED);
-
         }
 
         vBox.getChildren().add(horBox);

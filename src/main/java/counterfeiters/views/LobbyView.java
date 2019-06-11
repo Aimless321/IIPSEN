@@ -78,7 +78,6 @@ public class LobbyView implements Observer {
     @Override
     public void start() {
         startButton.setVisible(false);
-
         controller.registerObserver(this);
     }
 
@@ -118,7 +117,6 @@ public class LobbyView implements Observer {
         }
         else {
             System.out.println("i didnt get the round");
-
         }
 
         //For testing
