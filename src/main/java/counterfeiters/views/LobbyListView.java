@@ -23,6 +23,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View for the lobbylist screen
+ * @author Melissa Basgol
+ */
+
 public class LobbyListView implements Observer {
 
 
@@ -89,6 +94,7 @@ public class LobbyListView implements Observer {
         this.controller = (LobbyListController) controller;
     }
 
+
     @Override
     public void update(Observable observable) {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
@@ -135,6 +141,10 @@ public class LobbyListView implements Observer {
 
     }
 
+    /**
+     * Inserts the game into the lobby as a row
+     * @param game is the game that it is going to insert
+     */
     public void addLobbyInView(Game game){
 
         vBox.setStyle("-fx-background-color: transparent");
@@ -213,7 +223,6 @@ public class LobbyListView implements Observer {
         if(game.getNumPlayers()>=4){
             horBox.setStyle("-fx-background-image: url(background/red-back.JPG)");
             numPlayers.setTextFill(Color.DARKRED);
-
         }
 
         vBox.getChildren().add(horBox);

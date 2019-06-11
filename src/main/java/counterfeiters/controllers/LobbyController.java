@@ -104,6 +104,8 @@ public class LobbyController {
 
     public void startTheGame() {
         //TODO: load boardview
+
         app.loadView(BoardView.class, app.boardController);
+        System.out.println("Ik zit in start the game");
     }
 }

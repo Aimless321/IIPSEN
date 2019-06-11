@@ -78,10 +78,13 @@ public class LobbyView implements Observer {
     @Override
     public void start() {
         startButton.setVisible(false);
-
         controller.registerObserver(this);
     }
 
+    /**
+     * Updates and checks if the player is the host, if so adds the start button
+     * @param observable is the game from the lobby
+     */
     @Override
     public void update(Observable observable) {
         Game game = (Game)observable;
@@ -118,7 +121,6 @@ public class LobbyView implements Observer {
         }
         else {
             System.out.println("i didnt get the round");
-
         }
 
         //For testing

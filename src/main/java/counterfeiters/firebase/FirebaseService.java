@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
  * The interaction between all of the classes and the Firestore db.
  * Uses the Singleton design pattern.
  * Get a instance by using <b>FirebaseService.getInstance();</b>
- * @author Wesley Bijleveld
+ * @author Wesley Bijleveld, Melissa Basgol
  */
 public class FirebaseService {
     public static FirebaseService instance = null;
@@ -57,6 +57,12 @@ public class FirebaseService {
         return docRef.addSnapshotListener(eventListener);
     }
 
+    /**
+     * Listen to a whole collection
+     * @param collection name of the collection.
+     * @param eventListener When an event takes place the eventlistener needs to be executed.
+     * @return Listener registraton.
+     */
     //listen to a whole collection
     public ListenerRegistration listenToCollection(String collection, EventListener<QuerySnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
@@ -136,7 +142,11 @@ public class FirebaseService {
         return null;
     }
 
-    //Melissa
+    /**
+     * Get all the documents from a collection.
+     * @param collection name of the collection.
+     * @return List with all the documents in the collection.
+     */
     public List<QueryDocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
         try {
             ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
