@@ -90,6 +90,7 @@ public class LobbyListView implements Observer {
         this.controller = (LobbyListController) controller;
     }
 
+
     @Override
     public void update(Observable observable) {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
@@ -136,6 +137,10 @@ public class LobbyListView implements Observer {
 
     }
 
+    /**
+     * Inserts the game into the lobby as a row
+     * @param game is the game that it is going to insert
+     */
     public void addLobbyInView(Game game){
 
         vBox.setStyle("-fx-background-color: transparent");
