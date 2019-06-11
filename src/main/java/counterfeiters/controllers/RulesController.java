@@ -1,5 +1,11 @@
 package counterfeiters.controllers;
 
+/**
+ * Dit is de controller die de applicatiecontroller-methode nodig heeft om te werken.
+ *
+ * @author Robin van den Berg.
+ */
+
 public class RulesController {
     private ApplicationController app;
 

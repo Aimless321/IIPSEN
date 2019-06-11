@@ -3,9 +3,13 @@ package counterfeiters.controllers;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RulesView;
-
 import java.util.Map;
 
+/**
+ * This controller is the link between the scoreboard view and the game controller, via the applicationcontroller, that contains the game model.
+ *
+ * @author Robin van den Berg
+ */
 public class ScoreboardController {
     private ApplicationController app;
 

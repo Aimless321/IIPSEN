@@ -22,6 +22,12 @@ public class Account implements Observable{
     private String textField;
     private String username;
 
+    /**
+     * This method compares the password of the input from the user and firebase
+     *
+     * @author Robin van den Berg
+     */
+
     public boolean checkCredentials(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 

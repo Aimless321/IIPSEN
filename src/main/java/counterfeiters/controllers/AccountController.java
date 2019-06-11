@@ -10,7 +10,6 @@ import counterfeiters.views.Observer;
  * @version 05-06-2019
  * @return checkCredentials
  * */
-
 public class AccountController {
 
     private ApplicationController app;
