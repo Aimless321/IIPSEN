@@ -48,7 +48,7 @@ public class ApplicationController {
         gameListController = new GameListController(this);
 
         //Load first view
-        loadView(MainMenuView.class, mainMenuController);
+        loadView(LoginView.class, loginController);
     }
 
     /**
