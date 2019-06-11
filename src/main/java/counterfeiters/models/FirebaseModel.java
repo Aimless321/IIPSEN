@@ -1,18 +1,11 @@
 package counterfeiters.models;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
-import com.google.cloud.firestore.DocumentReference;
-
-import counterfeiters.controllers.ApplicationController;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import counterfeiters.firebase.FirebaseService;
-import counterfeiters.views.LobbyListView;
 import counterfeiters.views.Observer;
 
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 
 public class FirebaseModel implements Observable {

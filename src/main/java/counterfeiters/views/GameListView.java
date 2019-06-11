@@ -1,9 +1,6 @@
 package counterfeiters.views;
 
-import com.google.cloud.firestore.DocumentSnapshot;
 import counterfeiters.controllers.GameListController;
-import counterfeiters.controllers.LobbyListController;
-import counterfeiters.models.Board;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
@@ -14,7 +11,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;

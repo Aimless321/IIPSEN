@@ -1,19 +1,17 @@
 package counterfeiters.controllers;
 
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.EventListener;
+import com.google.cloud.firestore.FirestoreException;
+import com.google.cloud.firestore.ListenerRegistration;
+import com.google.cloud.firestore.QuerySnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
-import counterfeiters.models.Player;
 import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
-import javafx.stage.Stage;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LobbyListController {
     private ApplicationController app;

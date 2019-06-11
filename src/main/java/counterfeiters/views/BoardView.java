@@ -1,7 +1,9 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.*;
+import counterfeiters.models.Board;
+import counterfeiters.models.Henchman;
+import counterfeiters.models.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;

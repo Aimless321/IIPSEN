@@ -1,14 +1,9 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
-import com.sun.xml.internal.bind.v2.TODO;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class Board implements Observable{

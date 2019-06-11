@@ -1,10 +1,8 @@
 package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
-import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
-import sun.applet.Main;
 
 import java.lang.reflect.InvocationTargetException;
 

@@ -2,7 +2,6 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
