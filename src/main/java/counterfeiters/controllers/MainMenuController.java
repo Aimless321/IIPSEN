@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.models.FakeMoney;
 import counterfeiters.models.Player;
 import counterfeiters.views.LobbyView;
 

@@ -1,9 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.Board;
-import counterfeiters.models.Henchman;
-import counterfeiters.models.Observable;
+import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -16,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Set;
@@ -25,6 +24,11 @@ public class BoardView implements Observer {
     public HBox blackMarketView;
     public ImageView policePawn;
     public Pane pane;
+    public Text qualityOneMoney;
+    public Text qualityTwoMoney;
+    public Text qualityThreeMoney;
+    public Text totalRealMoney;
+    public Text totalBankMoney;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -60,8 +64,11 @@ public class BoardView implements Observer {
         }
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
         boardcontroller.board.game.nextTurn();
+
+        if(boardcontroller.checkActionField(4, btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
@@ -104,8 +111,12 @@ public class BoardView implements Observer {
         }
 
         Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+
         boardcontroller.board.game.nextTurn();
+
+        if(boardcontroller.checkActionField(4, btn.getId())) {
+            placeHenchman(btn);
+        }
     }
 
     @FXML
@@ -175,27 +186,47 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        Board board = (Board)observable;
+        if(observable instanceof Board) {
+            System.out.println("update from board" );
+            Board board = (Board) observable;
 
-        updateBlackMarket(board);
+            updateBlackMarket(board);
 
-        updatePolicePawn(board);
+            updatePolicePawn(board);
 
-        resetHenchman();
 
-        for(Henchman henchman : board.getHenchmen()) {
-            VBox henchmanbox  = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+            resetHenchman();
 
-            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
+            for (Henchman henchman : board.getHenchmen()) {
+                VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
 
-            ImageView henchmanImage = new ImageView(old.getImage());
-            henchmanImage.setLayoutX(henchman.x);
-            henchmanImage.setLayoutY(henchman.y);
-            henchmanImage.setFitHeight(36);
-            henchmanImage.setFitWidth(36);
-            henchmanImage.getStyleClass().add("henchman");
+                ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
 
-            pane.getChildren().add(henchmanImage);
+                ImageView henchmanImage = new ImageView(old.getImage());
+                henchmanImage.setLayoutX(henchman.x);
+                henchmanImage.setLayoutY(henchman.y);
+                henchmanImage.setFitHeight(36);
+                henchmanImage.setFitWidth(36);
+                henchmanImage.getStyleClass().add("henchman");
+
+                pane.getChildren().add(henchmanImage);
+            }
+        }
+        // Als er game als observable dient voert die het volgende uit.
+        if(observable instanceof Game){
+            Game game = (Game) observable;
+            this.qualityOneMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityOne()));
+            this.qualityTwoMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityTwo()));
+            this.qualityThreeMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityThree()));
+            this.totalRealMoney.setText(String.valueOf(game.localPlayer.getRealMoney().getTotalMoney()));
+            System.out.println("Money = " + game.localPlayer.getRealMoney().getTotalMoney());
+            this.totalBankMoney.setText(String.valueOf(game.localPlayer.getBahamasBank().getTotalBankMoney()));
+        }
+    }
+    
+    public void updateBlackMarket(Board board) {
+        for (int i = 0; i < 7; i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
         }
     }
 
@@ -209,12 +240,6 @@ public class BoardView implements Observer {
 
         //Pawn is too low, so set it a big higher
         policePawn.setY(bounds.getMaxY()-20);
-    }
-
-    public void updateBlackMarket(Board board) {
-        for (int i = 0; i < 7; i++) {
-            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
-        }
     }
 
     public void resetHenchman() {

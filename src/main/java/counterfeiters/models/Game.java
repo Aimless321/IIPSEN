@@ -28,6 +28,7 @@ public class Game implements Observable {
     }
 
     public void createNewGame(Player player) {
+
         //Get the firebase service
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -37,9 +38,9 @@ public class Game implements Observable {
         //Initialize variables
         this.gameId = lobbyDoc.getId();
         addPlayer(player);
+
         this.lobbyName = player.getUserName() + "'s Lobby";
         this.localPlayer = player;
-
         fb.setClass("lobbies", gameId, this);
 
         notifyAllObservers();
@@ -174,6 +175,22 @@ public class Game implements Observable {
 
     public void nextTurn() {
         turn++;
+        notifyAllObservers();
+    }
+
+    /**
+     * Based on the indicated character, the correct method will be called for updating the money.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoney(int qId, String character, int amount){
+        if (character.equals("+")){
+            localPlayer.updateMoneyPlus(qId, amount);
+        }
+        if (character.equals("-")){
+            localPlayer.updateMoneyReduce(qId, amount);
+        }
         notifyAllObservers();
     }
 

@@ -46,4 +46,8 @@ public class GameController {
     public void updateData(Game updateGame) {
         game.updateData(updateGame);
     }
+
+    public void updateMoney(int qId, String character, int amount){
+        game.updateMoney(qId, character, amount);
+    }
 }

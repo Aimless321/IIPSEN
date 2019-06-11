@@ -10,6 +10,11 @@ public class Player {
     private String userName;
     private int playerId = 1;
     private int score;
+
+    FakeMoney fakeMoney;
+    RealMoney realMoney;
+    BahamasBank bahamasBank;
+
     private ArrayList<Card> cards = new ArrayList<>();
 
     public Player() {
@@ -18,6 +23,12 @@ public class Player {
 
     public Player(String userName) {
         this.userName = userName;
+        this.fakeMoney = new FakeMoney();
+        this.realMoney = new RealMoney();
+        this.bahamasBank = new BahamasBank();
+        realMoney.setTotalMoney(100);
+        bahamasBank.setTotalBankMoney(0);
+
     }
 
     public void leaveLobby(Game game) {
@@ -76,6 +87,63 @@ public class Player {
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+
+    /**
+     * This switch will call the right method based on the given id and it will add the right amount.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoneyPlus(int qualityId, int amount){
+        switch(qualityId) {
+            case 1:
+                fakeMoney.setQualityOne(fakeMoney.getQualityOne() + amount);
+                break;
+            case 2:
+                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() + amount);
+                break;
+            case 3:
+                fakeMoney.setQualityThree(fakeMoney.getQualityThree() + amount);
+                break;
+            case 4:
+                realMoney.setTotalMoney(realMoney.getTotalMoney() + amount);
+                break;
+            case 5:
+                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() + amount);
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * This switch will call the right method based on the given id and it will reduce the right amount.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 09-06-2019
+     * */
+    public void updateMoneyReduce(int qualityId, int amount){
+        switch(qualityId) {
+            case 1:
+                fakeMoney.setQualityOne(fakeMoney.getQualityOne() - amount);
+                break;
+            case 2:
+                fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() - amount);
+                break;
+            case 3:
+                fakeMoney.setQualityThree(fakeMoney.getQualityThree() - amount);
+                break;
+            case 4:
+                realMoney.setTotalMoney(realMoney.getTotalMoney() - amount);
+                break;
+            case 5:
+                bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() - amount);
+                break;
+            default:
+                break;
+        }
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -87,6 +155,16 @@ public class Player {
     public void setScore(int score) {
         this.score = score;
     }
+
+    public FakeMoney getFakeMoney() {
+        return fakeMoney;
+    }
+
+    public RealMoney getRealMoney(){
+        return realMoney;
+    }
+
+    public BahamasBank getBahamasBank(){return bahamasBank;}
 
 
     //    public boolean hasPlaneTicket(){
