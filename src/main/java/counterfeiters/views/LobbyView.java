@@ -116,11 +116,11 @@ public class LobbyView implements Observer {
         }
 
         if (game.getRound() == 1) {
-            ("i got the round");
+            System.out.println("i got the round");
             Platform.runLater(() -> controller.startTheGame());
         }
         else {
-            ("i didnt get the round");
+            System.out.println("i didnt get the round");
         }
 
         //For testing

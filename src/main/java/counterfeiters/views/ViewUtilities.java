@@ -64,7 +64,7 @@ public class ViewUtilities {
 
             return root;
         } catch (IOException e) {
-            ("MainMenuView cannot find the fxml file");
+            System.out.println("MainMenuView cannot find the fxml file");
             e.printStackTrace();
         }
 

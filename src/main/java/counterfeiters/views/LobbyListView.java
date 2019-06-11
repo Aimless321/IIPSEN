@@ -71,7 +71,7 @@ public class LobbyListView implements Observer {
 
     @FXML
     public void pressRules() {
-        ("Rules button pressed");
+        System.out.println("Rules button pressed");
     }
 
     @FXML
@@ -101,14 +101,14 @@ public class LobbyListView implements Observer {
         if (firebaseModel.lobbyOrGame().equals("lobby")) {
             Platform.runLater(() -> vBox.getChildren().clear());
             games.clear();
-            ("listWows size after clearing in view:");
-            (games.size());
+            System.out.println("listWows size after clearing in view:");
+            System.out.println(games.size());
 
             //Add new games for lobbylist
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-            ("updateslobbies size in lobbylsitview:");
-            //(updatedLobbies.size());
+            System.out.println("updateslobbies size in lobbylsitview:");
+            //System.out.println(updatedLobbies.size());
 
             if (updatedGames.size() != 0) {
                 for (Game game : updatedGames) {
@@ -184,7 +184,7 @@ public class LobbyListView implements Observer {
                             controller.clickLobby(game.getGameId());
                         }
                         else {
-                            ("Lobby is full");
+                            System.out.println("Lobby is full");
                         }
                     }
                 }
@@ -196,7 +196,7 @@ public class LobbyListView implements Observer {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    ("mouse entered");
+                    System.out.println("mouse entered");
                     }
                 }
             });
@@ -204,7 +204,7 @@ public class LobbyListView implements Observer {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    ("mouse exited");
+                    System.out.println("mouse exited");
                 }
             }
         });

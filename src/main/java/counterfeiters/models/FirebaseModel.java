@@ -48,12 +48,12 @@ public class FirebaseModel implements Observable {
         this.gameslist.clear();
         this.lobbies.clear();
 
-        ("after lobbies clear lobbies size:");
+        System.out.println("after lobbies clear lobbies size:");
 
         // retrieve all documents in lobbies
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
-        ("after get all  lobbies size:");
-        (lobbies.size());
+        System.out.println("after get all  lobbies size:");
+        System.out.println(lobbies.size());
         for (DocumentSnapshot doc: lobbies) {
             Game game =doc.toObject(Game.class);
             this.gameslist.add(game);
@@ -66,12 +66,12 @@ public class FirebaseModel implements Observable {
         lobbyOrGame = "game";
         this.gameslist.clear();
         this.lobbies.clear();
-        ("after lobbies clear lobbies size:");
-        (lobbies.size());
+        System.out.println("after lobbies clear lobbies size:");
+        System.out.println(lobbies.size());
         // retrieve all documents in lobbies
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
-        ("after get all  lobbies size:");
-        (lobbies.size());
+        System.out.println("after get all  lobbies size:");
+        System.out.println(lobbies.size());
         for (DocumentSnapshot doc: lobbies) {
             Game game = doc.toObject(Board.class).game;
             this.gameslist.add(game);

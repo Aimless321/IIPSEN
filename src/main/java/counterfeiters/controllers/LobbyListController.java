@@ -51,7 +51,7 @@ public class LobbyListController {
                     if(querySnapshot != null && !querySnapshot.isEmpty()) {
                         //To the model for update
                         updateLobbiesModel();
-                        ("Something happened");
+                        System.out.println("Something happened");
                     }
 
                // }

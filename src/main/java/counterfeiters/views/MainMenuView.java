@@ -42,7 +42,7 @@ public class MainMenuView implements Observer {
 
     @FXML
     public void pressJoinLobby() {
-        ("Join button pressed");
+        System.out.println("Join button pressed");
 
         controller.joinLobbyPressed();
     }
@@ -55,7 +55,7 @@ public class MainMenuView implements Observer {
 
     @FXML
     public void pressLoadGame() {
-        ("Load button pressed");
+        System.out.println("Load button pressed");
 
         controller.loadGamePressed();
     }
