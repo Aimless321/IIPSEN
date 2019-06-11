@@ -50,7 +50,7 @@ public class ApplicationController {
     }
 
     /**
-     * Handles the switching of views, and passes the controller to it.
+     * Created a new instance of a Class, by calling the constructor with a stage and controller.<br>
      * Example usage:<br>
      * - loadView(LobbyView.class, stage, controller)
      * @param view The class of the view you want to show

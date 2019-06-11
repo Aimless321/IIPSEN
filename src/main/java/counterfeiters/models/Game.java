@@ -58,11 +58,17 @@ public class Game implements Observable {
         updateFirebase();
     }
 
+    /**
+     * Write this object to the firebase.
+     */
     public void updateFirebase() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("lobbies", gameId, this);
     }
 
+    /**
+     * Delete the lobby.
+     */
     public void delete() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.delete("lobbies", gameId);
@@ -70,12 +76,21 @@ public class Game implements Observable {
         players.clear();
     }
 
+    /**
+     * Check if the localclient is the host.
+     * @return true/false
+     */
     public boolean checkHost() {
         Player host = players.get(0);
 
         return host == localPlayer;
     }
 
+    /**
+     * Update the data in this model,
+     * Is used to add/remove players to the view when someone joins/leaves.
+     * @param updateGame
+     */
     public void updateData(Game updateGame) {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
@@ -83,6 +98,11 @@ public class Game implements Observable {
         notifyAllObservers();
     }
 
+    /**
+     * Get a player from a username.
+     * @param username username of the player.
+     * @return Player
+     */
     @Exclude
     private Player getPlayerFromUserName(String username) {
         for (Player player : players) {

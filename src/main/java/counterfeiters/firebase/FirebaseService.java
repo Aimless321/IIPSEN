@@ -44,6 +44,13 @@ public class FirebaseService {
         }
     }
 
+    /**
+     * Creates a change listener on a document.
+     * @param collection the name of the collection.
+     * @param document the name of the document.
+     * @param eventListener The EventListener that needs to be executed when the event takes place.
+     * @return ListenerRegistration, so you can remove the listener when needed.
+     */
     public ListenerRegistration listen(String collection, String document, EventListener<DocumentSnapshot> eventListener) {
         CollectionReference colRef = db.collection(collection);
         DocumentReference docRef = colRef.document(document);
@@ -58,6 +65,12 @@ public class FirebaseService {
         return colRef.addSnapshotListener(eventListener);
     }
 
+    /**
+     * Write data to a document.
+     * @param collection name of the collection.
+     * @param document name of the document.
+     * @param data data to write to the document.
+     */
     public void set(String collection, String document, Map<String, Object> data) {
         DocumentReference docRef = db.collection(collection).document(document);
 
@@ -70,6 +83,13 @@ public class FirebaseService {
         }
     }
 
+    /**
+     * Write an entire class to Firebase.
+     * See: https://firebase.google.com/docs/firestore/query-data/get-data#custom_objects
+     * @param collection
+     * @param document
+     * @param data
+     */
     public void setClass(String collection, String document, Object data) {
         DocumentReference docRef = db.collection(collection).document(document);
 
@@ -82,10 +102,21 @@ public class FirebaseService {
         }
     }
 
+    /**
+     * Insert an empty document to a collection.
+     * @param collection name of the collection.
+     * @return a reference to the Document
+     */
     public DocumentReference insert(String collection) {
         return db.collection(collection).document();
     }
 
+    /**
+     * Get a document from a collection.
+     * @param collection name of the collection.
+     * @param document name of the document.
+     * @return Snapshot of the document.
+     */
     public DocumentSnapshot get(String collection, String document) {
         DocumentReference docRef = db.collection(collection).document(document);
 
@@ -123,6 +154,13 @@ public class FirebaseService {
         return null;
     }
 
+    /**
+     * Search for all documents in a collection that have a certain key and value.
+     * @param collection name of the collection to search in.
+     * @param key key to search for.
+     * @param value value of the key.
+     * @return List of documents that match the search.
+     */
     public List<QueryDocumentSnapshot> query(String collection, String key, String value) {
         Query query = db.collection(collection).whereEqualTo(key, value);
 
@@ -138,6 +176,11 @@ public class FirebaseService {
         return null;
     }
 
+    /**
+     * Delete a document from a collection.
+     * @param collection name of the collection.
+     * @param document name of the document.
+     */
     public void delete(String collection, String document) {
         DocumentReference docRef = db.collection(collection).document(document);
 
@@ -150,6 +193,10 @@ public class FirebaseService {
         }
     }
 
+    /**
+     * Singleton pattern to get an instance of this class.
+     * @return instance of FirebaseService.
+     */
     public static FirebaseService getInstance() {
         if(instance == null) {
             instance = new FirebaseService();

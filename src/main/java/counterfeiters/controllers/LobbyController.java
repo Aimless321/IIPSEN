@@ -9,6 +9,11 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+/**
+ * Controller for the LobbyView, contains a listener for updates.
+ * Handles everything that needs to happen in the LobbyView.
+ * @author Wesley Bijleveld
+ */
 public class LobbyController {
     private ApplicationController app;
     private ListenerRegistration listener;
@@ -21,6 +26,9 @@ public class LobbyController {
         app.gameController.registerObserver(observer);
     }
 
+    /**
+     * Create the firebase listener, for the current lobby.
+     */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -58,11 +66,22 @@ public class LobbyController {
         //Remove the old game data, by creating a new game
         app.gameController.deleteGame();
 
-        //TODO: Go to the lobbylistview, not the mainmenu
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
-    public void gameDeleted() {
+    public void rulesButtonPressed() {
+        app.loadView(RulesView.class, app.rulesController);
+    }
+
+    public void startButtonPressed() {
+        //TODO: Start game
+        app.loadView(BoardView.class, app.boardController);
+    }
+
+    /**
+     * Called when the game has been deleted by the host.
+     */
+    private void gameDeleted() {
         Alert popup = ViewUtilities.showPopup(Alert.AlertType.INFORMATION, "Info",
                                 "The host left the lobby, sending you back to the main menu.");
 
@@ -78,14 +97,5 @@ public class LobbyController {
         });
 
         popup.showAndWait();
-    }
-
-    public void rulesButtonPressed() {
-        app.loadView(RulesView.class, app.rulesController);
-    }
-
-    public void startButtonPressed() {
-        //TODO: Start game
-        app.loadView(BoardView.class, app.boardController);
     }
 }

@@ -5,6 +5,11 @@ import counterfeiters.models.Game;
 import counterfeiters.models.Player;
 import counterfeiters.views.Observer;
 
+/**
+ * The controller of the game model.
+ * Handles loading, joining and creating of a game.
+ * @author Wesley Bijleveld
+ */
 public class GameController {
     private ApplicationController app;
     public Game game;

@@ -5,6 +5,10 @@ import counterfeiters.views.GameListView;
 import counterfeiters.views.LobbyListView;
 import counterfeiters.views.LobbyView;
 
+/**
+ * Controller of the MainMenuView, passes all of the actions to the model, and loads the right views.
+ * @author Wesley Bijleveld
+ */
 public class MainMenuController {
     private ApplicationController app;
 
