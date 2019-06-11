@@ -49,11 +49,11 @@ public class Game implements Observable {
         FirebaseService fb = FirebaseService.getInstance();
 
 
-        Game game = fb.get("games", "NsEoFJ2rkgbZtq8zXXex").toObject(Game.class);
+        Game game = fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
         Map<String, Integer> scores = new HashMap();
         LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
         ArrayList<Integer> list = new ArrayList<>();
-        ArrayList<Player> players = game.getGame().getPlayers();
+        ArrayList<Player> players = game.getPlayers();
 
         for (int i = 0; i < players.size(); i++) {
             String name = players.get(i).getUserName();
@@ -82,8 +82,7 @@ public class Game implements Observable {
     }
 
 
-
-        public void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         numPlayers++;
         players.add(player);
 
