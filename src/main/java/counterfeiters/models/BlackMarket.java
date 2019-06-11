@@ -2,6 +2,7 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,7 +10,7 @@ public class BlackMarket {
     private ArrayList<Card> marketList;
 
     @Exclude
-    public Card[] cardRow = new Card[7];
+    public ArrayList<Card> cardRow = new ArrayList<>();
 
     public BlackMarket() {
         this.marketList = new ArrayList<Card>();
@@ -35,41 +36,33 @@ public class BlackMarket {
      */
     public void prepareView() {
         for (int i = 0; i < 7; i++) {
-            placeCard(i);
+            cardRow.add(marketList.get(0));
+            marketList.remove(0);
         }
     }
     public void refill() {
         while(emptyChecker()) {
             for (int i = 0; i < 7; i++) {
-                if (cardRow[i] == null) {
+                if (cardRow.get(i) == null) {
                     for (int j = i; j < 7; j++) {
-                        if (j != 6) {
-                            cardRow[j] = cardRow[j + 1];
-                        } else {
-                            placeCard(j);
-                        }
+
                     }
                 }
             }
         }
     }
 
-    public void placeCard(int position) {
-        cardRow[position] = marketList.get(0);
-        marketList.remove(0);
-    }
-
     public boolean emptyChecker() {
         for (int i = 0; i < 7; i++) {
-            if (cardRow[i] == null) {
-                return false;
+            if (cardRow.get(i) == null) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
 
     public Card getCard(int position) {
-        return cardRow[position];
+        return cardRow.get(position);
     }
 }
