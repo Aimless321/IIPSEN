@@ -76,7 +76,7 @@ public class RegisterView implements Observer {
         psword = password.getText().trim();
         pswordCheck = passwordCheck.getText().trim();
 
-        System.out.println("Register button pressed");
+        ("Register button pressed");
 
         controller.registerButtonPressed(name, psword, pswordCheck);
     }
@@ -88,7 +88,7 @@ public class RegisterView implements Observer {
 
     @Override
     public void setController(Object controller) {
-        System.out.println("IN");
+        ("IN");
         RegisterController registerController = (RegisterController) controller;
         this.controller = registerController;
         registerController.registerObserver(this);

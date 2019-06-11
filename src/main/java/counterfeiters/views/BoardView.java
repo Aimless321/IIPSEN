@@ -60,7 +60,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
-        System.out.println("Black market pressed");
+        ("Black market pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -75,7 +75,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
-        System.out.println("Launder button pressed");
+        ("Launder button pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -90,7 +90,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
-        System.out.println("Fraud button pressed");
+        ("Fraud button pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -106,7 +106,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
-        System.out.println("Fly button pressed");
+        ("Fly button pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -122,7 +122,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
-        System.out.println("Healer button pressed");
+        ("Healer button pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -139,7 +139,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
-        System.out.println("Print button pressed");
+        ("Print button pressed");
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
@@ -147,7 +147,7 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         if(btn.getId().equals("police")) {
-            System.out.println("herkend als police");
+            ("herkend als police");
             boardcontroller.advancePolice();
         }
 
@@ -157,7 +157,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-        System.out.println("Rules button pressed");
+        ("Rules button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
@@ -165,7 +165,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
-        System.out.println("Cards button pressed");
+        ("Cards button pressed");
 
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
@@ -187,7 +187,7 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        System.out.println("update from board");
+        ("update from board");
         Board board = (Board) observable;
 
 
@@ -215,7 +215,7 @@ public class BoardView implements Observer {
         this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
         this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));
         this.totalRealMoney.setText(String.valueOf(board.game.localPlayer.getRealMoney().getTotalMoney()));
-        System.out.println("Money = " + board.game.localPlayer.getRealMoney().getTotalMoney());
+        ("Money = " + board.game.localPlayer.getRealMoney().getTotalMoney());
         this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
     }
 
