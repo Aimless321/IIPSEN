@@ -6,6 +6,7 @@ import counterfeiters.models.Henchman;
 import counterfeiters.models.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -201,6 +202,13 @@ public class BoardView implements Observer {
     public void updatePolicePawn(Board board) {
         policePawn.setX(board.policePawn.getXCoordinate());
         policePawn.setY(board.policePawn.getYCoordinate());
+
+        Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
+
+        policePawn.setX(bounds.getMinX());
+
+        //Pawn is too low, so set it a big higher
+        policePawn.setY(bounds.getMaxY()-20);
     }
 
     public void updateBlackMarket(Board board) {
