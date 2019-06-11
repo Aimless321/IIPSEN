@@ -27,6 +27,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View for the game load view screen
+ * @author Melissa Basgol
+ */
+
 public class GameListView implements Observer{
     @FXML
     public Pane pane;

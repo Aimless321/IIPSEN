@@ -24,6 +24,11 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * View for the lobbylist screen
+ * @author Melissa Basgol
+ */
+
 public class LobbyListView implements Observer {
 
 

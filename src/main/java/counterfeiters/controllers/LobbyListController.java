@@ -15,6 +15,12 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This controller loads the linked views and directs the chosen game(when lobby clicked) to the gamecontroller adn the lobbycontroller
+ *
+ * @author Melissa basgol
+ * */
+
 public class LobbyListController {
     private ApplicationController app;
     public FirebaseModel firebaseModel;
@@ -30,6 +36,9 @@ public class LobbyListController {
         firebaseModel.registerObserver(observer);
     }
 
+    /**
+     * Create the firebase listener, for the collection lobbies.
+     */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 

@@ -27,6 +27,9 @@ public class GameListController {
         firebaseModel.registerObserver(observer);
     }
 
+    /**
+     * Create the firebase listener, for the collection lobbies.
+     */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 

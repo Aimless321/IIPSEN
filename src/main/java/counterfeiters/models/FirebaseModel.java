@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Firebasemodel retrieves and updates the lobbies and games from firebase
+ * @author Melissa Basgol
+ */
 
 public class FirebaseModel implements Observable {
 
