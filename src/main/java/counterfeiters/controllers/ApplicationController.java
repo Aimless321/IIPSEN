@@ -2,7 +2,6 @@ package counterfeiters.controllers;
 
 import counterfeiters.views.LobbyView;
 import counterfeiters.views.LoginView;
-import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import javafx.stage.Stage;
 
@@ -22,13 +21,11 @@ public class ApplicationController {
     public LoginController loginController;
     public RegisterController registerController;
     public LobbyController lobbyController;
-    public LobbyListController lobbyListController;
     public ScoreboardController scoreboardController;
     public BoardController boardController;
     public GameController gameController;
     public RulesController rulesController;
     public AccountController accountController;
-    public GameListController gameListController;
 
     public ApplicationController(Stage stage) {
         this.stage = stage;
@@ -36,7 +33,6 @@ public class ApplicationController {
         //Create all controllers
         mainMenuController = new MainMenuController(this);
         lobbyController = new LobbyController(this);
-        lobbyListController = new LobbyListController(this);
         scoreboardController = new ScoreboardController(this);
         loginController = new LoginController(this);
         registerController = new RegisterController(this);
@@ -44,7 +40,6 @@ public class ApplicationController {
         gameController = new GameController(this);
         rulesController = new RulesController(this);
         accountController = new AccountController(this);
-        gameListController = new GameListController(this);
 
         //Load first view
         loadView(LoginView.class, loginController);

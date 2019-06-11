@@ -77,7 +77,7 @@ public class LobbyView implements Observer {
 
     @Override
     public void start() {
-        startButton.setVisible(false);
+        startButton.visibleProperty().set(false);
 
         controller.registerObserver(this);
     }
@@ -97,8 +97,9 @@ public class LobbyView implements Observer {
             Platform.runLater(() -> insertPlayerBox(player));
         }
 
+        //TODO: Check if this player is the host
         if(game.checkHost()) {
-            startButton.setVisible(true);
+            startButton.visibleProperty().set(true);
         }
     }
 
