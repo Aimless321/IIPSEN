@@ -4,6 +4,7 @@ import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
+
 import java.util.ArrayList;
 
 public class Board implements Observable{
