@@ -47,12 +47,13 @@ public class Board implements Observable{
     }
 
     //Hier gaat iets fout
-    public boolean checkMoney(int bedrag){
+    public boolean checkMoney(int id, int bedrag){
+        System.out.println("checkMoney");
+
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
             System.out.println("Old player money: " + game.localPlayer.realMoney.getTotalMoney());
-            game.localPlayer.realMoney.setTotalMoney(game.localPlayer.realMoney.getTotalMoney() - bedrag);
+            game.localPlayer.updateMoneyReduce(id, bedrag);
             System.out.println("New player money: " + game.localPlayer.realMoney.getTotalMoney());
-            notifyAllObservers();
             return true;
         }
             return false;
@@ -68,8 +69,10 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public boolean checkActionField(int bedrag) {
-        if(checkMoney(bedrag)){
+    public boolean checkActionField(int id, int bedrag) {
+        System.out.println("Board.checkActionField");
+
+        if(checkMoney(id, bedrag)){
             return true;
         }
         else {

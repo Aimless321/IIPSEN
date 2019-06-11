@@ -36,8 +36,8 @@ public class BoardController {
 
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
-        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
-//        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
+//        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
+        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
     }
 
     public void registerListeners() {
@@ -102,10 +102,14 @@ public class BoardController {
         app.gameController.updateMoney(qId, character, amount);
     }
 
-    public boolean checkActionField(String id){
+    public boolean checkActionField(int moneyId, String id){
+        System.out.println("checkActionField");
+
         int money = Integer.parseInt(id);
 
-        if (board.checkActionField(money)) {
+        if (board.checkActionField(moneyId, money)) {
+            //TODO: Fout
+            app.gameController.game.notifyAllObservers();
             return true;
         }
         return false;
@@ -118,7 +122,7 @@ public class BoardController {
             double posX = bounds.getMinX() + btn.getWidth() / 3;
             double posY = bounds.getMinY() + btn.getHeight() / 5;
             Player player = app.gameController.game.localPlayer;
-            updateMoneyOnPosition(4, min, 30);
+            //updateMoneyOnPosition(4, min, 30);
             board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
