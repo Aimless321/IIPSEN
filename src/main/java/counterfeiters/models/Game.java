@@ -11,6 +11,7 @@ import static java.util.Map.Entry.comparingByValue;
 import static java.util.Map.Entry.*;
 import static java.util.stream.Collectors.toMap;
 
+
 public class Game implements Observable {
     private String gameId;
     private int numPlayers = 1;
@@ -47,6 +48,16 @@ public class Game implements Observable {
 
         notifyAllObservers();
     }
+
+    /**
+     * This method loads the scores in the scoreboard view
+     * The scores are stored in a hashmap.
+     * The hashmap is stored in an arraylist and sorted.
+     * The arraylist is stored in a linkedHashMap.
+     * The linkedHashMap returns to the scoreboard view.
+     *
+     * @author Robin van den Berg
+     */
 
     public Map<String, Integer> loadScores() {
         FirebaseService fb = FirebaseService.getInstance();

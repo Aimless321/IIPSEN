@@ -3,6 +3,10 @@ package counterfeiters.controllers;
 import counterfeiters.models.Account;
 import counterfeiters.views.Observer;
 
+/**
+ *
+ */
+
 public class AccountController {
 
     private ApplicationController app;

@@ -17,6 +17,11 @@ import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This view shows the scores of the players, after the game has ended.
+ *
+ * @author Robin van den Berg
+ */
 
 public class ScoreboardView implements Observer {
     public ImageView firstPlayer;

@@ -10,6 +10,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * This view shows the rules of "counterfeiters".
+ *
+ * @author Robin van den Berg
+ */
+
+
 public class RulesView implements Observer {
     private Stage stage;
     private RulesController controller;

@@ -6,6 +6,11 @@ import counterfeiters.views.Observer;
 import counterfeiters.views.RegisterView;
 import javafx.stage.Stage;
 
+
+/**
+ * This controller is the link between the login view and the account controller, via the application controller, that contains the account model.
+ */
+
 public class LoginController {
     private ApplicationController app;
 

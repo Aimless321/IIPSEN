@@ -18,6 +18,13 @@ import javafx.scene.control.TextField;
 
 import java.awt.*;
 
+/**
+ * This view contains the fields, that users has to use to login via the data from firebase.
+ *
+ * @author Robin van den Berg.
+ */
+
+
 public class LoginView implements Observer {
     public TextField username;
     public PasswordField password;
