@@ -70,7 +70,7 @@ public class GameListView implements Observer{
 
     @FXML
     public void pressRules() {
-        System.out.println("Rules button pressed");
+
     }
 
     @FXML
@@ -99,13 +99,13 @@ public class GameListView implements Observer{
         if (firebaseModel.lobbyOrGame().equals("game")) {
             Platform.runLater(() -> vBox.getChildren().clear());
             games.clear();
-            System.out.println("listWows size after clearing in view:");
-            System.out.println(games.size());
+
+
             //Add new rows for lobbylist
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-            System.out.println("updateslobbies size in lobbylsitview:");
-            System.out.println(updatedGames.size());
+
+
 
 
             if (updatedGames.size() != 0) {
@@ -184,7 +184,7 @@ public class GameListView implements Observer{
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    System.out.println("mouse entered");
+
                     }
                 }
             });
@@ -192,7 +192,7 @@ public class GameListView implements Observer{
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    System.out.println("mouse exited");
+
                 }
             }
         });

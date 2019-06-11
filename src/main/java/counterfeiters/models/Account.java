@@ -87,7 +87,7 @@ public class Account implements Observable{
                return true;
            }
            else{
-               System.out.println("naam bestaat");
+
                textField = "Username already exist!";
                notifyAllObservers();
                return false;

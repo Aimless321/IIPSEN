@@ -151,7 +151,7 @@ public class Game implements Observable {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
         this.round = updateGame.getRound();
-        System.out.println("this round is " + round);
+
         //
         notifyAllObservers();
 

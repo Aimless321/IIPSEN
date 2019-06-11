@@ -51,12 +51,12 @@ public class Board implements Observable{
      * @version 11-06-2019
      * */
     public boolean checkMoney(int id, int bedrag){
-        System.out.println("checkMoney");
+
 
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-            System.out.println("Old player money: " + game.localPlayer.realMoney.getTotalMoney());
+
             game.localPlayer.updateMoneyReduce(id, bedrag);
-            System.out.println("New player money: " + game.localPlayer.realMoney.getTotalMoney());
+
             return true;
         }
             return false;
@@ -79,7 +79,7 @@ public class Board implements Observable{
      * @version 11-06-2019
      * */
     public boolean checkActionField(int id, int bedrag) {
-        System.out.println("Board.checkActionField");
+
 
         if(checkMoney(id, bedrag)){
             return true;

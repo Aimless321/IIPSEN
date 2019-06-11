@@ -42,7 +42,7 @@ public class GameListController {
                 }
                 //To the model for update
                 updateGamesModel();
-                System.out.println("Something happened");
+
 
                 // }
             }

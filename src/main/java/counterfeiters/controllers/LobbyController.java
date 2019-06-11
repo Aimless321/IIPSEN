@@ -32,7 +32,7 @@ public class LobbyController {
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
-        System.out.println(app.gameController.game.getGameId());
+
         //Listen for changes in the lobby
         listener = fb.listen("lobbies", app.gameController.game.getGameId(),
         (documentSnapshot, e) -> {
@@ -106,6 +106,6 @@ public class LobbyController {
         //TODO: load boardview
 
         app.loadView(BoardView.class, app.boardController);
-        System.out.println("Ik zit in start the game");
+
     }
 }
