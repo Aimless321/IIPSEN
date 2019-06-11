@@ -1,6 +1,5 @@
 package counterfeiters.views;
 
-import com.sun.jndi.toolkit.url.Uri;
 import counterfeiters.controllers.ScoreboardController;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
@@ -12,8 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.sql.SQLOutput;
-import java.util.HashMap;
 import java.util.Map;
 
 

@@ -3,13 +3,9 @@ package counterfeiters.models;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
-import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Game implements Observable {
     private String gameId;

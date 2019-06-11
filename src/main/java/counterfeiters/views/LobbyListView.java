@@ -1,6 +1,5 @@
 package counterfeiters.views;
 
-import com.google.cloud.firestore.DocumentSnapshot;
 import counterfeiters.controllers.LobbyListController;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;

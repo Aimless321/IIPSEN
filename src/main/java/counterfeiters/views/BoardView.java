@@ -1,7 +1,9 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.*;
+import counterfeiters.models.Board;
+import counterfeiters.models.Henchman;
+import counterfeiters.models.Observable;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -81,7 +83,6 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         boardcontroller.advancePolice();
-
 
         placeHenchman(btn);
         boardcontroller.board.game.nextTurn();
@@ -186,44 +187,38 @@ public class BoardView implements Observer {
 
     @Override
     public void update(Observable observable) {
-        if(observable instanceof Board) {
-            System.out.println("update from board" );
-            Board board = (Board) observable;
-
-            updateBlackMarket(board);
-
-            updatePolicePawn(board);
+        System.out.println("update from board");
+        Board board = (Board) observable;
 
 
-            resetHenchman();
+        updateBlackMarket(board);
+        updatePolicePawn(board);
 
-            for (Henchman henchman : board.getHenchmen()) {
-                VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+        resetHenchman();
 
-                ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
+        for (Henchman henchman : board.getHenchmen()) {
+            VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
 
-                ImageView henchmanImage = new ImageView(old.getImage());
-                henchmanImage.setLayoutX(henchman.x);
-                henchmanImage.setLayoutY(henchman.y);
-                henchmanImage.setFitHeight(36);
-                henchmanImage.setFitWidth(36);
-                henchmanImage.getStyleClass().add("henchman");
+            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
 
-                pane.getChildren().add(henchmanImage);
-            }
+            ImageView henchmanImage = new ImageView(old.getImage());
+            henchmanImage.setLayoutX(henchman.x);
+            henchmanImage.setLayoutY(henchman.y);
+            henchmanImage.setFitHeight(36);
+            henchmanImage.setFitWidth(36);
+            henchmanImage.getStyleClass().add("henchman");
+
+            pane.getChildren().add(henchmanImage);
         }
         // Als er game als observable dient voert die het volgende uit.
-        if(observable instanceof Game){
-            Game game = (Game) observable;
-            this.qualityOneMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityOne()));
-            this.qualityTwoMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityTwo()));
-            this.qualityThreeMoney.setText(String.valueOf(game.localPlayer.getFakeMoney().getQualityThree()));
-            this.totalRealMoney.setText(String.valueOf(game.localPlayer.getRealMoney().getTotalMoney()));
-            System.out.println("Money = " + game.localPlayer.getRealMoney().getTotalMoney());
-            this.totalBankMoney.setText(String.valueOf(game.localPlayer.getBahamasBank().getTotalBankMoney()));
-        }
+        this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
+        this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
+        this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));
+        this.totalRealMoney.setText(String.valueOf(board.game.localPlayer.getRealMoney().getTotalMoney()));
+        System.out.println("Money = " + board.game.localPlayer.getRealMoney().getTotalMoney());
+        this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
     }
-    
+
     public void updateBlackMarket(Board board) {
         for (int i = 0; i < 7; i++) {
             ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());

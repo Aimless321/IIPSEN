@@ -1,15 +1,10 @@
 package counterfeiters.controllers;
 
-import counterfeiters.firebase.FirebaseService;
-import counterfeiters.models.Game;
-import counterfeiters.models.Player;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RulesView;
-import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Map;
 
 public class ScoreboardController {
     private ApplicationController app;
