@@ -13,5 +13,4 @@ public interface Observer {
      * Can be used for registering the observer and initializing a screen
      */
     public void start();
-
 }

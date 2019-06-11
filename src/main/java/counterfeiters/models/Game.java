@@ -134,7 +134,6 @@ public class Game implements Observable {
      */
     public void updateData(Game updateGame) {
         this.players = updateGame.getPlayers();
-        this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
 
         notifyAllObservers();
     }
