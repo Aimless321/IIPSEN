@@ -103,5 +103,18 @@ public class BoardController {
         board.advancePolice();
     }
 
+    public boolean checkPlayerCash(String position) {
+         return board.game.localPlayer.checkCash(position);
+    }
 
+    /**
+     * This method processes a purchase at the black market.
+     * First it checks if the player has enough cash.
+     * Then the card gets added to the player's inventory.
+     * @author LeanderLoomans
+     * @param position
+     */
+    public void makePurchase(String position) {
+        board.game.localPlayer.addCard(board.blackmarket.getCard(Integer.valueOf(position)));
+    }
 }

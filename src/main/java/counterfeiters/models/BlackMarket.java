@@ -6,14 +6,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BlackMarket {
-    private ArrayList<Card> marketList;
+    private ArrayList<Card> marketList = new ArrayList<>();
 
-    @Exclude
-    public Card[] cardRow = new Card[7];
+    public ArrayList<Card> cardRow = new ArrayList<>();
 
-    public BlackMarket() {
-        this.marketList = new ArrayList<Card>();
-    }
+    public BlackMarket() {}
 
     public void addToMarket(Card card) {
         marketList.add(card);
@@ -35,12 +32,12 @@ public class BlackMarket {
      */
     public void prepareView() {
         for (int i = 0; i < 7; i++) {
-            cardRow[i] = marketList.get(0);
+            cardRow.add(marketList.get(0));
             marketList.remove(0);
         }
     }
 
     public Card getCard(int position) {
-        return cardRow[position];
+        return cardRow.get(position);
     }
 }

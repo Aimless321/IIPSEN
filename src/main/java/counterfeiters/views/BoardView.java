@@ -54,8 +54,13 @@ public class BoardView implements Observer {
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
         System.out.println("Black market pressed");
-
         Button btn = (Button) mouseEvent.getSource();
+        if(!boardcontroller.checkPlayerCash(btn.getStyleClass().get(1))) {
+            return;
+        }
+        boardcontroller.makePurchase(btn.getStyleClass().get(1));
+
+        System.out.println(btn.getStyleClass().get(1));
         placeHenchman(btn);
     }
 

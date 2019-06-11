@@ -76,6 +76,10 @@ public class Player {
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -88,8 +92,16 @@ public class Player {
         this.score = score;
     }
 
+    public boolean checkCash(String position) {
+        return true;
+    }
 
-    //    public boolean hasPlaneTicket(){
-//        return ;
-//    }
+    public boolean hasPlaneTicket(){
+        for(Card n : cards) {
+            if (n instanceof PlaneTicket) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
