@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
+   <children>
+      <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="133.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality I" textAlignment="CENTER" wrappingWidth="132.13671875" />
+                  <TextField fx:id="txtQualityOne" maxWidth="115.0" prefHeight="25.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnAddQualityOne" mnemonicParsing="false" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMinQualityOne" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="133.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality II" textAlignment="CENTER" wrappingWidth="132.13671875" />
+                  <TextField fx:id="txtQualityTwo" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnAddQualityTwo" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMinQualityTwo" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="133.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality III" textAlignment="CENTER" wrappingWidth="132.13671875" />
+                  <TextField fx:id="txtQualityThree" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnAddQualityThree" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnMinQualityThree" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                           <HBox.margin>
+                              <Insets left="25.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
