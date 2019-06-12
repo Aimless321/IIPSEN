@@ -226,7 +226,11 @@ public class BoardView implements Observer {
     
     public void updateBlackMarket(Board board) {
         for (int i = 0; i < 7; i++) {
-            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
+            try {
+                ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
+            }catch (NullPointerException e) {
+                System.out.println("no image");
+            }
         }
     }
 

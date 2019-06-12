@@ -20,6 +20,11 @@ public class BlackMarket {
         marketList.add(card);
     }
 
+    public void addToRow() {
+        cardRow.add(marketList.get(0));
+        marketList.remove(0);
+    }
+
     /**
      * This method shuffles the BlackMarket arraylist.
      * @author: LeanderLoomans
@@ -30,35 +35,15 @@ public class BlackMarket {
 
 
     /**
-     * This method takes the first 7 cards from marketList and places them in cardRow.
+     * This method takes cards from marketList and places them in cardRow.
+     * It continues until cardRow contains 7 cards.
      * The cards are removed from marketList.
      * @autor: LeanderLoomans
      */
-    public void prepareView() {
-        for (int i = 0; i < 7; i++) {
-            cardRow.add(marketList.get(0));
-            marketList.remove(0);
-        }
-    }
     public void refill() {
-        while(emptyChecker()) {
-            for (int i = 0; i < 7; i++) {
-                if (cardRow.get(i) == null) {
-                    for (int j = i; j < 7; j++) {
-
-                    }
-                }
-            }
+        while (cardRow.size() < 7) {
+            addToRow();
         }
-    }
-
-    public boolean emptyChecker() {
-        for (int i = 0; i < 7; i++) {
-            if (cardRow.get(i) == null) {
-                return true;
-            }
-        }
-        return false;
     }
 
 

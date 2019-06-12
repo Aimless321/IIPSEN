@@ -35,7 +35,7 @@ public class Board implements Observable{
     }
 
     public void prepareBlackMarket() {
-        blackmarket.prepareView();
+        blackmarket.refill();
         notifyAllObservers();
     }
 
