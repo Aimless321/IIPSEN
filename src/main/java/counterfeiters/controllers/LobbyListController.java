@@ -50,7 +50,16 @@ public class LobbyListController {
                         return;
                     }
 
-                    if(querySnapshot != null && !querySnapshot.isEmpty()) {
+                    System.out.println( "Gameid in the change = " + querySnapshot.getDocumentChanges().get(0).getDocument().contains("gameId"));
+                    System.out.println( "Gameid in the change = " + querySnapshot.getDocumentChanges().get(0).getDocument().getId());
+
+                    //Prevent that the lobby won't be double updated
+                    if(querySnapshot.getDocumentChanges().get(0).getDocument().get("lobbyName") == null){
+                        return;
+                    }
+
+
+                    if(querySnapshot != null) {
                         //To the model for update
                         updateLobbiesModel();
                         System.out.println("Something happened");
