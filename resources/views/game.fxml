@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
    <children>
       <HBox fx:id="blackMarketView" alignment="TOP_RIGHT" layoutX="437.0" layoutY="21.0" prefHeight="163.0" prefWidth="1011.0" spacing="35.0">
          <padding>
@@ -38,37 +47,37 @@
       </HBox>
       <HBox layoutX="447.0" layoutY="201.0" prefHeight="52.0" prefWidth="994.0">
          <children>
-            <Button id="60" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="7">
+            <Button id="60" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="0">
                <HBox.margin>
                   <Insets right="35.0" />
                </HBox.margin>
             </Button>
-            <Button id="60" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="6">
+            <Button id="60" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="112.0" styleClass="1">
                <HBox.margin>
                   <Insets right="35.0" />
                </HBox.margin>
             </Button>
-            <Button id="50" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="5">
+            <Button id="50" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="2">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button id="40" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="4">
+            <Button id="40" layoutX="236.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="3">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button id="30" layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="110.0" styleClass="3">
+            <Button id="30" layoutX="349.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="110.0" styleClass="4">
                <HBox.margin>
                   <Insets right="36.0" />
                </HBox.margin>
             </Button>
-            <Button id="20" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="109.0" styleClass="2">
+            <Button id="20" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="109.0" styleClass="5">
                <HBox.margin>
                   <Insets right="37.0" />
                </HBox.margin>
             </Button>
-            <Button id="10" layoutX="123.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="1">
+            <Button id="10" layoutX="123.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#blackMarket" opacity="0.0" prefHeight="49.0" prefWidth="111.0" styleClass="6">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -114,7 +123,7 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="30"  layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="4">
+            <Button id="30" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="4">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>

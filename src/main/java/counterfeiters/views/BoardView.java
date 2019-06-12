@@ -66,11 +66,15 @@ public class BoardView implements Observer {
         }
 
         Button btn = (Button) mouseEvent.getSource();
-        boardcontroller.board.game.nextTurn();
+
 
         if(boardcontroller.checkActionField(4, btn.getId())) {
+            boardcontroller.makePurchase(btn.getStyleClass().get(1));
             placeHenchman(btn);
         }
+
+        boardcontroller.board.game.nextTurn();
+
     }
 
     @FXML
@@ -134,6 +138,7 @@ public class BoardView implements Observer {
         if(btn.getId().equals("police")) {
             boardcontroller.advancePolice();
         }
+
 
         placeHenchman(btn);
         boardcontroller.board.game.nextTurn();

@@ -144,6 +144,10 @@ public class Player {
         }
     }
 
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -165,6 +169,8 @@ public class Player {
     }
 
     public BahamasBank getBahamasBank(){return bahamasBank;}
+
+
 
 
     //    public boolean hasPlaneTicket(){

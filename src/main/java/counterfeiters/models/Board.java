@@ -72,23 +72,15 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    /**
-     * By giving the right moneyQuality and quantity, the method for the check can be called up.
-     *
-     * @author Ali Rezaa Ghariebiyan
-     * @version 11-06-2019
-     * */
-    public boolean checkActionField(int id, int bedrag) {
 
 
-        if(checkMoney(id, bedrag)){
-            return true;
-        }
-        else {
-            //TODO: add sound
-//            soundWrong();
-            return false;
-        }
+    public void makePurchase(int cardNumber) {
+        Card card = blackmarket.cardRow.get(cardNumber);
+        System.out.println("gotten Card: " + card);
+        game.localPlayer.addCard(card);
+        System.out.println("added card to player");
+        blackmarket.makeCardPurchased(cardNumber);
+        System.out.println("card removed");
     }
 //
 //    public void actionFieldAction() {
