@@ -80,6 +80,8 @@ public class BoardView implements Observer {
             return;
         }
 
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney();
+
         Button btn = (Button) mouseEvent.getSource();
 
         boardcontroller.advancePolice();
