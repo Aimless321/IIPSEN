@@ -31,11 +31,6 @@ public class GameController {
         game = new Game();
     }
 
-    public Map<String, Integer> loadScores()
-    {
-        return game.loadScores();
-
-    }
 
     public void createGame(Player player) {
         game.createNewGame(player);

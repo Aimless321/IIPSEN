@@ -19,7 +19,6 @@ public class Game implements Observable {
     public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
-    private Game game;
 
     public Game() {
 
@@ -53,43 +52,6 @@ public class Game implements Observable {
      *
      * @author Robin van den Berg
      */
-
-    public Map<String, Integer> loadScores() {
-        FirebaseService fb = FirebaseService.getInstance();
-
-
-        Game game = fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
-        Map<String, Integer> scores = new HashMap();
-        LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        ArrayList<Player> players = game.getPlayers();
-
-        for (int i = 0; i < players.size(); i++) {
-            String name = players.get(i).getUserName();
-            int score = (players.get(i).getScore());
-            scores.put(name, score);
-
-        }
-
-        for (Map.Entry<String, Integer> keys : scores.entrySet())
-        {
-            list.add(Integer.valueOf(keys.getValue()));
-        }
-        Collections.sort(list, Collections.reverseOrder());
-
-        for(Integer score : list){
-            for (Map.Entry<String, Integer> entry : scores.entrySet())
-            {
-                if(entry.getValue().equals(score))
-                {
-                    sortedScores.put(entry.getKey(),score);
-                }
-            }
-        }
-
-        return sortedScores;
-    }
-
 
     public void addPlayer(Player player) {
         numPlayers++;
@@ -163,7 +125,7 @@ public class Game implements Observable {
      * @return Player
      */
     @Exclude
-    private Player getPlayerFromUserName(String username) {
+    public Player getPlayerFromUserName(String username) {
         for (Player player : players) {
             if(player.getUserName().equals(username)) {
                 return player;
@@ -226,8 +188,6 @@ public class Game implements Observable {
     public int getRound() {
         return round;
     }
-
-    public Game getGame(){return game;}
 
     public Date getStartTime() {
         return startTime;

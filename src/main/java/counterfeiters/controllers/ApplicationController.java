@@ -2,6 +2,7 @@ package counterfeiters.controllers;
 
 import counterfeiters.views.LoginView;
 import counterfeiters.views.Observer;
+import counterfeiters.views.ScoreboardView;
 import javafx.stage.Stage;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,7 +46,7 @@ public class ApplicationController {
         gameListController = new GameListController(this);
 
         //Load first view
-        loadView(LoginView.class, loginController);
+        loadView(ScoreboardView.class, scoreboardController);
     }
 
     /**

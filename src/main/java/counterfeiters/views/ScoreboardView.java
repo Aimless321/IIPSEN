@@ -1,7 +1,9 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.ScoreboardController;
+import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
+import counterfeiters.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -63,10 +66,17 @@ public class ScoreboardView implements Observer {
     }
 
     public void showScores() {
-        Map<String, Integer> data = controller.loadScores();
-        firstPlayer.setImage(new Image("/players/deer.jpg"));
-        secondPlayer.setImage(new Image("/players/deer.jpg"));
-        thirdPlayer.setImage(new Image("/players/deer.jpg"));
+
+        Game game = controller.loadScores();
+        Map<String, Integer> data = controller.getScores(game.getPlayers());
+
+        Image imageFirst = game.getPlayerFromUserName((String)data.keySet().toArray()[0]).getCharacterImagePath();
+        Image imageSecond = game.getPlayerFromUserName((String)data.keySet().toArray()[1]).getCharacterImagePath();
+        Image imageThird = game.getPlayerFromUserName((String)data.keySet().toArray()[2]).getCharacterImagePath();
+
+        firstPlayer.setImage(imageFirst);
+        secondPlayer.setImage(imageSecond);
+        thirdPlayer.setImage(imageThird);
 
         firstPlayerName.setText((String)data.keySet().toArray()[0]);
         secondPlayerName.setText((String)data.keySet().toArray()[1]);
