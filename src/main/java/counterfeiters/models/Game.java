@@ -111,7 +111,19 @@ public class Game implements Observable {
 
         numPlayers--;
 
+        resetPlayerNumbers();
+
         updateFirebase();
+    }
+
+    public void resetPlayerNumbers() {
+        //Start from the first player
+        for(int i = 1; i < players.size(); i++) {
+            Player player = players.get(i);
+
+            //Playernumber starts from 1, so do it +1
+            player.setPlayerId(i+1);
+        }
     }
 
     /**
@@ -151,6 +163,7 @@ public class Game implements Observable {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
         this.round = updateGame.getRound();
+        this.numPlayers = updateGame.numPlayers;
 
         //
         notifyAllObservers();

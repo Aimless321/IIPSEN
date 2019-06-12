@@ -32,4 +32,8 @@ public class MainMenuController {
         //TODO: Switch to the GameListView
         app.loadView(GameListView.class, app.gameListController);
     }
+
+    public void exitButtonPressed() {
+        app.quit();
+    }
 }

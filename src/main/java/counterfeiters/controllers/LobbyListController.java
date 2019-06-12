@@ -1,9 +1,6 @@
 package counterfeiters.controllers;
 
-import com.google.cloud.firestore.EventListener;
-import com.google.cloud.firestore.FirestoreException;
-import com.google.cloud.firestore.ListenerRegistration;
-import com.google.cloud.firestore.QuerySnapshot;
+import com.google.cloud.firestore.*;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
@@ -12,6 +9,7 @@ import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * This controller loads the linked views and directs the chosen game(when lobby clicked) to the gamecontroller adn the lobbycontroller
@@ -48,11 +46,16 @@ public class LobbyListController {
                         return;
                     }
 
-                    if(querySnapshot != null && !querySnapshot.isEmpty()) {
-                        //To the model for update
-                        updateLobbiesModel();
-
+                    List<DocumentChange> changes = querySnapshot.getDocumentChanges();
+                    for(DocumentChange change : changes) {
+                        System.out.println(change.getDocument().getData().toString());
                     }
+
+                    //if(querySnapshot != null && !querySnapshot.isEmpty()) {
+                        //To the model for update
+                     //   updateLobbiesModel();
+
+                    //}
 
                // }
             }
