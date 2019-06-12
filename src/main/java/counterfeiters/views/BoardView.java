@@ -4,6 +4,7 @@ import counterfeiters.controllers.BoardController;
 import counterfeiters.models.Board;
 import counterfeiters.models.Henchman;
 import counterfeiters.models.Observable;
+import counterfeiters.models.PlaneTicket;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -119,11 +120,17 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.board.game.nextTurn();
-
-        if(boardcontroller.checkActionField(4, btn.getId())) {
-            placeHenchman(btn);
+        if(btn.getStyleClass().get(1).equals("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
+            System.out.println("player has no ticket!");
+            return;
         }
+        else if(!btn.getStyleClass().get(1).equals("ticket")
+                && !boardcontroller.checkActionField(4, btn.getId())) {
+            return;
+        }
+
+        placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
 
     @FXML

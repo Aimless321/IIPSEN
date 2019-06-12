@@ -109,8 +109,10 @@ public class BoardController {
      * */
     public boolean checkActionField(int moneyId, String id){
 
-
+        System.out.println("test1");
+        System.out.println("id is " + id);
         int money = Integer.parseInt(id);
+        System.out.println("test2");
 
         if (board.checkMoney(moneyId, money)) {
             //TODO: Fout
@@ -143,5 +145,9 @@ public class BoardController {
 
     public void makePurchase(String cardNumber ) {
         board.makePurchase(Integer.parseInt(cardNumber));
+    }
+
+    public boolean checkCard(Card card) {
+        return board.game.localPlayer.hasCard(card);
     }
 }

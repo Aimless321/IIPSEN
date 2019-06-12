@@ -17,6 +17,10 @@ public abstract class Card {
         return image;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setImg(String img) {
         this.img = img;
     }

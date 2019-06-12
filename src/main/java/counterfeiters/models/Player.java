@@ -170,10 +170,12 @@ public class Player {
 
     public BahamasBank getBahamasBank(){return bahamasBank;}
 
-
-
-
-    //    public boolean hasPlaneTicket(){
-//        return ;
-//    }
+    public boolean hasCard(Card card) {
+        for (Card n : cards) {
+            if (n.getName().equals(card.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

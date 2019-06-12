@@ -41,7 +41,7 @@ public class BlackMarket {
      */
     public void refill() {
         for (int i = 0; i < 7; i++) {
-            if (cardRow.get(i).equals(BlancCard.class)) {
+            if ((cardRow.size() > 0) && cardRow.get(i).equals(BlancCard.class)) {
                 cardRow.remove(i);
             }
         }
