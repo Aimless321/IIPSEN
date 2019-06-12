@@ -123,10 +123,6 @@ public class Game implements Observable {
 
             //Playernumber starts from 1, so do it +1
             player.setPlayerId(i+1);
-
-            int num = i+1;
-
-            System.out.println("someone leaved: resetting " + player.getUserName() + " to " + num);
         }
     }
 
