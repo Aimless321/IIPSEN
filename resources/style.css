@@ -33,6 +33,20 @@
     -fx-cursor: hand;
 }
 
+.list-label {
+    -fx-font-size: 30;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+.hbox {
+     -fx-pref-height: 60;
+     -fx-pref-width: 980;
+ }
+
+.hbox:hover {
+    -fx-cursor: hand;
+}
+
 .scroll-pane {
     -fx-background-color: transparent;
 }
