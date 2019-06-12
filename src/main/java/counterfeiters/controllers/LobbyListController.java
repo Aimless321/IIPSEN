@@ -41,23 +41,22 @@ public class LobbyListController {
         listener = fb.listenToCollection("lobbies", new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirestoreException e) {
-                    if (e != null) {
-                        System.err.println("Listen failed:" + e);
-                        return;
-                    }
+                if (e != null) {
+                    System.err.println("Listen failed:" + e);
+                    return;
+                }
 
-                    List<DocumentChange> changes = querySnapshot.getDocumentChanges();
-                    for(DocumentChange change : changes) {
-                        System.out.println(change.getDocument().getData().toString());
-                    }
+                //Prevent that the lobby won't be double updated
+                if(querySnapshot.getDocumentChanges().get(0).getDocument().get("lobbyName") == null){
+                    return;
+                }
 
-                    //if(querySnapshot != null && !querySnapshot.isEmpty()) {
-                        //To the model for update
-                     //   updateLobbiesModel();
 
-                    //}
-
-               // }
+                if(querySnapshot != null) {
+                    //To the model for update
+                    updateLobbiesModel();
+                    System.out.println("Something happened");
+                }
             }
         });
     }

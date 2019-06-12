@@ -36,8 +36,6 @@ public class BoardController {
 
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
-//        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
-        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
     }
 
     public void registerListeners() {
