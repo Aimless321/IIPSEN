@@ -28,7 +28,7 @@ public class ScoreboardController {
         app.gameController.registerObserver(observer);
     }
 
-    
+
     public Game loadScores() {
         FirebaseService fb = FirebaseService.getInstance();
 
