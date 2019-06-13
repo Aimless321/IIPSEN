@@ -33,6 +33,12 @@
     -fx-cursor: hand;
 }
 
+.close-button
+{
+    -fx-background-color: red;
+    -fx-cursor: hand;
+}
+
 .scroll-pane {
     -fx-background-color: transparent;
 }

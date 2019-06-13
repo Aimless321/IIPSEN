@@ -1,9 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.ScoreboardController;
-import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
-import counterfeiters.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -67,12 +64,11 @@ public class ScoreboardView implements Observer {
 
     public void showScores() {
 
-        Game game = controller.loadScores();
-        Map<String, Integer> data = controller.getScores(game.getPlayers());
+        Map<String, Integer> data = controller.getScores(controller.loadScores().getPlayers());
 
-        Image imageFirst = game.getPlayerFromUserName((String)data.keySet().toArray()[0]).getCharacterImagePath();
-        Image imageSecond = game.getPlayerFromUserName((String)data.keySet().toArray()[1]).getCharacterImagePath();
-        Image imageThird = game.getPlayerFromUserName((String)data.keySet().toArray()[2]).getCharacterImagePath();
+        Image imageFirst = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[0]).getCharacterImagePath();
+        Image imageSecond = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[1]).getCharacterImagePath();
+        Image imageThird = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[2]).getCharacterImagePath();
 
         firstPlayer.setImage(imageFirst);
         secondPlayer.setImage(imageSecond);
@@ -85,6 +81,7 @@ public class ScoreboardView implements Observer {
         firstPlayerCash.setText("$"+ data.values().toArray()[0]);
         secondPlayerCash.setText("$"+ data.values().toArray()[1]);
         thirdPlayerCash.setText("$"+ data.values().toArray()[2]);
+
     }
 
     @FXML
@@ -107,7 +104,10 @@ public class ScoreboardView implements Observer {
 
     @Override
     public void setController(Object controller) {
-        this.controller = (ScoreboardController)controller;
+
+        ScoreboardController scoreboardController = (ScoreboardController) controller ;
+        this.controller = scoreboardController;
+        scoreboardController.registerObserver(this);
     }
 
     @Override

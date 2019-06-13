@@ -53,6 +53,33 @@ public class Game implements Observable {
      * @author Robin van den Berg
      */
 
+    public Map<String, Integer> getScores(ArrayList<Player> players) {
+        Map<String, Integer> scores = new HashMap<>();
+        LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < players.size(); i++) {
+            String name = players.get(i).getUserName();
+            int score = (players.get(i).getScore());
+            scores.put(name, score);
+        }
+
+        for (Map.Entry<String, Integer> keys : scores.entrySet()) {
+            list.add(keys.getValue());
+        }
+        list.sort(Collections.reverseOrder());
+
+        for (Integer score : list) {
+            for (Map.Entry<String, Integer> entry : scores.entrySet()) {
+                if (entry.getValue().equals(score)) {
+                    sortedScores.put(entry.getKey(), score);
+                }
+            }
+        }
+
+        return sortedScores;
+    }
+
     public void addPlayer(Player player) {
         numPlayers++;
         players.add(player);

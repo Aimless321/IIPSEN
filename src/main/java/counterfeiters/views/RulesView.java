@@ -37,7 +37,7 @@ public class RulesView implements Observer {
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
-        pane.setBackground(ViewUtilities.getBackground("/background/rulesPage1.jpg"));
+        pane.setBackground(ViewUtilities.getBackground("/background/rulePage1.jpg"));
 
         //Show it on the screen
         Scene scene = new Scene(root, 1920, 1080);
@@ -46,6 +46,7 @@ public class RulesView implements Observer {
         popupStage.initOwner(stage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.setScene(scene);
+        popupStage.setFullScreen(true);
         popupStage.show();
 
     }
@@ -59,14 +60,14 @@ public class RulesView implements Observer {
     }
     public void pressNext()
     {
-        pane.setBackground(ViewUtilities.getBackground("/background/rulesPage2.jpg"));
+        pane.setBackground(ViewUtilities.getBackground(controller.nextButtonPressed()));
 
     }
 
 
     public void pressPrevious()
     {
-        pane.setBackground(ViewUtilities.getBackground("/background/rulesPage1.jpg"));
+        pane.setBackground(ViewUtilities.getBackground(controller.previousButtonPressed()));
 
     }
 

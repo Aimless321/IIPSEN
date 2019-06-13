@@ -17,7 +17,7 @@ import java.util.*;
  * @author Robin van den Berg
  */
 public class ScoreboardController {
-    public ApplicationController app;
+    private ApplicationController app;
 
 
     public ScoreboardController(ApplicationController applicationController) {
@@ -28,40 +28,19 @@ public class ScoreboardController {
         app.gameController.registerObserver(observer);
     }
 
-
+    //TODO: remove hardcode, place game.
     public Game loadScores() {
+
+        app.gameController.game.getScores(app.gameController.game.getPlayers());
         FirebaseService fb = FirebaseService.getInstance();
 
 
         return fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
     }
 
-    public Map<String, Integer> getScores(ArrayList<Player> players) {
-        Map<String, Integer> scores = new HashMap();
-        LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
-        ArrayList<Integer> list = new ArrayList<>();
-
-        for (int i = 0; i < players.size(); i++) {
-            String name = players.get(i).getUserName();
-            int score = (players.get(i).getScore());
-            scores.put(name, score);
-
-        }
-
-        for (Map.Entry<String, Integer> keys : scores.entrySet()) {
-            list.add(Integer.valueOf(keys.getValue()));
-        }
-        Collections.sort(list, Collections.reverseOrder());
-
-        for (Integer score : list) {
-            for (Map.Entry<String, Integer> entry : scores.entrySet()) {
-                if (entry.getValue().equals(score)) {
-                    sortedScores.put(entry.getKey(), score);
-                }
-            }
-        }
-
-        return sortedScores;
+    public Map<String,Integer> getScores(ArrayList<Player> players)
+    {
+        return app.gameController.game.getScores(players);
     }
 
     public void menuButtonPressed() {
