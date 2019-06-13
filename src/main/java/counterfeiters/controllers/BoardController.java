@@ -5,6 +5,7 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
@@ -108,10 +109,12 @@ public class BoardController {
      * */
     public boolean checkActionField(int moneyId, String id){
 
-
+        System.out.println("test1");
+        System.out.println("id is " + id);
         int money = Integer.parseInt(id);
+        System.out.println("test2");
 
-        if (board.checkActionField(moneyId, money)) {
+        if (board.checkMoney(moneyId, money)) {
             //TODO: Fout
             app.gameController.game.notifyAllObservers();
             return true;
@@ -140,4 +143,11 @@ public class BoardController {
     }
 
 
+    public void makePurchase(String cardNumber ) {
+        board.makePurchase(Integer.parseInt(cardNumber));
+    }
+
+    public boolean checkCard(Card card) {
+        return board.game.localPlayer.hasCard(card);
+    }
 }

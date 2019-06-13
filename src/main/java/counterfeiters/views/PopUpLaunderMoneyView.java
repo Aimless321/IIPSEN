@@ -31,7 +31,7 @@ public class PopUpLaunderMoneyView implements Observer{
         Parent root = ViewUtilities.loadFxml("/views/popUp_Launder.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("Pane");
+        Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
