@@ -32,7 +32,7 @@ public class PopUpLaunderMoneyView implements Observer{
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
-        pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
+        pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
         Scene scene = new Scene(root, 400, 200);
