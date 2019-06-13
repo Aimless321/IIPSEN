@@ -29,19 +29,21 @@ public class Board implements Observable{
         for(Observer obs : observers) {
             Platform.runLater(() -> obs.update(this));
         }
-
-        updateFirebase();
     }
 
     public void prepareBlackMarket() {
         blackmarket.refill();
         notifyAllObservers();
+
+        updateFirebase();
     }
 
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
 
         notifyAllObservers();
+
+        updateFirebase();
     }
 
 
