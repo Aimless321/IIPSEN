@@ -30,6 +30,8 @@ public class Board implements Observable{
         for(Observer obs : observers) {
             Platform.runLater(() -> obs.update(this));
         }
+
+        updateFirebase();
     }
 
     public void prepareBlackMarket() {
@@ -41,7 +43,6 @@ public class Board implements Observable{
         henchmen.add(new Henchman(posX, posY, player));
 
         notifyAllObservers();
-        updateFirebase();
     }
 
 

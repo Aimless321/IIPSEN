@@ -115,14 +115,6 @@ public class LobbyView implements Observer {
             startButton.visibleProperty().set(true);
         }
 
-        if (game.getRound() == 1) {
-
-            Platform.runLater(() -> controller.startTheGame());
-        }
-        else {
-
-        }
-
         //For testing
         //startButton.setVisible(true);
         //startButton.setDisable(false);
