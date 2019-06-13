@@ -108,7 +108,7 @@
                   <Insets bottom="8.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="6">
+            <Button id="30" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="6">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
@@ -163,12 +163,12 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="glasses" GridPane.columnIndex="6" GridPane.rowIndex="2">
+            <Button id="30" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="glasses" GridPane.columnIndex="6" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <Button id="30" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldFraud" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>

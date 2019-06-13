@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
    <children>
       <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
          <children>
@@ -23,12 +22,12 @@
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityOne" mnemonicParsing="false" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityOne" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityOne" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -50,12 +49,12 @@
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityTwo" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityTwo" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityTwo" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -77,12 +76,12 @@
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityThree" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityThree" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>

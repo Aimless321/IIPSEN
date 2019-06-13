@@ -33,6 +33,14 @@ public class BoardView implements Observer {
     public Text totalRealMoney;
     public Text totalBankMoney;
 
+    private String plus = "+";
+    private String min = "-";
+    private int qualityOne = 1;
+    private int qualityTwo = 2;
+    private int qualityThree = 3;
+    private int realMoney = 4;
+    private int bahamasBank = 5;
+
     private Stage stage;
     private BoardController boardcontroller;
 
@@ -103,6 +111,8 @@ public class BoardView implements Observer {
         }
 
         Button btn = (Button) mouseEvent.getSource();
+
+        boardcontroller.updateMoneyOnPosition(realMoney, plus, Integer.parseInt(btn.getId()));
 
         if (btn.getStyleClass().get(1).equals("glasses")) {
             boardcontroller.makeFirstPlayer();

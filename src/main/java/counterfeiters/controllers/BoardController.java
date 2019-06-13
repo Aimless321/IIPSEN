@@ -15,8 +15,7 @@ public class BoardController {
     public ApplicationController app;
     public Board board = new Board();
     private ListenerRegistration listener;
-    private String plus = "+";
-    private String min = "-";
+
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -108,11 +107,7 @@ public class BoardController {
      * @version 11-06-2019
      * */
     public boolean checkActionField(int moneyId, String id){
-
-        System.out.println("test1");
-        System.out.println("id is " + id);
         int money = Integer.parseInt(id);
-        System.out.println("test2");
 
         if (board.checkMoney(moneyId, money)) {
             //TODO: Fout
