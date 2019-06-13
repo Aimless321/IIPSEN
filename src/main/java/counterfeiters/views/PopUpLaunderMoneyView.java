@@ -2,14 +2,33 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
 import counterfeiters.models.Observable;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class PopUpLaunderMoneyView implements Observer{
+
+    public Button launder;
+    public TextField txtQualityOne;
+    public TextField txtQualityTwo;
+    public TextField txtQualityThree;
+
+    private int qualityOneMoney = 1;
+    private int qualityTwoMoney = 2;
+    private int qualityThreeMoney = 3;
+    private int realMoney = 4;
+    private int bahamasBank = 5;
+
+    private int qualityOne;
+    private int qualityTwo;
+    private int qualityThree;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -63,5 +82,56 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void start() {
+    }
+
+    @FXML
+    public void pressLaunder(MouseEvent mouseEvent) {
+        qualityOne = Integer.parseInt(txtQualityOne.getText());
+        qualityTwo = Integer.parseInt(txtQualityTwo.getText());
+        qualityThree = Integer.parseInt(txtQualityThree.getText());
+
+        controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+    }
+
+    @FXML
+    public void plusQualityOne(MouseEvent mouseEvent) {
+        counterPlus(qualityOne, txtQualityOne);
+    }
+
+    @FXML
+    public void minQualityOne(MouseEvent mouseEvent) {
+        counterMin(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void plusQualityTwo(MouseEvent mouseEvent) {
+        counterPlus(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void minQualityTwo(MouseEvent mouseEvent) {
+        counterMin(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void plusQualityThree(MouseEvent mouseEvent) {
+        counterPlus(qualityThree, txtQualityThree);
+    }
+
+    @FXML
+    public void minQualitythree(MouseEvent mouseEvent) {
+        counterMin(qualityThree, txtQualityThree);
+    }
+
+    public void counterPlus(int quality, TextField textfield){
+        quality = Integer.parseInt(textfield.getText());
+        quality++;
+        textfield.setText(String.valueOf(quality));
+    }
+
+    public void counterMin(int quality, TextField textfield){
+        quality = Integer.parseInt(textfield.getText());
+        quality--;
+        textfield.setText(String.valueOf(quality));
     }
 }

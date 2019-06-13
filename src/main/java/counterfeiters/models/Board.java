@@ -72,7 +72,11 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
+    public void countMoney(int qualityId, int qualiytOne, int qualityTwo, int qualityThree) {
+        int result = (qualiytOne + qualityTwo + qualityThree) * 50;
 
+        game.localPlayer.updateMoneyPlus(qualityId, result);
+    }
 
     public void makePurchase(int cardNumber) {
         Card card = blackmarket.cardRow.get(cardNumber);

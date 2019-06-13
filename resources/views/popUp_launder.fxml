@@ -15,19 +15,19 @@
             <VBox prefHeight="200.0" prefWidth="133.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality I" textAlignment="CENTER" wrappingWidth="132.13671875" />
-                  <TextField fx:id="txtQualityOne" maxWidth="115.0" prefHeight="25.0" prefWidth="100.0">
+                  <TextField fx:id="txtQualityOne" alignment="CENTER" maxWidth="115.0" prefHeight="25.0" prefWidth="100.0" text="0">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityOne" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityOne" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityOne" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityOne" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -42,19 +42,19 @@
             <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="133.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality II" textAlignment="CENTER" wrappingWidth="132.13671875" />
-                  <TextField fx:id="txtQualityTwo" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0">
+                  <TextField fx:id="txtQualityTwo" alignment="CENTER" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0" text="0">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityTwo" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityTwo" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -69,19 +69,19 @@
             <VBox layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="133.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality III" textAlignment="CENTER" wrappingWidth="132.13671875" />
-                  <TextField fx:id="txtQualityThree" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0">
+                  <TextField fx:id="txtQualityThree" alignment="CENTER" maxWidth="115.0" prefHeight="25.0" prefWidth="88.0" text="0">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualitythree" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -93,6 +93,15 @@
                   <Insets top="10.0" />
                </HBox.margin>
             </VBox>
+         </children>
+      </HBox>
+      <HBox layoutY="150.0" prefHeight="50.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="launder" mnemonicParsing="false" onMouseClicked="#pressLaunder" prefHeight="25.0" prefWidth="100.0" styleClass="green-button" text="Launder">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
    </children>
