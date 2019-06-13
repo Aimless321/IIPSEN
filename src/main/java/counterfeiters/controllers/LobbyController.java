@@ -83,9 +83,6 @@ public class LobbyController {
     public void startButtonPressed() {
         app.gameController.setStartRound(1);
 
-        //Remove the lobby
-        app.gameController.game.delete();
-
         //TO TEST THE BOARDVIEW UNCOMMENT THIS v AND COMMENT THAT ^
         //app.loadView(BoardView.class, app.boardController);
     }
