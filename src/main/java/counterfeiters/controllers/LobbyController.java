@@ -42,14 +42,15 @@ public class LobbyController {
             }
 
             if (documentSnapshot != null && documentSnapshot.exists()) {
-                System.out.println(documentSnapshot.get("round"));
-
                 Game updateGame = documentSnapshot.toObject(Game.class);
-                app.gameController.updateData(updateGame);
 
                 if(updateGame.getRound() == 1) {
+                    listener.remove();
                     Platform.runLater(this::startTheGame);
+                    return;
                 }
+
+                app.gameController.updateData(updateGame);
             } else {
                 //Lobby has been deleted in firebase
                 Platform.runLater(this::gameDeleted);
@@ -82,6 +83,9 @@ public class LobbyController {
     public void startButtonPressed() {
         app.gameController.setStartRound(1);
 
+        //Remove the lobby
+        app.gameController.game.delete();
+
         //TO TEST THE BOARDVIEW UNCOMMENT THIS v AND COMMENT THAT ^
         //app.loadView(BoardView.class, app.boardController);
     }
@@ -108,6 +112,7 @@ public class LobbyController {
     }
 
     public void startTheGame() {
+        //Load the view
         app.loadView(BoardView.class, app.boardController);
     }
 }
