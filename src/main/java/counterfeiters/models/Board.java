@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
-    @Exclude
     public BlackMarket blackmarket = new BlackMarket();
     public PolicePawn policePawn = new PolicePawn(4);
     public FirstPlayerPawn firstPlayerPawn = new FirstPlayerPawn();
