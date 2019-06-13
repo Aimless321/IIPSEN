@@ -70,6 +70,7 @@ public class Board implements Observable{
 
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
+        game.updateData(updateBoard.game);
         notifyAllObservers();
     }
 
@@ -116,6 +117,10 @@ public class Board implements Observable{
 
     public ArrayList<Henchman> getHenchmen() {
         return henchmen;
+    }
+
+    public void setHenchmen(ArrayList<Henchman> henchmen) {
+        this.henchmen = henchmen;
     }
 
     public void setGame(Game game) {

@@ -129,8 +129,6 @@ public class Game implements Observable {
     public void delete() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.delete("lobbies", gameId);
-
-        players.clear();
     }
 
     /**
@@ -154,9 +152,7 @@ public class Game implements Observable {
         this.round = updateGame.getRound();
         this.numPlayers = updateGame.numPlayers;
 
-        //
         notifyAllObservers();
-
     }
 
     /**
@@ -178,10 +174,6 @@ public class Game implements Observable {
         observers.add(observer);
     }
 
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
     public void notifyAllObservers() {
         for(Observer obs : observers) {
             obs.update(this);
@@ -194,7 +186,6 @@ public class Game implements Observable {
 
     public void nextTurn() {
         turn++;
-        notifyAllObservers();
     }
 
     /**
@@ -210,7 +201,6 @@ public class Game implements Observable {
         if (character.equals("-")){
             localPlayer.updateMoneyReduce(qId, amount);
         }
-        notifyAllObservers();
     }
 
     public String getGameId() {
