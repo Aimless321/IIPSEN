@@ -124,8 +124,8 @@ public class LobbyView implements Observer {
         }
 
         //For testing
-        startButton.setVisible(true);
-        startButton.setDisable(false);
+        //startButton.setVisible(true);
+        //startButton.setDisable(false);
     }
 
     public void insertPlayerBox(Player player) {
