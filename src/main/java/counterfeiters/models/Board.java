@@ -12,6 +12,7 @@ public class Board implements Observable{
     @Exclude
     public BlackMarket blackmarket = new BlackMarket();
     public PolicePawn policePawn = new PolicePawn(4);
+    public FirstPlayerPawn firstPlayerPawn = new FirstPlayerPawn();
     private ArrayList<Henchman> henchmen = new ArrayList<>();
     public Game game;
 
@@ -107,6 +108,10 @@ public class Board implements Observable{
     public void advancePolice() {
         policePawn.advance();
         notifyAllObservers();
+    }
+
+    public void makeFirstPlayer(){
+        firstPlayerPawn.setFirstPlayer(game.localPlayer);
     }
 
     public ArrayList<Henchman> getHenchmen() {
