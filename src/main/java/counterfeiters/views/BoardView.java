@@ -82,7 +82,7 @@ public class BoardView implements Observer {
             placeHenchman(btn);
         }
 
-        boardcontroller.board.game.nextTurn();
+
 
     }
 
@@ -100,7 +100,6 @@ public class BoardView implements Observer {
         boardcontroller.advancePolice();
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
@@ -119,7 +118,6 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
@@ -141,7 +139,6 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
@@ -159,7 +156,6 @@ public class BoardView implements Observer {
 
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
@@ -177,7 +173,6 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
     @FXML
@@ -198,6 +193,8 @@ public class BoardView implements Observer {
 
     public void placeHenchman(Button btn) {
         boardcontroller.henchmanPlaced(btn);
+
+        boardcontroller.board.game.nextTurn();
     }
 
     @Override
@@ -247,7 +244,7 @@ public class BoardView implements Observer {
     public void updateBlackMarket(Board board) {
         for (int i = 0; i < 7; i++) {
             try {
-                ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImg());
+                ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
             }catch (NullPointerException e) {
                 System.out.println("no image");
             }
