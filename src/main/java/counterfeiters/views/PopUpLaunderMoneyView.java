@@ -2,14 +2,33 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
 import counterfeiters.models.Observable;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class PopUpLaunderMoneyView implements Observer{
+
+    public Button launder;
+    public TextField txtQualityOne;
+    public TextField txtQualityTwo;
+    public TextField txtQualityThree;
+
+    private int qualityOneMoney = 1;
+    private int qualityTwoMoney = 2;
+    private int qualityThreeMoney = 3;
+    private int realMoney = 4;
+    private int bahamasBank = 5;
+
+    private int qualityOne;
+    private int qualityTwo;
+    private int qualityThree;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -63,5 +82,14 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void start() {
+    }
+
+    @FXML
+    public void pressLaunder(MouseEvent mouseEvent) {
+        qualityOne = Integer.parseInt(txtQualityOne.getText());
+        qualityTwo = Integer.parseInt(txtQualityTwo.getText());
+        qualityThree = Integer.parseInt(txtQualityThree.getText());
+
+        controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
     }
 }

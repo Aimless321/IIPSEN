@@ -235,7 +235,6 @@ public class BoardView implements Observer {
 
             pane.getChildren().add(henchmanImage);
         }
-        // Als er game als observable dient voert die het volgende uit.
         this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
         this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
         this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));

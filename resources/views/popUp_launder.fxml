@@ -95,5 +95,14 @@
             </VBox>
          </children>
       </HBox>
+      <HBox layoutY="150.0" prefHeight="50.0" prefWidth="400.0">
+         <children>
+            <Button fx:id="launder" mnemonicParsing="false" onMouseClicked="#pressLaunder" prefHeight="25.0" prefWidth="100.0" styleClass="green-button" text="Launder">
+               <HBox.margin>
+                  <Insets left="150.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
