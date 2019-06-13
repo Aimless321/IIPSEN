@@ -52,12 +52,8 @@ public class Board implements Observable{
      * @version 11-06-2019
      * */
     public boolean checkMoney(int id, int bedrag){
-
-
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-
             game.localPlayer.updateMoneyReduce(id, bedrag);
-
             return true;
         }
             return false;
