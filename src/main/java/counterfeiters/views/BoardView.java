@@ -161,11 +161,24 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
 
+        int qualityCounter = 0;
+        int printerCounter = 0;
         if(!boardcontroller.board.game.checkYourTurn()) {
             return;
         }
 
         Button btn = (Button) mouseEvent.getSource();
+
+        for(String card : boardcontroller.getCardNames()){
+            if(card.equals("PrinterUpgrade")){
+                qualityCounter++;
+            }
+            else if(card.equals("Printer")){
+                printerCounter++;
+            }
+        }
+
+        boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter,printerCounter);
 
         if(btn.getId().equals("police")) {
 
@@ -173,7 +186,9 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
+        boardcontroller.board.game.nextTurn();
     }
+
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
