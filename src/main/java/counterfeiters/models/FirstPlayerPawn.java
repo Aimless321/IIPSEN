@@ -10,4 +10,8 @@ public class FirstPlayerPawn {
     public void setFirstPlayer(Player firstPlayer) {
         this.firstPlayer = firstPlayer;
     }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
+    }
 }

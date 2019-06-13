@@ -57,6 +57,7 @@ public class GameController {
         FirebaseService fb = FirebaseService.getInstance();
         Game game = fb.get("lobbies", gameid).toObject(Game.class);
         this.game = game;
+        app.boardController.board.game = game;
 
         Player client = new Player(app.accountController.getUsername());
         game.localPlayer = client;
