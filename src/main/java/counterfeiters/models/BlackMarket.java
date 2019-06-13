@@ -50,6 +50,17 @@ public class BlackMarket {
         }
     }
 
+    public Card givePlayerCard(Card cardtype) {
+        for (Card n : marketList) {
+            if (n.getClass() == cardtype.getClass()) {
+                Card card = n;
+                marketList.remove(n);
+                return card;
+            }
+        }
+        return null;
+    }
+
 
     public Card getCard(int position) {
         return cardRow.get(position);

@@ -28,7 +28,6 @@ public class Player {
         this.bahamasBank = new BahamasBank();
         realMoney.setTotalMoney(100);
         bahamasBank.setTotalBankMoney(0);
-
     }
 
     public void leaveLobby(Game game) {
@@ -177,5 +176,9 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public ArrayList<Card> getCards() {
+        return cards;
     }
 }

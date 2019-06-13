@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardController {
@@ -142,6 +143,13 @@ public class BoardController {
         board.advancePolice();
     }
 
+    public ArrayList<String> getCardNames(){
+        ArrayList<String> cardsAsString = new ArrayList<>();
+        for( Card card : app.gameController.game.localPlayer.getCards()) {
+            cardsAsString.add(card.getName());
+        }
+        return cardsAsString;
+    }
 
     public void makePurchase(String cardNumber ) {
         board.makePurchase(Integer.parseInt(cardNumber));
@@ -153,5 +161,10 @@ public class BoardController {
 
     public void makeFirstPlayer() {
         board.makeFirstPlayer();
+    }
+
+    public void givePlayerCards() {
+        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new Printer()));
+        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new PrinterUpgrade()));
     }
 }
