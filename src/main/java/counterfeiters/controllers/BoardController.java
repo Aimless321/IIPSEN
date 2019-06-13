@@ -162,4 +162,9 @@ public class BoardController {
     public void makeFirstPlayer() {
         board.makeFirstPlayer();
     }
+
+    public void givePlayerCards() {
+        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new Printer()));
+        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new PrinterUpgrade()));
+    }
 }

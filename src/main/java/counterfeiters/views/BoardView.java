@@ -313,5 +313,6 @@ public class BoardView implements Observer {
         boardcontroller.prepareView();
 
         boardcontroller.registerListeners();
+        boardcontroller.givePlayerCards();
     }
 }

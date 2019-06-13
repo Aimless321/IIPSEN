@@ -16,4 +16,5 @@ public class PrinterUpgrade extends Card {
             super.setImg("/cards/hologram.png");
         }
     }
+    public PrinterUpgrade() {}
 }
