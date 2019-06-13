@@ -92,4 +92,46 @@ public class PopUpLaunderMoneyView implements Observer{
 
         controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
     }
+
+    @FXML
+    public void plusQualityOne(MouseEvent mouseEvent) {
+        counterPlus(qualityOne, txtQualityOne);
+    }
+
+    @FXML
+    public void minQualityOne(MouseEvent mouseEvent) {
+        counterMin(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void plusQualityTwo(MouseEvent mouseEvent) {
+        counterPlus(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void minQualityTwo(MouseEvent mouseEvent) {
+        counterMin(qualityTwo, txtQualityTwo);
+    }
+
+    @FXML
+    public void plusQualityThree(MouseEvent mouseEvent) {
+        counterPlus(qualityThree, txtQualityThree);
+    }
+
+    @FXML
+    public void minQualitythree(MouseEvent mouseEvent) {
+        counterMin(qualityThree, txtQualityThree);
+    }
+
+    public void counterPlus(int quality, TextField textfield){
+        quality = Integer.parseInt(textfield.getText());
+        quality++;
+        textfield.setText(String.valueOf(quality));
+    }
+
+    public void counterMin(int quality, TextField textfield){
+        quality = Integer.parseInt(textfield.getText());
+        quality--;
+        textfield.setText(String.valueOf(quality));
+    }
 }
