@@ -150,4 +150,8 @@ public class BoardController {
     public boolean checkCard(Card card) {
         return board.game.localPlayer.hasCard(card);
     }
+
+    public void makeFirstPlayer() {
+        board.makeFirstPlayer();
+    }
 }

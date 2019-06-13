@@ -103,8 +103,9 @@ public class BoardView implements Observer {
         }
 
         Button btn = (Button) mouseEvent.getSource();
-        if(btn.getStyleClass().get(0).equals("police")) {
-            boardcontroller.advancePolice();
+
+        if (btn.getStyleClass().get(1).equals("glasses")) {
+            boardcontroller.makeFirstPlayer();
         }
 
         placeHenchman(btn);
