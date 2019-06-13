@@ -186,7 +186,6 @@ public class BoardView implements Observer {
         }
 
         placeHenchman(btn);
-        boardcontroller.board.game.nextTurn();
     }
 
 
@@ -207,9 +206,9 @@ public class BoardView implements Observer {
     }
 
     public void placeHenchman(Button btn) {
-        boardcontroller.henchmanPlaced(btn);
-
         boardcontroller.board.game.nextTurn();
+
+        boardcontroller.henchmanPlaced(btn);
     }
 
     @Override
@@ -271,10 +270,10 @@ public class BoardView implements Observer {
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
-        policePawn.setX(bounds.getMinX());
+        //policePawn.setX(bounds.getMinX());
 
         //Pawn is too low, so set it a big higher
-        policePawn.setY(bounds.getMaxY()-20);
+        //policePawn.setY(bounds.getMaxY()-20);
     }
 
     public void resetHenchman() {
