@@ -5,6 +5,7 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ public class BoardController {
     private ListenerRegistration listener;
     private String plus = "+";
     private String min = "-";
+    private boolean lobbyDeleted = false;
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -123,19 +125,23 @@ public class BoardController {
     }
 
     public void henchmanPlaced(Button btn) {
-            Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+        if(!lobbyDeleted) {
+            app.gameController.game.delete();
+        }
 
-            //Calculate middle position of the button
-            double posX = bounds.getMinX() + btn.getWidth() / 3;
-            double posY = bounds.getMinY() + btn.getHeight() / 5;
-            Player player = app.gameController.game.localPlayer;
-            //updateMoneyOnPosition(4, min, 30);
-            board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
+        Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+
+        //Calculate middle position of the button
+        double posX = bounds.getMinX() + btn.getWidth() / 3;
+        double posY = bounds.getMinY() + btn.getHeight() / 5;
+        Player player = app.gameController.game.localPlayer;
+        //updateMoneyOnPosition(4, min, 30);
+        board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
         board.prepareBlackMarket();
-        app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
+        //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }
 
     public void advancePolice() {
