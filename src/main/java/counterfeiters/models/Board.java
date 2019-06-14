@@ -75,6 +75,11 @@ public class Board implements Observable{
         return game.checkYourTurn(firstPlayerPawn);
     }
 
+    @Exclude
+    public Player getCurrentPlayer() {
+        return game.getCurrentPlayer(firstPlayerPawn);
+    }
+
     public void updateFirebase() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("games", game.getGameId(), this);
