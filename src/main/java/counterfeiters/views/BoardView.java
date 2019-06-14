@@ -70,7 +70,7 @@ public class BoardView implements Observer {
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -89,7 +89,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -105,7 +105,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -144,7 +144,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -163,7 +163,7 @@ public class BoardView implements Observer {
 
         int qualityCounter = 0;
         int printerCounter = 0;
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 

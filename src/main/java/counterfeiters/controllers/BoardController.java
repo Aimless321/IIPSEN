@@ -135,6 +135,7 @@ public class BoardController {
     }
 
     public void prepareView() {
+        board.randomFirstPlayer();
         board.prepareBlackMarket();
         //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }

@@ -6,6 +6,7 @@ import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -38,6 +39,15 @@ public class Board implements Observable{
         updateFirebase();
     }
 
+    public void randomFirstPlayer() {
+        ArrayList<Player> players = game.getPlayers();
+
+        Random random = new Random();
+        Player randomPlayer = players.get(random.nextInt(players.size()));
+
+        firstPlayerPawn.setFirstPlayer(randomPlayer);
+    }
+
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
 
@@ -59,6 +69,10 @@ public class Board implements Observable{
             return true;
         }
             return false;
+    }
+
+    public boolean checkYourTurn() {
+        return game.checkYourTurn(firstPlayerPawn);
     }
 
     public void updateFirebase() {
