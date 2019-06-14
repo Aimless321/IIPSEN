@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class PolicePawn{
 
-    private int pawnPosition;
+    private int pawnPosition = 1;
 
     HashMap<Integer, Integer> xcoordinates= new HashMap<Integer, Integer>();
     HashMap<Integer, Integer> ycoordinates= new HashMap<Integer, Integer>();
@@ -19,11 +19,13 @@ public class PolicePawn{
         if (players == 3) {
             this.pawnPosition = 4;
         }
-        else {
-            this.pawnPosition = 1;
-        }
+
         fillXCoordinates();
         fillYCoordinates();
+    }
+
+    public void updateData(PolicePawn updatePolicePawn) {
+        this.pawnPosition = updatePolicePawn.pawnPosition;
     }
 
     private void fillXCoordinates() {

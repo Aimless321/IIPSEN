@@ -270,10 +270,13 @@ public class BoardView implements Observer {
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
-        //policePawn.setX(bounds.getMinX());
+        try {
+            policePawn.setX(bounds.getMinX());
 
-        //Pawn is too low, so set it a big higher
-        //policePawn.setY(bounds.getMaxY()-20);
+            //Pawn is too low, so set it a big higher
+            policePawn.setY(bounds.getMaxY()-20);
+        } catch (NullPointerException e) {}
+
     }
 
     public void resetHenchman() {

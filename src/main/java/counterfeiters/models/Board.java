@@ -86,6 +86,7 @@ public class Board implements Observable{
         //Update all the other models aswell
         game.updateData(updateBoard.game);
         blackmarket.updateData(updateBoard.blackmarket);
+        policePawn.updateData(updateBoard.policePawn);
 
         notifyAllObservers();
     }

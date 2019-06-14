@@ -52,6 +52,8 @@ public class BoardController {
                     }
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
+                        System.out.println("Updating board");
+
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
                     }
