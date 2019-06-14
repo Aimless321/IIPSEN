@@ -150,6 +150,7 @@ public class Game implements Observable {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
         this.round = updateGame.getRound();
+        this.turn = updateGame.getTurn();
         this.numPlayers = updateGame.numPlayers;
 
         notifyAllObservers();
@@ -249,5 +250,13 @@ public class Game implements Observable {
 
     public void setLobbyName(String lobbyName) {
         this.lobbyName = lobbyName;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }
