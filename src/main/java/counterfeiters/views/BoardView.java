@@ -199,10 +199,9 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
-
-
-        Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+        ImageView img = (ImageView) mouseEvent.getSource();
+        boardcontroller.app.playerCardController.setPlayerID(Integer.parseInt(img.getStyleClass().get(1)));
+        boardcontroller.app.loadView(PlayerCardView.class, boardcontroller.app.playerCardController);
     }
 
     public void placeHenchman(Button btn) {
