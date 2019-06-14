@@ -68,7 +68,11 @@ public class Board implements Observable{
 
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
+
+        //Update all the other models aswell
         game.updateData(updateBoard.game);
+        blackmarket.updateData(updateBoard.blackmarket);
+
         notifyAllObservers();
     }
 

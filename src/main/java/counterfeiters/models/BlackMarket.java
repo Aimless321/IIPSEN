@@ -15,6 +15,10 @@ public class BlackMarket {
         this.marketList = new ArrayList<>();
     }
 
+    public void updateData(BlackMarket updateBlackMarket) {
+        cardRow = updateBlackMarket.cardRow;
+    }
+
     public void addToMarket(Card card) {
         marketList.add(card);
     }
