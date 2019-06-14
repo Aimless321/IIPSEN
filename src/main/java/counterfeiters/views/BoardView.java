@@ -1,10 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.Board;
-import counterfeiters.models.Henchman;
-import counterfeiters.models.Observable;
-import counterfeiters.models.PlaneTicket;
+import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -20,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 public class BoardView implements Observer {
@@ -170,15 +168,16 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         for(String card : boardcontroller.getCardNames()){
-            if(card.equals("PrinterUpgrade")){
+            if(card.equals("upgrade")){
                 qualityCounter++;
             }
-            else if(card.equals("Printer")){
+            else if(card.equals("printer")){
                 printerCounter++;
             }
+
         }
 
-        boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter,printerCounter);
+        boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter, printerCounter);
 
         if(btn.getStyleClass().contains("police")) {
 
@@ -308,9 +307,11 @@ public class BoardView implements Observer {
         }
 
         boardcontroller.registerObserver(this);
+        boardcontroller.givePlayerCards();
         boardcontroller.prepareView();
 
         boardcontroller.registerListeners();
-        boardcontroller.givePlayerCards();
+
+
     }
 }
