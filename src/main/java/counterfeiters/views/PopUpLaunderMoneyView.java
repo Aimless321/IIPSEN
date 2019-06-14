@@ -57,6 +57,7 @@ public class PopUpLaunderMoneyView implements Observer{
         qualityThree = Integer.parseInt(txtQualityThree.getText());
     }
 
+    //test
     public void counterPlus(int amount, TextField textfield){
         if(controller.checkQualityQuantity(amount)){
             amount++;
