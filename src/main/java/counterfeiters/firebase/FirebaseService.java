@@ -26,13 +26,13 @@ public class FirebaseService {
 
     private FirebaseService() {
         InputStream serviceAccount =
-                getClass().getResourceAsStream("/FB-backup.json");
+                getClass().getResourceAsStream("/firebase-creds.json");
 
         FirebaseOptions options = null;
         try {
             options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                    .setDatabaseUrl("https://groep01-3e215.firebaseio.com")
+                    .setDatabaseUrl("https://iipsen-groep1.firebaseio.com")
                     .build();
 
             FirebaseApp.initializeApp(options);

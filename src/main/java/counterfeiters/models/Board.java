@@ -48,7 +48,7 @@ public class Board implements Observable{
 
 
     /**
-     * This method checks whether the user has enought money, If this is the case, the money wil de deducted from his account.
+     * This method checks whether the user has enough money, If this is the case, the money wil de deducted from his account.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
@@ -76,6 +76,7 @@ public class Board implements Observable{
         int result = (qualiytOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
+        notifyAllObservers();
     }
 
     public void makePurchase(int cardNumber) {
@@ -127,5 +128,13 @@ public class Board implements Observable{
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public boolean checkQualityQuantity(int amount) {
+        if (game.localPlayer.getFakeMoney().getQualityOne() == amount){
+            return true;
+        }
+        else
+            return true;
     }
 }
