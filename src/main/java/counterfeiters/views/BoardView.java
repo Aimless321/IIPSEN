@@ -113,7 +113,7 @@ public class BoardView implements Observer {
 
         boardcontroller.updateMoneyOnPosition(realMoney, plus, Integer.parseInt(btn.getId()));
 
-        if (btn.getStyleClass().get(1).equals("glasses")) {
+        if (btn.getStyleClass().contains("glasses")) {
             boardcontroller.makeFirstPlayer();
         }
 
@@ -129,11 +129,11 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().get(1).equals("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
+        if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
             System.out.println("player has no ticket!");
             return;
         }
-        else if(!btn.getStyleClass().get(1).equals("ticket")
+        else if(!btn.getStyleClass().contains("ticket")
                 && !boardcontroller.checkActionField(4, btn.getId())) {
             return;
         }
@@ -150,7 +150,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getId().equals("police")) {
+        if(btn.getStyleClass().contains("police")) {
             boardcontroller.advancePolice();
         }
 
@@ -180,7 +180,7 @@ public class BoardView implements Observer {
 
         boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter,printerCounter);
 
-        if(btn.getId().equals("police")) {
+        if(btn.getStyleClass().contains("police")) {
 
             boardcontroller.advancePolice();
         }
