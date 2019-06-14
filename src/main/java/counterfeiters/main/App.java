@@ -17,7 +17,7 @@ public class App extends Application
        // final ObservableList lobbies = FXCollections.observableArrayList("Julia", "Ian", "Sue", "Matthew", "Hannah", "Stephan", "Denise");
 
 
-        primaryStage.setMaximized(true);
+        primaryStage.setFullScreen(true);
         primaryStage.setTitle("Counterfeiters");
         primaryStage.show();
     }
