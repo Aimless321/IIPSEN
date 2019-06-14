@@ -85,7 +85,7 @@ public class LobbyController {
 
 
         //TO TEST THE BOARDVIEW UNCOMMENT THIS
-        //app.loadView(BoardView.class, app.boardController);
+        app.loadView(BoardView.class, app.boardController);
     }
 
     /**

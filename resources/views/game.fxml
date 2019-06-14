@@ -103,7 +103,7 @@
             <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="58.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button id="police" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police">
+            <Button mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police">
                <GridPane.margin>
                   <Insets bottom="8.0" />
                </GridPane.margin>
@@ -123,27 +123,27 @@
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="30" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="none" GridPane.columnIndex="4">
+            <Button id="30" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#actionFieldFly" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="4">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="none" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="none" GridPane.columnIndex="2">
+            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldHealer" opacity="0.0" prefHeight="49.0" prefWidth="113.0" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
+            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldLaunder" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
             </Button>
-            <Button id="police" layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
+            <Button layoutX="10.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#actionFieldPrint" opacity="0.0" prefHeight="49.0" prefWidth="113.0" styleClass="police" GridPane.columnIndex="8" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets bottom="9.0" />
                </GridPane.margin>
