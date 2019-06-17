@@ -1,12 +1,10 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
-import counterfeiters.models.Board;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,22 +16,23 @@ import javafx.stage.StageStyle;
 
 public class PopUpLaunderMoneyView implements Observer{
 
+    // FXML values.
     public TextField txtQualityOne;
     public TextField txtQualityTwo;
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
-    public Text TextField;
+    public Text txtField;
 
+    // Values from textfield.
     private int qualityOne;
     private int qualityTwo;
     private int qualityThree;
     private int currentAmount;
 
+    // As arguments for the methods.
     private String strQualityOne = "qualityOne";
     private String strQualityTwo = "qualityTwo";
     private String strQualityThree = "qualityThree";
-
-    //Type money
     private int realMoney = 4;
 
     private Stage stage;
@@ -52,6 +51,13 @@ public class PopUpLaunderMoneyView implements Observer{
         show();
     }
 
+    /**
+     * Retrieves the values, adds them and returns the total.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * @return total
+     * */
     public int getValues(){
         qualityOne = Integer.parseInt(txtQualityOne.getText());
         qualityTwo = Integer.parseInt(txtQualityTwo.getText());
@@ -61,6 +67,12 @@ public class PopUpLaunderMoneyView implements Observer{
         return total;
     }
 
+    /**
+     * Calculates how much 'fakemoney' the user has and ensures that the user cannot add more than what is indicated.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
     public void counterPlus(String quality, TextField textfield){
         currentAmount = Integer.parseInt(textfield.getText());
 
@@ -70,6 +82,12 @@ public class PopUpLaunderMoneyView implements Observer{
         }
     }
 
+    /**
+     * Ensures that you cannot click lower than 0
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
     public void counterMin(TextField textfield){
         currentAmount = Integer.parseInt(textfield.getText());
 
@@ -81,13 +99,14 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @FXML
     public void pressLaunder(MouseEvent mouseEvent) {
-        if (getValues() < 8){
-            controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+        if (getValues() <= 8){
+            controller.transerMoney(realMoney, qualityOne, qualityTwo, qualityThree);
 
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
         } else{
-            TextField.setText("You can only launder 8 money!");
+            txtField.setText("You can only launder 8 bills!");
+            System.out.println("bitch");
         }
     }
 
@@ -145,7 +164,6 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void setController(Object controller) {
-
         PopUpLaunderMoneyController popUpLaunderMoneyController = (PopUpLaunderMoneyController) controller;
         this.controller = popUpLaunderMoneyController;
         popUpLaunderMoneyController.registerObserver(this);
@@ -153,8 +171,6 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void update(Observable observable) {
-//        Board board = (Board)observable;
-//        textField.setText(board.getTextField());
     }
 
     @Override

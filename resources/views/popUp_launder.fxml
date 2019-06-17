@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
    <children>
       <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
          <children>
@@ -104,6 +104,6 @@
             </Button>
          </children>
       </HBox>
-      <Text fx:id="textfield" fill="RED" layoutX="134.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="133.0" />
+      <Text fx:id="txtField" fill="RED" layoutX="134.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="133.0" />
    </children>
 </AnchorPane>

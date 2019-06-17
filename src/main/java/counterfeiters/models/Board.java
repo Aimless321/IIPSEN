@@ -72,7 +72,7 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void countMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
