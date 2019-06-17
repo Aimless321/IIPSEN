@@ -327,22 +327,22 @@
             </ImageView>
          </children>
       </VBox>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="cards2">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="2">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="588.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="cards1">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="588.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="1">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="390.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="cards3">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="390.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="3">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="589.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="cards0">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="589.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="0">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
