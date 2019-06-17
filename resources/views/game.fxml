@@ -211,22 +211,29 @@
             <Image url="@/players/herron.jpg" />
          </image>
       </ImageView>
-      <Text layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
+
+      <Text fx:id="crocplayer" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
+      <Text fx:id="deerplayer" layoutX="1459.0" layoutY="732.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="1459.0" layoutY="732.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
+      <Text fx:id="herronplayer" layoutX="1459.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="1459.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
+      <Pane fx:id="hippopane">
+      <ImageView fx:id="hippoimageview" fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="198.0" id="profile-hippo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@/players/hippo.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="hippoplayer" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
@@ -255,6 +262,12 @@
             </ImageView>
          </children>
       </VBox>
+         <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="2">
+            <image>
+               <Image url="@/cards/upgrades.png" />
+            </image>
+         </ImageView>
+      </Pane>
       <VBox id="henchman-croc" alignment="TOP_CENTER" layoutX="233.0" layoutY="740.0" prefHeight="144.0" prefWidth="48.0" spacing="18.0">
          <children>
             <ImageView fitHeight="150.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
@@ -327,12 +340,12 @@
             </ImageView>
          </children>
       </VBox>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="1">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="0">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="588.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="0">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="588.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="1">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>

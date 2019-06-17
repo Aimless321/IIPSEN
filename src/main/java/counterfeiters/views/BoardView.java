@@ -21,6 +21,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class BoardView implements Observer {
@@ -33,6 +35,11 @@ public class BoardView implements Observer {
     public Text qualityThreeMoney;
     public Text totalRealMoney;
     public Text totalBankMoney;
+    public Text crocplayer;
+    public Text deerplayer;
+    public Text herronplayer;
+    public Text hippoplayer;
+    public Pane hippopane;
 
     private String plus = "+";
     private String min = "-";
@@ -310,6 +317,28 @@ public class BoardView implements Observer {
         }
     }
 
+    public void playersAndCards() {
+        //FOR LOOP
+        HashMap<String, String> map = boardcontroller.board.getPlayersAndCards();
+        for (Map.Entry playerValues : map.entrySet()) {
+            System.out.println("Key: " + playerValues.getKey() + " & Value: " + playerValues.getValue());
+            switch (playerValues.getKey().toString()) {
+                case "1":
+                    crocplayer.setText(playerValues.getValue().toString());
+                case "2":
+                    deerplayer.setText(playerValues.getValue().toString());
+                case "3":
+                    herronplayer.setText(playerValues.getValue().toString());
+                case "4":
+                    hippoplayer.setText(playerValues.getValue().toString());
+            }
+        }
+        //If there are only 3 players hide the fourth player.
+        if (map.size() ==3){
+            hippopane.setVisible(false);
+        }
+    }
+
     public void updateMoney(Board board) {
         this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
         this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
@@ -346,6 +375,7 @@ public class BoardView implements Observer {
 
         boardcontroller.registerObserver(this);
         boardcontroller.prepareView();
+        playersAndCards();
 
         boardcontroller.registerListeners();
 

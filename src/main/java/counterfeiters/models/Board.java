@@ -6,6 +6,7 @@ import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Board implements Observable{
@@ -14,6 +15,7 @@ public class Board implements Observable{
     public PolicePawn policePawn = new PolicePawn(4);
     public FirstPlayerPawn firstPlayerPawn = new FirstPlayerPawn();
     private ArrayList<Henchman> henchmen = new ArrayList<>();
+    private HashMap<String, String> hmap = new HashMap<String, String>();
     public Game game;
 
     public Board() {
@@ -147,5 +149,18 @@ public class Board implements Observable{
     public void prepareFirstPlayer() {
         Player host = game.getPlayers().get(0);
         firstPlayerPawn.setFirstPlayer(host);
+    }
+
+    @Exclude
+    public void setPlayersAndCards() {
+        for (Player player : game.getPlayers()) {
+            hmap.put(String.valueOf(player.getPlayerId()), player.getUserName());
+            //String charachtertext = player.getCharacterName() + "player";
+        }
+    }
+
+    @Exclude
+    public HashMap<String,String> getPlayersAndCards() {
+        return hmap;
     }
 }
