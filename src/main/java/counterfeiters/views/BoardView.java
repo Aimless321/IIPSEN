@@ -146,6 +146,8 @@ public class BoardView implements Observer {
             return;
         }
 
+        boardcontroller.app.popUpBahamasController.bahamas();
+
         Button btn = (Button) mouseEvent.getSource();
 
         if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
