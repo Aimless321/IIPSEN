@@ -211,22 +211,22 @@
             <Image url="@/players/herron.jpg" />
          </image>
       </ImageView>
-      <Text layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
+      <Text fx:id="hippoplayer" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
+      <Text fx:id="crocplayer" layoutY="731.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" textAlignment="RIGHT" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="1459.0" layoutY="732.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
+      <Text fx:id="deerplayer" layoutX="1459.0" layoutY="732.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Text layoutX="1459.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
+      <Text fx:id="herronplayer" layoutX="1459.0" layoutY="381.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PLAYER" wrappingWidth="424.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
