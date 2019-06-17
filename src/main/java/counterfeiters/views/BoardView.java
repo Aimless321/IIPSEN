@@ -345,7 +345,6 @@ public class BoardView implements Observer {
         }
 
         boardcontroller.registerObserver(this);
-        boardcontroller.givePlayerCards();
         boardcontroller.prepareView();
 
         boardcontroller.registerListeners();

@@ -3,6 +3,8 @@ package counterfeiters.controllers;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
+import counterfeiters.models.Printer;
+import counterfeiters.models.PrinterUpgrade;
 import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
@@ -33,12 +35,20 @@ public class GameController {
 
 
     public void createGame(Player player) {
+        //Add cards to host
+        givePlayerCards(player);
+
         game.createNewGame(player);
 
         app.lobbyController.registerListeners();
 
         //Give the game to the board aswell
         app.boardController.board.game = game;
+    }
+
+    private void givePlayerCards(Player player) {
+        player.addCard(app.boardController.givePlayerCard(new Printer()));
+        player.addCard(app.boardController.givePlayerCard(new PrinterUpgrade()));
     }
 
     public void loadFromSavedGame(Game game) {
@@ -60,6 +70,10 @@ public class GameController {
         app.boardController.board.game = game;
 
         Player client = new Player(app.accountController.getUsername());
+
+        //Give the standard cards when the player joins, so they don't get overwritten
+        givePlayerCards(client);
+
         game.localPlayer = client;
         game.addPlayer(client);
 
