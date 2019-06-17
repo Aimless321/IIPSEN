@@ -150,12 +150,10 @@ public class BoardController {
         board.advancePolice();
     }
 
-    public ArrayList<String> getCardNames(){
-        ArrayList<String> cardsAsString = new ArrayList<>();
-        for( Card card : app.gameController.game.localPlayer.getCards()) {
-            cardsAsString.add(card.getName());
-        }
-        return cardsAsString;
+    public void printMoney() {
+
+        int[] print = board.printMoney();
+        board.game.localPlayer.updateMoneyPlus(print[0], print[1]);
     }
 
     public void makePurchase(String cardNumber ) {
