@@ -39,15 +39,6 @@ public class Board implements Observable{
         updateFirebase();
     }
 
-    public void randomFirstPlayer() {
-        ArrayList<Player> players = game.getPlayers();
-
-        Random random = new Random();
-        Player randomPlayer = players.get(random.nextInt(players.size()));
-
-        firstPlayerPawn.setFirstPlayer(randomPlayer);
-    }
-
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
 
@@ -160,5 +151,10 @@ public class Board implements Observable{
         }
         else
             return true;
+    }
+
+    public void prepareFirstPlayer() {
+        Player host = game.getPlayers().get(0);
+        firstPlayerPawn.setFirstPlayer(host);
     }
 }
