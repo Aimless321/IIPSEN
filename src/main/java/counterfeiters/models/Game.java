@@ -16,6 +16,7 @@ public class Game implements Observable {
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
     private int turn = 0;
+    private Player firstPlayer;
     @Exclude
     public Player localPlayer;
     private Date startTime;
@@ -185,11 +186,12 @@ public class Game implements Observable {
     @Exclude
     public Player getCurrentPlayer(FirstPlayerPawn firstPlayerPawn) {
         if(turn == 0) {
+            this.firstPlayer = firstPlayerPawn.getFirstPlayer();
             return firstPlayerPawn.getFirstPlayer();
         }
 
         //Start at the first player index plus the turn, then modulo it for the amount of players
-        int firstPlayerIndex = firstPlayerPawn.getFirstPlayer().getPlayerId()-1;
+        int firstPlayerIndex = firstPlayer.getPlayerId()-1;
         Player current = players.get((turn + firstPlayerIndex) % players.size());
 
         return current;
@@ -216,6 +218,14 @@ public class Game implements Observable {
         if (character.equals("-")){
             localPlayer.updateMoneyReduce(qId, amount);
         }
+    }
+
+    /**
+     * Checks if all of the players have set 3 henchmen.
+     * @return true/false
+     */
+    public boolean checkEndRound() {
+        return turn == players.size() * 3;
     }
 
     public String getGameId() {

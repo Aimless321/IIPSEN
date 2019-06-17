@@ -1,12 +1,11 @@
 package counterfeiters.models;
 
-import com.google.cloud.firestore.annotation.Exclude;
-import javafx.scene.image.Image;
+import counterfeiters.events.EventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BlackMarket {
+public class BlackMarket implements EventListener {
     private ArrayList<Card> marketList = new ArrayList<>();;
 
     public ArrayList<Card> cardRow = new ArrayList<>();
@@ -41,11 +40,9 @@ public class BlackMarket {
      * @autor: LeanderLoomans
      */
     public void refill() {
-        for (int i = 0; i < 7; i++) {
-            if ((cardRow.size() > 0) && cardRow.get(i).equals(BlancCard.class)) {
-                cardRow.remove(i);
-            }
-        }
+        //Remove all blanccards
+        cardRow.removeIf(card -> (card.getName().equals("")));
+
         while (cardRow.size() < 7) {
             addToRow();
         }
@@ -81,5 +78,24 @@ public class BlackMarket {
 
     public void setMarketList(ArrayList<Card> marketList) {
         this.marketList = marketList;
+    }
+
+    @Override
+    public void onRoundEnd() {
+        //Remove first 2 cards
+        cardRow.remove(0);
+        cardRow.remove(0);
+
+        refill();
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 }

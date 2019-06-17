@@ -7,6 +7,10 @@ public class FirstPlayerPawn {
 
     }
 
+    public void updateData(FirstPlayerPawn firstPlayerPawn) {
+        this.firstPlayer = firstPlayerPawn.getFirstPlayer();
+    }
+
     public void setFirstPlayer(Player firstPlayer) {
         this.firstPlayer = firstPlayer;
     }

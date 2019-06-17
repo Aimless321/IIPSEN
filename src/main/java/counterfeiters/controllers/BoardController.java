@@ -129,9 +129,14 @@ public class BoardController {
         //Calculate middle position of the button
         double posX = bounds.getMinX() + btn.getWidth() / 3;
         double posY = bounds.getMinY() + btn.getHeight() / 5;
+
         Player player = app.gameController.game.localPlayer;
-        //updateMoneyOnPosition(4, min, 30);
-        board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
+        board.placeHenchman(posX, posY, player.getCharacterName());
+
+        board.checkEndRound();
+
+        board.updateFirebase();
+        board.notifyAllObservers();
     }
 
     public void prepareView() {
