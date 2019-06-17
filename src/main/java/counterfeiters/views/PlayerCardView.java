@@ -4,7 +4,8 @@ import counterfeiters.controllers.PlayerCardController;
 import counterfeiters.models.Observable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -15,7 +16,8 @@ public class PlayerCardView implements Observer{
 
     private Stage stage;
     private PlayerCardController controller;
-    public GridPane playerCardView;
+    public FlowPane playerCardView;
+    public ScrollPane scrollPane;
 
     //Need an empty constructor for FXML
     public PlayerCardView() {
@@ -38,11 +40,13 @@ public class PlayerCardView implements Observer{
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1200, 800);
+        Scene scene = new Scene(root, 1000, 650);
+
 
         Stage popupStage = new Stage(StageStyle.DECORATED);
         popupStage.initOwner(stage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
+        popupStage.setResizable(false);
         popupStage.setScene(scene);
         popupStage.show();
     }
@@ -66,7 +70,6 @@ public class PlayerCardView implements Observer{
 
     @Override
     public void start() {
-        //playerCardView.getChildren().removeAll();
         controller.makeCardView(playerCardView);
     }
 }
