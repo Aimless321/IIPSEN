@@ -56,8 +56,7 @@ public class LobbyView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
-        stage.setScene(scene);
+        stage.getScene().setRoot(pane);
     }
 
     @FXML

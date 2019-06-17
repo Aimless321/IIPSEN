@@ -63,8 +63,7 @@ public class BoardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
-        stage.setScene(scene);
+        stage.getScene().setRoot(pane);
     }
 
     @FXML
