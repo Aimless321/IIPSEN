@@ -27,6 +27,9 @@ public class ApplicationController {
     public RulesController rulesController;
     public AccountController accountController;
     public GameListController gameListController;
+    public PopUpLaunderMoneyController popUpLaunderMoneyController;
+    public PopUpBahamasController popUpBahamasController;
+    public PlayerCardController playerCardController;
 
     public ApplicationController(Stage stage) {
         this.stage = stage;
@@ -43,6 +46,9 @@ public class ApplicationController {
         rulesController = new RulesController(this);
         accountController = new AccountController(this);
         gameListController = new GameListController(this);
+        popUpLaunderMoneyController = new PopUpLaunderMoneyController(this);
+        popUpBahamasController = new PopUpBahamasController(this);
+        playerCardController = new PlayerCardController(this);
 
         //Load first view
         loadView(LoginView.class, loginController);

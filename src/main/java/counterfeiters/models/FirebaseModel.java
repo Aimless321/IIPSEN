@@ -51,6 +51,9 @@ public class FirebaseModel implements Observable {
 
 
         // retrieve all documents in lobbies
+        if(fb.getAllDocumentsFromCollection("lobbies")==null) {
+
+        }
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
 
 

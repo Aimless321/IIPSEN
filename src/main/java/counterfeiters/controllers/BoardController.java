@@ -8,14 +8,14 @@ import counterfeiters.views.Observer;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardController {
     public ApplicationController app;
     public Board board = new Board();
     private ListenerRegistration listener;
-    private String plus = "+";
-    private String min = "-";
+    private boolean lobbyDeleted = false;
 
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -36,8 +36,6 @@ public class BoardController {
 
     public void registerObserver(Observer observer) {
         board.registerObserver(observer);
-//        board.notifyAllObservers(); //Zo wordt het geld niet geupdate.
-        app.gameController.registerObserver(observer); //Met deze update hij het geld wel
     }
 
     public void registerListeners() {
@@ -52,6 +50,8 @@ public class BoardController {
                     }
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
+                        System.out.println("Updating board");
+
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
                     }
@@ -109,11 +109,9 @@ public class BoardController {
      * @version 11-06-2019
      * */
     public boolean checkActionField(int moneyId, String id){
-
-
         int money = Integer.parseInt(id);
 
-        if (board.checkActionField(moneyId, money)) {
+        if (board.checkMoney(moneyId, money)) {
             //TODO: Fout
             app.gameController.game.notifyAllObservers();
             return true;
@@ -122,24 +120,63 @@ public class BoardController {
     }
 
     public void henchmanPlaced(Button btn) {
-            Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+        if(!lobbyDeleted) {
+            app.gameController.game.delete();
+        }
 
-            //Calculate middle position of the button
-            double posX = bounds.getMinX() + btn.getWidth() / 3;
-            double posY = bounds.getMinY() + btn.getHeight() / 5;
-            Player player = app.gameController.game.localPlayer;
-            //updateMoneyOnPosition(4, min, 30);
-            board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
+        Bounds bounds = btn.localToScene(btn.getBoundsInLocal());
+
+        //Calculate middle position of the button
+        double posX = bounds.getMinX() + btn.getWidth() / 3;
+        double posY = bounds.getMinY() + btn.getHeight() / 5;
+
+        Player player = app.gameController.game.localPlayer;
+        board.placeHenchman(posX, posY, player.getCharacterName());
+
+        board.checkEndRound();
+
+        board.updateFirebase();
+        board.notifyAllObservers();
     }
 
     public void prepareView() {
+        board.prepareFirstPlayer();
         board.prepareBlackMarket();
-        app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
+        board.setPlayersAndCards();
+        //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }
 
     public void advancePolice() {
         board.advancePolice();
     }
 
+    public void printMoney() {
 
+        int[] print = board.printMoney();
+        board.game.localPlayer.updateMoneyPlus(print[0], print[1]);
+    }
+
+    public void makePurchase(String cardNumber ) {
+        board.makePurchase(Integer.parseInt(cardNumber));
+    }
+
+    public boolean checkCard(Card card) {
+        return board.game.localPlayer.hasCard(card);
+    }
+
+    public void makeFirstPlayer() {
+        board.makeFirstPlayer();
+    }
+
+    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
+    }
+
+    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
+    }
+
+    public Card givePlayerCard(Card card) {
+        return board.blackmarket.givePlayerCard(card);
+    }
 }

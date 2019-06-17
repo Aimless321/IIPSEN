@@ -44,6 +44,12 @@ public class LobbyController {
             if (documentSnapshot != null && documentSnapshot.exists()) {
                 Game updateGame = documentSnapshot.toObject(Game.class);
 
+                if(updateGame.getRound() == 1) {
+                    listener.remove();
+                    Platform.runLater(this::startTheGame);
+                    return;
+                }
+
                 app.gameController.updateData(updateGame);
             } else {
                 //Lobby has been deleted in firebase
@@ -76,9 +82,6 @@ public class LobbyController {
 
     public void startButtonPressed() {
         app.gameController.setStartRound(1);
-
-        //TO TEST THE BOARDVIEW UNCOMMENT THIS v AND COMMENT THAT ^
-        //app.loadView(BoardView.class, app.boardController);
     }
 
     /**
@@ -103,9 +106,7 @@ public class LobbyController {
     }
 
     public void startTheGame() {
-        //TODO: load boardview
-
+        //Load the view
         app.loadView(BoardView.class, app.boardController);
-
     }
 }

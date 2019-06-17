@@ -4,6 +4,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
+import javafx.application.Platform;
 
 import java.util.*;
 
@@ -15,11 +16,11 @@ public class Game implements Observable {
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
     private int turn = 0;
+    private Player firstPlayer;
     @Exclude
     public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
-    private Game game;
 
     public Game() {
 
@@ -54,42 +55,32 @@ public class Game implements Observable {
      * @author Robin van den Berg
      */
 
-    public Map<String, Integer> loadScores() {
-        FirebaseService fb = FirebaseService.getInstance();
-
-
-        Game game = fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
-        Map<String, Integer> scores = new HashMap();
+    public Map<String, Integer> getScores(ArrayList<Player> players) {
+        Map<String, Integer> scores = new HashMap<>();
         LinkedHashMap<String, Integer> sortedScores = new LinkedHashMap<>();
         ArrayList<Integer> list = new ArrayList<>();
-        ArrayList<Player> players = game.getPlayers();
 
         for (int i = 0; i < players.size(); i++) {
             String name = players.get(i).getUserName();
             int score = (players.get(i).getScore());
             scores.put(name, score);
-
         }
 
-        for (Map.Entry<String, Integer> keys : scores.entrySet())
-        {
-            list.add(Integer.valueOf(keys.getValue()));
+        for (Map.Entry<String, Integer> keys : scores.entrySet()) {
+            list.add(keys.getValue());
         }
-        Collections.sort(list, Collections.reverseOrder());
+        list.sort(Collections.reverseOrder());
 
-        for(Integer score : list){
-            for (Map.Entry<String, Integer> entry : scores.entrySet())
-            {
-                if(entry.getValue().equals(score))
-                {
-                    sortedScores.put(entry.getKey(),score);
+        for (Integer score : list) {
+            for (Map.Entry<String, Integer> entry : scores.entrySet()) {
+                if (entry.getValue().equals(score)) {
+                    sortedScores.put(entry.getKey(), score);
                 }
             }
         }
 
         return sortedScores;
     }
-
 
     public void addPlayer(Player player) {
         numPlayers++;
@@ -111,7 +102,19 @@ public class Game implements Observable {
 
         numPlayers--;
 
+        resetPlayerNumbers();
+
         updateFirebase();
+    }
+
+    public void resetPlayerNumbers() {
+        //Start from the first player
+        for(int i = 1; i < players.size(); i++) {
+            Player player = players.get(i);
+
+            //Playernumber starts from 1, so do it +1
+            player.setPlayerId(i+1);
+        }
     }
 
     /**
@@ -128,8 +131,6 @@ public class Game implements Observable {
     public void delete() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.delete("lobbies", gameId);
-
-        players.clear();
     }
 
     /**
@@ -151,10 +152,10 @@ public class Game implements Observable {
         this.players = updateGame.getPlayers();
         this.localPlayer = getPlayerFromUserName(localPlayer.getUserName());
         this.round = updateGame.getRound();
+        this.turn = updateGame.getTurn();
+        this.numPlayers = updateGame.numPlayers;
 
-        //
         notifyAllObservers();
-
     }
 
     /**
@@ -163,7 +164,7 @@ public class Game implements Observable {
      * @return Player
      */
     @Exclude
-    private Player getPlayerFromUserName(String username) {
+    public Player getPlayerFromUserName(String username) {
         for (Player player : players) {
             if(player.getUserName().equals(username)) {
                 return player;
@@ -176,23 +177,32 @@ public class Game implements Observable {
         observers.add(observer);
     }
 
-    public void unregisterObserver(Observer observer) {
-        observers.remove(observer);
-    }
-
     public void notifyAllObservers() {
         for(Observer obs : observers) {
-            obs.update(this);
+            Platform.runLater(() -> obs.update(this));
         }
     }
 
-    public boolean checkYourTurn() {
-        return localPlayer.getPlayerId() == players.get(turn % players.size()).getPlayerId();
+    @Exclude
+    public Player getCurrentPlayer(FirstPlayerPawn firstPlayerPawn) {
+        if(turn == 0) {
+            this.firstPlayer = firstPlayerPawn.getFirstPlayer();
+            return firstPlayerPawn.getFirstPlayer();
+        }
+
+        //Start at the first player index plus the turn, then modulo it for the amount of players
+        int firstPlayerIndex = firstPlayer.getPlayerId()-1;
+        Player current = players.get((turn + firstPlayerIndex) % players.size());
+
+        return current;
+    }
+
+    public boolean checkYourTurn(FirstPlayerPawn firstPlayerPawn) {
+        return localPlayer.getPlayerId() == getCurrentPlayer(firstPlayerPawn).getPlayerId();
     }
 
     public void nextTurn() {
         turn++;
-        notifyAllObservers();
     }
 
     /**
@@ -208,7 +218,14 @@ public class Game implements Observable {
         if (character.equals("-")){
             localPlayer.updateMoneyReduce(qId, amount);
         }
-        notifyAllObservers();
+    }
+
+    /**
+     * Checks if all of the players have set 3 henchmen.
+     * @return true/false
+     */
+    public boolean checkEndRound() {
+        return turn == players.size() * 3;
     }
 
     public String getGameId() {
@@ -226,8 +243,6 @@ public class Game implements Observable {
     public int getRound() {
         return round;
     }
-
-    public Game getGame(){return game;}
 
     public Date getStartTime() {
         return startTime;
@@ -259,5 +274,13 @@ public class Game implements Observable {
 
     public void setLobbyName(String lobbyName) {
         this.lobbyName = lobbyName;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }

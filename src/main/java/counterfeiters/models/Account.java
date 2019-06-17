@@ -2,9 +2,13 @@ package counterfeiters.models;
 
 
 import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.HashFunction;
+import com.google.common.hash.Hashing;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,13 +35,15 @@ public class Account implements Observable{
     public boolean checkCredentials(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
-        String p = password;
+        //Hash the password before checking it
+        HashFunction hashFunction = Hashing.sha512();
+        HashCode passwordHash = hashFunction.hashString(password, Charset.defaultCharset());
 
         try
         {
             String r = fb.get("users", username).getString("password");
 
-            if (r.equals(p))
+            if (r.equals(passwordHash.toString()))
             {
                 this.username = username;
 
@@ -87,13 +93,10 @@ public class Account implements Observable{
                return true;
            }
            else{
-
                textField = "Username already exist!";
                notifyAllObservers();
                return false;
            }
-
-
     }
 
     public void registerObserver(Observer observer) {
@@ -139,9 +142,13 @@ public class Account implements Observable{
     public void addUser(String username, String password){
         FirebaseService fb = FirebaseService.getInstance();
 
+        //Hash the password before saving it
+        HashFunction hashFunction = Hashing.sha512();
+        HashCode hashCode = hashFunction.hashString(password, Charset.defaultCharset());
+
         Map<String, Object> data = new HashMap<>();
         data.put("username", username);
-        data.put("password", password);
+        data.put("password", hashCode.toString());
 
         fb.set("users", username, data);
         textField = "";

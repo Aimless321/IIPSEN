@@ -1,22 +1,27 @@
 package counterfeiters.models;
 
-import com.google.cloud.firestore.annotation.Exclude;
+import counterfeiters.events.EventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class BlackMarket {
-    private ArrayList<Card> marketList;
+public class BlackMarket implements EventListener {
+    private ArrayList<Card> marketList = new ArrayList<>();;
 
-    @Exclude
     public ArrayList<Card> cardRow = new ArrayList<>();
 
-    public BlackMarket() {
-        this.marketList = new ArrayList<Card>();
+    public void updateData(BlackMarket updateBlackMarket) {
+        cardRow = updateBlackMarket.cardRow;
+        marketList = updateBlackMarket.getMarketList();
     }
 
     public void addToMarket(Card card) {
         marketList.add(card);
+    }
+
+    public void addToRow() {
+        cardRow.add(marketList.get(0));
+        marketList.remove(0);
     }
 
     /**
@@ -29,39 +34,68 @@ public class BlackMarket {
 
 
     /**
-     * This method takes the first 7 cards from marketList and places them in cardRow.
+     * This method takes cards from marketList and places them in cardRow.
+     * It continues until cardRow contains 7 cards.
      * The cards are removed from marketList.
      * @autor: LeanderLoomans
      */
-    public void prepareView() {
-        for (int i = 0; i < 7; i++) {
-            cardRow.add(marketList.get(0));
-            marketList.remove(0);
-        }
-    }
     public void refill() {
-        while(emptyChecker()) {
-            for (int i = 0; i < 7; i++) {
-                if (cardRow.get(i) == null) {
-                    for (int j = i; j < 7; j++) {
+        //Remove all blanccards
+        cardRow.removeIf(card -> (card.getName().equals("")));
 
-                    }
-                }
-            }
+        while (cardRow.size() < 7) {
+            addToRow();
         }
     }
 
-    public boolean emptyChecker() {
-        for (int i = 0; i < 7; i++) {
-            if (cardRow.get(i) == null) {
-                return true;
+    public Card givePlayerCard(Card cardtype) {
+        for (Card n : marketList) {
+            if (n.getClass() == cardtype.getClass()) {
+                Card card = n;
+                marketList.remove(n);
+                return card;
             }
         }
-        return false;
+        return null;
     }
 
 
     public Card getCard(int position) {
         return cardRow.get(position);
+    }
+
+    public void removeCard(int position) {
+        cardRow.remove(position);
+    }
+
+    public void makeCardPurchased(int position) {
+        cardRow.set(position, new BlancCard());
+    }
+
+    public ArrayList<Card> getMarketList() {
+        return marketList;
+    }
+
+    public void setMarketList(ArrayList<Card> marketList) {
+        this.marketList = marketList;
+    }
+
+    @Override
+    public void onRoundEnd() {
+        //Remove first 2 cards
+        cardRow.remove(0);
+        cardRow.remove(0);
+
+        refill();
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 }

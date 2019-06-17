@@ -57,16 +57,20 @@ public class ScoreboardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/scoreboard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1920, 1080);
-        stage.setScene(scene);
-
+        stage.getScene().setRoot(pane);
     }
 
     public void showScores() {
-        Map<String, Integer> data = controller.loadScores();
-        firstPlayer.setImage(new Image("/players/deer.jpg"));
-        secondPlayer.setImage(new Image("/players/deer.jpg"));
-        thirdPlayer.setImage(new Image("/players/deer.jpg"));
+
+        Map<String, Integer> data = controller.getScores(controller.loadScores().getPlayers());
+
+        Image imageFirst = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[0]).getCharacterImagePath();
+        Image imageSecond = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[1]).getCharacterImagePath();
+        Image imageThird = controller.loadScores().getPlayerFromUserName((String)data.keySet().toArray()[2]).getCharacterImagePath();
+
+        firstPlayer.setImage(imageFirst);
+        secondPlayer.setImage(imageSecond);
+        thirdPlayer.setImage(imageThird);
 
         firstPlayerName.setText((String)data.keySet().toArray()[0]);
         secondPlayerName.setText((String)data.keySet().toArray()[1]);
@@ -75,6 +79,7 @@ public class ScoreboardView implements Observer {
         firstPlayerCash.setText("$"+ data.values().toArray()[0]);
         secondPlayerCash.setText("$"+ data.values().toArray()[1]);
         thirdPlayerCash.setText("$"+ data.values().toArray()[2]);
+
     }
 
     @FXML
@@ -97,7 +102,10 @@ public class ScoreboardView implements Observer {
 
     @Override
     public void setController(Object controller) {
-        this.controller = (ScoreboardController)controller;
+
+        ScoreboardController scoreboardController = (ScoreboardController) controller ;
+        this.controller = scoreboardController;
+        scoreboardController.registerObserver(this);
     }
 
     @Override

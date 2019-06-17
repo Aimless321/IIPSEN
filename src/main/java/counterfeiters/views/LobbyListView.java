@@ -22,6 +22,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * View for the lobbylist screen
@@ -40,7 +42,8 @@ public class LobbyListView implements Observer {
 
     private Stage stage;
     private LobbyListController controller;
-    private List<Game> games = new ArrayList<>();
+    private ArrayList<Game> games = new ArrayList<>();
+
 
     private int counter = 0;
     private String chosenGame;
@@ -65,8 +68,8 @@ public class LobbyListView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
-        stage.setScene(scene);}
+        stage.getScene().setRoot(pane);
+    }
 
 
     @FXML
@@ -94,7 +97,6 @@ public class LobbyListView implements Observer {
         this.controller = (LobbyListController) controller;
     }
 
-
     @Override
     public void update(Observable observable) {
         FirebaseModel firebaseModel  = (FirebaseModel) observable;
@@ -105,17 +107,17 @@ public class LobbyListView implements Observer {
 
 
             //Add new games for lobbylist
+
+
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-
-            //
-
-            if (updatedGames.size() != 0) {
+            if (updatedGames.size() != 0 && !updatedGames.isEmpty()) {
                 for (Game game : updatedGames) {
                     Platform.runLater(() ->
                             addLobbyInView(game));
                 }
             } else {
+                System.out.println("er zijn geen lobbies");
                 noLobbies();
             }
         }
@@ -131,14 +133,14 @@ public class LobbyListView implements Observer {
         HBox.setHgrow(region2, Priority.ALWAYS);
 
         Label noLobby = new Label("No Lobbies available.");
-        noLobby.setFont(new Font(30));
-        noLobby.setTextFill(Color.WHITE);
+        noLobby.getStyleClass().add("list-label");
 
         HBox horBox = new HBox(region1, noLobby,  region2);
-        horBox.setStyle("-fx-pref-height: 85");
-        horBox.setStyle("-fx-pref-width: 980");
-        horBox.setStyle("-fx-background-image: transparent");
+        horBox.getStyleClass().add("hbox");
+        horBox.setStyle("-fx-background-color: transparent");
+        horBox.setAlignment(Pos.CENTER);
 
+        vBox.getChildren().add(horBox);
     }
 
     /**
@@ -158,22 +160,19 @@ public class LobbyListView implements Observer {
         HBox.setHgrow(region2, Priority.ALWAYS);
 
         Label lobbyName = new Label(" " + counter + ". " +game.getLobbyName());
-        lobbyName.setFont(new Font(30));
-        lobbyName.setTextFill(Color.WHITE);
+        lobbyName.getStyleClass().add("list-label");
 
         Label numPlayers = new Label(game.getNumPlayers() + "/4  ");
-        numPlayers.setFont(new Font(30));
-        numPlayers.setTextFill(Color.WHITE);
+        lobbyName.getStyleClass().add("list-label");
+
 
         ImageView icon  = new ImageView("icons/player.png");
         icon.setFitHeight(25);
         icon.setFitWidth(25);
 
         HBox horBox = new HBox(lobbyName, region1, region2, numPlayers, icon, new Label("  "));
-        horBox.setAlignment(Pos.CENTER_LEFT);
-
-        horBox.setStyle("-fx-cursor: hand");
-
+        horBox.getStyleClass().addAll("hbox","hbox:hover");
+        horBox.setAlignment(Pos.CENTER);
 
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -190,28 +189,6 @@ public class LobbyListView implements Observer {
                 }
             }
         });
-
-        //Add hover effects (doesnt work in css)
-        horBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-
-                    }
-                }
-            });
-        horBox.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-
-                }
-            }
-        });
-
-
-        horBox.setStyle("-fx-pref-height: 30");
-        horBox.setStyle("-fx-pref-width: 980");
 
         if (counter %2 == 0) {
             horBox.setStyle("-fx-background-image: url(background/light_back.JPG)");

@@ -26,9 +26,9 @@ public class Player {
         this.fakeMoney = new FakeMoney();
         this.realMoney = new RealMoney();
         this.bahamasBank = new BahamasBank();
-        realMoney.setTotalMoney(100);
-        bahamasBank.setTotalBankMoney(0);
 
+        //TODO: Remove for real version
+        realMoney.setTotalMoney(100);
     }
 
     public void leaveLobby(Game game) {
@@ -144,6 +144,10 @@ public class Player {
         }
     }
 
+    public void addCard(Card card) {
+        cards.add(card);
+    }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
@@ -166,8 +170,16 @@ public class Player {
 
     public BahamasBank getBahamasBank(){return bahamasBank;}
 
+    public boolean hasCard(Card card) {
+        for (Card n : cards) {
+            if (n.getName().equals(card.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    //    public boolean hasPlaneTicket(){
-//        return ;
-//    }
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }

@@ -34,7 +34,7 @@ public class ViewUtilities {
         Image image = new Image(ViewUtilities.class.getResourceAsStream(path));
 
         //Set background size
-        BackgroundSize backgroundSize = new BackgroundSize(1920, 1080, false, false, false, true);
+        BackgroundSize backgroundSize = new BackgroundSize(screenWidth, screenHeight, false, false, false, true);
 
         //Init backgroundImage
         BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);

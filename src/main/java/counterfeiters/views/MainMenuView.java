@@ -5,6 +5,7 @@ import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -36,8 +37,7 @@ public class MainMenuView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, ViewUtilities.screenWidth, ViewUtilities.screenHeight);
-        stage.setScene(scene);
+        stage.getScene().setRoot(pane);
     }
 
     @FXML
@@ -58,6 +58,11 @@ public class MainMenuView implements Observer {
 
 
         controller.loadGamePressed();
+    }
+
+    @FXML
+    public void pressExitGame(MouseEvent mouseEvent) {
+        controller.exitButtonPressed();
     }
 
     @Override
