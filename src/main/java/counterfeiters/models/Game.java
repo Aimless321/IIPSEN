@@ -218,6 +218,14 @@ public class Game implements Observable {
         }
     }
 
+    /**
+     * Checks if all of the players have set 3 henchmen.
+     * @return true/false
+     */
+    public boolean checkEndRound() {
+        return (turn * 3) % players.size() != 0;
+    }
+
     public String getGameId() {
         return gameId;
     }

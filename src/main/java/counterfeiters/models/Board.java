@@ -87,6 +87,23 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
+    public void checkEndRound() {
+        if(!game.checkEndRound()) {
+            return;
+        }
+
+        //Remove the henchmen
+        this.henchmen = new ArrayList<>();
+
+        //Set turn back to 0, and add 1 to the round
+        game.setTurn(0);
+        game.setRound(game.getRound()+1);
+
+        updateFirebase();
+
+        notifyAllObservers();
+    }
+
     public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
