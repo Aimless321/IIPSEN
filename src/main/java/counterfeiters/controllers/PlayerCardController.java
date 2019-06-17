@@ -34,5 +34,9 @@ public class PlayerCardController {
     public void setPlayerID(int player) {
         this.player = player;
     }
+
+    public boolean checkPlayer(int player) {
+        return player < app.gameController.game.getPlayers().size();
+    }
 }
 

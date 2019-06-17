@@ -200,7 +200,15 @@ public class BoardView implements Observer {
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
         ImageView img = (ImageView) mouseEvent.getSource();
-        boardcontroller.app.playerCardController.setPlayerID(Integer.parseInt(img.getStyleClass().get(1)));
+        int player = Integer.parseInt(img.getStyleClass().get(1));
+
+        if (!boardcontroller.app.playerCardController.checkPlayer(player)) {
+            return;
+        }
+
+
+
+        boardcontroller.app.playerCardController.setPlayerID(player);
         boardcontroller.app.loadView(PlayerCardView.class, boardcontroller.app.playerCardController);
     }
 
@@ -267,12 +275,12 @@ public class BoardView implements Observer {
         policePawn.setX(board.policePawn.getXCoordinate());
         policePawn.setY(board.policePawn.getYCoordinate());
 
-        Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
+//        Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
-        //policePawn.setX(bounds.getMinX());
-
-        //Pawn is too low, so set it a big higher
-        //policePawn.setY(bounds.getMaxY()-20);
+//        policePawn.setX(bounds.getMinX());
+//
+//        // Pawn is too low, so set it a big higher
+//        policePawn.setY(bounds.getMaxY()-20);
     }
 
     public void resetHenchman() {
