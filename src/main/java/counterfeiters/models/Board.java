@@ -81,6 +81,7 @@ public class Board implements Observable{
         game.updateData(updateBoard.game);
         blackmarket.updateData(updateBoard.blackmarket);
         policePawn.updateData(updateBoard.policePawn);
+        firstPlayerPawn.updateData(updateBoard.firstPlayerPawn);
 
         notifyAllObservers();
     }
