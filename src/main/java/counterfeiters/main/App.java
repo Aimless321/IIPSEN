@@ -29,6 +29,7 @@ public class App extends Application
         primaryStage.setFullScreen(true);
         primaryStage.setTitle("Counterfeiters");
         primaryStage.show();
+
         SoundManager.playLoop("background_music.mp3");
     }
 }
