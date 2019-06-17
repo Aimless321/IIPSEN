@@ -134,6 +134,9 @@ public class BoardController {
         board.placeHenchman(posX, posY, player.getCharacterName());
 
         board.checkEndRound();
+
+        board.updateFirebase();
+        board.notifyAllObservers();
     }
 
     public void prepareView() {

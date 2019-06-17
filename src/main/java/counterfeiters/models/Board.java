@@ -1,12 +1,12 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
+import counterfeiters.events.EventHandler;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -23,6 +23,8 @@ public class Board implements Observable{
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);
+
+        EventHandler.getInstance().registerListener(blackmarket);
     }
 
     @Override
@@ -41,10 +43,6 @@ public class Board implements Observable{
 
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
-
-        notifyAllObservers();
-
-        updateFirebase();
     }
 
 
@@ -99,9 +97,7 @@ public class Board implements Observable{
         game.setTurn(0);
         game.setRound(game.getRound()+1);
 
-        updateFirebase();
-
-        notifyAllObservers();
+        EventHandler.getInstance().endRound();
     }
 
     public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
