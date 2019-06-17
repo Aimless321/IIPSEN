@@ -26,9 +26,9 @@ public class Player {
         this.fakeMoney = new FakeMoney();
         this.realMoney = new RealMoney();
         this.bahamasBank = new BahamasBank();
+
+        //TODO: Remove for real version
         realMoney.setTotalMoney(100);
-        fakeMoney.setQualityOne(10);
-        bahamasBank.setTotalBankMoney(0);
     }
 
     public void leaveLobby(Game game) {
