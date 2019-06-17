@@ -52,6 +52,8 @@ public class BoardController {
                     }
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
+                        System.out.println("Updating board");
+
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
                     }
@@ -135,6 +137,7 @@ public class BoardController {
     }
 
     public void prepareView() {
+        board.randomFirstPlayer();
         board.prepareBlackMarket();
         //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }

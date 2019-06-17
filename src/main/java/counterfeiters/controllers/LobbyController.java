@@ -82,9 +82,6 @@ public class LobbyController {
 
     public void startButtonPressed() {
         app.gameController.setStartRound(1);
-
-        //TO TEST THE BOARDVIEW UNCOMMENT THIS v
-        app.loadView(BoardView.class, app.boardController);
     }
 
     /**

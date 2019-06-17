@@ -57,9 +57,7 @@ public class ScoreboardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/scoreboard.png"));
 
         //Show it on the screen
-        Scene scene = new Scene(root, 1920, 1080);
-        stage.setScene(scene);
-
+        stage.getScene().setRoot(pane);
     }
 
     public void showScores() {

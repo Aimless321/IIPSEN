@@ -181,8 +181,21 @@ public class Game implements Observable {
         }
     }
 
-    public boolean checkYourTurn() {
-        return localPlayer.getPlayerId() == players.get(turn % players.size()).getPlayerId();
+    @Exclude
+    public Player getCurrentPlayer(FirstPlayerPawn firstPlayerPawn) {
+        if(turn == 0) {
+            return firstPlayerPawn.getFirstPlayer();
+        }
+
+        //Start at the first player index plus the turn, then modulo it for the amount of players
+        int firstPlayerIndex = firstPlayerPawn.getFirstPlayer().getPlayerId()-1;
+        Player current = players.get((turn + firstPlayerIndex) % players.size());
+
+        return current;
+    }
+
+    public boolean checkYourTurn(FirstPlayerPawn firstPlayerPawn) {
+        return localPlayer.getPlayerId() == getCurrentPlayer(firstPlayerPawn).getPlayerId();
     }
 
     public void nextTurn() {

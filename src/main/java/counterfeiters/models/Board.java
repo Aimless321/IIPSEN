@@ -6,6 +6,7 @@ import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -38,6 +39,15 @@ public class Board implements Observable{
         updateFirebase();
     }
 
+    public void randomFirstPlayer() {
+        ArrayList<Player> players = game.getPlayers();
+
+        Random random = new Random();
+        Player randomPlayer = players.get(random.nextInt(players.size()));
+
+        firstPlayerPawn.setFirstPlayer(randomPlayer);
+    }
+
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
 
@@ -48,7 +58,7 @@ public class Board implements Observable{
 
 
     /**
-     * This method checks whether the user has enought money, If this is the case, the money wil de deducted from his account.
+     * This method checks whether the user has enough money, If this is the case, the money wil de deducted from his account.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
@@ -61,6 +71,15 @@ public class Board implements Observable{
             return false;
     }
 
+    public boolean checkYourTurn() {
+        return game.checkYourTurn(firstPlayerPawn);
+    }
+
+    @Exclude
+    public Player getCurrentPlayer() {
+        return game.getCurrentPlayer(firstPlayerPawn);
+    }
+
     public void updateFirebase() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("games", game.getGameId(), this);
@@ -68,7 +87,12 @@ public class Board implements Observable{
 
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
+
+        //Update all the other models aswell
         game.updateData(updateBoard.game);
+        blackmarket.updateData(updateBoard.blackmarket);
+        policePawn.updateData(updateBoard.policePawn);
+
         notifyAllObservers();
     }
 
@@ -76,6 +100,7 @@ public class Board implements Observable{
         int result = (qualiytOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
+        notifyAllObservers();
     }
 
     public void makePurchase(int cardNumber) {
@@ -127,5 +152,13 @@ public class Board implements Observable{
 
     public void setGame(Game game) {
         this.game = game;
+    }
+
+    public boolean checkQualityQuantity(int amount) {
+        if (game.localPlayer.getFakeMoney().getQualityOne() == amount){
+            return true;
+        }
+        else
+            return true;
     }
 }
