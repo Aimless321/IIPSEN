@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BlackMarket {
-    private ArrayList<Card> marketList;
+    private ArrayList<Card> marketList = new ArrayList<>();;
 
     public ArrayList<Card> cardRow = new ArrayList<>();
 
-    public BlackMarket() {
-        this.marketList = new ArrayList<>();
+    public void updateData(BlackMarket updateBlackMarket) {
+        cardRow = updateBlackMarket.cardRow;
+        marketList = updateBlackMarket.getMarketList();
     }
 
     public void addToMarket(Card card) {
@@ -72,5 +73,13 @@ public class BlackMarket {
 
     public void makeCardPurchased(int position) {
         cardRow.set(position, new BlancCard());
+    }
+
+    public ArrayList<Card> getMarketList() {
+        return marketList;
+    }
+
+    public void setMarketList(ArrayList<Card> marketList) {
+        this.marketList = marketList;
     }
 }

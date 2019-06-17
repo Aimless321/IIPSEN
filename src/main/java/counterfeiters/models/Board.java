@@ -6,6 +6,7 @@ import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -38,6 +39,15 @@ public class Board implements Observable{
         updateFirebase();
     }
 
+    public void randomFirstPlayer() {
+        ArrayList<Player> players = game.getPlayers();
+
+        Random random = new Random();
+        Player randomPlayer = players.get(random.nextInt(players.size()));
+
+        firstPlayerPawn.setFirstPlayer(randomPlayer);
+    }
+
     public void placeHenchman(double posX, double posY, String player) {
         henchmen.add(new Henchman(posX, posY, player));
 
@@ -61,6 +71,15 @@ public class Board implements Observable{
             return false;
     }
 
+    public boolean checkYourTurn() {
+        return game.checkYourTurn(firstPlayerPawn);
+    }
+
+    @Exclude
+    public Player getCurrentPlayer() {
+        return game.getCurrentPlayer(firstPlayerPawn);
+    }
+
     public void updateFirebase() {
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("games", game.getGameId(), this);
@@ -68,7 +87,12 @@ public class Board implements Observable{
 
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
+
+        //Update all the other models aswell
         game.updateData(updateBoard.game);
+        blackmarket.updateData(updateBoard.blackmarket);
+        policePawn.updateData(updateBoard.policePawn);
+
         notifyAllObservers();
     }
 

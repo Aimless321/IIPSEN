@@ -1,10 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
-import counterfeiters.models.Board;
-import counterfeiters.models.Henchman;
-import counterfeiters.models.Observable;
-import counterfeiters.models.PlaneTicket;
+import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
@@ -12,11 +9,14 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -70,7 +70,7 @@ public class BoardView implements Observer {
     @FXML
     public void blackMarket(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -89,7 +89,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -105,7 +105,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldFraud(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -123,7 +123,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldFly(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -144,7 +144,7 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
 
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -163,7 +163,7 @@ public class BoardView implements Observer {
 
         int qualityCounter = 0;
         int printerCounter = 0;
-        if(!boardcontroller.board.game.checkYourTurn()) {
+        if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
@@ -231,27 +231,11 @@ public class BoardView implements Observer {
         updatePolicePawn(board);
 
         resetHenchman();
+        addHenchman(board);
 
-        for (Henchman henchman : board.getHenchmen()) {
-            VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+        updateMoney(board);
 
-            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
-
-            ImageView henchmanImage = new ImageView(old.getImage());
-            henchmanImage.setLayoutX(henchman.x);
-            henchmanImage.setLayoutY(henchman.y);
-            henchmanImage.setFitHeight(36);
-            henchmanImage.setFitWidth(36);
-            henchmanImage.getStyleClass().add("henchman");
-
-            pane.getChildren().add(henchmanImage);
-        }
-        this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
-        this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
-        this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));
-        this.totalRealMoney.setText(String.valueOf(board.game.localPlayer.getRealMoney().getTotalMoney()));
-
-        this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
+        setCurrentPlayerShadow(board);
     }
 
     public void updateBlackMarket(Board board) {
@@ -270,10 +254,13 @@ public class BoardView implements Observer {
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
-        //policePawn.setX(bounds.getMinX());
+        try {
+            policePawn.setX(bounds.getMinX());
 
-        //Pawn is too low, so set it a big higher
-        //policePawn.setY(bounds.getMaxY()-20);
+            //Pawn is too low, so set it a big higher
+            policePawn.setY(bounds.getMaxY()-20);
+        } catch (NullPointerException e) {}
+
     }
 
     public void resetHenchman() {
@@ -296,6 +283,48 @@ public class BoardView implements Observer {
                 children.add(0, newHenchman);
             }
         }
+    }
+
+    public void addHenchman(Board board) {
+        for (Henchman henchman : board.getHenchmen()) {
+            VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
+
+            ImageView old = (ImageView) henchmanbox.getChildren().remove(0);
+
+            ImageView henchmanImage = new ImageView(old.getImage());
+            henchmanImage.setLayoutX(henchman.x);
+            henchmanImage.setLayoutY(henchman.y);
+            henchmanImage.setFitHeight(36);
+            henchmanImage.setFitWidth(36);
+            henchmanImage.getStyleClass().add("henchman");
+
+            pane.getChildren().add(henchmanImage);
+        }
+    }
+
+    public void updateMoney(Board board) {
+        this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
+        this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
+        this.qualityThreeMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityThree()));
+        this.totalRealMoney.setText(String.valueOf(board.game.localPlayer.getRealMoney().getTotalMoney()));
+        this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
+    }
+
+    public void setCurrentPlayerShadow(Board board) {
+        String[] profilePictures = {"#profile-croc", "#profile-deer", "#profile-herron", "#profile-hippo"};
+        for(int i = 0; i < profilePictures.length; i++) {
+            ImageView profilePicture = (ImageView) pane.lookup(profilePictures[i]);
+
+            //Remove effect
+            profilePicture.setEffect(null);
+        }
+
+        DropShadow shadow = new DropShadow(25.0, Color.web("#00adee"));
+        shadow.setSpread(0.5);
+
+        Player currentPlayer = board.getCurrentPlayer();
+        ImageView profilePicture = (ImageView) pane.lookup("#profile-" + currentPlayer.getCharacterName());
+        profilePicture.setEffect(shadow);
     }
 
     @Override

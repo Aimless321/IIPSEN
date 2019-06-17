@@ -183,7 +183,7 @@
             <Image url="@/icons/question-sign.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="policePawn" fitHeight="50.0" fitWidth="50.0" layoutX="918.0" layoutY="361.0" onMouseClicked="#pressRules" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="policePawn" fitHeight="50.0" fitWidth="50.0" layoutX="918.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
          </viewport>
@@ -191,22 +191,22 @@
             <Image url="@/henchman/police.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="198.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="198.0" id="profile-hippo" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/hippo.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="741.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="741.0" id="profile-croc" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/croc.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="1459.0" layoutY="742.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="1459.0" layoutY="742.0" id="profile-deer" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/deer.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="1459.0" layoutY="198.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="144.0" fitWidth="144.0" layoutX="1459.0" layoutY="198.0" id="profile-herron" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/herron.jpg" />
          </image>
