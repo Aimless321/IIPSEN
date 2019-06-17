@@ -161,25 +161,13 @@ public class BoardView implements Observer {
     @FXML
     public void actionFieldPrint(MouseEvent mouseEvent) {
 
-        int qualityCounter = 0;
-        int printerCounter = 0;
         if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
         Button btn = (Button) mouseEvent.getSource();
 
-        for(String card : boardcontroller.getCardNames()){
-            if(card.equals("upgrade")){
-                qualityCounter++;
-            }
-            else if(card.equals("printer")){
-                printerCounter++;
-            }
-
-        }
-
-        boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter, printerCounter);
+        boardcontroller.printMoney();
 
         if(btn.getStyleClass().contains("police")) {
 
