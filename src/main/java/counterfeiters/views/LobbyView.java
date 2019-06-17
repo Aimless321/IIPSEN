@@ -89,21 +89,21 @@ public class LobbyView implements Observer {
         Game game = (Game)observable;
 
         //Remove all players
-        Platform.runLater(() -> players.getChildren().clear());
+        players.getChildren().clear();
 
         //Add new players
         List<Player> playerList = game.getPlayers();
 
         for(Player player : playerList) {
             //We cannot update it on this thread, so we run it later
-            Platform.runLater(() -> insertPlayerBox(player));
+            insertPlayerBox(player);
         }
 
         //TODO: Check if this player is the host and if there are 3 or more players
         if(game.checkHost()) {
 
             if (playerList.size()>=3){
-                startButton.getText().replace("Waiting for players...","Start");
+                startButton.setText("Start");
                 //startButton.setText("Start");
                 startButton.setDisable(false);
             }
