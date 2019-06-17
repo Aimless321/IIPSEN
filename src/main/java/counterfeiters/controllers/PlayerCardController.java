@@ -23,15 +23,11 @@ public class PlayerCardController {
     }
 
     public FlowPane makeCardView(FlowPane playerCardView) {
-        System.out.println("hier goed 1");
         ArrayList<Card> cardRow = app.gameController.game.getPlayers().get(player).getCards();
         for (int i = 0; i < cardRow.size(); i++) {
-            System.out.println("Adding card: " + cardRow.get(i).getName());
-
             ImageView imageview = new ImageView(cardRow.get(i).getImage());
             imageview.setFitWidth(150);
             imageview.setPreserveRatio(true);
-            System.out.println("tot hier ook goed 2");
             playerCardView.getChildren().add(imageview);
         }
         return playerCardView;
