@@ -223,7 +223,7 @@ public class Game implements Observable {
      * @return true/false
      */
     public boolean checkEndRound() {
-        return (players.size() * turn) % 3  == 0;
+        return turn == players.size() * 3;
     }
 
     public String getGameId() {
