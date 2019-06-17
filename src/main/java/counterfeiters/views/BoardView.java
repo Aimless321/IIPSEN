@@ -39,6 +39,7 @@ public class BoardView implements Observer {
     public Text deerplayer;
     public Text herronplayer;
     public Text hippoplayer;
+    public Pane hippopane;
 
     private String plus = "+";
     private String min = "-";
@@ -331,6 +332,10 @@ public class BoardView implements Observer {
                 case "4":
                     hippoplayer.setText(playerValues.getValue().toString());
             }
+        }
+        //If there are only 3 players hide the fourth player.
+        if (map.size() ==3){
+            hippopane.setVisible(false);
         }
     }
 
