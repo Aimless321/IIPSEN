@@ -57,6 +57,13 @@ public class Board implements Observable{
     public boolean checkMoney(int id, int bedrag){
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
             game.localPlayer.updateMoneyReduce(id, bedrag);
+            notifyAllObservers();
+            return true;
+        }
+
+        if (game.localPlayer.bahamasBank.getTotalBankMoney() >= bedrag){
+            game.localPlayer.updateMoneyReduce(id, bedrag);
+            notifyAllObservers();
             return true;
         }
             return false;
@@ -119,14 +126,6 @@ public class Board implements Observable{
         blackmarket.makeCardPurchased(cardNumber);
         System.out.println("card removed");
     }
-
-//    public void soundWrong(){
-//        String musicFile = "/sounds/wrong.mp3";
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
-//    }
 
     public void advancePolice() {
         policePawn.advance();

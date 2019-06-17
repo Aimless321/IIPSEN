@@ -28,6 +28,7 @@ public class Player {
         this.bahamasBank = new BahamasBank();
 
         //TODO: Remove for real version
+        bahamasBank.setTotalBankMoney(250);
         realMoney.setTotalMoney(100);
         fakeMoney.setQualityOne(5);
         fakeMoney.setQualityTwo(10);

@@ -13,6 +13,22 @@ public class PopUpBahamasController {
         app.loadView(PopUpBahamasView.class, app.popUpBahamasController);
     }
 
+    public boolean addAmountToBahamas(int amount, int id){
+        if (app.boardController.board.checkMoney(amount, id)){
+            app.boardController.board.game.localPlayer.updateMoneyPlus(amount, id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean reduceAmountFromBahamas(int amount, int id) {
+        if (app.boardController.board.checkMoney(amount, id)){
+            app.boardController.board.game.localPlayer.updateMoneyReduce(amount, id);
+            return true;
+        }
+        return false;
+    }
+
     public void registerObserver(PopUpBahamasView popUpBahamasView) {
     }
 }

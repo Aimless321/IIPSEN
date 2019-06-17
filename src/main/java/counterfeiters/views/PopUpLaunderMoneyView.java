@@ -106,7 +106,7 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void pressLaunder(MouseEvent mouseEvent) {
+    public void pressLaunder() {
         if (controller.checkAmount(getValues())){
             controller.transferMoney(realMoney, qualityOne, qualityTwo, qualityThree);
 
@@ -118,32 +118,32 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void plusQualityOne(MouseEvent mouseEvent) {
+    public void plusQualityOne() {
         counterPlus(strQualityOne, txtQualityOne);
     }
 
     @FXML
-    public void minQualityOne(MouseEvent mouseEvent) {
+    public void minQualityOne() {
         counterMin(txtQualityOne);
     }
 
     @FXML
-    public void plusQualityTwo(MouseEvent mouseEvent) {
+    public void plusQualityTwo() {
         counterPlus(strQualityTwo, txtQualityTwo);
     }
 
     @FXML
-    public void minQualityTwo(MouseEvent mouseEvent) {
+    public void minQualityTwo() {
         counterMin(txtQualityTwo);
     }
 
     @FXML
-    public void plusQualityThree(MouseEvent mouseEvent) {
+    public void plusQualityThree() {
         counterPlus(strQualityThree, txtQualityThree);
     }
 
     @FXML
-    public void minQualityThree(MouseEvent mouseEvent) {
+    public void minQualityThree() {
         counterMin(txtQualityThree);
     }
 

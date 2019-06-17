@@ -82,9 +82,6 @@ public class BoardView implements Observer {
             boardcontroller.makePurchase(btn.getStyleClass().get(1));
             placeHenchman(btn);
         }
-
-
-
     }
 
     @FXML
@@ -180,7 +177,6 @@ public class BoardView implements Observer {
             else if(card.equals("printer")){
                 printerCounter++;
             }
-
         }
 
         boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter, printerCounter);
@@ -196,8 +192,6 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-
-
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
     }
@@ -210,8 +204,6 @@ public class BoardView implements Observer {
         if (!boardcontroller.app.playerCardController.checkPlayer(player)) {
             return;
         }
-
-
 
         boardcontroller.app.playerCardController.setPlayerID(player);
         boardcontroller.app.loadView(PlayerCardView.class, boardcontroller.app.playerCardController);
@@ -237,7 +229,6 @@ public class BoardView implements Observer {
     public void update(Observable observable) {
 
         Board board = (Board) observable;
-
 
         updateBlackMarket(board);
         updatePolicePawn(board);
@@ -352,7 +343,6 @@ public class BoardView implements Observer {
         boardcontroller.prepareView();
 
         boardcontroller.registerListeners();
-
 
     }
 }
