@@ -87,10 +87,13 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void countMoney(int qualityId, int qualiytOne, int qualityTwo, int qualityThree) {
-        int result = (qualiytOne + qualityTwo + qualityThree) * 50;
+    public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
+        game.localPlayer.updateMoneyReduce(1, qualityOne);
+        game.localPlayer.updateMoneyReduce(2, qualityTwo);
+        game.localPlayer.updateMoneyReduce(3, qualityThree);
         notifyAllObservers();
     }
 
@@ -102,19 +105,6 @@ public class Board implements Observable{
         blackmarket.makeCardPurchased(cardNumber);
         System.out.println("card removed");
     }
-//
-//    public void actionFieldAction() {
-//
-//    }
-//
-//    public void actionFieldMethod() {
-//
-//    }
-//
-//    public String checkFieldType() {
-//
-//    }
-//
 
 //    public void soundWrong(){
 //        String musicFile = "/sounds/wrong.mp3";
@@ -145,9 +135,10 @@ public class Board implements Observable{
         this.game = game;
     }
 
-    public boolean checkQualityQuantity(int amount) {
-        if (game.localPlayer.getFakeMoney().getQualityOne() == amount){
-            return true;
+    public boolean checkQualityQuantity(int amount, String quality) {
+
+        if (game.localPlayer.getFakeMoney().getQuality(quality) == amount){
+            return false;
         }
         else
             return true;

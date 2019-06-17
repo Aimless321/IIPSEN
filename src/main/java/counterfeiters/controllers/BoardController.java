@@ -5,8 +5,6 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
@@ -166,8 +164,8 @@ public class BoardController {
         board.makeFirstPlayer();
     }
 
-    public void countMoney(int qualityId, int qualiytOne, int qualityTwo, int qualityThree) {
-        board.countMoney(qualityId, qualiytOne, qualityTwo, qualityThree);
+    public void transerMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.transferMoney(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
     public Card givePlayerCard(Card card) {

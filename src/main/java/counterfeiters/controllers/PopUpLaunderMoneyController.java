@@ -14,15 +14,15 @@ public class PopUpLaunderMoneyController {
         app.loadView(PopUpLaunderMoneyView.class, app.popUpLaunderMoneyController);
     }
 
-    public void countMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree){
-        app.boardController.countMoney(qualityId, qualityOne, qualityTwo, qualityThree);
+    public void transerMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree){
+        app.boardController.transerMoney(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
     public void registerObserver(Observer observer) {app.accountController.registerObserver(observer);
     }
 
-    public boolean checkQualityQuantity(int amount) {
-        if(app.boardController.board.checkQualityQuantity(amount)) {
+    public boolean checkQualityQuantity(String quality, int amount) {
+        if(app.boardController.board.checkQualityQuantity(amount, quality)) {
             return true;
         }
         else

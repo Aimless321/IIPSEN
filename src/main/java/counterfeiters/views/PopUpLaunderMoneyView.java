@@ -1,12 +1,10 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
-import counterfeiters.models.Board;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,22 +16,24 @@ import javafx.stage.StageStyle;
 
 public class PopUpLaunderMoneyView implements Observer{
 
+    // FXML values.
     public TextField txtQualityOne;
     public TextField txtQualityTwo;
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
-    public Text textField;
+    public Text txtField;
 
+    // Values from textfield.
     private int qualityOne;
     private int qualityTwo;
     private int qualityThree;
+    private int currentAmount;
 
-    //Type money
-    private int qualityOneMoney = 1;
-    private int qualityTwoMoney = 2;
-    private int qualityThreeMoney = 3;
+    // As arguments for the methods.
+    private String strQualityOne = "qualityOne";
+    private String strQualityTwo = "qualityTwo";
+    private String strQualityThree = "qualityThree";
     private int realMoney = 4;
-    private int bahamasBank = 5;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -51,62 +51,92 @@ public class PopUpLaunderMoneyView implements Observer{
         show();
     }
 
-    public void getValues(){
+    /**
+     * Retrieves the values, adds them and returns the total.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * @return total
+     * */
+    public int getValues(){
         qualityOne = Integer.parseInt(txtQualityOne.getText());
         qualityTwo = Integer.parseInt(txtQualityTwo.getText());
         qualityThree = Integer.parseInt(txtQualityThree.getText());
+
+        int total = qualityOne + qualityTwo + qualityThree;
+        return total;
     }
 
-    public void counterPlus(int amount, TextField textfield){
-        if(controller.checkQualityQuantity(amount)){
-            amount++;
-            textfield.setText(String.valueOf(amount));
+    /**
+     * Calculates how much 'fakemoney' the user has and ensures that the user cannot add more than what is indicated.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
+    public void counterPlus(String quality, TextField textfield){
+        currentAmount = Integer.parseInt(textfield.getText());
+
+        if(controller.checkQualityQuantity(quality, currentAmount)){
+            currentAmount++;
+            textfield.setText(String.valueOf(currentAmount));
         }
     }
 
-    public void counterMin(int amount, TextField textfield){
-        if (amount != 0){
-            amount--;
+    /**
+     * Ensures that you cannot click lower than 0
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
+    public void counterMin(TextField textfield){
+        currentAmount = Integer.parseInt(textfield.getText());
+
+        if(currentAmount != 0){
+            currentAmount--;
+            textfield.setText(String.valueOf(currentAmount));
         }
-        textfield.setText(String.valueOf(amount));
     }
 
     @FXML
     public void pressLaunder(MouseEvent mouseEvent) {
-        getValues();controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+        if (getValues() <= 8){
+            controller.transerMoney(realMoney, qualityOne, qualityTwo, qualityThree);
 
-        Stage stage = (Stage) anchorpane.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) anchorpane.getScene().getWindow();
+            stage.close();
+        } else{
+            txtField.setText("You can only launder 8 bills!");
+        }
     }
 
     @FXML
     public void plusQualityOne(MouseEvent mouseEvent) {
-        counterPlus(qualityOne, txtQualityOne);
+        counterPlus(strQualityOne, txtQualityOne);
     }
 
     @FXML
     public void minQualityOne(MouseEvent mouseEvent) {
-        counterMin(qualityOne, txtQualityOne);
+        counterMin(txtQualityOne);
     }
 
     @FXML
     public void plusQualityTwo(MouseEvent mouseEvent) {
-        counterPlus(qualityTwo, txtQualityTwo);
+        counterPlus(strQualityTwo, txtQualityTwo);
     }
 
     @FXML
     public void minQualityTwo(MouseEvent mouseEvent) {
-        counterMin(qualityTwo, txtQualityTwo);
+        counterMin(txtQualityTwo);
     }
 
     @FXML
     public void plusQualityThree(MouseEvent mouseEvent) {
-        counterPlus(qualityThree, txtQualityThree);
+        counterPlus(strQualityThree, txtQualityThree);
     }
 
     @FXML
     public void minQualitythree(MouseEvent mouseEvent) {
-        counterMin(qualityThree, txtQualityThree);
+        counterMin(txtQualityThree);
     }
 
     public void show() {
@@ -133,7 +163,6 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void setController(Object controller) {
-
         PopUpLaunderMoneyController popUpLaunderMoneyController = (PopUpLaunderMoneyController) controller;
         this.controller = popUpLaunderMoneyController;
         popUpLaunderMoneyController.registerObserver(this);
@@ -141,8 +170,6 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void update(Observable observable) {
-//        Board board = (Board)observable;
-//        textField.setText(board.getTextField());
     }
 
     @Override
