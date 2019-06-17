@@ -168,7 +168,7 @@ public class BoardController {
         board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new PrinterUpgrade()));
     }
 
-    public void countMoney(int qualityId, int qualiytOne, int qualityTwo, int qualityThree) {
-        board.countMoney(qualityId, qualiytOne, qualityTwo, qualityThree);
+    public void countMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.countMoney(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 }

@@ -21,8 +21,8 @@ public class PopUpLaunderMoneyController {
     public void registerObserver(Observer observer) {app.accountController.registerObserver(observer);
     }
 
-    public boolean checkQualityQuantity(int amount) {
-        if(app.boardController.board.checkQualityQuantity(amount)) {
+    public boolean checkQualityQuantity(String quality, int amount) {
+        if(app.boardController.board.checkQualityQuantity(amount, quality)) {
             return true;
         }
         else

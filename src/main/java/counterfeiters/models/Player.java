@@ -27,7 +27,8 @@ public class Player {
         this.realMoney = new RealMoney();
         this.bahamasBank = new BahamasBank();
         realMoney.setTotalMoney(100);
-        fakeMoney.setQualityOne(2);
+        fakeMoney.setQualityOne(9);
+        fakeMoney.setQualityThree(5);
         bahamasBank.setTotalBankMoney(0);
     }
 

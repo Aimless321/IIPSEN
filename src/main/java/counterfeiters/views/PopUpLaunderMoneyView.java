@@ -22,18 +22,19 @@ public class PopUpLaunderMoneyView implements Observer{
     public TextField txtQualityTwo;
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
-    public Text textField;
+    public Text TextField;
 
     private int qualityOne;
     private int qualityTwo;
     private int qualityThree;
+    private int currentAmount;
+
+    private String strQualityOne = "qualityOne";
+    private String strQualityTwo = "qualityTwo";
+    private String strQualityThree = "qualityThree";
 
     //Type money
-    private int qualityOneMoney = 1;
-    private int qualityTwoMoney = 2;
-    private int qualityThreeMoney = 3;
     private int realMoney = 4;
-    private int bahamasBank = 5;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -51,63 +52,73 @@ public class PopUpLaunderMoneyView implements Observer{
         show();
     }
 
-    public void getValues(){
+    public int getValues(){
         qualityOne = Integer.parseInt(txtQualityOne.getText());
         qualityTwo = Integer.parseInt(txtQualityTwo.getText());
         qualityThree = Integer.parseInt(txtQualityThree.getText());
+
+        int total = qualityOne + qualityTwo + qualityThree;
+        return total;
     }
 
-    //test
-    public void counterPlus(int amount, TextField textfield){
-        if(controller.checkQualityQuantity(amount)){
-            amount++;
-            textfield.setText(String.valueOf(amount));
+    public void counterPlus(String quality, TextField textfield){
+        currentAmount = Integer.parseInt(textfield.getText());
+
+        if(controller.checkQualityQuantity(quality, currentAmount)){
+            currentAmount++;
+            textfield.setText(String.valueOf(currentAmount));
         }
     }
 
-    public void counterMin(int amount, TextField textfield){
-        if (amount != 0){
-            amount--;
+    public void counterMin(TextField textfield){
+        currentAmount = Integer.parseInt(textfield.getText());
+
+        if(currentAmount != 0){
+            currentAmount--;
+            textfield.setText(String.valueOf(currentAmount));
         }
-        textfield.setText(String.valueOf(amount));
     }
 
     @FXML
     public void pressLaunder(MouseEvent mouseEvent) {
-        getValues();controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+        if (getValues() < 8){
+            controller.countMoney(realMoney, qualityOne, qualityTwo, qualityThree);
 
-        Stage stage = (Stage) anchorpane.getScene().getWindow();
-        stage.close();
+            Stage stage = (Stage) anchorpane.getScene().getWindow();
+            stage.close();
+        } else{
+            TextField.setText("You can only launder 8 money!");
+        }
     }
 
     @FXML
     public void plusQualityOne(MouseEvent mouseEvent) {
-        counterPlus(qualityOne, txtQualityOne);
+        counterPlus(strQualityOne, txtQualityOne);
     }
 
     @FXML
     public void minQualityOne(MouseEvent mouseEvent) {
-        counterMin(qualityOne, txtQualityOne);
+        counterMin(txtQualityOne);
     }
 
     @FXML
     public void plusQualityTwo(MouseEvent mouseEvent) {
-        counterPlus(qualityTwo, txtQualityTwo);
+        counterPlus(strQualityTwo, txtQualityTwo);
     }
 
     @FXML
     public void minQualityTwo(MouseEvent mouseEvent) {
-        counterMin(qualityTwo, txtQualityTwo);
+        counterMin(txtQualityTwo);
     }
 
     @FXML
     public void plusQualityThree(MouseEvent mouseEvent) {
-        counterPlus(qualityThree, txtQualityThree);
+        counterPlus(strQualityThree, txtQualityThree);
     }
 
     @FXML
     public void minQualitythree(MouseEvent mouseEvent) {
-        counterMin(qualityThree, txtQualityThree);
+        counterMin(txtQualityThree);
     }
 
     public void show() {

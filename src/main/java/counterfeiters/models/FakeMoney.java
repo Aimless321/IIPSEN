@@ -41,6 +41,21 @@ public class FakeMoney implements Observable{
         return qualityThree;
     }
 
+    public int getQuality(String quality){
+        switch (quality){
+            case "qualityOne":
+                return getQualityOne();
+            case "qualityTwo":
+                return getQualityTwo();
+            case "qualityThree":
+                return getQualityThree();
+            default:
+                break;
+
+        }
+        return 0;
+    }
+
     @Override
     public void registerObserver(Observer observer) {
         observers.add(observer);

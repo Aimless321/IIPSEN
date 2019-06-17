@@ -93,13 +93,10 @@ public class Account implements Observable{
                return true;
            }
            else{
-
                textField = "Username already exist!";
                notifyAllObservers();
                return false;
            }
-
-
     }
 
     public void registerObserver(Observer observer) {
