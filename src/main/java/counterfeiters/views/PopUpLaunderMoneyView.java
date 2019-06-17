@@ -79,6 +79,10 @@ public class PopUpLaunderMoneyView implements Observer{
         if(controller.checkQualityQuantity(quality, currentAmount)){
             currentAmount++;
             textfield.setText(String.valueOf(currentAmount));
+            txtField.setText("");
+        }
+        else{
+            txtField.setText("Can't select more than your current amount!");
         }
     }
 
@@ -94,18 +98,22 @@ public class PopUpLaunderMoneyView implements Observer{
         if(currentAmount != 0){
             currentAmount--;
             textfield.setText(String.valueOf(currentAmount));
+            txtField.setText("");
+        }
+        else{
+            txtField.setText("Can't select lower dan 0!");
         }
     }
 
     @FXML
     public void pressLaunder(MouseEvent mouseEvent) {
-        if (getValues() <= 8){
-            controller.transerMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+        if (controller.checkAmount(getValues())){
+            controller.transferMoney(realMoney, qualityOne, qualityTwo, qualityThree);
 
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
         } else{
-            txtField.setText("You can only launder 8 bills!");
+            txtField.setText("You can only launder " + controller.getMaxAmount() + " bills!");
         }
     }
 
@@ -135,7 +143,7 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void minQualitythree(MouseEvent mouseEvent) {
+    public void minQualityThree(MouseEvent mouseEvent) {
         counterMin(txtQualityThree);
     }
 

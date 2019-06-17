@@ -28,6 +28,7 @@ public class ApplicationController {
     public AccountController accountController;
     public GameListController gameListController;
     public PopUpLaunderMoneyController popUpLaunderMoneyController;
+    public PopUpBahamasController popUpBahamasController;
     public PlayerCardController playerCardController;
 
     public ApplicationController(Stage stage) {
@@ -46,6 +47,7 @@ public class ApplicationController {
         accountController = new AccountController(this);
         gameListController = new GameListController(this);
         popUpLaunderMoneyController = new PopUpLaunderMoneyController(this);
+        popUpBahamasController = new PopUpBahamasController(this);
         playerCardController = new PlayerCardController(this);
 
         //Load first view
