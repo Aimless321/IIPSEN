@@ -166,12 +166,11 @@ public class BoardController {
         board.makeFirstPlayer();
     }
 
-    public void givePlayerCards() {
-        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new Printer()));
-        board.game.localPlayer.addCard(board.blackmarket.givePlayerCard(new PrinterUpgrade()));
-    }
-
     public void countMoney(int qualityId, int qualiytOne, int qualityTwo, int qualityThree) {
         board.countMoney(qualityId, qualiytOne, qualityTwo, qualityThree);
+    }
+
+    public Card givePlayerCard(Card card) {
+        return board.blackmarket.givePlayerCard(card);
     }
 }
