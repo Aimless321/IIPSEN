@@ -1,11 +1,13 @@
 package counterfeiters.models;
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Board implements Observable{
@@ -14,7 +16,9 @@ public class Board implements Observable{
     public PolicePawn policePawn = new PolicePawn(4);
     public FirstPlayerPawn firstPlayerPawn = new FirstPlayerPawn();
     private ArrayList<Henchman> henchmen = new ArrayList<>();
+    private HashMap<Integer,String> hmap = new HashMap<Integer,String>();
     public Game game;
+    public FirebaseService fb;
 
     public Board() {
 
@@ -160,5 +164,15 @@ public class Board implements Observable{
         }
         else
             return true;
+    }
+
+    public HashMap<Integer,String> setPlayersAndCards() {
+        for (DocumentSnapshot doc : fb.getAllDocumentsFromCollection("games")) {
+            for (Player player : doc.toObject(Game.class).getPlayers()) {
+                hmap.put(player.getPlayerId(), player.getUserName());
+                //String charachtertext = player.getCharacterName() + "player";
+            }
+        }
+        return hmap;
     }
 }
