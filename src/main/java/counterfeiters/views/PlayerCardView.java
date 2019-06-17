@@ -66,7 +66,7 @@ public class PlayerCardView implements Observer{
 
     @Override
     public void start() {
-        playerCardView.getChildren().removeAll();
-        playerCardView = controller.makeCardView(playerCardView);
+        //playerCardView.getChildren().removeAll();
+        controller.makeCardView(playerCardView);
     }
 }
