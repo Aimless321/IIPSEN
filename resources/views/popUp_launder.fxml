@@ -81,7 +81,7 @@
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualitythree" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>

@@ -164,8 +164,12 @@ public class BoardController {
         board.makeFirstPlayer();
     }
 
-    public void transerMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
-        board.transferMoney(qualityId, qualityOne, qualityTwo, qualityThree);
+    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
+    }
+
+    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        board.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
     public Card givePlayerCard(Card card) {

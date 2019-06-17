@@ -87,8 +87,22 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
+
+        game.localPlayer.updateMoneyPlus(qualityId, result);
+        game.localPlayer.updateMoneyReduce(1, qualityOne);
+        game.localPlayer.updateMoneyReduce(2, qualityTwo);
+        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        notifyAllObservers();
+    }
+
+    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+        int resultQualityOne = qualityOne * 20;
+        int resultQualityTwo = qualityTwo * 30;
+        int resultQualityThree = qualityThree * 40;
+
+        int result = resultQualityOne + resultQualityTwo + resultQualityThree;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
         game.localPlayer.updateMoneyReduce(1, qualityOne);

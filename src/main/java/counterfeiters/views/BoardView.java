@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
+import counterfeiters.controllers.PopUpLaunderMoneyController;
 import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -93,11 +94,29 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpLaunderMoneyController.launderMoney();
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET);
 
         Button btn = (Button) mouseEvent.getSource();
 
         boardcontroller.advancePolice();
+
+        placeHenchman(btn);
+    }
+
+    @FXML
+    public void actionFieldHealer(MouseEvent mouseEvent) {
+
+        if(!boardcontroller.board.checkYourTurn()) {
+            return;
+        }
+
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER);
+
+        Button btn = (Button) mouseEvent.getSource();
+
+        if(btn.getStyleClass().contains("police")) {
+            boardcontroller.advancePolice();
+        }
 
         placeHenchman(btn);
     }
@@ -137,23 +156,6 @@ public class BoardView implements Observer {
                 && !boardcontroller.checkActionField(4, btn.getId())) {
             return;
         }
-
-        placeHenchman(btn);
-    }
-
-    @FXML
-    public void actionFieldHealer(MouseEvent mouseEvent) {
-
-        if(!boardcontroller.board.checkYourTurn()) {
-            return;
-        }
-
-        Button btn = (Button) mouseEvent.getSource();
-
-        if(btn.getStyleClass().contains("police")) {
-            boardcontroller.advancePolice();
-        }
-
 
         placeHenchman(btn);
     }

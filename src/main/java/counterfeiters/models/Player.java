@@ -29,6 +29,9 @@ public class Player {
 
         //TODO: Remove for real version
         realMoney.setTotalMoney(100);
+        fakeMoney.setQualityOne(5);
+        fakeMoney.setQualityTwo(10);
+        fakeMoney.setQualityThree(3);
     }
 
     public void leaveLobby(Game game) {
