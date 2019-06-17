@@ -1,6 +1,7 @@
 package counterfeiters.main;
 
 import counterfeiters.controllers.ApplicationController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.views.ViewUtilities;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -28,5 +29,7 @@ public class App extends Application
         primaryStage.setFullScreen(true);
         primaryStage.setTitle("Counterfeiters");
         primaryStage.show();
+
+        SoundManager.playLoop("background_music.mp3");
     }
 }
