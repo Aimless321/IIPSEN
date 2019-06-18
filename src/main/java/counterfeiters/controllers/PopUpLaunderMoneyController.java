@@ -53,4 +53,8 @@ public class PopUpLaunderMoneyController {
     public boolean checkAmount(int curAmount) {
         return curAmount <= getMaxAmount();
     }
+
+    public int policePosition() {
+        return app.boardController.board.policePawn.getPawnPosition();
+    }
 }

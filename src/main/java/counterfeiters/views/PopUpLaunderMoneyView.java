@@ -166,7 +166,17 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @FXML
     public void checkAvailability() {
-
+        System.out.println(controller.policePosition());
+        switch (controller.policePosition()) {
+            case 11:
+                System.out.println("txt wuality one doadbled");
+                txtQualityOne.setEditable(false);
+                System.out.println("txt wuality one doadbled");
+            case 13:
+                txtQualityTwo.setEditable(false);
+            case 17:
+                txtQualityThree.setEditable(false);
+        }
     }
 
     @Override
