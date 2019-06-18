@@ -172,8 +172,7 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-        Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+        boardcontroller.rulesPressed();
     }
 
     @FXML

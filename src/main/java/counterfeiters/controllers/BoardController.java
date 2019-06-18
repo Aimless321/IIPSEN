@@ -6,6 +6,7 @@ import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
 import javafx.collections.transformation.FilteredList;
+import counterfeiters.views.RulesView;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
@@ -143,6 +144,13 @@ public class BoardController {
         board.prepareFirstPlayer();
         board.prepareBlackMarket();
         board.setPlayersAndCards();
+    }
+
+    public void rulesPressed()
+    {
+
+        app.loadView(RulesView.class, app.rulesController);
+
     }
 
     public void advancePolice() {

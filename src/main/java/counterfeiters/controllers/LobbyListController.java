@@ -10,6 +10,7 @@ import counterfeiters.models.Game;
 import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
 
 import javax.annotation.Nullable;
 
@@ -85,7 +86,7 @@ public class LobbyListController {
     }
 
     public void rulesButtonPressed() {
-        //TODO: Go to the rules view
+        app.loadView(RulesView.class, app.rulesController);
     }
 
 }

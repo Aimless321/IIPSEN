@@ -69,7 +69,7 @@ public class GameListView implements Observer{
 
     @FXML
     public void pressRules() {
-
+        controller.rulesButtonPressed();
     }
 
     @FXML
