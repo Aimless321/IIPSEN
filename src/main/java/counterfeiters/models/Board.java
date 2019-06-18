@@ -91,6 +91,17 @@ public class Board implements Observable, EventListener {
 
     }
 
+    public void giveMoneyOnEnd(String cardName){
+        ArrayList<Card> cards = game.localPlayer.getCards();
+
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+            }
+
+        }
+    }
+
     public boolean checkYourTurn() {
         return game.checkYourTurn(firstPlayerPawn);
     }
@@ -218,27 +229,13 @@ public class Board implements Observable, EventListener {
     @Override
     public void onRoundEnd() {
 
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if (card.getName().equals("diner")) {
-                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
-            }
-
-        }
+        giveMoneyOnEnd("diner");
     }
 
 
     @Override
     public void onGameEnd() {
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if (card.getName().equals("scratchcard")) {
-                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
-            }
-
-        }
+        giveMoneyOnEnd("scratchcard");
 
     }
 }
