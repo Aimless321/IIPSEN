@@ -5,6 +5,7 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
@@ -138,6 +139,13 @@ public class BoardController {
         board.prepareFirstPlayer();
         board.prepareBlackMarket();
         //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
+    }
+
+    public void rulesPressed()
+    {
+
+        app.loadView(RulesView.class, app.rulesController);
+
     }
 
     public void advancePolice() {
