@@ -8,8 +8,6 @@ import counterfeiters.models.PrinterUpgrade;
 import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
-import java.util.Map;
-
 /**
  * The controller of the game model.
  * Handles loading, joining and creating of a game.

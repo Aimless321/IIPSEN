@@ -7,9 +7,9 @@ import counterfeiters.models.Player;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RulesView;
-import javafx.scene.image.Image;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This controller is the link between the scoreboard view and the game controller, via the applicationcontroller, that contains the game model.

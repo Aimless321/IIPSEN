@@ -5,10 +5,10 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardController {
@@ -50,8 +50,6 @@ public class BoardController {
                     }
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
-                        System.out.println("Updating board");
-
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
                     }
@@ -131,12 +129,20 @@ public class BoardController {
         double posY = bounds.getMinY() + btn.getHeight() / 5;
 
         Player player = app.gameController.game.localPlayer;
-        board.placeHenchman(posX, posY, player.getCharacterName());
+        board.placeHenchman(posX, posY, player.getCharacterName(), getActionFieldButtonId(btn));
 
         board.checkEndRound();
 
         board.updateFirebase();
         board.notifyAllObservers();
+    }
+
+    public String getActionFieldButtonId(Button btn) {
+        //Only get the classes that start with 'actionfield-'
+        FilteredList<String> classList = btn.getStyleClass().filtered(
+                styleClass -> (styleClass.matches("actionfield-.*")));
+
+        return classList.get(0);
     }
 
     public void prepareView() {

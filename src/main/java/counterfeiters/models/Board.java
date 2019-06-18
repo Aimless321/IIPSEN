@@ -43,8 +43,8 @@ public class Board implements Observable{
         updateFirebase();
     }
 
-    public void placeHenchman(double posX, double posY, String player) {
-        henchmen.add(new Henchman(posX, posY, player));
+    public void placeHenchman(double posX, double posY, String player, String buttonId) {
+        henchmen.add(new Henchman(posX, posY, player, buttonId));
     }
 
 
@@ -156,11 +156,8 @@ public class Board implements Observable{
 
     public void makePurchase(int cardNumber) {
         Card card = blackmarket.cardRow.get(cardNumber);
-        System.out.println("gotten Card: " + card);
         game.localPlayer.addCard(card);
-        System.out.println("added card to player");
         blackmarket.makeCardPurchased(cardNumber);
-        System.out.println("card removed");
     }
 
 //    public void soundWrong(){

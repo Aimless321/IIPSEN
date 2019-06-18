@@ -8,10 +8,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -21,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -158,7 +155,6 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
-            System.out.println("player has no ticket!");
             return;
         }
         else if(!btn.getStyleClass().contains("ticket")
@@ -250,7 +246,7 @@ public class BoardView implements Observer {
             try {
                 ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
             }catch (NullPointerException e) {
-                System.out.println("no image");
+                System.err.println("Cannot load blackmarket card image");
             }
         }
     }
@@ -290,6 +286,15 @@ public class BoardView implements Observer {
                 children.add(0, newHenchman);
             }
         }
+
+        //Enable all of the action field buttons again (21 buttons)
+        for(int i = 0; i < 21; i++) {
+            Button btn = (Button) pane.lookup(".actionfield-" + i);
+
+            if(btn != null) {
+                btn.setDisable(false);
+            }
+        }
     }
 
     public void addHenchman(Board board) {
@@ -306,6 +311,13 @@ public class BoardView implements Observer {
             henchmanImage.getStyleClass().add("henchman");
 
             pane.getChildren().add(henchmanImage);
+
+            //Disable the button that it's placed on
+            Button btn = (Button) pane.lookup("." + henchman.getBtnId());
+
+            if(btn != null) {
+                btn.setDisable(true);
+            }
         }
     }
 
