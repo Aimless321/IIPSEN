@@ -110,17 +110,21 @@ public class LobbyListView implements Observer {
 
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-            if (updatedGames.size() != 0 && !updatedGames.isEmpty()) {
-                for (Game game : updatedGames) {
-                    if (game.getRound() != 1) {
-                        Platform.runLater(() ->
-                                addLobbyInView(game));
-                    }
-                }
-            } else {
+            if (updatedGames.size() == 0 || updatedGames.isEmpty()) {
                 System.out.println("er zijn geen lobbies");
                 noLobbies();
+
+                return;
             }
+
+
+            for (Game game : updatedGames) {
+                if (game.getRound() != 1) {
+                    Platform.runLater(() ->
+                            addLobbyInView(game));
+                }
+            }
+
         }
     }
 
