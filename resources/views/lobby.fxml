@@ -3,30 +3,32 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.*?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LobbyView">
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LobbyView">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="600.0" layoutX="1082.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" />
-      <ImageView styleClass="rules-button" fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMousePressed="#pressRules" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="980.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="600.0" layoutX="1085.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" AnchorPane.bottomAnchor="980.0" AnchorPane.leftAnchor="1085.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="249.0" />
+      <ImageView fitHeight="67.0" fitWidth="86.0" layoutX="1839.0" layoutY="17.0" onMousePressed="#pressRules" pickOnBounds="true" preserveRatio="true" styleClass="rules-button" AnchorPane.bottomAnchor="996.0" AnchorPane.leftAnchor="1838.567008972168" AnchorPane.rightAnchor="26.43299102783203" AnchorPane.topAnchor="17.0">
          <image>
             <Image url="@/icons/question-sign.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="1098.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Context">
+      <Text fill="WHITE" layoutX="1098.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Context" AnchorPane.bottomAnchor="774.96484375" AnchorPane.leftAnchor="1098.0" AnchorPane.rightAnchor="698.49609375" AnchorPane.topAnchor="257.15234375">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <Text boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" layoutX="1099.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players act as Mafia counterfeiters, printing fake bills and ex-changing them for the real thing. The Godfather can help them avoid the police, but his protection comes at a cost. The game ends when the police complete their investigations into the coun-terfeiting industry; the winner will be the player with the most ‘real’ (non-counterfeit) money!" wrappingWidth="471.828125">
+      <Text boundsType="LOGICAL_VERTICAL_CENTER" fill="WHITE" layoutX="1099.0" layoutY="327.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Players act as Mafia counterfeiters, printing fake bills and ex-changing them for the real thing. The Godfather can help them avoid the police, but his protection comes at a cost. The game ends when the police complete their investigations into the coun-terfeiting industry; the winner will be the player with the most ‘real’ (non-counterfeit) money!" wrappingWidth="471.828125" AnchorPane.bottomAnchor="774.96484375" AnchorPane.leftAnchor="1098.0" AnchorPane.rightAnchor="698.49609375" AnchorPane.topAnchor="306.15234375">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" layoutX="1179.0" layoutY="704.0" prefHeight="136.0" prefWidth="311.0" spacing="15.0">
+      <VBox alignment="TOP_CENTER" layoutX="1179.0" layoutY="704.0" prefHeight="136.0" prefWidth="311.0" spacing="15.0" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="1179.0" AnchorPane.rightAnchor="430.0" AnchorPane.topAnchor="704.0">
          <children>
             <Button fx:id="startButton" mnemonicParsing="false" onMouseClicked="#pressStart" prefHeight="44.0" prefWidth="310.0" styleClass="green-button" text="Start" textFill="WHITE">
                <font>
@@ -40,12 +42,12 @@
             </Button>
          </children>
       </VBox>
-      <Text fx:id="title" fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby" wrappingWidth="1485.13671875">
+      <Text fx:id="title" fill="WHITE" layoutX="14.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lobby" wrappingWidth="1485.13671875" AnchorPane.bottomAnchor="997.451171875" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="420.86328125" AnchorPane.topAnchor="16.044921875">
          <font>
             <Font size="50.0" />
          </font>
       </Text>
-      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" prefHeight="600.0" prefWidth="637.0" spacing="15">
+      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" prefHeight="600.0" prefWidth="637.0" spacing="15" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="889.0" AnchorPane.topAnchor="240.0">
       </VBox>
    </children>
-</Pane>
+</AnchorPane>

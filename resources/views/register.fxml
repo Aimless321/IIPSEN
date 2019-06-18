@@ -1,34 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.RegisterView">
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.RegisterView">
    <children>
-      <VBox alignment="CENTER" layoutX="710.0" layoutY="335.0" prefHeight="500.0" prefWidth="500.0">
+      <VBox alignment="CENTER" layoutX="710.0" layoutY="335.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="245.0" AnchorPane.leftAnchor="710.0" AnchorPane.rightAnchor="710.0" AnchorPane.topAnchor="335.0">
          <children>
-            <TextField fx:id="username" alignment="CENTER" promptText="Username">
+            <TextField fx:id="username" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="500.0" promptText="Username">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </TextField>
-            <PasswordField fx:id="password" alignment="CENTER" promptText="Password">
+            <PasswordField fx:id="password" alignment="CENTER" minWidth="-Infinity" prefWidth="500.0" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <PasswordField fx:id="passwordCheck" alignment="CENTER" onKeyPressed="#keyPressed" promptText="Password">
+            <PasswordField fx:id="passwordCheck" alignment="CENTER" minWidth="-Infinity" onKeyPressed="#keyPressed" prefWidth="500.0" promptText="Password">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </PasswordField>
-            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#pressRegister" prefWidth="500.0" styleClass="green-button" text="Register" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#pressRegister" prefWidth="500.0" styleClass="green-button" text="Register" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
             </Button>
-            <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#backToMenu" prefWidth="500.0" styleClass="blue-button" text="Back to Login" textAlignment="CENTER" textFill="WHITE">
+            <Button alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#backToMenu" prefWidth="500.0" styleClass="blue-button" text="Back to Login" textAlignment="CENTER" textFill="WHITE">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>
@@ -41,4 +45,4 @@
          </children>
       </VBox>
    </children>
-</Pane>
+</AnchorPane>

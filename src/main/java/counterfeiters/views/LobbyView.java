@@ -50,7 +50,7 @@ public class LobbyView implements Observer {
         Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage, controller);
 
         //Find root pane and set background
-        Pane pane = (Pane)root.lookup("Pane");
+        Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         //Show it on the screen
