@@ -1,6 +1,7 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
+import com.google.type.Money;
 import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 
@@ -28,6 +29,7 @@ public class Player {
         this.bahamasBank = new BahamasBank();
 
         //TODO: Remove for real version
+        bahamasBank.setTotalBankMoney(250);
         realMoney.setTotalMoney(100);
     }
 
@@ -94,21 +96,21 @@ public class Player {
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoneyPlus(int qualityId, int amount){
-        switch(qualityId) {
-            case 1:
+    public void updateMoneyPlus(MoneyType type, int amount){
+        switch(type) {
+            case FAKE_ONE:
                 fakeMoney.setQualityOne(fakeMoney.getQualityOne() + amount);
                 break;
-            case 2:
+            case FAKE_TWO:
                 fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() + amount);
                 break;
-            case 3:
+            case FAKE_THREE:
                 fakeMoney.setQualityThree(fakeMoney.getQualityThree() + amount);
                 break;
-            case 4:
+            case REAL:
                 realMoney.setTotalMoney(realMoney.getTotalMoney() + amount);
                 break;
-            case 5:
+            case BAHAMAS:
                 bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() + amount);
                 break;
             default:
@@ -122,26 +124,34 @@ public class Player {
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoneyReduce(int qualityId, int amount){
-        switch(qualityId) {
-            case 1:
+    public void updateMoneyReduce(MoneyType type, int amount){
+        switch(type) {
+            case FAKE_ONE:
                 fakeMoney.setQualityOne(fakeMoney.getQualityOne() - amount);
                 break;
-            case 2:
+            case FAKE_TWO:
                 fakeMoney.setQualityTwo(fakeMoney.getQualityTwo() - amount);
                 break;
-            case 3:
+            case FAKE_THREE:
                 fakeMoney.setQualityThree(fakeMoney.getQualityThree() - amount);
                 break;
-            case 4:
+            case REAL:
                 realMoney.setTotalMoney(realMoney.getTotalMoney() - amount);
                 break;
-            case 5:
+            case BAHAMAS:
                 bahamasBank.setTotalBankMoney(bahamasBank.getTotalBankMoney() - amount);
                 break;
             default:
                 break;
         }
+    }
+
+    public boolean checkRedueBahamas(int amount) {
+        return bahamasBank.getTotalBankMoney() >= amount;
+    }
+
+    public boolean checkAddBahamas(int amount) {
+        return realMoney.getTotalMoney() >= amount;
     }
 
     public void addCard(Card card) {

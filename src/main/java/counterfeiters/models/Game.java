@@ -211,13 +211,8 @@ public class Game implements Observable {
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoney(int qId, String character, int amount){
-        if (character.equals("+")){
-            localPlayer.updateMoneyPlus(qId, amount);
-        }
-        if (character.equals("-")){
-            localPlayer.updateMoneyReduce(qId, amount);
-        }
+    public void updateMoney(int amount){
+        localPlayer.updateMoneyPlus(MoneyType.REAL, amount);
     }
 
     /**

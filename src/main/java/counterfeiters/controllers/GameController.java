@@ -82,10 +82,6 @@ public class GameController {
         game.updateData(updateGame);
     }
 
-    public void updateMoney(int qId, String character, int amount) {
-        game.updateMoney(qId, character, amount);
-    }
-
     public void setStartRound(int numRound) {
         game.roundChanged(numRound);
     }

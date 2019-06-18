@@ -54,12 +54,13 @@ public class Board implements Observable{
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
      * */
-    public boolean checkMoney(int id, int bedrag){
+    public boolean checkMoney(MoneyType type, int bedrag){
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-            game.localPlayer.updateMoneyReduce(id, bedrag);
+            game.localPlayer.updateMoneyReduce(type, bedrag);
             return true;
         }
-            return false;
+
+        return false;
     }
 
 
@@ -130,17 +131,17 @@ public class Board implements Observable{
         EventHandler.getInstance().endRound();
     }
 
-    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 
-    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int resultQualityOne = qualityOne * 20;
         int resultQualityTwo = qualityTwo * 30;
         int resultQualityThree = qualityThree * 40;
@@ -148,9 +149,9 @@ public class Board implements Observable{
         int result = resultQualityOne + resultQualityTwo + resultQualityThree;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 
@@ -159,14 +160,6 @@ public class Board implements Observable{
         game.localPlayer.addCard(card);
         blackmarket.makeCardPurchased(cardNumber);
     }
-
-//    public void soundWrong(){
-//        String musicFile = "/sounds/wrong.mp3";
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
-//    }
 
     public void advancePolice() {
         policePawn.advance();

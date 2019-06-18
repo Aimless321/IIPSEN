@@ -1,7 +1,9 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.models.MoneyType;
 import counterfeiters.models.Observable;
+import counterfeiters.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,7 +35,6 @@ public class PopUpLaunderMoneyView implements Observer{
     private String strQualityOne = "qualityOne";
     private String strQualityTwo = "qualityTwo";
     private String strQualityThree = "qualityThree";
-    private int realMoney = 4;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -106,9 +107,9 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void pressLaunder(MouseEvent mouseEvent) {
+    public void pressLaunder() {
         if (controller.checkAmount(getValues())){
-            controller.transferMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+            controller.transferMoney(MoneyType.REAL, qualityOne, qualityTwo, qualityThree);
 
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
@@ -118,32 +119,32 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void plusQualityOne(MouseEvent mouseEvent) {
+    public void plusQualityOne() {
         counterPlus(strQualityOne, txtQualityOne);
     }
 
     @FXML
-    public void minQualityOne(MouseEvent mouseEvent) {
+    public void minQualityOne() {
         counterMin(txtQualityOne);
     }
 
     @FXML
-    public void plusQualityTwo(MouseEvent mouseEvent) {
+    public void plusQualityTwo() {
         counterPlus(strQualityTwo, txtQualityTwo);
     }
 
     @FXML
-    public void minQualityTwo(MouseEvent mouseEvent) {
+    public void minQualityTwo() {
         counterMin(txtQualityTwo);
     }
 
     @FXML
-    public void plusQualityThree(MouseEvent mouseEvent) {
+    public void plusQualityThree() {
         counterPlus(strQualityThree, txtQualityThree);
     }
 
     @FXML
-    public void minQualityThree(MouseEvent mouseEvent) {
+    public void minQualityThree() {
         counterMin(txtQualityThree);
     }
 
@@ -173,7 +174,6 @@ public class PopUpLaunderMoneyView implements Observer{
     public void setController(Object controller) {
         PopUpLaunderMoneyController popUpLaunderMoneyController = (PopUpLaunderMoneyController) controller;
         this.controller = popUpLaunderMoneyController;
-        popUpLaunderMoneyController.registerObserver(this);
     }
 
     @Override

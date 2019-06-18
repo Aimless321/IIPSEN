@@ -39,14 +39,6 @@ public class BoardView implements Observer {
     public Text hippoplayer;
     public Pane hippopane;
 
-    private String plus = "+";
-    private String min = "-";
-    private int qualityOne = 1;
-    private int qualityTwo = 2;
-    private int qualityThree = 3;
-    private int realMoney = 4;
-    private int bahamasBank = 5;
-
     private Stage stage;
     private BoardController boardcontroller;
 
@@ -82,13 +74,10 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
 
-        if(boardcontroller.checkActionField(4, btn.getId())) {
+        if(boardcontroller.checkActionField(btn.getId())) {
             boardcontroller.makePurchase(btn.getStyleClass().get(1));
             placeHenchman(btn);
         }
-
-
-
     }
 
     @FXML
@@ -134,7 +123,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.updateMoneyOnPosition(realMoney, plus, Integer.parseInt(btn.getId()));
+        boardcontroller.updateMoneyOnPosition(Integer.parseInt(btn.getId()));
 
         if (btn.getStyleClass().contains("glasses")) {
             boardcontroller.makeFirstPlayer();
@@ -150,16 +139,13 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpBahamasController.bahamas();
-
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
-            return;
-        }
-        else if(!btn.getStyleClass().contains("ticket")
-                && !boardcontroller.checkActionField(4, btn.getId())) {
-            return;
+        if(btn.getStyleClass().contains("ticket") && boardcontroller.checkCard(new PlaneTicket())) {
+            boardcontroller.openBahamas();
+
+        } else if(boardcontroller.checkActionField(btn.getId())) {
+            boardcontroller.openBahamas();
         }
 
         placeHenchman(btn);
@@ -177,7 +163,6 @@ public class BoardView implements Observer {
         boardcontroller.printMoney();
 
         if(btn.getStyleClass().contains("police")) {
-
             boardcontroller.advancePolice();
         }
 
@@ -187,8 +172,6 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
-
-
         Button btn = (Button) mouseEvent.getSource();
         placeHenchman(btn);
     }
@@ -201,8 +184,6 @@ public class BoardView implements Observer {
         if (!boardcontroller.app.playerCardController.checkPlayer(player)) {
             return;
         }
-
-
 
         boardcontroller.app.playerCardController.setPlayerID(player);
         boardcontroller.app.loadView(PlayerCardView.class, boardcontroller.app.playerCardController);
@@ -228,7 +209,6 @@ public class BoardView implements Observer {
     public void update(Observable observable) {
 
         Board board = (Board) observable;
-
 
         updateBlackMarket(board);
         updatePolicePawn(board);
@@ -382,7 +362,6 @@ public class BoardView implements Observer {
         playersAndCards();
 
         boardcontroller.registerListeners();
-
 
     }
 }

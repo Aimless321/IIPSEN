@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.models.MoneyType;
 import counterfeiters.views.Observer;
 import counterfeiters.views.PopUpLaunderMoneyView;
 
@@ -19,7 +20,7 @@ public class PopUpLaunderMoneyController {
         app.loadView(PopUpLaunderMoneyView.class, app.popUpLaunderMoneyController);
     }
 
-    public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree){
+    public void transferMoney(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree){
         if (type == LaunderType.SUPERMARKET){
             app.boardController.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
         }
@@ -27,9 +28,6 @@ public class PopUpLaunderMoneyController {
         if (type == LaunderType.HEALER){
             app.boardController.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
         }
-    }
-
-    public void registerObserver(Observer observer) {app.accountController.registerObserver(observer);
     }
 
     public boolean checkQualityQuantity(String quality, int amount) {
