@@ -155,10 +155,20 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void makePurchase(int cardNumber) {
-        Card card = blackmarket.cardRow.get(cardNumber);
+    public boolean makePurchase(int cardNumber) {
+        Card card;
+
+
+        try {
+            card = blackmarket.cardRow.get(cardNumber);
+        }catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
         game.localPlayer.addCard(card);
         blackmarket.makeCardPurchased(cardNumber);
+
+        return true;
     }
 
     public void advancePolice() {
