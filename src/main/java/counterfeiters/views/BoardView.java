@@ -153,6 +153,7 @@ public class BoardView implements Observer {
         }
         else if(!btn.getStyleClass().contains("ticket")
                 && !boardcontroller.checkActionField(4, btn.getId())) {
+            boardcontroller.app.popUpBahamasController.bahamas();
             return;
         }
 

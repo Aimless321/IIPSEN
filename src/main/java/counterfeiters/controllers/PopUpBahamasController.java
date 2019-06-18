@@ -13,16 +13,16 @@ public class PopUpBahamasController {
         app.loadView(PopUpBahamasView.class, app.popUpBahamasController);
     }
 
-    public boolean addAmountToBahamas(int amount, int id){
+    public boolean addAmountToBahamas(int amount, int bankId, int id){
         if (app.boardController.board.checkMoney(amount, id)){
-            app.boardController.board.game.localPlayer.updateMoneyPlus(amount, id);
+            app.boardController.board.game.localPlayer.updateMoneyPlus(amount, bankId);
             return true;
         }
         return false;
     }
 
-    public boolean reduceAmountFromBahamas(int amount, int id) {
-        if (app.boardController.board.checkMoney(amount, id)){
+    public boolean reduceAmountFromBahamas(int amount, int bankId, int id) {
+        if (app.boardController.board.checkMoney(amount, bankId)){
             app.boardController.board.game.localPlayer.updateMoneyReduce(amount, id);
             return true;
         }

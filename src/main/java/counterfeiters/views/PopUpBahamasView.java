@@ -41,23 +41,23 @@ public class PopUpBahamasView implements Observer{
     @FXML
     public void pressReduce() {
         int value = Integer.parseInt(txtValue.getText());
-        if(!controller.reduceAmountFromBahamas(value, 5)){
+        if(!controller.reduceAmountFromBahamas(value, 5, 4)){
             textField.setText("You don't have enough money on your bankaccount");
+        }else{
+            Stage stage = (Stage) anchorpane.getScene().getWindow();
+            stage.close();
         }
-
-        Stage stage = (Stage) anchorpane.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
     public void pressAdd() {
         int value = Integer.parseInt(txtValue.getText());
-        if(controller.addAmountToBahamas(value, 5)){
+        if(controller.addAmountToBahamas(value, 5, 4)){
             textField.setText("You dont have enough 'real money' at the moment");
+        }else{
+            Stage stage = (Stage) anchorpane.getScene().getWindow();
+            stage.close();
         }
-
-        Stage stage = (Stage) anchorpane.getScene().getWindow();
-        stage.close();
 
     }
 
