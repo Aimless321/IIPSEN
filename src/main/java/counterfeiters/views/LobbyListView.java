@@ -100,19 +100,23 @@ public class LobbyListView implements Observer {
             games.clear();
 
 
-
             //Add new games for lobbylist
 
 
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-            if (updatedGames.size() != 0 && !updatedGames.isEmpty()) {
-                for (Game game : updatedGames) {
+            if (updatedGames.size() == 0 || updatedGames.isEmpty()) {
+                System.out.println("er zijn geen lobbies");
+                noLobbies();
+
+                return;
+            }
+
+            for (Game game : updatedGames) {
+                if (game.getRound() != 1) {
                     Platform.runLater(() ->
                             addLobbyInView(game));
                 }
-            } else {
-                noLobbies();
             }
         }
     }
@@ -131,7 +135,7 @@ public class LobbyListView implements Observer {
 
         HBox horBox = new HBox(region1, noLobby,  region2);
         horBox.getStyleClass().add("hbox");
-        horBox.setStyle("-fx-background-color: transparent");
+        horBox.setStyle("-fx-background-color: black");
         horBox.setAlignment(Pos.CENTER);
 
         vBox.getChildren().add(horBox);
@@ -171,15 +175,10 @@ public class LobbyListView implements Observer {
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    if(mouseEvent.getClickCount() == 2){
-                        if(game.getNumPlayers() <4){
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)
+                        && mouseEvent.getClickCount() == 2
+                        && game.getNumPlayers() <4){
                             controller.clickLobby(game.getGameId());
-                        }
-                        else {
-
-                        }
-                    }
                 }
             }
         });
