@@ -164,6 +164,11 @@ public class PopUpLaunderMoneyView implements Observer{
         popupStage.show();
     }
 
+    @FXML
+    public void checkAvailability() {
+
+    }
+
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -178,6 +183,7 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void update(Observable observable) {
+
     }
 
     @Override
