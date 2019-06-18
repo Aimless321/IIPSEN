@@ -2,6 +2,7 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.events.EventHandler;
+import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
@@ -9,7 +10,7 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Board implements Observable{
+public class Board implements Observable, EventListener {
     private ArrayList<Observer> observers = new ArrayList<>();
     public BlackMarket blackmarket = new BlackMarket();
     public PolicePawn policePawn = new PolicePawn(4);
@@ -27,6 +28,7 @@ public class Board implements Observable{
         observers.add(observer);
 
         EventHandler.getInstance().registerListener(blackmarket);
+        EventHandler.getInstance().registerListener(this);
     }
 
     @Override
@@ -72,7 +74,6 @@ public class Board implements Observable{
         int upgradeCounter = 0;
 
         ArrayList<Card> cards = game.localPlayer.getCards();
-
         for (Card card : cards) {
             if(card.getName().equals("printer")) {
                 printerCounter = printerCounter + 2;
@@ -207,5 +208,37 @@ public class Board implements Observable{
     @Exclude
     public HashMap<String,String> getPlayersAndCards() {
         return hmap;
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onRoundEnd() {
+
+        ArrayList<Card> cards = game.localPlayer.getCards();
+
+        for (Card card : cards) {
+            if (card.getName().equals("diner")) {
+                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+            }
+
+        }
+    }
+
+
+    @Override
+    public void onGameEnd() {
+        ArrayList<Card> cards = game.localPlayer.getCards();
+
+        for (Card card : cards) {
+            if (card.getName().equals("scratchcard")) {
+                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+            }
+
+        }
+
     }
 }
