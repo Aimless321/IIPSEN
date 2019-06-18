@@ -2,12 +2,13 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 import com.google.type.Money;
+import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements EventListener {
     private String userName;
     private int playerId = 1;
     private int score;
@@ -191,5 +192,28 @@ public class Player {
 
     public ArrayList<Card> getCards() {
         return cards;
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onRoundEnd() {
+
+        ArrayList<Card> cards = getCards();
+
+        for (Card card : cards) {
+            if(card.getName().equals("diner")) {
+                updateMoneyPlus(MoneyType.REAL, 50);
+            }
+
+        }
+    }
+
+    @Override
+    public void onGameEnd() {
+
     }
 }
