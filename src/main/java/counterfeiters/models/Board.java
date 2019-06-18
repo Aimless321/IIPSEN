@@ -64,32 +64,6 @@ public class Board implements Observable{
     }
 
 
-    public int[] printMoney()
-    {
-
-        int[] print = new int[2];
-        int printerCounter = 0;
-        int upgradeCounter = 0;
-
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if(card.getName().equals("printer")) {
-                printerCounter = printerCounter + 2;
-            }
-            if(card.getName().equals("upgrade")) {
-                upgradeCounter++;
-            }
-
-        }
-
-        print[0] = upgradeCounter;
-        print[1] = printerCounter;
-
-        return print;
-
-    }
-
     public boolean checkYourTurn() {
         return game.checkYourTurn(firstPlayerPawn);
     }

@@ -89,6 +89,41 @@ public class Player {
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+    public void printMoney()
+    {
+        int printerCounter = 0;
+        int upgradeCounter = 0;
+
+        ArrayList<Card> cards = getCards();
+        if (cards.contains(PrinterUpgrade.UpgradeType.PAINT)){
+            System.out.println("speler heeft paint");
+            upgradeCounter++;
+        }
+        if (cards.contains(PrinterUpgrade.UpgradeType.PAPER)){
+            System.out.println("speler heeft paper");
+            upgradeCounter++;
+        }
+        if (cards.contains(PrinterUpgrade.UpgradeType.HOLOGRAM)){
+            System.out.println("speler heeft hologram");
+            upgradeCounter++;
+        }
+
+        for (Card card : cards) {
+            if(card.getName().equals("printer")) {
+                printerCounter++;
+            }
+        }
+
+        switch (upgradeCounter){
+            case 1:
+                updateMoneyPlus(MoneyType.FAKE_ONE, 2 * printerCounter);
+            case 2:
+                updateMoneyPlus(MoneyType.FAKE_TWO, 2 * printerCounter);
+            case 3:
+                updateMoneyPlus(MoneyType.FAKE_THREE, 2 * printerCounter);
+        }
+    }
+
 
     /**
      * This switch will call the right method based on the given id and it will add the right amount.
