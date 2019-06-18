@@ -117,7 +117,6 @@ public class LobbyListView implements Observer {
                 return;
             }
 
-
             for (Game game : updatedGames) {
                 if (game.getRound() != 1) {
                     Platform.runLater(() ->
@@ -142,7 +141,7 @@ public class LobbyListView implements Observer {
 
         HBox horBox = new HBox(region1, noLobby,  region2);
         horBox.getStyleClass().add("hbox");
-        horBox.setStyle("-fx-background-color: transparent");
+        horBox.setStyle("-fx-background-color: black");
         horBox.setAlignment(Pos.CENTER);
 
         vBox.getChildren().add(horBox);
@@ -182,15 +181,10 @@ public class LobbyListView implements Observer {
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    if(mouseEvent.getClickCount() == 2){
-                        if(game.getNumPlayers() <4){
+                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)
+                        && mouseEvent.getClickCount() == 2
+                        && game.getNumPlayers() <4){
                             controller.clickLobby(game.getGameId());
-                        }
-                        else {
-
-                        }
-                    }
                 }
             }
         });
