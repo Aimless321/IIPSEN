@@ -6,7 +6,6 @@ import counterfeiters.views.Observer;
 import javafx.application.Platform;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Board implements Observable{
     private ArrayList<Observer> observers = new ArrayList<>();
@@ -54,19 +53,13 @@ public class Board implements Observable{
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
      * */
-    public boolean checkMoney(int id, int bedrag){
+    public boolean checkMoney(MoneyType type, int bedrag){
         if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-            game.localPlayer.updateMoneyReduce(id, bedrag);
-            notifyAllObservers();
+            game.localPlayer.updateMoneyReduce(type, bedrag);
             return true;
         }
 
-        if (game.localPlayer.bahamasBank.getTotalBankMoney() >= bedrag){
-            game.localPlayer.updateMoneyReduce(id, bedrag);
-            notifyAllObservers();
-            return true;
-        }
-            return false;
+        return false;
     }
 
     public boolean checkYourTurn() {
@@ -94,17 +87,17 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 
-    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int resultQualityOne = qualityOne * 20;
         int resultQualityTwo = qualityTwo * 30;
         int resultQualityThree = qualityThree * 40;
@@ -112,9 +105,9 @@ public class Board implements Observable{
         int result = resultQualityOne + resultQualityTwo + resultQualityThree;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 

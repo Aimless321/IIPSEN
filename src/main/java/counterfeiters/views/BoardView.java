@@ -35,14 +35,6 @@ public class BoardView implements Observer {
     public Text totalRealMoney;
     public Text totalBankMoney;
 
-    private String plus = "+";
-    private String min = "-";
-    private int qualityOne = 1;
-    private int qualityTwo = 2;
-    private int qualityThree = 3;
-    private int realMoney = 4;
-    private int bahamasBank = 5;
-
     private Stage stage;
     private BoardController boardcontroller;
 
@@ -78,7 +70,7 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
 
-        if(boardcontroller.checkActionField(4, btn.getId())) {
+        if(boardcontroller.checkActionField(btn.getId())) {
             boardcontroller.makePurchase(btn.getStyleClass().get(1));
             placeHenchman(btn);
         }
@@ -127,7 +119,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.updateMoneyOnPosition(realMoney, plus, Integer.parseInt(btn.getId()));
+        boardcontroller.updateMoneyOnPosition(Integer.parseInt(btn.getId()));
 
         if (btn.getStyleClass().contains("glasses")) {
             boardcontroller.makeFirstPlayer();
@@ -143,18 +135,13 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpBahamasController.bahamas();
-
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
-            System.out.println("player has no ticket!");
-            return;
-        }
-        else if(!btn.getStyleClass().contains("ticket")
-                && !boardcontroller.checkActionField(4, btn.getId())) {
-            boardcontroller.app.popUpBahamasController.bahamas();
-            return;
+        if(btn.getStyleClass().contains("ticket") && boardcontroller.checkCard(new PlaneTicket())) {
+            boardcontroller.openBahamas();
+
+        } else if(boardcontroller.checkActionField(btn.getId())) {
+            boardcontroller.openBahamas();
         }
 
         placeHenchman(btn);
@@ -180,10 +167,9 @@ public class BoardView implements Observer {
             }
         }
 
-        boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter, printerCounter);
+        //boardcontroller.board.game.localPlayer.updateMoneyPlus(qualityCounter, printerCounter);
 
         if(btn.getStyleClass().contains("police")) {
-
             boardcontroller.advancePolice();
         }
 

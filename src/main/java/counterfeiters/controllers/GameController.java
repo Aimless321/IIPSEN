@@ -8,8 +8,6 @@ import counterfeiters.models.PrinterUpgrade;
 import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
-import java.util.Map;
-
 /**
  * The controller of the game model.
  * Handles loading, joining and creating of a game.
@@ -82,10 +80,6 @@ public class GameController {
 
     public void updateData(Game updateGame) {
         game.updateData(updateGame);
-    }
-
-    public void updateMoney(int qId, String character, int amount) {
-        game.updateMoney(qId, character, amount);
     }
 
     public void setStartRound(int numRound) {

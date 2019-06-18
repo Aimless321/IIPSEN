@@ -97,9 +97,8 @@ public class BoardController {
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoneyOnPosition(int qId, String character, int amount){
-        Player player = app.gameController.game.localPlayer;
-        app.gameController.updateMoney(qId, character, amount);
+    public void updateMoneyOnPosition(int amount){
+        app.gameController.game.updateMoney(amount);
     }
 
     /**
@@ -108,15 +107,10 @@ public class BoardController {
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
      * */
-    public boolean checkActionField(int moneyId, String id){
+    public boolean checkActionField(String id){
         int money = Integer.parseInt(id);
 
-        if (board.checkMoney(moneyId, money)) {
-            //TODO: Fout
-            app.gameController.game.notifyAllObservers();
-            return true;
-        }
-        return false;
+        return board.checkMoney(MoneyType.REAL, money);
     }
 
     public void henchmanPlaced(Button btn) {
@@ -129,15 +123,12 @@ public class BoardController {
         //Calculate middle position of the button
         double posX = bounds.getMinX() + btn.getWidth() / 3;
         double posY = bounds.getMinY() + btn.getHeight() / 5;
-        Player player = app.gameController.game.localPlayer;
-        //updateMoneyOnPosition(4, min, 30);
         board.placeHenchman(posX, posY, app.gameController.game.localPlayer.getCharacterName());
     }
 
     public void prepareView() {
         board.prepareFirstPlayer();
         board.prepareBlackMarket();
-        //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
     }
 
     public void advancePolice() {
@@ -152,6 +143,10 @@ public class BoardController {
         return cardsAsString;
     }
 
+    public void openBahamas() {
+        app.popUpBahamasController.bahamas();
+    }
+
     public void makePurchase(String cardNumber ) {
         board.makePurchase(Integer.parseInt(cardNumber));
     }
@@ -164,11 +159,11 @@ public class BoardController {
         board.makeFirstPlayer();
     }
 
-    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         board.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
-    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         board.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 

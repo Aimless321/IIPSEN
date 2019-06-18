@@ -1,7 +1,9 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.models.MoneyType;
 import counterfeiters.models.Observable;
+import counterfeiters.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -33,7 +35,6 @@ public class PopUpLaunderMoneyView implements Observer{
     private String strQualityOne = "qualityOne";
     private String strQualityTwo = "qualityTwo";
     private String strQualityThree = "qualityThree";
-    private int realMoney = 4;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -108,7 +109,7 @@ public class PopUpLaunderMoneyView implements Observer{
     @FXML
     public void pressLaunder() {
         if (controller.checkAmount(getValues())){
-            controller.transferMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+            controller.transferMoney(MoneyType.REAL, qualityOne, qualityTwo, qualityThree);
 
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
@@ -173,7 +174,6 @@ public class PopUpLaunderMoneyView implements Observer{
     public void setController(Object controller) {
         PopUpLaunderMoneyController popUpLaunderMoneyController = (PopUpLaunderMoneyController) controller;
         this.controller = popUpLaunderMoneyController;
-        popUpLaunderMoneyController.registerObserver(this);
     }
 
     @Override

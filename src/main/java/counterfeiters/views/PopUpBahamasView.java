@@ -41,7 +41,7 @@ public class PopUpBahamasView implements Observer{
     @FXML
     public void pressReduce() {
         int value = Integer.parseInt(txtValue.getText());
-        if(!controller.reduceAmountFromBahamas(value, 5, 4)){
+        if(!controller.reduceAmountFromBahamas(value)){
             textField.setText("You don't have enough money on your bankaccount");
         }else{
             Stage stage = (Stage) anchorpane.getScene().getWindow();
@@ -52,7 +52,7 @@ public class PopUpBahamasView implements Observer{
     @FXML
     public void pressAdd() {
         int value = Integer.parseInt(txtValue.getText());
-        if(controller.addAmountToBahamas(value, 5, 4)){
+        if(!controller.addAmountToBahamas(value)){
             textField.setText("You dont have enough 'real money' at the moment");
         }else{
             Stage stage = (Stage) anchorpane.getScene().getWindow();
@@ -88,7 +88,6 @@ public class PopUpBahamasView implements Observer{
     public void setController(Object controller) {
         PopUpBahamasController popUpLaunderMoneyController = (PopUpBahamasController) controller;
         this.controller = popUpLaunderMoneyController;
-        popUpLaunderMoneyController.registerObserver(this);
     }
 
     @Override
