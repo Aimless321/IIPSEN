@@ -1,5 +1,6 @@
 package counterfeiters.controllers;
 
+import counterfeiters.models.Board;
 import counterfeiters.views.Observer;
 import counterfeiters.views.PopUpLaunderMoneyView;
 
@@ -27,6 +28,10 @@ public class PopUpLaunderMoneyController {
         if (type == LaunderType.HEALER){
             app.boardController.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
         }
+    }
+
+    public void updates(){
+
     }
 
     public void registerObserver(Observer observer) {app.accountController.registerObserver(observer);

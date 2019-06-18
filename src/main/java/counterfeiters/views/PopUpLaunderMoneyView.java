@@ -1,7 +1,10 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.models.Board;
+import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Observable;
+import counterfeiters.models.PolicePawn;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +26,7 @@ public class PopUpLaunderMoneyView implements Observer{
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
     public Text txtField;
+    public VBox vboxOne;
 
     // Values from textfield.
     private int qualityOne;
@@ -164,21 +169,6 @@ public class PopUpLaunderMoneyView implements Observer{
         popupStage.show();
     }
 
-    @FXML
-    public void checkAvailability() {
-        System.out.println(controller.policePosition());
-        switch (controller.policePosition()) {
-            case 11:
-                System.out.println("txt wuality one doadbled");
-                txtQualityOne.setEditable(false);
-                System.out.println("txt wuality one doadbled");
-            case 13:
-                txtQualityTwo.setEditable(false);
-            case 17:
-                txtQualityThree.setEditable(false);
-        }
-    }
-
     @Override
     public void setStage(Stage stage) {
         this.stage = stage;
@@ -193,10 +183,47 @@ public class PopUpLaunderMoneyView implements Observer{
 
     @Override
     public void update(Observable observable) {
-
     }
+
+    @FXML
+    public void updateView(int pos) {
+        System.out.println("pos is" + pos);
+
+        if (pos < 11) {
+            System.out.println("txt wuality one doadbled pos 11");
+            txtQualityOne.setDisable(false);
+            txtQualityTwo.setDisable(false);
+            txtQualityThree.setDisable(false);
+        }
+
+        else if (pos < 13) {
+            System.out.println("txt wuality one doadbled pos 13");
+            txtQualityOne.setDisable(true);
+            txtQualityTwo.setDisable(false);
+            txtQualityThree.setDisable(false);}
+
+        else if (pos < 17) {
+            System.out.println("txt wuality one doadbled pos 17");
+            txtQualityOne.setDisable(true);
+            txtQualityTwo.setDisable(true);
+            txtQualityThree.setDisable(false);
+        }
+        else if (pos < 19) {
+            System.out.println("txt wuality one doadbled pos 17");
+            txtQualityOne.setDisable(true);
+            txtQualityTwo.setDisable(true);
+            txtQualityThree.setDisable(true);
+        }
+        else {
+
+        }
+        }
+
 
     @Override
     public void start() {
+        controller.registerObserver(this);
+        updateView(controller.policePosition());
+
     }
 }
