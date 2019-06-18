@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import counterfeiters.models.Player;
@@ -9,6 +10,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -30,6 +33,8 @@ public class LobbyView implements Observer {
 
     @FXML
     public Button startButton;
+    public ImageView muteButton;
+
 
     private Stage stage;
     private LobbyController controller;
@@ -53,6 +58,12 @@ public class LobbyView implements Observer {
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
+        pane.setOnKeyPressed(event -> {
+            if (event.equals(KeyCode.M)) {
+                SoundManager.toggleMute();
+            }
+        });
+
         //Show it on the screen
         stage.getScene().setRoot(pane);
     }
@@ -71,6 +82,19 @@ public class LobbyView implements Observer {
     public void pressRules() {
         controller.rulesButtonPressed();
     }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(0.5);
+        }
+        else {
+            muteButton.setOpacity(1);
+        }
+    }
+
 
     @Override
     public void start() {

@@ -2,6 +2,7 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,6 +31,7 @@ public class BoardView implements Observer {
     public HBox blackMarketView;
     public ImageView policePawn;
     public Pane pane;
+    public ImageView muteButton;
     public Text qualityOneMoney;
     public Text qualityTwoMoney;
     public Text qualityThreeMoney;
@@ -59,6 +63,13 @@ public class BoardView implements Observer {
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
+
+        pane.setOnKeyPressed(event -> {
+            if (event.equals(KeyCode.M)) {
+                SoundManager.toggleMute();
+            }
+        });
+
 
         //Show it on the screen
         stage.getScene().setRoot(pane);
@@ -173,6 +184,18 @@ public class BoardView implements Observer {
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
         boardcontroller.rulesPressed();
+    }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(0.5);
+        }
+        else {
+            muteButton.setOpacity(1);
+        }
     }
 
     @FXML
@@ -346,6 +369,8 @@ public class BoardView implements Observer {
         ImageView profilePicture = (ImageView) pane.lookup("#profile-" + currentPlayer.getCharacterName());
         profilePicture.setEffect(shadow);
     }
+
+
 
     @Override
     public void start() {
