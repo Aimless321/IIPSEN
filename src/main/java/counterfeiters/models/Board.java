@@ -67,6 +67,7 @@ public class Board implements Observable{
     {
 
         int[] print = new int[2];
+        boolean upgrade = true;
         int printerCounter = 0;
         int upgradeCounter = 0;
 
@@ -76,8 +77,15 @@ public class Board implements Observable{
             if(card.getName().equals("printer")) {
                 printerCounter = printerCounter + 2;
             }
-            if(card.getName().equals("upgrade")) {
-                upgradeCounter++;
+            if(upgrade) {
+                if (card.getName().equals("upgrade")) {
+                    upgradeCounter++;
+                }
+            }
+
+            if (upgradeCounter == 3)
+            {
+                upgrade = false;
             }
 
         }
