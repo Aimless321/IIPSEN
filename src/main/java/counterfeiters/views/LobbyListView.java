@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyListController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -39,6 +41,8 @@ public class LobbyListView implements Observer {
     public ScrollPane scrollPane;
     @FXML
     public VBox vBox;
+    public ImageView muteButton;
+
 
     private Stage stage;
     private LobbyListController controller;
@@ -67,6 +71,12 @@ public class LobbyListView implements Observer {
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
+        pane.setOnKeyPressed(event -> {
+            if (event.equals(KeyCode.M)) {
+                SoundManager.toggleMute();
+            }
+        });
+
         //Show it on the screen
         stage.getScene().setRoot(pane);
     }
@@ -75,6 +85,18 @@ public class LobbyListView implements Observer {
     @FXML
     public void pressRules() {
 
+    }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(0.5);
+        }
+        else {
+            muteButton.setOpacity(1);
+        }
     }
 
     @FXML

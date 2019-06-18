@@ -2,49 +2,42 @@ package counterfeiters.managers;
 
         import javafx.scene.media.Media;
         import javafx.scene.media.MediaPlayer;
-        import java.io.File;
-        import java.util.ArrayList;
 
 
 public class SoundManager {
-    private static boolean muteSound = false;
+    public static boolean muteSound = false;
     private static MediaPlayer player;
     private static MediaPlayer backgroundPlayer;
 
     public static void playSound(String fileName){
-        Media sound = new Media(new File("./././././resources/sounds/" + fileName).toURI().toString());
+        if(muteSound) {
+            return;
+        }
+
+        Media sound = new Media(SoundManager.class.getResource("/sounds/" + fileName).toString());
         player = new MediaPlayer((sound));
         player.play();
         player.setMute(muteSound);
-//        return player;
     }
 
     public static void playLoop(String fileName){
-        Media sound = new Media(new File("./././././resources/sounds/" + fileName).toURI().toString());
+        Media sound = new Media(SoundManager.class.getResource("/sounds/" + fileName).toString());
         backgroundPlayer = new MediaPlayer((sound));
         backgroundPlayer.setAutoPlay(true);
         backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
         backgroundPlayer.setMute(muteSound);
-//        return player;
     }
 
     public static void muteSounds(){
-        if (! muteSound){
-            player.setMute(true);
-            muteSound = true;
-        }
+        muteSound = true;
     }
 
     public static void unmuteSounds(){
-        if (muteSound){
-            player.setMute(false);
-            muteSound = false;
-        }
+        muteSound = false;
     }
 
     public  static void toggleMute(){
         muteSound = !muteSound;
-        player.setMute(muteSound);
         backgroundPlayer.setMute(muteSound);
     }
 }

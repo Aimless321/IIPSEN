@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LoginController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.Account;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
@@ -8,8 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,6 +28,8 @@ public class LoginView implements Observer {
     public TextField username;
     public PasswordField password;
     public Text textField;
+    public ImageView muteButton;
+
     public Pane pane;
 
     private Stage stage;
@@ -49,6 +54,12 @@ public class LoginView implements Observer {
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
+
+        pane.setOnKeyPressed(event -> {
+            if (event.equals(KeyCode.M)) {
+                SoundManager.toggleMute();
+            }
+        });
 
         //Show it on the screen
         stage.getScene().setRoot(pane);
@@ -78,6 +89,18 @@ public class LoginView implements Observer {
     public void pressRegister()
     {
         controller.registerButtonPressed();
+    }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(0.5);
+        }
+        else {
+            muteButton.setOpacity(1);
+        }
     }
 
     @Override
