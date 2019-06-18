@@ -30,13 +30,9 @@ public class FirebaseService {
 
         FirebaseOptions options = null;
         try {
-            FirestoreOptions firestoreOptions =
-                    FirestoreOptions.newBuilder().setTimestampsInSnapshotsEnabled(true).build();
-
             options = new FirebaseOptions.Builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                     .setDatabaseUrl("https://iipsen-groep1.firebaseio.com")
-                    .setFirestoreOptions(firestoreOptions)
                     .build();
 
             FirebaseApp.initializeApp(options);
