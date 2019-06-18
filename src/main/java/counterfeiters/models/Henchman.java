@@ -2,6 +2,7 @@ package counterfeiters.models;
 
 public class Henchman {
     private String owner;
+    private String btnId;
     public double x;
     public double y;
 
@@ -9,10 +10,11 @@ public class Henchman {
 
     }
 
-    public Henchman(double x, double y, String owner) {
+    public Henchman(double x, double y, String owner, String btnId) {
         this.x = x;
         this.y = y;
         this.owner = owner;
+        this.btnId = btnId;
     }
 
     public String getOwner() {
@@ -37,5 +39,13 @@ public class Henchman {
 
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public String getBtnId() {
+        return btnId;
+    }
+
+    public void setBtnId(String btnId) {
+        this.btnId = btnId;
     }
 }

@@ -4,11 +4,9 @@ import counterfeiters.controllers.LobbyController;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import counterfeiters.models.Player;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -115,8 +113,8 @@ public class LobbyView implements Observer {
         }
 
         //For testing
-        //startButton.setVisible(true);
-        //startButton.setDisable(false);
+        startButton.setVisible(true);
+        startButton.setDisable(false);
     }
 
     public void insertPlayerBox(Player player) {

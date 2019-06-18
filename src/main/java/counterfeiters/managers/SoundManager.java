@@ -1,9 +1,9 @@
 package counterfeiters.managers;
 
-        import javafx.scene.media.Media;
-        import javafx.scene.media.MediaPlayer;
-        import java.io.File;
-        import java.util.ArrayList;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 
 
 public class SoundManager {

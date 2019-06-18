@@ -2,10 +2,8 @@ package counterfeiters.controllers;
 
 import counterfeiters.models.Card;
 import counterfeiters.views.Observer;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
