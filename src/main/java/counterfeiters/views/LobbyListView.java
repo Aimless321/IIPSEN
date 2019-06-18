@@ -105,7 +105,6 @@ public class LobbyListView implements Observer {
             games.clear();
 
 
-
             //Add new games for lobbylist
 
 
@@ -113,8 +112,10 @@ public class LobbyListView implements Observer {
 
             if (updatedGames.size() != 0 && !updatedGames.isEmpty()) {
                 for (Game game : updatedGames) {
-                    Platform.runLater(() ->
-                            addLobbyInView(game));
+                    if (game.getRound() != 1) {
+                        Platform.runLater(() ->
+                                addLobbyInView(game));
+                    }
                 }
             } else {
                 System.out.println("er zijn geen lobbies");
