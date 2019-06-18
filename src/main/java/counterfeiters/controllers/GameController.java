@@ -55,6 +55,9 @@ public class GameController {
         //Firebase doesnt load the localplayer, so we have to set it
         this.game.localPlayer = game.getPlayers().get(0);
 
+        //Reset the round back to 0, so the game isn't started yet
+        this.game.setRound(0);
+
         FirebaseService fb = FirebaseService.getInstance();
         fb.setClass("lobbies", game.getGameId(), game);
 
@@ -82,10 +85,7 @@ public class GameController {
         game.updateData(updateGame);
     }
 
-    public void setStartRound(int numRound) {
-        game.roundChanged(numRound);
-    }
-    public void startGame(){
-        app.loadView(BoardView.class, app.boardController);
+    public void setStartRound() {
+        game.startGame();
     }
 }

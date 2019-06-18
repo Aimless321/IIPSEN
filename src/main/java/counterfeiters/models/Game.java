@@ -16,7 +16,7 @@ public class Game implements Observable {
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
     private int turn = 0;
-    private Player firstPlayer;
+    private Player firstPlayer = null;
     @Exclude
     public Player localPlayer;
     private Date startTime;
@@ -91,8 +91,12 @@ public class Game implements Observable {
         updateFirebase();
     }
 
-    public void roundChanged(int numRound) {
-        setRound(numRound);
+    public void startGame() {
+        //Set the starttime
+        this.startTime = new Date();
+
+        //Set round to 1, so the game starts for everyone
+        this.round = 1;
         updateFirebase();
     }
 
@@ -185,6 +189,11 @@ public class Game implements Observable {
 
     @Exclude
     public Player getCurrentPlayer(FirstPlayerPawn firstPlayerPawn) {
+        //Store the current first player, so it only updates at round end
+        if(firstPlayer == null) {
+            this.firstPlayer = firstPlayerPawn.getFirstPlayer();
+        }
+
         if(turn == 0) {
             this.firstPlayer = firstPlayerPawn.getFirstPlayer();
             return firstPlayerPawn.getFirstPlayer();
