@@ -48,6 +48,12 @@ public class FirebaseModel implements Observable {
         this.gameslist.clear();
         this.lobbies.clear();
 
+
+
+        // retrieve all documents in lobbies
+        if(fb.getAllDocumentsFromCollection("lobbies")==null) {
+
+        }
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
 
 
@@ -58,7 +64,7 @@ public class FirebaseModel implements Observable {
         notifyAllObservers();
     }
 
-    public void updateGames(String username) {
+    public void updateGames() {
         FirebaseService fb = FirebaseService.getInstance();
         lobbyOrGame = "game";
         this.gameslist.clear();
@@ -66,19 +72,13 @@ public class FirebaseModel implements Observable {
 
 
         // retrieve all documents in lobbies
-        this.lobbies.addAll(fb.getAllDocumentsAndOrder("games"));
+        this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
 
 
         for (DocumentSnapshot doc: lobbies) {
             Game game = doc.toObject(Board.class).game;
-
-            //Only add the game if the player is the host
-            Player host = game.getPlayers().get(0);
-            if(host.getUserName().equals(username)) {
-                this.gameslist.add(game);
-            }
+            this.gameslist.add(game);
         }
-
         notifyAllObservers();
     }
 

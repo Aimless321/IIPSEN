@@ -8,7 +8,6 @@ import counterfeiters.models.Observable;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -183,11 +182,6 @@ public class GameListView implements Observer{
         lobbyName.setFont(new Font(30));
         lobbyName.setTextFill(Color.WHITE);
 
-        Label startTime = new Label(game.getStartTime().toString());
-        startTime.setPadding(new Insets(0, 25, 0, 0));
-        startTime.setFont(new Font(25));
-        startTime.setTextFill(Color.WHITE);
-
         Label numPlayers = new Label(String.valueOf(game.getNumPlayers()));
         numPlayers.setFont(new Font(30));
         numPlayers.setTextFill(Color.WHITE);
@@ -196,7 +190,7 @@ public class GameListView implements Observer{
         icon.setFitHeight(25);
         icon.setFitWidth(25);
 
-        HBox horBox = new HBox(lobbyName, region1, region2, startTime, numPlayers, icon, new Label("  "));
+        HBox horBox = new HBox(lobbyName, region1, region2, numPlayers, icon, new Label("  "));
         horBox.setAlignment(Pos.CENTER_LEFT);
 
 
