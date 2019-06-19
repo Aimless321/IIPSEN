@@ -198,10 +198,16 @@ public class LobbyListView implements Observer {
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)
-                        && mouseEvent.getClickCount() == 2
-                        && game.getNumPlayers() <4){
-                            controller.clickLobby(game.getGameId());
+                if(!mouseEvent.getButton().equals(MouseButton.PRIMARY) || mouseEvent.getClickCount() != 2) {
+                    return;
+                }
+
+                if(game.getNumPlayers() < game.getPlayers().size()) {
+                    controller.clickFullLobby(game);
+                    System.out.println("Joining existing lobby");
+                } else {
+                    controller.clickLobby(game.getGameId());
+                    System.out.println("Joining new lobby");
                 }
             }
         });

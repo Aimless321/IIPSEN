@@ -2,6 +2,7 @@ package counterfeiters.controllers;
 
 import com.google.cloud.firestore.EventListener;
 import com.google.cloud.firestore.FirestoreException;
+import com.google.cloud.firestore.ListenerRegistration;
 import com.google.cloud.firestore.QuerySnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Board;
@@ -14,10 +15,10 @@ import counterfeiters.views.RulesView;
 import javax.annotation.Nullable;
 
 public class GameListController {
-
     private ApplicationController app;
-    public FirebaseModel firebaseModel;
 
+    public FirebaseModel firebaseModel;
+    private ListenerRegistration listener;
 
     public GameListController(ApplicationController applicationController) {
         this.app = applicationController;
@@ -34,7 +35,7 @@ public class GameListController {
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
-        fb.listenToCollection("games", new EventListener<QuerySnapshot>() {
+        listener = fb.listenToCollection("games", new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot querySnapshot, @Nullable FirestoreException e) {
                 if (e != null) {
@@ -51,15 +52,16 @@ public class GameListController {
     }
 
     public void updateGamesModel() {
-        firebaseModel.updateGames();
+        firebaseModel.updateGames(app.accountController.getUsername());
     }
 
     public void leaveButtonPressed() {
-        //TODO: Go to the MainMenuView
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
     public void gameSelected(String gameid){
+        listener.remove();
+
         Board board = app.boardController.createFromSaved(gameid);
 
         app.gameController.loadFromSavedGame(board.game);

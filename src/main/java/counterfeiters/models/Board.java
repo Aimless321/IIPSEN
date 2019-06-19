@@ -37,6 +37,11 @@ public class Board implements Observable{
     }
 
     public void prepareBlackMarket() {
+        //Cardrow is already filled (game has been loaded from fb)
+        if(blackmarket.cardRow.size() > 0) {
+            return;
+        }
+
         blackmarket.refill();
         notifyAllObservers();
 
@@ -128,6 +133,8 @@ public class Board implements Observable{
         if(!game.checkEndRound()) {
             return;
         }
+
+        System.out.println("Ending round");
 
         //Remove the henchmen
         this.henchmen = new ArrayList<>();

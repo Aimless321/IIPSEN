@@ -81,7 +81,7 @@ public class LobbyController {
     }
 
     public void startButtonPressed() {
-        app.gameController.setStartRound(1);
+        app.gameController.setStartRound();
     }
 
     /**
