@@ -39,6 +39,10 @@ public class Board implements Observable, EventListener {
     }
 
     public void prepareBlackMarket() {
+        if(blackmarket.cardRow.size() > 0) {
+            return;
+        }
+        
         blackmarket.refill();
         notifyAllObservers();
 
