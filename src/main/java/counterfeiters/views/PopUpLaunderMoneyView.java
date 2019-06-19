@@ -184,30 +184,34 @@ public class PopUpLaunderMoneyView implements Observer{
    @FXML
    public void qualityAvailability(int i) {
        if (controller.getLaunderType() == PopUpLaunderMoneyController.LaunderType.SUPERMARKET) {
-           System.out.println("ik zit nu in updateview en int is" + i);
-           if (i == 0) {
+           switch (i) {
+               case 0:
                txtQualityOne.setDisable(false);
                txtQualityTwo.setDisable(false);
                txtQualityThree.setDisable(false);
-           } else if (i == 1) {
+               break;
+               case 1:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(false);
                txtQualityThree.setDisable(false);
-           } else if (i == 2) {
+               break;
+               case 2:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(false);
-           } else if (i == 3) {
+               break;
+               case 3:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(true);
-           }
-        else {
+               break;
+           }}
+           else {
            txtQualityOne.setDisable(false);
            txtQualityTwo.setDisable(false);
            txtQualityThree.setDisable(false);
        }
-   } }
+   }
 
 
     @Override
