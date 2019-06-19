@@ -20,7 +20,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="buttonsQualityOne" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityOne" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
@@ -47,7 +47,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="buttonsQualityTwo" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
@@ -74,7 +74,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox fx:id="buttonsQualityThree" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -25,6 +26,9 @@ public class PopUpLaunderMoneyView implements Observer{
     public AnchorPane anchorpane;
     public Text txtField;
     public VBox vboxOne;
+    public HBox buttonsQualityOne;
+    public HBox buttonsQualityTwo;
+    public HBox buttonsQualityThree;
 
     // Values from textfield.
     private int qualityOne;
@@ -193,14 +197,20 @@ public class PopUpLaunderMoneyView implements Observer{
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(false);
                txtQualityThree.setDisable(false);
+               buttonsQualityOne.setDisable(true);
            } else if (i == 2) {
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(false);
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
            } else if (i == 3) {
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(true);
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
+               buttonsQualityThree.setDisable(true);
            }
         else {
            txtQualityOne.setDisable(false);
