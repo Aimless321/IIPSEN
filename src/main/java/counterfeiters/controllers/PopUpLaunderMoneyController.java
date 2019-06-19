@@ -1,7 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.models.MoneyType;
-import counterfeiters.views.Observer;
+import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.views.PopUpLaunderMoneyView;
 
 public class PopUpLaunderMoneyController {
@@ -47,8 +47,21 @@ public class PopUpLaunderMoneyController {
 
         return 0;
     }
+    public int qualityCheck() {
+
+        return app.boardController.board.policePawn.qualityCheck();
+    }
 
     public boolean checkAmount(int curAmount) {
         return curAmount <= getMaxAmount();
+    }
+
+    @Exclude
+    public LaunderType getLaunderType() {
+        return type;
+    }
+
+    public int policePosition() {
+        return app.boardController.board.policePawn.getPawnPosition();
     }
 }

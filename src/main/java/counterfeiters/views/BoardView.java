@@ -3,6 +3,7 @@ package counterfeiters.views;
 import counterfeiters.controllers.BoardController;
 import counterfeiters.controllers.PopUpLaunderMoneyController;
 import counterfeiters.managers.SoundManager;
+import counterfeiters.events.EventHandler;
 import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -97,7 +98,6 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
-
         if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
@@ -113,7 +113,6 @@ public class BoardView implements Observer {
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
-
         if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
@@ -267,6 +266,7 @@ public class BoardView implements Observer {
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
+
         try {
             policePawn.setX(bounds.getMinX());
 
@@ -274,6 +274,12 @@ public class BoardView implements Observer {
             policePawn.setY(bounds.getMinY());
         } catch (NullPointerException e) {}
 
+        if (board.policePawn.endCheck()) {
+            board.game.localPlayer.updateMoneyReduce(MoneyType.REAL,board.game.localPlayer.getRealMoney().getTotalMoney()/2);
+            EventHandler.getInstance().endRound();
+            EventHandler.getInstance().endGame();
+            boardcontroller.endGame();
+        }
     }
 
     public void resetHenchman() {
@@ -377,8 +383,6 @@ public class BoardView implements Observer {
         ImageView profilePicture = (ImageView) pane.lookup("#profile-" + currentPlayer.getCharacterName());
         profilePicture.setEffect(shadow);
     }
-
-
 
     @Override
     public void start() {

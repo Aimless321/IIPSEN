@@ -159,6 +159,10 @@ public class Board implements Observable, EventListener {
 
     public void advancePolice() {
         policePawn.advance();
+        //Checking if the policepawn is on "Godfather", if so the player loses half of his realmoney
+        if (policePawn.godfatherCheck()) {
+            game.localPlayer.updateMoneyReduce(MoneyType.REAL,game.localPlayer.getRealMoney().getTotalMoney()/2);
+        }
         notifyAllObservers();
     }
 
@@ -191,6 +195,7 @@ public class Board implements Observable, EventListener {
         Player host = game.getPlayers().get(0);
         firstPlayerPawn.setFirstPlayer(host);
     }
+
 
     @Exclude
     public void setPlayersAndCards() {

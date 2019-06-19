@@ -3,7 +3,6 @@ package counterfeiters.views;
 import counterfeiters.controllers.PopUpLaunderMoneyController;
 import counterfeiters.models.MoneyType;
 import counterfeiters.models.Observable;
-import counterfeiters.models.Player;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,6 +24,7 @@ public class PopUpLaunderMoneyView implements Observer{
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
     public Text txtField;
+    public VBox vboxOne;
 
     // Values from textfield.
     private int qualityOne;
@@ -180,7 +181,37 @@ public class PopUpLaunderMoneyView implements Observer{
     public void update(Observable observable) {
     }
 
+   @FXML
+   public void qualityAvailability(int i) {
+       if (controller.getLaunderType() == PopUpLaunderMoneyController.LaunderType.SUPERMARKET) {
+           System.out.println("ik zit nu in updateview en int is" + i);
+           if (i == 0) {
+               txtQualityOne.setDisable(false);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+           } else if (i == 1) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+           } else if (i == 2) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(false);
+           } else if (i == 3) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(true);
+           }
+        else {
+           txtQualityOne.setDisable(false);
+           txtQualityTwo.setDisable(false);
+           txtQualityThree.setDisable(false);
+       }
+   } }
+
+
     @Override
     public void start() {
+        qualityAvailability(controller.qualityCheck());
     }
 }

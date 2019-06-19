@@ -12,7 +12,7 @@
    <children>
       <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="133.0">
+            <VBox  fx:id="vboxOne" prefHeight="200.0" prefWidth="133.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality I" textAlignment="CENTER" wrappingWidth="132.13671875" />
                   <TextField fx:id="txtQualityOne" alignment="CENTER" editable="false" maxWidth="115.0" prefHeight="25.0" prefWidth="100.0" text="0">
