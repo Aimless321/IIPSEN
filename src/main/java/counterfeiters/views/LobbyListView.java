@@ -77,10 +77,6 @@ public class LobbyListView implements Observer {
         controller.leaveButtonPressed();
     }
 
-    @FXML
-    public void clickOnLobby() {
-        //lobbyList.getItem()
-    }
 
     @Override
     public void setStage(Stage stage) {

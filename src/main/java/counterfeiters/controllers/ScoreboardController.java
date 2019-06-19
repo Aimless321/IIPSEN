@@ -35,7 +35,7 @@ public class ScoreboardController {
         FirebaseService fb = FirebaseService.getInstance();
 
 
-        return fb.get("games", "dtoKv6O75rwX94mXvm2g").toObject(Board.class).game;
+        return fb.get("games",app.boardController.board.game.getGameId()).toObject(Board.class).game;
     }
 
     public Map<String,Integer> getScores(ArrayList<Player> players)

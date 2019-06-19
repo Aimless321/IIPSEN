@@ -185,43 +185,9 @@ public class PopUpLaunderMoneyView implements Observer{
     public void update(Observable observable) {
     }
 
-   /* @FXML
-    public void updateView(int pos) {
-        System.out.println("pos is" + pos);
-
-        if (pos < 11) {
-            System.out.println("txt wuality one doadbled pos 11");
-            txtQualityOne.setDisable(false);
-            txtQualityTwo.setDisable(false);
-            txtQualityThree.setDisable(false);
-        }
-
-        else if (pos < 13) {
-            System.out.println("txt wuality one doadbled pos 13");
-            txtQualityOne.setDisable(true);
-            txtQualityTwo.setDisable(false);
-            txtQualityThree.setDisable(false);}
-
-        else if (pos < 17) {
-            System.out.println("txt wuality one doadbled pos 17");
-            txtQualityOne.setDisable(true);
-            txtQualityTwo.setDisable(true);
-            txtQualityThree.setDisable(false);
-        }
-        else if (pos < 19) {
-            System.out.println("txt wuality one doadbled pos 17");
-            txtQualityOne.setDisable(true);
-            txtQualityTwo.setDisable(true);
-            txtQualityThree.setDisable(true);
-        }
-        else {
-
-        }
-        }
-*/
-
    @FXML
    public void qualityAvailability(int i){
+
        System.out.println("ik zit nu in updateview en int is" + i);
        if(i==0) {
            txtQualityOne.setDisable(false);

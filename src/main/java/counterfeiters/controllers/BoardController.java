@@ -5,6 +5,7 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import counterfeiters.views.ScoreboardView;
 import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
@@ -184,5 +185,9 @@ public class BoardController {
 
     public Card givePlayerCard(Card card) {
         return board.blackmarket.givePlayerCard(card);
+    }
+
+    public void endGame(){
+        app.loadView(ScoreboardView.class, app.scoreboardController);
     }
 }

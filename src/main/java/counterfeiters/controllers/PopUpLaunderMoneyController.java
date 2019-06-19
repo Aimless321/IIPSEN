@@ -55,6 +55,7 @@ public class PopUpLaunderMoneyController {
         return 0;
     }
     public int qualityCheck() {
+
         return app.boardController.board.policePawn.qualityCheck();
     }
 

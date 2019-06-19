@@ -58,7 +58,7 @@ public class PolicePawn{
     }
 
     public boolean godfatherCheck() {
-        if (pawnPosition == 10 || pawnPosition == 16 || pawnPosition == 19) {
+        if (pawnPosition == 10 || pawnPosition == 16) {
             return true;
         }
         return false;
@@ -66,6 +66,13 @@ public class PolicePawn{
 
     public boolean planeCheck() {
         if (pawnPosition == 15) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean endCheck(){
+        if (pawnPosition == 19){
             return true;
         }
         return false;
