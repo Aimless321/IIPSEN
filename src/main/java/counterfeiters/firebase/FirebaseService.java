@@ -6,7 +6,6 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.firestore.v1beta1.StructuredQuery;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -149,29 +148,18 @@ public class FirebaseService {
      * @return List with all the documents in the collection.
      */
     public List<QueryDocumentSnapshot> getAllDocumentsFromCollection(String collection)  {
-        ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
-
-        return executeQuery(collectionData);
-    }
-
-    public List<QueryDocumentSnapshot> getAllDocumentsAndOrder(String collection) {
-        ApiFuture<QuerySnapshot> collectionData = db.collection(collection).orderBy("game.startTime", Query.Direction.DESCENDING).get();
-
-        return executeQuery(collectionData);
-    }
-
-    private List<QueryDocumentSnapshot> executeQuery(ApiFuture<QuerySnapshot> collectionData) {
         try {
+            ApiFuture<QuerySnapshot> collectionData = db.collection(collection).get();
+
             if(collectionData != null) {
                 List<QueryDocumentSnapshot> documentsList = collectionData.get().getDocuments();
                 return documentsList;
             } else {
-                System.err.println("Cannot find collection: " + collectionData.toString());
+                System.err.println("Cannot find collection: " + collection);
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

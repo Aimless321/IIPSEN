@@ -95,7 +95,10 @@ public class GameController {
         game.updateData(updateGame);
     }
 
-    public void setStartRound() {
-        game.startGame();
+    public void setStartRound(int numRound) {
+        game.roundChanged(numRound);
+    }
+    public void startGame(){
+        app.loadView(BoardView.class, app.boardController);
     }
 }
