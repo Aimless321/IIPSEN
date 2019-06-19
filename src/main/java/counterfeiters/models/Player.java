@@ -7,6 +7,8 @@ import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player{
     private String userName;
@@ -93,21 +95,7 @@ public class Player{
     public void printMoney()
     {
         int printerCounter = 0;
-        int upgradeCounter = 0;
-
-        ArrayList<PrinterUpgrade.UpgradeType> upgradeTypes = getUpgrades();
-        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.PAINT)){
-            System.out.println("speler heeft paint");
-            upgradeCounter++;
-        }
-        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.PAPER)){
-            System.out.println("speler heeft paper");
-            upgradeCounter++;
-        }
-        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.HOLOGRAM)){
-            System.out.println("speler heeft hologram");
-            upgradeCounter++;
-        }
+        int printQuality = getPrintQuality();
 
         for (Card card : cards) {
             if(card.getName().equals("printer")) {
@@ -115,7 +103,7 @@ public class Player{
             }
         }
 
-        switch (upgradeCounter){
+        switch (printQuality){
             case 1:
                 updateMoneyPlus(MoneyType.FAKE_ONE, 2 * printerCounter);
             case 2:
@@ -125,17 +113,21 @@ public class Player{
         }
     }
 
-    private ArrayList<PrinterUpgrade.UpgradeType> getUpgrades() {
-        ArrayList<PrinterUpgrade.UpgradeType> upgrades = new ArrayList<>();
+    private int getPrintQuality() {
+        Set<PrinterUpgrade.UpgradeType> upgrades = new HashSet<>();
 
         for (Card card : cards) {
-            if(card.getName().equals("upgrade")) {
-                PrinterUpgrade upgrade = (PrinterUpgrade) card;
-                upgrades.add(upgrade.getType());
+            switch (card.getImg()) {
+                case "/cards/paper.png":
+                    upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
+                case "/cards/paint.png":
+                    upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
+                case "/cards/hologram.png":
+                    upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
             }
         }
 
-        return upgrades;
+        return upgrades.size();
     }
 
     /**
