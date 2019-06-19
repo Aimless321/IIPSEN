@@ -186,27 +186,33 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
    @FXML
-   public void qualityAvailability(int i){
-
-       System.out.println("ik zit nu in updateview en int is" + i);
-       if(i==0) {
+   public void qualityAvailability(int i) {
+       if (controller.getLaunderType() == PopUpLaunderMoneyController.LaunderType.SUPERMARKET) {
+           System.out.println("ik zit nu in updateview en int is" + i);
+           if (i == 0) {
+               txtQualityOne.setDisable(false);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+           } else if (i == 1) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+           } else if (i == 2) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(false);
+           } else if (i == 3) {
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(true);
+           }
+        else {
            txtQualityOne.setDisable(false);
            txtQualityTwo.setDisable(false);
-           txtQualityThree.setDisable(false);}
-        else if (i == 1) {
-            txtQualityOne.setDisable(true);
-           txtQualityTwo.setDisable(false);
-           txtQualityThree.setDisable(false);}
-        else if (i == 2) {
-            txtQualityOne.setDisable(true);
-            txtQualityTwo.setDisable(true);
-            txtQualityThree.setDisable(false);}
-        else if (i == 3) {
-            txtQualityOne.setDisable(true);
-            txtQualityTwo.setDisable(true);
-            txtQualityThree.setDisable(true);
-           }
+           txtQualityThree.setDisable(false);
        }
+   } }
+
 
     @Override
     public void start() {
