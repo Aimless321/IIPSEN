@@ -250,8 +250,6 @@ public class BoardView implements Observer {
     public void updateBlackMarket(Board board) {
         ArrayList<Card> cardRow = board.blackmarket.cardRow;
 
-        System.out.println(cardRow.toString());
-
         for (int i = 0; i < cardRow.size(); i++) {
             ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
         }
