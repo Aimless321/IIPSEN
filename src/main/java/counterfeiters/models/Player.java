@@ -106,10 +106,13 @@ public class Player{
         switch (printQuality){
             case 1:
                 updateMoneyPlus(MoneyType.FAKE_ONE, 2 * printerCounter);
+                break;
             case 2:
                 updateMoneyPlus(MoneyType.FAKE_TWO, 2 * printerCounter);
+                break;
             case 3:
                 updateMoneyPlus(MoneyType.FAKE_THREE, 2 * printerCounter);
+                break;
         }
     }
 
@@ -120,10 +123,13 @@ public class Player{
             switch (card.getImg()) {
                 case "/cards/paper.png":
                     upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
+                    break;
                 case "/cards/paint.png":
-                    upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
+                    upgrades.add(PrinterUpgrade.UpgradeType.PAINT);
+                    break;
                 case "/cards/hologram.png":
-                    upgrades.add(PrinterUpgrade.UpgradeType.PAPER);
+                    upgrades.add(PrinterUpgrade.UpgradeType.HOLOGRAM);
+                    break;
             }
         }
 
