@@ -153,6 +153,10 @@ public class BoardView implements Observer {
             return;
         }
 
+        if(boardcontroller.board.policePawn.planeCheck()) {
+            return;
+        }
+
         Button btn = (Button) mouseEvent.getSource();
 
         if(btn.getStyleClass().contains("ticket") && boardcontroller.checkCard(new PlaneTicket())) {
