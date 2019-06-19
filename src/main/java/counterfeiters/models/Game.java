@@ -62,7 +62,7 @@ public class Game implements Observable {
 
         for (int i = 0; i < players.size(); i++) {
             String name = players.get(i).getUserName();
-            int score = (players.get(i).getScore());
+            int score = players.get(i).getRealMoney().getTotalMoney() + players.get(i).getBahamasBank().getTotalBankMoney();
             scores.put(name, score);
         }
 
