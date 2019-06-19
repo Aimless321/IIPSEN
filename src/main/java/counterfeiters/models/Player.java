@@ -95,16 +95,16 @@ public class Player{
         int printerCounter = 0;
         int upgradeCounter = 0;
 
-        ArrayList<Card> cards = getCards();
-        if (cards.contains(PrinterUpgrade.UpgradeType.PAINT)){
+        ArrayList<PrinterUpgrade.UpgradeType> upgradeTypes = getUpgrades();
+        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.PAINT)){
             System.out.println("speler heeft paint");
             upgradeCounter++;
         }
-        if (cards.contains(PrinterUpgrade.UpgradeType.PAPER)){
+        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.PAPER)){
             System.out.println("speler heeft paper");
             upgradeCounter++;
         }
-        if (cards.contains(PrinterUpgrade.UpgradeType.HOLOGRAM)){
+        if (upgradeTypes.contains(PrinterUpgrade.UpgradeType.HOLOGRAM)){
             System.out.println("speler heeft hologram");
             upgradeCounter++;
         }
@@ -125,6 +125,18 @@ public class Player{
         }
     }
 
+    private ArrayList<PrinterUpgrade.UpgradeType> getUpgrades() {
+        ArrayList<PrinterUpgrade.UpgradeType> upgrades = new ArrayList<>();
+
+        for (Card card : cards) {
+            if(card.getName().equals("upgrade")) {
+                PrinterUpgrade upgrade = (PrinterUpgrade) card;
+                upgrades.add(upgrade.getType());
+            }
+        }
+
+        return upgrades;
+    }
 
     /**
      * This switch will call the right method based on the given id and it will add the right amount.
