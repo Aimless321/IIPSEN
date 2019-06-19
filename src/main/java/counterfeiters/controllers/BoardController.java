@@ -158,12 +158,7 @@ public class BoardController {
     }
 
     public void printMoney() {
-
-        int[] print = board.printMoney();
-
-        //Enum starts at 0, so we have to do it minus 1
-        int moneyType = print[0]-1;
-        board.game.localPlayer.updateMoneyPlus(MoneyType.values()[moneyType], print[1]);
+        board.game.localPlayer.printMoney();
     }
 
     public void openBahamas() {

@@ -65,40 +65,6 @@ public class Board implements Observable, EventListener {
         return false;
     }
 
-
-    public int[] printMoney()
-    {
-
-        int[] print = new int[2];
-        boolean upgrade = true;
-        int printerCounter = 0;
-        int upgradeCounter = 0;
-
-        ArrayList<Card> cards = game.localPlayer.getCards();
-        for (Card card : cards) {
-            if(card.getName().equals("printer")) {
-                printerCounter = printerCounter + 2;
-            }
-            if(upgrade) {
-                if (card.getName().equals("upgrade")) {
-                    upgradeCounter++;
-                }
-            }
-
-            if (upgradeCounter == 3)
-            {
-                upgrade = false;
-            }
-
-        }
-
-        print[0] = upgradeCounter;
-        print[1] = printerCounter;
-
-        return print;
-
-    }
-
     public void giveMoneyOnEnd(String cardName){
         ArrayList<Card> cards = game.localPlayer.getCards();
 
@@ -109,7 +75,7 @@ public class Board implements Observable, EventListener {
 
         }
     }
-
+  
     public boolean checkYourTurn() {
         return game.checkYourTurn(firstPlayerPawn);
     }
