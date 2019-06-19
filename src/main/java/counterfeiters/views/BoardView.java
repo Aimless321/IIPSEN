@@ -298,7 +298,7 @@ public class BoardView implements Observer {
         }
 
         //Enable all of the action field buttons again (21 buttons)
-        for(int i = 0; i < 21; i++) {
+        for(int i = 0; i <= 21; i++) {
             Button btn = (Button) pane.lookup(".actionfield-" + i);
 
             if(btn != null) {
