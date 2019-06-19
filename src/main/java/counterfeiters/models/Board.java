@@ -134,6 +134,8 @@ public class Board implements Observable{
             return;
         }
 
+        System.out.println("Ending round");
+
         //Remove the henchmen
         this.henchmen = new ArrayList<>();
 

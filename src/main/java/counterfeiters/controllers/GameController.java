@@ -1,10 +1,7 @@
 package counterfeiters.controllers;
 
 import counterfeiters.firebase.FirebaseService;
-import counterfeiters.models.Game;
-import counterfeiters.models.Player;
-import counterfeiters.models.Printer;
-import counterfeiters.models.PrinterUpgrade;
+import counterfeiters.models.*;
 import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
@@ -77,6 +74,18 @@ public class GameController {
 
         game.localPlayer = client;
         game.addPlayer(client);
+
+        app.lobbyController.registerListeners();
+    }
+
+    public void joinLoadedGame(String gameid) {
+        FirebaseService fb = FirebaseService.getInstance();
+        Board board = fb.get("games", gameid).toObject(Board.class);
+
+        this.game = board.game;
+        app.boardController.board = board;
+
+        game.localPlayer = game.getPlayerFromUserName(app.accountController.getUsername());
 
         app.lobbyController.registerListeners();
     }

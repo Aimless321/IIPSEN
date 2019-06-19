@@ -165,7 +165,7 @@ public class Game implements Observable {
     /**
      * Get a player from a username.
      * @param username username of the player.
-     * @return Player
+     * @return Player or null if the players has not been found
      */
     @Exclude
     public Player getPlayerFromUserName(String username) {

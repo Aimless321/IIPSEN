@@ -80,9 +80,17 @@ public class LobbyListController {
         FirebaseService fb = FirebaseService.getInstance();
         Game game = fb.get("lobbies", chosenGame).toObject(Game.class);
 
-            app.gameController.joinGame(chosenGame);
-            app.loadView(LobbyView.class, app.lobbyController);
+        app.gameController.joinGame(chosenGame);
+        app.loadView(LobbyView.class, app.lobbyController);
+    }
 
+    public void clickFullLobby(Game game) {
+        if(game.getPlayerFromUserName(app.accountController.getUsername()) == null) {
+            return;
+        }
+
+        app.gameController.joinLoadedGame(game.getGameId());
+        app.loadView(LobbyView.class, app.lobbyController);
     }
 
     public void rulesButtonPressed() {
@@ -90,8 +98,3 @@ public class LobbyListController {
     }
 
 }
-
-
-
-
-
