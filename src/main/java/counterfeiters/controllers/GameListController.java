@@ -51,7 +51,7 @@ public class GameListController {
     }
 
     public void updateGamesModel() {
-        firebaseModel.updateGames();
+        firebaseModel.updateGames(app.accountController.getUsername());
     }
 
     public void leaveButtonPressed() {

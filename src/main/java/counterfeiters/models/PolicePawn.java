@@ -12,7 +12,8 @@ public class PolicePawn{
     HashMap<Integer, Integer> ycoordinates= new HashMap<Integer, Integer>();
 
     public PolicePawn() {
-
+        fillXCoordinates();
+        fillYCoordinates();
     }
 
     public PolicePawn(int players) {
