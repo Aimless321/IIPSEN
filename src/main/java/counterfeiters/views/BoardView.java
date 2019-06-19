@@ -150,6 +150,12 @@ public class BoardView implements Observer {
             return;
         }
 
+        //Checking if the policepawn is on "airplane", if so the player can not fly to the bahamas
+        if(boardcontroller.board.policePawn.planeCheck()) {
+            return;
+        }
+
+
         boardcontroller.app.popUpBahamasController.bahamas();
 
         Button btn = (Button) mouseEvent.getSource();
@@ -256,6 +262,7 @@ public class BoardView implements Observer {
         policePawn.setY(board.policePawn.getYCoordinate());
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
+
 
         try {
             policePawn.setX(bounds.getMinX());
