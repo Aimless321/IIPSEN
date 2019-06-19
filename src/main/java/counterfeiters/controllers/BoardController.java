@@ -32,8 +32,6 @@ public class BoardController {
         Board savedBoard = documentSnapshot.toObject(Board.class);
         this.board = savedBoard;
 
-        System.out.println(savedBoard.game.getPlayers().size());
-
         return savedBoard;
     }
 
