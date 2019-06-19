@@ -2,6 +2,7 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.events.EventHandler;
+import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
@@ -9,7 +10,7 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Board implements Observable{
+public class Board implements Observable, EventListener {
     private ArrayList<Observer> observers = new ArrayList<>();
     public BlackMarket blackmarket = new BlackMarket();
     public PolicePawn policePawn = new PolicePawn(4);
@@ -27,6 +28,7 @@ public class Board implements Observable{
         observers.add(observer);
 
         EventHandler.getInstance().registerListener(blackmarket);
+        EventHandler.getInstance().registerListener(this);
     }
 
     @Override
@@ -63,7 +65,17 @@ public class Board implements Observable{
         return false;
     }
 
+    public void giveMoneyOnEnd(String cardName){
+        ArrayList<Card> cards = game.localPlayer.getCards();
 
+        for (Card card : cards) {
+            if (card.getName().equals(cardName)) {
+                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+            }
+
+        }
+    }
+  
     public boolean checkYourTurn() {
         return game.checkYourTurn(firstPlayerPawn);
     }
@@ -129,10 +141,20 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
-    public void makePurchase(int cardNumber) {
-        Card card = blackmarket.cardRow.get(cardNumber);
+    public boolean makePurchase(int cardNumber) {
+        Card card;
+
+
+        try {
+            card = blackmarket.cardRow.get(cardNumber);
+        }catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
         game.localPlayer.addCard(card);
         blackmarket.makeCardPurchased(cardNumber);
+
+        return true;
     }
 
     public void advancePolice() {
@@ -181,5 +203,23 @@ public class Board implements Observable{
     @Exclude
     public HashMap<String,String> getPlayersAndCards() {
         return hmap;
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onRoundEnd() {
+
+        giveMoneyOnEnd("diner");
+    }
+
+
+    @Override
+    public void onGameEnd() {
+        giveMoneyOnEnd("scratchcard");
+
     }
 }

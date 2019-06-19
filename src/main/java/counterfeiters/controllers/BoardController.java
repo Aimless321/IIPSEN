@@ -21,7 +21,7 @@ public class BoardController {
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
 
-        fillMarket(3);
+        fillMarket(4);
         board.blackmarket.shuffleMarket();
     }
 
@@ -73,7 +73,7 @@ public class BoardController {
         map.put(new Diner(), 4);
         map.put(new PlaneTicket(), 3);
         map.put(new ScratchCard(), 3);
-        map.put(new Lawyer("good"), 1);
+        map.put(new Lawyer(), 1);
 
         if (spelers == 4) {
             for (Card n : map.keySet()) {
@@ -165,8 +165,8 @@ public class BoardController {
         app.popUpBahamasController.bahamas();
     }
 
-    public void makePurchase(String cardNumber ) {
-        board.makePurchase(Integer.parseInt(cardNumber));
+    public boolean makePurchase(String cardNumber ) {
+        return board.makePurchase(Integer.parseInt(cardNumber));
     }
 
     public boolean checkCard(Card card) {

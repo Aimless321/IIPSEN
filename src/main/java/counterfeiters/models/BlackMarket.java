@@ -43,7 +43,7 @@ public class BlackMarket implements EventListener {
         //Remove all blanccards
         cardRow.removeIf(card -> (card.getName().equals("")));
 
-        while (cardRow.size() < 7) {
+        while ((cardRow.size() < 7) && (marketList.size() > 0)) {
             addToRow();
         }
     }
@@ -83,8 +83,14 @@ public class BlackMarket implements EventListener {
     @Override
     public void onRoundEnd() {
         //Remove first 2 cards
-        cardRow.remove(0);
-        cardRow.remove(0);
+        if (cardRow.size()>1) {
+            cardRow.remove(0);
+            cardRow.remove(0);
+        }
+        else if (cardRow.size()>0) {
+            cardRow.remove(0);
+        }
+
 
         refill();
     }

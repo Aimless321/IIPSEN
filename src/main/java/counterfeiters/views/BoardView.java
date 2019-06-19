@@ -22,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -86,7 +87,10 @@ public class BoardView implements Observer {
 
 
         if(boardcontroller.checkActionField(btn.getId())) {
-            boardcontroller.makePurchase(btn.getStyleClass().get(1));
+            if(!boardcontroller.makePurchase(btn.getStyleClass().get(1))) {
+                return;
+            }
+
             placeHenchman(btn);
         }
     }
@@ -244,13 +248,17 @@ public class BoardView implements Observer {
     }
 
     public void updateBlackMarket(Board board) {
-        for (int i = 0; i < 7; i++) {
-            try {
-                ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
-            }catch (NullPointerException e) {
-                System.err.println("Cannot load blackmarket card image");
-            }
+        ArrayList<Card> cardRow = board.blackmarket.cardRow;
+
+        for (int i = 0; i < cardRow.size(); i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
         }
+
+        for (int j = blackMarketView.getChildren().size()-1; j >= cardRow.size(); j--) {
+            System.out.println("Removing card " + j);
+            blackMarketView.getChildren().remove(j);
+        }
+
     }
 
     public void updatePolicePawn(Board board) {

@@ -2,12 +2,13 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 import com.google.type.Money;
+import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player{
     private String userName;
     private int playerId = 1;
     private int score;
@@ -38,7 +39,7 @@ public class Player {
 
         //If the lobby will be empty after this or if this player is the host, remove the lobby from firebase
         //Else remove this player from the lobby and update firebase
-        if(game.getNumPlayers() == 1 || game.getPlayers().get(0) == this) {
+        if (game.getNumPlayers() == 1 || game.getPlayers().get(0) == this) {
             game.delete();
         } else {
             game.removePlayer(this);
@@ -130,9 +131,9 @@ public class Player {
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
-     * */
-    public void updateMoneyPlus(MoneyType type, int amount){
-        switch(type) {
+     */
+    public void updateMoneyPlus(MoneyType type, int amount) {
+        switch (type) {
             case FAKE_ONE:
                 fakeMoney.setQualityOne(fakeMoney.getQualityOne() + amount);
                 break;
@@ -158,9 +159,9 @@ public class Player {
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
-     * */
-    public void updateMoneyReduce(MoneyType type, int amount){
-        switch(type) {
+     */
+    public void updateMoneyReduce(MoneyType type, int amount) {
+        switch (type) {
             case FAKE_ONE:
                 fakeMoney.setQualityOne(fakeMoney.getQualityOne() - amount);
                 break;
@@ -209,11 +210,13 @@ public class Player {
         return fakeMoney;
     }
 
-    public RealMoney getRealMoney(){
+    public RealMoney getRealMoney() {
         return realMoney;
     }
 
-    public BahamasBank getBahamasBank(){return bahamasBank;}
+    public BahamasBank getBahamasBank() {
+        return bahamasBank;
+    }
 
     public boolean hasCard(Card card) {
         for (Card n : cards) {
@@ -228,3 +231,4 @@ public class Player {
         return cards;
     }
 }
+

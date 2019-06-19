@@ -42,11 +42,10 @@ public class RulesView implements Observer {
         //Show it on the screen
         Scene scene = new Scene(root, 1920, 1080);
 
-        Stage popupStage = new Stage(StageStyle.DECORATED);
+        Stage popupStage = new Stage(StageStyle.UNDECORATED);
         popupStage.initOwner(stage);
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.setScene(scene);
-        popupStage.setFullScreen(true);
         popupStage.show();
 
     }
