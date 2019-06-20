@@ -67,7 +67,7 @@ public class LobbyListView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
         pane.setOnKeyPressed(event -> {
-            if (event.equals(KeyCode.M)) {
+            if (event.getCode() == KeyCode.M) {
                 SoundManager.toggleMute();
             }
         });

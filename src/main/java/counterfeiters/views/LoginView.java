@@ -55,7 +55,7 @@ public class LoginView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/with-money-and-logo.png"));
 
         pane.setOnKeyPressed(event -> {
-            if (event.equals(KeyCode.M)) {
+            if (event.getCode() == KeyCode.M) {
                 SoundManager.toggleMute();
             }
         });

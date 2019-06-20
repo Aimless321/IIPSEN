@@ -62,7 +62,7 @@ public class ScoreboardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/scoreboard.png"));
 
         pane.setOnKeyPressed(event -> {
-            if (event.equals(KeyCode.M)) {
+            if (event.getCode() == KeyCode.M) {
                 SoundManager.toggleMute();
             }
         });
