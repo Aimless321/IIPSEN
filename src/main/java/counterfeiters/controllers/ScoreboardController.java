@@ -28,7 +28,6 @@ public class ScoreboardController {
         app.gameController.registerObserver(observer);
     }
 
-    //TODO: remove hardcode, place game.
     public Game loadScores() {
 
         app.gameController.game.getScores(app.gameController.game.getPlayers());
@@ -43,6 +42,9 @@ public class ScoreboardController {
     }
 
     public void menuButtonPressed() {
+        app.gameController.deleteGame();
+        app.boardController.deleteBoard();
+
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
     public void exitButtonPressed()

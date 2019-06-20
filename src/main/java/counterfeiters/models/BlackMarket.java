@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class BlackMarket implements EventListener {
-    private ArrayList<Card> marketList = new ArrayList<>();;
+    private ArrayList<Card> marketList = new ArrayList<>();
 
     public ArrayList<Card> cardRow = new ArrayList<>();
 

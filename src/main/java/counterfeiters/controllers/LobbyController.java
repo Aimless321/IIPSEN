@@ -64,8 +64,6 @@ public class LobbyController {
         listener.remove();
 
         Game game = app.gameController.game;
-
-        String localUsername = app.accountController.getUsername();
         
         Player player = game.localPlayer;
         player.leaveLobby(game);

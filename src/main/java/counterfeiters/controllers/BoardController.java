@@ -143,6 +143,10 @@ public class BoardController {
         return classList.get(0);
     }
 
+    public void deleteBoard() {
+        board = new Board();
+    }
+
     public void prepareView() {
         board.prepareFirstPlayer();
         board.prepareBlackMarket();
