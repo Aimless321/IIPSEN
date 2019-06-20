@@ -37,7 +37,7 @@ public class GameController {
 
         app.lobbyController.registerListeners();
 
-        //Give the game to the board aswell
+        //Give the game to the board as well
         app.boardController.board.game = game;
     }
 

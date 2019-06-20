@@ -67,14 +67,13 @@ public class BoardController {
     private void fillMarket(int spelers) {
         HashMap<Card, Integer> map = new HashMap();
 
-        map.put(new Printer(), 9);
+        map.put(new Printer(), 6);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.HOLOGRAM), 3);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.PAPER), 4);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.PAINT), 4);
         map.put(new Diner(), 4);
         map.put(new PlaneTicket(), 3);
         map.put(new ScratchCard(), 3);
-        map.put(new Lawyer(), 1);
 
         if (spelers == 4) {
             for (Card n : map.keySet()) {

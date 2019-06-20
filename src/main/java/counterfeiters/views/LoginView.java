@@ -95,10 +95,10 @@ public class LoginView implements Observer {
         SoundManager.toggleMute();
 
         if (SoundManager.muteSound) {
-            muteButton.setOpacity(0.5);
+            muteButton.setOpacity(1);
         }
         else {
-            muteButton.setOpacity(1);
+            muteButton.setOpacity(0.5);
         }
     }
 
