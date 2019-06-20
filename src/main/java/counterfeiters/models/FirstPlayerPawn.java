@@ -18,7 +18,9 @@ public class FirstPlayerPawn implements EventListener {
 
     @Override
     public void onRoundEnd() {
-        this.firstPlayer = nextFirstPlayer;
+        if(nextFirstPlayer != null) {
+            this.firstPlayer = nextFirstPlayer;
+        }
     }
 
     public void setFirstPlayer(Player firstPlayer) {
