@@ -196,6 +196,10 @@ public class Board implements Observable, EventListener {
     }
 
     public void prepareFirstPlayer() {
+        if(firstPlayerPawn.getFirstPlayer() != null) {
+            return;
+        }
+
         Player host = game.getPlayers().get(0);
         firstPlayerPawn.setFirstPlayer(host);
     }
