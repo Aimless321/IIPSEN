@@ -2,7 +2,6 @@ package counterfeiters.controllers;
 
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.ListenerRegistration;
-import counterfeiters.events.EventHandler;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
@@ -12,7 +11,6 @@ import counterfeiters.views.RulesView;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
-import java.awt.*;
 import java.util.HashMap;
 
 public class BoardController {
@@ -56,10 +54,6 @@ public class BoardController {
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
-
-                        if(board.game.getRound() != updateBoard.game.getRound()) {
-                            EventHandler.getInstance().endRound();
-                        }
                     }
                 });
     }

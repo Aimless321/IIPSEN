@@ -70,13 +70,13 @@ public class Board implements Observable, EventListener {
     }
 
     public void giveMoneyOnEnd(String cardName){
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+        //Give money for each for each card
+        for (Player player : game.getPlayers()) {
+            for (Card card : player.getCards()) {
+                if (card.getName().equals(cardName)) {
+                    game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+                }
             }
-
         }
     }
   
@@ -225,7 +225,6 @@ public class Board implements Observable, EventListener {
 
     @Override
     public void onRoundEnd() {
-
         giveMoneyOnEnd("diner");
     }
 
