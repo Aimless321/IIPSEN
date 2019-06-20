@@ -67,8 +67,10 @@ public class BoardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
 
         pane.setOnKeyPressed(event -> {
-            if (event.equals(KeyCode.M)) {
+            if (event.getCode() == KeyCode.M) {
                 SoundManager.toggleMute();
+            } else if (event.getCode() == KeyCode.F11) {
+                stage.setFullScreen(!stage.isFullScreen());
             }
         });
 

@@ -74,7 +74,7 @@ public class Board implements Observable, EventListener {
         for (Player player : game.getPlayers()) {
             for (Card card : player.getCards()) {
                 if (card.getName().equals(cardName)) {
-                    game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+                    player.updateMoneyPlus(MoneyType.REAL, 50);
                 }
             }
         }
@@ -166,7 +166,7 @@ public class Board implements Observable, EventListener {
         //Checking if the policepawn is on "Godfather", if so the player loses half of his realmoney
         if (policePawn.godfatherCheck()) {
             for(Player player : game.getPlayers()) {
-                player.updateMoneyReduce(MoneyType.REAL,game.localPlayer.getRealMoney().getTotalMoney()/2);
+                player.updateMoneyReduce(MoneyType.REAL,player.getRealMoney().getTotalMoney()/2);
             }
         }
         notifyAllObservers();
