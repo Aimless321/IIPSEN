@@ -13,6 +13,7 @@ public class FirstPlayerPawn implements EventListener {
 
     public void updateData(FirstPlayerPawn firstPlayerPawn) {
         this.firstPlayer = firstPlayerPawn.getFirstPlayer();
+        this.nextFirstPlayer = firstPlayerPawn.getNextFirstPlayer();
     }
 
     @Override
