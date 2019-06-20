@@ -86,7 +86,7 @@ public class Account implements Observable{
                notifyAllObservers();
                return false;
            }
-
+           // If the method verifyUser returns true the user had been added to the firebase.
            if(verifyUser(username, password)) {
                textField = "";
                notifyAllObservers();
@@ -120,6 +120,7 @@ public class Account implements Observable{
     public boolean verifyUser(String username, String password) {
         FirebaseService fb = FirebaseService.getInstance();
 
+        // Loops through the list of users.
         List<QueryDocumentSnapshot> documents = fb.query("users", "username", username);
 
         if (documents.size() == 0){

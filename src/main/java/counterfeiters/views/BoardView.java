@@ -88,7 +88,6 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-
         if(boardcontroller.checkActionField(btn.getId())) {
             if(!boardcontroller.makePurchase(btn.getStyleClass().get(1))) {
                 return;
@@ -106,7 +105,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-
+        // Based on the given type the right method will be called.
         boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET, btn);
     }
 
@@ -355,6 +354,12 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * This method sets the money textfields in the boardview
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
     public void updateMoney(Board board) {
         this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
         this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));

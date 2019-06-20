@@ -89,25 +89,23 @@ public class BoardController {
     }
 
     /**
-     * By giving an Id, right character and amount. You can add or reduce money and the money will be updated in the indicated part.
-     * Calling the correct type of money is based on the given id.
-     * Adding or reducing money depends on de given character.
+     * By giving an amount. You can add or reduce money and the money will be updated in the indicated part.
      *
      * @author Ali Rezaa Ghariebiyan
-     * @version 09-06-2019
+     * @version 20-06-2019
      * */
     public void updateMoneyOnPosition(int amount){
         app.gameController.game.updateMoney(amount);
     }
 
     /**
-     * By giving the right moneyQuality and quantity, the method for the check can be called up.
+     * By giving the right amount, the method for the check can be called up.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
      * */
-    public boolean checkActionField(String id){
-        int money = Integer.parseInt(id);
+    public boolean checkActionField(String amount){
+        int money = Integer.parseInt(amount);
 
         return board.checkMoney(MoneyType.REAL, money);
     }

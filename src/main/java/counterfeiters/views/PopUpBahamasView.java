@@ -14,11 +14,21 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * The PopUpBahamasView will be created by giving the primarystage and PopUpBahamasController as arguments.
+ *
+ * With this view it will be possible to Fly money to the Bahamas from the boardview.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 20-06-2019
+ * */
+
 public class PopUpBahamasView implements Observer{
 
     private Stage stage;
     private PopUpBahamasController controller;
 
+    // FXML values.
     public AnchorPane anchorpane;
     public TextField txtValue;
     public Text textField;
@@ -31,13 +41,21 @@ public class PopUpBahamasView implements Observer{
     }
 
     //CONSTRUCTOR
-    public PopUpBahamasView(Stage primaryStage, Object popUpLaunderMoneyController) {
+    public PopUpBahamasView(Stage primaryStage, Object popUpBahamasController) {
         this.stage = primaryStage;
-        this.controller = (PopUpBahamasController) popUpLaunderMoneyController;
+        this.controller = (PopUpBahamasController) popUpBahamasController;
 
         show();
     }
 
+    /**
+     * Reduces the amount from the Bahamas account and adds it to the realMoney.
+     * If the player does not have enough money he will get an notification.
+     * Else it will be done and the view will be closed.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
     @FXML
     public void pressReduce() {
         int value = Integer.parseInt(txtValue.getText());
@@ -51,6 +69,14 @@ public class PopUpBahamasView implements Observer{
         }
     }
 
+    /**
+     * Reduces the amount from the Real money and adds it to the Bahamas account.
+     * If the player does not have enough money he will get an notification.
+     * Else it will be done and the view will be closed.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
     @FXML
     public void pressAdd() {
         int value = Integer.parseInt(txtValue.getText());
@@ -90,8 +116,8 @@ public class PopUpBahamasView implements Observer{
 
     @Override
     public void setController(Object controller) {
-        PopUpBahamasController popUpLaunderMoneyController = (PopUpBahamasController) controller;
-        this.controller = popUpLaunderMoneyController;
+        PopUpBahamasController popUpBahamasController = (PopUpBahamasController) controller;
+        this.controller = popUpBahamasController;
     }
 
     @Override
