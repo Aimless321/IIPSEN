@@ -26,10 +26,15 @@ public class PopUpLaunderMoneyController {
     public void transferMoney(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree){
         if (type == LaunderType.SUPERMARKET){
             app.boardController.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
+            app.boardController.advancePolice();
         }
 
         if (type == LaunderType.HEALER){
             app.boardController.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
+
+            if(btn.getStyleClass().contains("police")) {
+                app.boardController.advancePolice();
+            }
         }
 
         app.boardController.henchmanPlaced(btn);

@@ -106,8 +106,6 @@ public class BoardView implements Observer {
 
 
         boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET, btn);
-
-        boardcontroller.advancePolice();
     }
 
     @FXML
@@ -119,10 +117,6 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER, btn);
-
-        if(btn.getStyleClass().contains("police")) {
-            boardcontroller.advancePolice();
-        }
     }
 
     @FXML
