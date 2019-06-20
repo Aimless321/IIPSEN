@@ -20,12 +20,12 @@
                   <TextField fx:id="txtValue" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnReduce" mnemonicParsing="false" onMouseClicked="#pressReduce" prefHeight="20.0" prefWidth="80.0" styleClass="red-button" text="Reduce">
+                        <Button fx:id="btnReduce" mnemonicParsing="false" onMouseClicked="#pressReduce" prefHeight="20.0" prefWidth="80.0" styleClass="red-button" text="Withdraw">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" onMouseClicked="#pressAdd" prefHeight="20.0" prefWidth="80.0" styleClass="green-button" text="Add ">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onMouseClicked="#pressAdd" prefHeight="20.0" prefWidth="80.0" styleClass="green-button" text="Deposit">
                            <HBox.margin>
                               <Insets left="40.0" top="20.0" />
                            </HBox.margin>
