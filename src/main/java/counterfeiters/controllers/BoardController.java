@@ -114,6 +114,9 @@ public class BoardController {
     }
 
     public void henchmanPlaced(Button btn) {
+        //Go to the next turn
+        board.game.nextTurn();
+
         if(!lobbyDeleted) {
             app.gameController.game.delete();
         }

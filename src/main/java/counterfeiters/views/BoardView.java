@@ -217,8 +217,6 @@ public class BoardView implements Observer {
     }
 
     public void placeHenchman(Button btn) {
-        boardcontroller.board.game.nextTurn();
-
         boardcontroller.henchmanPlaced(btn);
     }
 
