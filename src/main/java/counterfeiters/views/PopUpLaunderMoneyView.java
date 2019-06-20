@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -25,6 +26,9 @@ public class PopUpLaunderMoneyView implements Observer{
     public AnchorPane anchorpane;
     public Text txtField;
     public VBox vboxOne;
+    public HBox buttonsQualityOne;
+    public HBox buttonsQualityTwo;
+    public HBox buttonsQualityThree;
 
     // Values from textfield.
     private int qualityOne;
@@ -184,30 +188,41 @@ public class PopUpLaunderMoneyView implements Observer{
    @FXML
    public void qualityAvailability(int i) {
        if (controller.getLaunderType() == PopUpLaunderMoneyController.LaunderType.SUPERMARKET) {
-           System.out.println("ik zit nu in updateview en int is" + i);
-           if (i == 0) {
+           switch (i) {
+               case 0:
                txtQualityOne.setDisable(false);
                txtQualityTwo.setDisable(false);
                txtQualityThree.setDisable(false);
-           } else if (i == 1) {
+               break;
+               case 1:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(false);
                txtQualityThree.setDisable(false);
-           } else if (i == 2) {
+               buttonsQualityOne.setDisable(true);
+               break;
+               case 2:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(false);
-           } else if (i == 3) {
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
+               break;
+               case 3:
                txtQualityOne.setDisable(true);
                txtQualityTwo.setDisable(true);
                txtQualityThree.setDisable(true);
-           }
-        else {
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
+               buttonsQualityThree.setDisable(true);
+
+                   break;
+           }}
+           else {
            txtQualityOne.setDisable(false);
            txtQualityTwo.setDisable(false);
            txtQualityThree.setDisable(false);
        }
-   } }
+   }
 
 
     @Override
