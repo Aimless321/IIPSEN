@@ -107,7 +107,7 @@ public class Board implements Observable, EventListener {
     }
 
     public void checkEndRound() {
-        if(!game.checkEndRound()) {
+        if(!game.checkEndRound() ) {
             return;
         }
 

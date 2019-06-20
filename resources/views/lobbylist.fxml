@@ -34,7 +34,7 @@
             <VBox fx:id="vBox" layoutX="460.0" layoutY="390.0" prefHeight="380.0" prefWidth="1000.0" />
          </content>
       </ScrollPane>
-      <ImageView fx:id="muteButton" fitHeight="40.0" fitWidth="40.0" layoutX="1799.0" layoutY="23.0" onMouseClicked="#pressMute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="muteButton" fitHeight="40.0" fitWidth="40.0" layoutX="1799.0" layoutY="23.0" onMouseClicked="#pressMute" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
          </viewport>
