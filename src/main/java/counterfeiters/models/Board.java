@@ -171,7 +171,7 @@ public class Board implements Observable, EventListener {
     }
 
     public void makeFirstPlayer(){
-        firstPlayerPawn.setFirstPlayer(game.localPlayer);
+        firstPlayerPawn.setNextFirstPlayer(game.localPlayer);
     }
 
     public ArrayList<Henchman> getHenchmen() {
