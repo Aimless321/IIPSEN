@@ -17,12 +17,12 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.BoardView">
    <children>
-      <HBox fx:id="blackMarketView" layoutX="437.0" layoutY="21.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="163.0" prefWidth="1011.0" spacing="35.0">
+      <HBox fx:id="blackMarketView" layoutX="425.0" layoutY="23.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="163.0" prefWidth="1011.0" spacing="35.0">
          <padding>
             <Insets right="12.0" />
          </padding>
       </HBox>
-      <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="1011.0" spacing="30.0">
+      <HBox alignment="TOP_CENTER" layoutX="437.0" layoutY="1011.0" prefHeight="26.0" prefWidth="1011.0" spacing="30.0">
          <children>
             <Text fx:id="qualityOneMoney" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
                <font>
@@ -256,11 +256,6 @@
             <Image url="@/henchman/police.png" />
          </image>
       </ImageView>
-      <ImageView id="profile-hippo" fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@/players/hippo.jpg" />
-         </image>
-      </ImageView>
       <ImageView id="profile-croc" fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="741.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/croc.jpg" />
@@ -292,7 +287,7 @@
             <Font name="System Bold" size="30.0" />
          </font>
       </Text>
-      <Pane fx:id="hippopane">
+      <Pane fx:id="hippopane" layoutY="2.0">
       <ImageView id="profile-hippo" fx:id="hippoimageview" fitHeight="144.0" fitWidth="144.0" layoutX="281.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/players/hippo.jpg" />
@@ -327,7 +322,7 @@
             </ImageView>
          </children>
       </VBox>
-         <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="2">
+         <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="351.0" layoutY="390.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="3">
             <image>
                <Image url="@/cards/upgrades.png" />
             </image>
@@ -405,12 +400,7 @@
             </ImageView>
          </children>
       </VBox>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="389.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="0">
-         <image>
-            <Image url="@/cards/upgrades.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="316.0" layoutY="588.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="1">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="351.0" layoutY="589.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="0">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
@@ -420,7 +410,7 @@
             <Image url="@/cards/upgrades.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="589.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="3">
+      <ImageView fitHeight="111.0" fitWidth="100.0" layoutX="1459.0" layoutY="589.0" onMouseClicked="#pressCards" pickOnBounds="true" preserveRatio="true" styleClass="1">
          <image>
             <Image url="@/cards/upgrades.png" />
          </image>
@@ -449,12 +439,12 @@
             </ImageView>
          </children>
       </HBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1527.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1603.0" layoutY="905.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@/money/1.png" />
          </image>
       </ImageView>
-      <Text fx:id="totalBankMoney" layoutX="1513.0" layoutY="1043.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
+      <Text fx:id="totalBankMoney" layoutX="1589.0" layoutY="1043.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="227.74609375">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
