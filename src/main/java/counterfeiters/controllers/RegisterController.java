@@ -20,7 +20,8 @@ public class RegisterController {
     }
 
     /**
-     * If the checkCredentials method in 'accountController' returns true, the loginView will load. <br> Otherwise, it will be captured in 'Account'.
+     * If the checkCredentials method in 'accountController' returns true, the loginView will load.
+     * Otherwise, it will be captured in 'Account'.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 05-06-2019

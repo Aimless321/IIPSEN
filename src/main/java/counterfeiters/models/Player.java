@@ -137,7 +137,7 @@ public class Player{
     }
 
     /**
-     * This switch will call the right method based on the given id and it will add the right amount.
+     * This switch will call the right method based on the given moneyType and it will add the right amount.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
@@ -165,7 +165,7 @@ public class Player{
     }
 
     /**
-     * This switch will call the right method based on the given id and it will reduce the right amount.
+     * This switch will call the right method based on the given money type and it will reduce the right amount.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
@@ -192,7 +192,7 @@ public class Player{
         }
     }
 
-    public boolean checkRedueBahamas(int amount) {
+    public boolean checkReduceBahamas(int amount) {
         return bahamasBank.getTotalBankMoney() >= amount;
     }
 

@@ -5,6 +5,13 @@ import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.views.PopUpLaunderMoneyView;
 import javafx.scene.control.Button;
 
+/**
+ * This controller only loads the correct views and provides further link to the BoardController(class) and model.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 05-06-2019
+ * */
+
 public class PopUpLaunderMoneyController {
     private ApplicationController app;
 
@@ -23,6 +30,12 @@ public class PopUpLaunderMoneyController {
         app.loadView(PopUpLaunderMoneyView.class, app.popUpLaunderMoneyController);
     }
 
+    /**
+     * Checks which launderType it is.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
     public void transferMoney(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree){
         if (type == LaunderType.SUPERMARKET){
             app.boardController.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
@@ -48,6 +61,12 @@ public class PopUpLaunderMoneyController {
             return false;
     }
 
+    /**
+     * Checks wich Laundertype it is.
+     *
+     * @author Ali Rezaa, Wesley Bijleveld
+     * @version 20-06-2019
+     * */
     public int getMaxAmount() {
         if(type == LaunderType.SUPERMARKET) {
             return 3;

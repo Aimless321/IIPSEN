@@ -55,20 +55,28 @@ public class Board implements Observable, EventListener {
 
 
     /**
-     * This method checks whether the user has enough money, If this is the case, the money wil de deducted from his account.
+     * This method check wheter the totalMoney is more than the give amount.
+     * if its true the method 'updateMoneyReduce' will be called.
      *
      * @author Ali Rezaa Ghariebiyan
-     * @version 11-06-2019
+     * @version 20-06-2019
      * */
-    public boolean checkMoney(MoneyType type, int bedrag){
-        if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-            game.localPlayer.updateMoneyReduce(type, bedrag);
+    public boolean checkMoney(MoneyType type, int amount){
+        if (game.localPlayer.realMoney.getTotalMoney() >= amount){
+            game.localPlayer.updateMoneyReduce(type, amount);
             return true;
         }
 
         return false;
     }
 
+
+    /**
+     * Checks if the user has a 'diner' at the end of the round. If true the user will get 50 real money.
+     *
+     * @author Ali Rezaa Ghariebiyan, Robin van den Berg
+     * @version 20-06-2019
+     * */
     public void giveMoneyOnEnd(String cardName){
         //Give money for each for each card
         for (Player player : game.getPlayers()) {
@@ -121,6 +129,12 @@ public class Board implements Observable, EventListener {
         EventHandler.getInstance().endRound();
     }
 
+    /**
+     * Calculates the given bills and gives it to the player.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
     public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
@@ -131,6 +145,12 @@ public class Board implements Observable, EventListener {
         notifyAllObservers();
     }
 
+    /**
+     * Calculates the given bills and gives it to the player.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
     public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int resultQualityOne = qualityOne * 20;
         int resultQualityTwo = qualityTwo * 30;
@@ -188,8 +208,15 @@ public class Board implements Observable, EventListener {
         this.game = game;
     }
 
-    public boolean checkQualityQuantity(int amount, String quality) {
 
+    /**
+     * This method checks whether the quality provided is equal to the number of bills the player has.
+     * If this is true it will return false.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 20-06-2019
+     * */
+    public boolean checkQualityQuantity(int amount, String quality) {
         if (game.localPlayer.getFakeMoney().getQuality(quality) == amount){
             return false;
         }

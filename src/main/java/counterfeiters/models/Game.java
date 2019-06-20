@@ -215,7 +215,8 @@ public class Game implements Observable {
     }
 
     /**
-     * Based on the indicated character, the correct method will be called for updating the money.
+     * The correct method will be called for updating the money.
+     * The moneyType will always be real money.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019

@@ -17,6 +17,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * The PopUpLaunderMoneyView will be created by giving the primarystage and PopUpLaunderMoneyController as arguments.
+ *
+ * With this view it will be possible to Launder money from the boardview.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 20-06-2019
+ * */
+
 public class PopUpLaunderMoneyView implements Observer{
 
     // FXML values.
@@ -111,6 +120,12 @@ public class PopUpLaunderMoneyView implements Observer{
         }
     }
 
+    /**
+     * If the total number of tickets is no more than may be exchanged. The money will be converted and added to the 'real money'.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
     @FXML
     public void pressLaunder() {
         if (controller.checkAmount(getValues())){
