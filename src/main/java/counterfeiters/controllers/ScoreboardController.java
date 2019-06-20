@@ -38,8 +38,7 @@ public class ScoreboardController {
         return fb.get("games",app.boardController.board.game.getGameId()).toObject(Board.class).game;
     }
 
-    public Map<String,Integer> getScores(ArrayList<Player> players)
-    {
+    public Map<String,Integer> getScores(ArrayList<Player> players) {
         return app.gameController.game.getScores(players);
     }
 

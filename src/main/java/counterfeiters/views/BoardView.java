@@ -67,8 +67,10 @@ public class BoardView implements Observer {
         pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
 
         pane.setOnKeyPressed(event -> {
-            if (event.equals(KeyCode.M)) {
+            if (event.getCode() == KeyCode.M) {
                 SoundManager.toggleMute();
+            } else if (event.getCode() == KeyCode.F11) {
+                stage.setFullScreen(!stage.isFullScreen());
             }
         });
 
@@ -106,8 +108,6 @@ public class BoardView implements Observer {
 
 
         boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET, btn);
-
-        boardcontroller.advancePolice();
     }
 
     @FXML
@@ -119,10 +119,6 @@ public class BoardView implements Observer {
         Button btn = (Button) mouseEvent.getSource();
 
         boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER, btn);
-
-        if(btn.getStyleClass().contains("police")) {
-            boardcontroller.advancePolice();
-        }
     }
 
     @FXML
@@ -196,10 +192,10 @@ public class BoardView implements Observer {
         SoundManager.toggleMute();
 
         if (SoundManager.muteSound) {
-            muteButton.setOpacity(0.5);
+            muteButton.setOpacity(1);
         }
         else {
-            muteButton.setOpacity(1);
+            muteButton.setOpacity(0.5);
         }
     }
 
@@ -217,8 +213,6 @@ public class BoardView implements Observer {
     }
 
     public void placeHenchman(Button btn) {
-        boardcontroller.board.game.nextTurn();
-
         boardcontroller.henchmanPlaced(btn);
     }
 

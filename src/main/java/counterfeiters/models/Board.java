@@ -70,13 +70,13 @@ public class Board implements Observable, EventListener {
     }
 
     public void giveMoneyOnEnd(String cardName){
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if (card.getName().equals(cardName)) {
-                game.localPlayer.updateMoneyPlus(MoneyType.REAL, 50);
+        //Give money for each for each card
+        for (Player player : game.getPlayers()) {
+            for (Card card : player.getCards()) {
+                if (card.getName().equals(cardName)) {
+                    player.updateMoneyPlus(MoneyType.REAL, 50);
+                }
             }
-
         }
     }
   
@@ -107,7 +107,7 @@ public class Board implements Observable, EventListener {
     }
 
     public void checkEndRound() {
-        if(!game.checkEndRound()) {
+        if(!game.checkEndRound() ) {
             return;
         }
 
@@ -165,13 +165,15 @@ public class Board implements Observable, EventListener {
         policePawn.advance();
         //Checking if the policepawn is on "Godfather", if so the player loses half of his realmoney
         if (policePawn.godfatherCheck()) {
-            game.localPlayer.updateMoneyReduce(MoneyType.REAL,game.localPlayer.getRealMoney().getTotalMoney()/2);
+            for(Player player : game.getPlayers()) {
+                player.updateMoneyReduce(MoneyType.REAL,player.getRealMoney().getTotalMoney()/2);
+            }
         }
         notifyAllObservers();
     }
 
     public void makeFirstPlayer(){
-        firstPlayerPawn.setFirstPlayer(game.localPlayer);
+        firstPlayerPawn.setNextFirstPlayer(game.localPlayer);
     }
 
     public ArrayList<Henchman> getHenchmen() {
@@ -196,6 +198,10 @@ public class Board implements Observable, EventListener {
     }
 
     public void prepareFirstPlayer() {
+        if(firstPlayerPawn.getFirstPlayer() != null) {
+            return;
+        }
+
         Player host = game.getPlayers().get(0);
         firstPlayerPawn.setFirstPlayer(host);
     }
@@ -221,7 +227,6 @@ public class Board implements Observable, EventListener {
 
     @Override
     public void onRoundEnd() {
-
         giveMoneyOnEnd("diner");
     }
 

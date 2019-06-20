@@ -8,11 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
+<AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.0
+" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpLaunderMoneyView">
    <children>
       <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
          <children>
-            <VBox  fx:id="vboxOne" prefHeight="200.0" prefWidth="133.0">
+            <VBox fx:id="vboxOne" prefHeight="200.0" prefWidth="133.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quality I" textAlignment="CENTER" wrappingWidth="132.13671875" />
                   <TextField fx:id="txtQualityOne" alignment="CENTER" editable="false" maxWidth="115.0" prefHeight="25.0" prefWidth="100.0" text="0">
@@ -22,12 +23,12 @@
                   </TextField>
                   <HBox fx:id="buttonsQualityOne" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityOne" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnMinQualityOne" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityOne" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityOne" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityOne" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnAddQualityOne" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityOne" prefHeight="15.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -49,12 +50,12 @@
                   </TextField>
                   <HBox fx:id="buttonsQualityTwo" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnMinQualityTwo" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityTwo" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnAddQualityTwo" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityTwo" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
@@ -76,12 +77,12 @@
                   </TextField>
                   <HBox fx:id="buttonsQualityThree" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
+                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnMinQualityThree" ellipsisString="-" mnemonicParsing="false" onMouseClicked="#minQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="red-button" text="-">
+                        <Button fx:id="btnAddQualityThree" ellipsisString="+" mnemonicParsing="false" onMouseClicked="#plusQualityThree" prefHeight="25.0" prefWidth="30.0" styleClass="green-button" text="+">
                            <HBox.margin>
                               <Insets left="25.0" top="5.0" />
                            </HBox.margin>
