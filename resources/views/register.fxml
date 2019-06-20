@@ -47,7 +47,7 @@
             </Text>
          </children>
       </VBox>
-      <ImageView fx:id="muteButton" fitHeight="40.0" fitWidth="40.0" layoutX="941.0" layoutY="672.0" onMouseClicked="#pressMute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="muteButton" fitHeight="40.0" fitWidth="40.0" layoutX="941.0" layoutY="712.0" onMouseClicked="#pressMute" pickOnBounds="true" preserveRatio="true">
          <viewport>
             <Rectangle2D />
          </viewport>
