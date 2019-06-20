@@ -3,15 +3,19 @@ package counterfeiters.controllers;
 import counterfeiters.models.MoneyType;
 import counterfeiters.models.Player;
 import counterfeiters.views.PopUpBahamasView;
+import javafx.scene.control.Button;
 
 public class PopUpBahamasController {
     private ApplicationController app;
+    private Button btn;
 
     public PopUpBahamasController(ApplicationController app) {
         this.app = app;
     }
 
-    public void bahamas () {
+    public void bahamas (Button btn) {
+        this.btn = btn;
+
         app.loadView(PopUpBahamasView.class, app.popUpBahamasController);
     }
 
@@ -41,5 +45,9 @@ public class PopUpBahamasController {
             return true;
         }
         return false;
+    }
+
+    public void placeHenchman() {
+        app.boardController.henchmanPlaced(btn);
     }
 }

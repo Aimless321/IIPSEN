@@ -46,6 +46,8 @@ public class PopUpBahamasView implements Observer{
         }else{
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
+
+            controller.placeHenchman();
         }
     }
 
@@ -57,6 +59,8 @@ public class PopUpBahamasView implements Observer{
         }else{
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
+
+            controller.placeHenchman();
         }
 
     }

@@ -3,19 +3,22 @@ package counterfeiters.controllers;
 import counterfeiters.models.MoneyType;
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.views.PopUpLaunderMoneyView;
+import javafx.scene.control.Button;
 
 public class PopUpLaunderMoneyController {
     private ApplicationController app;
 
     public enum LaunderType {HEALER, SUPERMARKET}
     private LaunderType type;
+    private Button btn;
 
     public PopUpLaunderMoneyController(ApplicationController app) {
         this.app = app;
     }
 
-    public void launderMoney(LaunderType type) {
+    public void launderMoney(LaunderType type, Button btn) {
         this.type = type;
+        this.btn = btn;
 
         app.loadView(PopUpLaunderMoneyView.class, app.popUpLaunderMoneyController);
     }
@@ -28,6 +31,8 @@ public class PopUpLaunderMoneyController {
         if (type == LaunderType.HEALER){
             app.boardController.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
         }
+
+        app.boardController.henchmanPlaced(btn);
     }
 
     public boolean checkQualityQuantity(String quality, int amount) {

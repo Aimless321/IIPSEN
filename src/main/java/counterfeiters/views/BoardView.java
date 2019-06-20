@@ -102,13 +102,12 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET);
-
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.advancePolice();
 
-        placeHenchman(btn);
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET, btn);
+
+        boardcontroller.advancePolice();
     }
 
     @FXML
@@ -117,15 +116,13 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER);
-
         Button btn = (Button) mouseEvent.getSource();
+
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER, btn);
 
         if(btn.getStyleClass().contains("police")) {
             boardcontroller.advancePolice();
         }
-
-        placeHenchman(btn);
     }
 
     @FXML
@@ -159,14 +156,15 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().contains("ticket") && boardcontroller.checkCard(new PlaneTicket())) {
-            boardcontroller.openBahamas();
+        if(btn.getStyleClass().contains("ticket")) {
+            if(!boardcontroller.checkCard(new PlaneTicket())) {
+                return;
+            }
 
-        } else if(boardcontroller.checkActionField(btn.getId())) {
-            boardcontroller.openBahamas();
+            boardcontroller.openBahamas(btn);
+        } else if (boardcontroller.checkActionField(btn.getId())) {
+            boardcontroller.openBahamas(btn);
         }
-
-        placeHenchman(btn);
     }
 
     @FXML

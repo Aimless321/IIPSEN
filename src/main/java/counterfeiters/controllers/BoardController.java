@@ -162,8 +162,8 @@ public class BoardController {
         board.game.localPlayer.printMoney();
     }
 
-    public void openBahamas() {
-        app.popUpBahamasController.bahamas();
+    public void openBahamas(Button btn) {
+        app.popUpBahamasController.bahamas(btn);
     }
 
     public boolean makePurchase(String cardNumber ) {
