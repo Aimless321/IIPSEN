@@ -7,7 +7,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -44,21 +43,7 @@
                   </Text>
             </children>
         </VBox>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="150.0" layoutX="603.0" layoutY="900.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="715.0" />
-      <HBox layoutX="672.0" layoutY="934.0" prefHeight="100.0" prefWidth="564.0" spacing="50.0">
-         <children>
-                <Button mnemonicParsing="false" onMouseClicked="#pressBackMenu" prefHeight="44.0" prefWidth="300.0" styleClass="green-button" text="Back to Menu" textFill="WHITE">
-                    <font>
-                        <Font size="25.0" />
-                    </font>
-                </Button>
-                <Button mnemonicParsing="false" onMousePressed="#pressExitGame" prefHeight="44.0" prefWidth="300.0" styleClass="red-button" text="Exit Game" textFill="WHITE">
-                    <font>
-                        <Font size="25.0" />
-                    </font>
-                </Button>
-         </children>
-      </HBox>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="81.0" layoutX="808.0" layoutY="999.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="319.0" />
       <VBox fx:id="players" layoutX="456.0" layoutY="275.0" prefHeight="230.0" prefWidth="157.0">
          <children>
             <ImageView fx:id="secondPlayer" fitHeight="150.0" fitWidth="152.0" pickOnBounds="true" preserveRatio="true">
@@ -105,5 +90,10 @@
             <Image url="@/icons/mute-button.png" />
          </image>
       </ImageView>
+        <Button layoutX="818.0" layoutY="1009.0" mnemonicParsing="false" onMousePressed="#pressExitGame" prefHeight="44.0" prefWidth="300.0" styleClass="red-button" text="Exit Game" textFill="WHITE">
+              <font>
+                  <Font size="25.0" />
+              </font>
+          </Button>
     </children>
 </AnchorPane>
