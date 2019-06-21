@@ -399,9 +399,15 @@ public class BoardView implements Observer {
 
     /**
      * Adds glasses to the player's profile picture who starts a round.
+     * Resets the other images first, so we dont get doubles.
      * @param board the board model
      */
     public void setSunglasses(Board board) {
+        for (Player player : board.game.getPlayers()) {
+            ImageView profilePicture = (ImageView) pane.lookup("#profile-" + player.getCharacterName());
+            profilePicture.setImage(player.getCharacterImagePath());
+        }
+
         Player firstPlayer = board.firstPlayerPawn.getFirstPlayer();
         ImageView profilePicture = (ImageView) pane.lookup("#profile-" + firstPlayer.getCharacterName());
         profilePicture.setImage(firstPlayer.getCharacterGlassesImagePath());
