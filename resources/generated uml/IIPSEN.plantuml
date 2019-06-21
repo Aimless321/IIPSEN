@@ -1,0 +1,560 @@
+@startuml
+
+title __COUNTERFEITERS's Class Diagram__\n
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Account {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.AccountController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.ActionField {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace main {
+      class counterfeiters.main.App {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.ApplicationController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BahamasBank {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BlackMarket {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BlancCard {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Board {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.BoardController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.BoardView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Card {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Diner {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace events {
+      class counterfeiters.events.EventHandler {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace events {
+      interface counterfeiters.events.EventListener {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FakeMoney {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FirebaseModel {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace firebase {
+      class counterfeiters.firebase.FirebaseService {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FirstPlayerPawn {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Game {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.GameController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.GameListController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.GameListView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Henchman {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LobbyController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LobbyListController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LobbyListView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LobbyView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LoginController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LoginView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.MainMenuController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.MainMenuView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      enum MoneyType {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      interface counterfeiters.models.Observable {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      interface counterfeiters.views.Observer {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PlaneTicket {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Player {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PlayerCardController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PlayerCardView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PolicePawn {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PopUpBahamasController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PopUpBahamasView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PopUpLaunderMoneyController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PopUpLaunderMoneyView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Printer {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PrinterUpgrade {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.RealMoney {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.RegisterController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.RegisterView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Rules {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.RulesController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.RulesView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.ScoreboardController {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.ScoreboardView {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.ScratchCard {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace managers {
+      class counterfeiters.managers.SoundManager {
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.ViewUtilities {
+      }
+    }
+  }
+  
+
+  counterfeiters.models.Account .up.|> counterfeiters.models.Observable
+  counterfeiters.controllers.AccountController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.AccountController o-- counterfeiters.models.Account : account
+  counterfeiters.main.App -up-|> javafx.application.Application
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.MainMenuController : mainMenuController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LoginController : loginController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.RegisterController : registerController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LobbyController : lobbyController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LobbyListController : lobbyListController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.ScoreboardController : scoreboardController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.BoardController : boardController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.GameController : gameController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.RulesController : rulesController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.AccountController : accountController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.GameListController : gameListController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PopUpLaunderMoneyController : popUpLaunderMoneyController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PopUpBahamasController : popUpBahamasController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PlayerCardController : playerCardController
+  counterfeiters.models.BahamasBank .up.|> counterfeiters.models.Observable
+  counterfeiters.models.BlackMarket .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.BlancCard -up-|> counterfeiters.models.Card
+  counterfeiters.models.Board .up.|> counterfeiters.models.Observable
+  counterfeiters.models.Board .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.Board o-- counterfeiters.models.BlackMarket : blackmarket
+  counterfeiters.models.Board o-- counterfeiters.models.PolicePawn : policePawn
+  counterfeiters.models.Board o-- counterfeiters.models.FirstPlayerPawn : firstPlayerPawn
+  counterfeiters.models.Board o-- counterfeiters.models.Game : game
+  counterfeiters.controllers.BoardController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.BoardController o-- counterfeiters.models.Board : board
+  counterfeiters.views.BoardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.BoardView o-- counterfeiters.controllers.BoardController : boardcontroller
+  counterfeiters.models.Diner -up-|> counterfeiters.models.Card
+  counterfeiters.models.FakeMoney .up.|> counterfeiters.models.Observable
+  counterfeiters.models.FirebaseModel .up.|> counterfeiters.models.Observable
+  counterfeiters.models.FirebaseModel o-- counterfeiters.firebase.FirebaseService : fb
+  counterfeiters.models.FirstPlayerPawn .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.FirstPlayerPawn o-- counterfeiters.models.Player : firstPlayer
+  counterfeiters.models.FirstPlayerPawn o-- counterfeiters.models.Player : nextFirstPlayer
+  counterfeiters.models.Game .up.|> counterfeiters.models.Observable
+  counterfeiters.models.Game o-- counterfeiters.models.Player : firstPlayer
+  counterfeiters.models.Game o-- counterfeiters.models.Player : localPlayer
+  counterfeiters.controllers.GameController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.GameController o-- counterfeiters.models.Game : game
+  counterfeiters.controllers.GameListController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.GameListController o-- counterfeiters.models.FirebaseModel : firebaseModel
+  counterfeiters.views.GameListView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.GameListView o-- counterfeiters.controllers.GameListController : controller
+  counterfeiters.controllers.LobbyController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.models.FirebaseModel : firebaseModel
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.models.Game : chosenGame
+  counterfeiters.views.LobbyListView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LobbyListView o-- counterfeiters.controllers.LobbyListController : controller
+  counterfeiters.views.LobbyView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LobbyView o-- counterfeiters.controllers.LobbyController : controller
+  counterfeiters.controllers.LoginController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.LoginView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LoginView o-- counterfeiters.controllers.LoginController : controller
+  counterfeiters.controllers.MainMenuController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.MainMenuView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.MainMenuView o-- counterfeiters.controllers.MainMenuController : controller
+  counterfeiters.models.PlaneTicket -up-|> counterfeiters.models.Card
+  counterfeiters.models.Player o-- counterfeiters.models.FakeMoney : fakeMoney
+  counterfeiters.models.Player o-- counterfeiters.models.RealMoney : realMoney
+  counterfeiters.models.Player o-- counterfeiters.models.BahamasBank : bahamasBank
+  counterfeiters.controllers.PlayerCardController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.PlayerCardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PlayerCardView o-- counterfeiters.controllers.PlayerCardController : controller
+  counterfeiters.controllers.PopUpBahamasController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.PopUpBahamasView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PopUpBahamasView o-- counterfeiters.controllers.PopUpBahamasController : controller
+  counterfeiters.controllers.PopUpLaunderMoneyController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.PopUpLaunderMoneyController o-- counterfeiters.controllers.PopUpLaunderMoneyController.LaunderType : type
+  counterfeiters.views.PopUpLaunderMoneyView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PopUpLaunderMoneyView o-- counterfeiters.controllers.PopUpLaunderMoneyController : controller
+  counterfeiters.models.Printer -up-|> counterfeiters.models.Card
+  counterfeiters.models.PrinterUpgrade -up-|> counterfeiters.models.Card
+  counterfeiters.models.PrinterUpgrade o-- counterfeiters.models.PrinterUpgrade.UpgradeType : type
+  counterfeiters.models.RealMoney .up.|> counterfeiters.models.Observable
+  counterfeiters.controllers.RegisterController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.RegisterView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.RegisterView o-- counterfeiters.controllers.RegisterController : controller
+  counterfeiters.controllers.RulesController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.RulesController o-- counterfeiters.models.Rules : rules
+  counterfeiters.views.RulesView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.RulesView o-- counterfeiters.controllers.RulesController : controller
+  counterfeiters.controllers.ScoreboardController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.views.ScoreboardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.ScoreboardView o-- counterfeiters.controllers.ScoreboardController : controller
+  counterfeiters.models.ScratchCard -up-|> counterfeiters.models.Card
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

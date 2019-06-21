@@ -1,0 +1,474 @@
+@startuml
+
+title __MODELS's Class Diagram__\n
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Account {
+          - observers : ArrayList<Observer>
+          - textField : String
+          - username : String
+          + checkCredentials()
+          + checkCredentials()
+          + registerObserver()
+          + notifyAllObservers()
+          + verifyUser()
+          + addUser()
+          + getTextField()
+          + getUsername()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.ActionField {
+          - availablitiy : boolean
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BahamasBank {
+          - observers : ArrayList<Observer>
+          - totalBankMoney : int
+          + getTotalBankMoney()
+          + setTotalBankMoney()
+          + registerObserver()
+          + notifyAllObservers()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BlackMarket {
+          - marketList : ArrayList<Card>
+          + cardRow : ArrayList<Card>
+          + updateData()
+          + addToMarket()
+          + addToRow()
+          + shuffleMarket()
+          + refill()
+          + givePlayerCard()
+          + getCard()
+          + removeCard()
+          + makeCardPurchased()
+          + getMarketList()
+          + setMarketList()
+          + onRoundEnd()
+          + onRoundStart()
+          + onGameEnd()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.BlancCard {
+          + BlancCard()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Board {
+          - observers : ArrayList<Observer>
+          - henchmen : ArrayList<Henchman>
+          - hmap : HashMap<String, String>
+          + Board()
+          + registerObserver()
+          + notifyAllObservers()
+          + prepareBlackMarket()
+          + placeHenchman()
+          + checkMoney()
+          + giveMoneyOnEnd()
+          + checkYourTurn()
+          + getCurrentPlayer()
+          + updateFirebase()
+          + updateData()
+          + checkEndRound()
+          + transferMoneySupermarket()
+          + transferMoneyHealer()
+          + makePurchase()
+          + advancePolice()
+          + makeFirstPlayer()
+          + getHenchmen()
+          + setHenchmen()
+          + setGame()
+          + checkQualityQuantity()
+          + prepareFirstPlayer()
+          + setPlayersAndCards()
+          + getPlayersAndCards()
+          + onRoundStart()
+          + onRoundEnd()
+          + onGameEnd()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Card {
+          - name : String
+          - img : String
+          + Card()
+          + Card()
+          + getImage()
+          + getName()
+          + setName()
+          + getImg()
+          + setImg()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Diner {
+          + Diner()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FakeMoney {
+          - observers : ArrayList<Observer>
+          - qualityOne : int
+          - qualityTwo : int
+          - qualityThree : int
+          + setQualityOne()
+          + setQualityTwo()
+          + setQualityThree()
+          + getQualityOne()
+          + getQualityTwo()
+          + getQualityThree()
+          + getQuality()
+          + registerObserver()
+          + notifyAllObservers()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FirebaseModel {
+          - lobbies : ArrayList<DocumentSnapshot>
+          - observers : ArrayList<Observer>
+          - gameslist : ArrayList<Game>
+          - lobbyOrGame : String
+          + FirebaseModel()
+          + FirebaseModel()
+          + LoadGames()
+          + loadLobbies()
+          + updateLobbies()
+          + updateGames()
+          + registerObserver()
+          + unregisterObserver()
+          + notifyAllObservers()
+          + getLobbies()
+          + getGames()
+          + lobbyOrGame()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.FirstPlayerPawn {
+          + FirstPlayerPawn()
+          + updateData()
+          + onRoundEnd()
+          + setFirstPlayer()
+          + getFirstPlayer()
+          + getNextFirstPlayer()
+          + setNextFirstPlayer()
+          + onRoundStart()
+          + onGameEnd()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Game {
+          - gameId : String
+          - lobbyName : String
+          - numPlayers : int
+          - players : ArrayList<Player>
+          - round : int
+          - turn : int
+          - startTime : Date
+          - observers : ArrayList<Observer>
+          + Game()
+          + createNewGame()
+          + getScores()
+          + addPlayer()
+          + startGame()
+          + removePlayer()
+          - resetPlayerNumbers()
+          + updateFirebase()
+          + delete()
+          + checkHost()
+          + updateData()
+          + getPlayerFromUserName()
+          + registerObserver()
+          + notifyAllObservers()
+          + getCurrentPlayer()
+          + checkYourTurn()
+          + nextTurn()
+          + updateMoney()
+          + checkEndRound()
+          + getGameId()
+          + getNumPlayers()
+          + getPlayers()
+          + getRound()
+          + getStartTime()
+          + setGameId()
+          + setNumPlayers()
+          + setPlayers()
+          + setRound()
+          + setStartTime()
+          + getLobbyName()
+          + setLobbyName()
+          + getTurn()
+          + setTurn()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Henchman {
+          - owner : String
+          - btnId : String
+          + x : double
+          + y : double
+          + Henchman()
+          + Henchman()
+          + getOwner()
+          + getX()
+          + setX()
+          + getY()
+          + setY()
+          + setOwner()
+          + getBtnId()
+          + setBtnId()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      enum MoneyType {
+        FAKE_ONE
+        FAKE_TWO
+        FAKE_THREE
+        REAL
+        BAHAMAS
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      interface counterfeiters.models.Observable {
+          {abstract} + registerObserver()
+          {abstract} + notifyAllObservers()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PlaneTicket {
+          + PlaneTicket()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Player {
+          - userName : String
+          - playerId : int
+          - score : int
+          - cards : ArrayList<Card>
+          + Player()
+          + Player()
+          + leaveLobby()
+          + getUserName()
+          + getPlayerId()
+          + getScore()
+          + getCharacterName()
+          + getCharacterImagePath()
+          + getCharacterGlassesImagePath()
+          + printMoney()
+          - getPrintQuality()
+          + updateMoneyPlus()
+          + updateMoneyReduce()
+          + checkReduceBahamas()
+          + checkAddBahamas()
+          + addCard()
+          + setUserName()
+          + setPlayerId()
+          + setScore()
+          + getFakeMoney()
+          + getRealMoney()
+          + getBahamasBank()
+          + hasCard()
+          + getCards()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PolicePawn {
+          - pawnPosition : int
+          ~ xcoordinates : HashMap<Integer, Integer>
+          ~ ycoordinates : HashMap<Integer, Integer>
+          + PolicePawn()
+          + PolicePawn()
+          + updateData()
+          - fillXCoordinates()
+          - fillYCoordinates()
+          + qualityCheck()
+          + godfatherCheck()
+          + planeCheck()
+          + endCheck()
+          + getXCoordinate()
+          + getYCoordinate()
+          + advance()
+          + getPawnPosition()
+          + setPawnPosition()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Printer {
+          + Printer()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.PrinterUpgrade {
+          + PrinterUpgrade()
+          + PrinterUpgrade()
+          + getType()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      enum UpgradeType {
+        PAPER
+        PAINT
+        HOLOGRAM
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.RealMoney {
+          - observers : ArrayList<Observer>
+          - totalMoney : int
+          + setTotalMoney()
+          + getTotalMoney()
+          + registerObserver()
+          + notifyAllObservers()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.Rules {
+          ~ page : String
+          + Rules()
+          + switchPage()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace models {
+      class counterfeiters.models.ScratchCard {
+          + ScratchCard()
+      }
+    }
+  }
+  
+
+  counterfeiters.models.Account .up.|> counterfeiters.models.Observable
+  counterfeiters.models.BahamasBank .up.|> counterfeiters.models.Observable
+  counterfeiters.models.BlackMarket .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.BlancCard -up-|> counterfeiters.models.Card
+  counterfeiters.models.Board .up.|> counterfeiters.models.Observable
+  counterfeiters.models.Board .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.Board o-- counterfeiters.models.BlackMarket : blackmarket
+  counterfeiters.models.Board o-- counterfeiters.models.PolicePawn : policePawn
+  counterfeiters.models.Board o-- counterfeiters.models.FirstPlayerPawn : firstPlayerPawn
+  counterfeiters.models.Board o-- counterfeiters.models.Game : game
+  counterfeiters.models.Diner -up-|> counterfeiters.models.Card
+  counterfeiters.models.FakeMoney .up.|> counterfeiters.models.Observable
+  counterfeiters.models.FirebaseModel .up.|> counterfeiters.models.Observable
+  counterfeiters.models.FirebaseModel o-- counterfeiters.firebase.FirebaseService : fb
+  counterfeiters.models.FirstPlayerPawn .up.|> counterfeiters.events.EventListener
+  counterfeiters.models.FirstPlayerPawn o-- counterfeiters.models.Player : firstPlayer
+  counterfeiters.models.FirstPlayerPawn o-- counterfeiters.models.Player : nextFirstPlayer
+  counterfeiters.models.Game .up.|> counterfeiters.models.Observable
+  counterfeiters.models.Game o-- counterfeiters.models.Player : firstPlayer
+  counterfeiters.models.Game o-- counterfeiters.models.Player : localPlayer
+  counterfeiters.models.PlaneTicket -up-|> counterfeiters.models.Card
+  counterfeiters.models.Player o-- counterfeiters.models.FakeMoney : fakeMoney
+  counterfeiters.models.Player o-- counterfeiters.models.RealMoney : realMoney
+  counterfeiters.models.Player o-- counterfeiters.models.BahamasBank : bahamasBank
+  counterfeiters.models.Printer -up-|> counterfeiters.models.Card
+  counterfeiters.models.PrinterUpgrade -up-|> counterfeiters.models.Card
+  counterfeiters.models.PrinterUpgrade o-- counterfeiters.models.PrinterUpgrade.UpgradeType : type
+  counterfeiters.models.PrinterUpgrade +-down- counterfeiters.models.PrinterUpgrade.UpgradeType
+  counterfeiters.models.RealMoney .up.|> counterfeiters.models.Observable
+  counterfeiters.models.ScratchCard -up-|> counterfeiters.models.Card
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

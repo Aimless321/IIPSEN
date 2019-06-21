@@ -1,0 +1,405 @@
+@startuml
+
+title __VIEWS's Class Diagram__\n
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.BoardView {
+          + blackMarketView : HBox
+          + policePawn : ImageView
+          + pane : Pane
+          + muteButton : ImageView
+          + qualityOneMoney : Text
+          + qualityTwoMoney : Text
+          + qualityThreeMoney : Text
+          + totalRealMoney : Text
+          + totalBankMoney : Text
+          + crocplayer : Text
+          + deerplayer : Text
+          + herronplayer : Text
+          + hippoplayer : Text
+          + hippopane : Pane
+          - stage : Stage
+          + BoardView()
+          + BoardView()
+          + show()
+          + blackMarket()
+          + actionFieldLaunder()
+          + actionFieldHealer()
+          + actionFieldFraud()
+          + actionFieldFly()
+          + actionFieldPrint()
+          + pressRules()
+          + pressMute()
+          + pressCards()
+          + placeHenchman()
+          + setStage()
+          + setController()
+          + update()
+          + updateBlackMarket()
+          + updatePolicePawn()
+          + resetHenchman()
+          + addHenchman()
+          + playersAndCards()
+          + updateMoney()
+          + setCurrentPlayerShadow()
+          + setSunglasses()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.GameListView {
+          + pane : Pane
+          + scrollPane : ScrollPane
+          + vBox : VBox
+          + muteButton : ImageView
+          - stage : Stage
+          - games : List<Game>
+          - counter : int
+          - chosenGame : String
+          + GameListView()
+          + GameListView()
+          + show()
+          + pressRules()
+          + pressMute()
+          + pressBackButton()
+          + clickOnLobby()
+          + setStage()
+          + setController()
+          + update()
+          + noLobbies()
+          + addGameInView()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LobbyListView {
+          + pane : Pane
+          + scrollPane : ScrollPane
+          + vBox : VBox
+          + muteButton : ImageView
+          - stage : Stage
+          - games : ArrayList<Game>
+          - counter : int
+          - chosenGame : String
+          + LobbyListView()
+          + LobbyListView()
+          + show()
+          + pressRules()
+          + pressMute()
+          + pressBackButton()
+          + setStage()
+          + setController()
+          + update()
+          + noLobbies()
+          + addLobbyInView()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LobbyView {
+          + title : Text
+          + players : VBox
+          + startButton : Button
+          + muteButton : ImageView
+          - stage : Stage
+          + LobbyView()
+          + LobbyView()
+          + show()
+          + pressStart()
+          + pressLeave()
+          + pressRules()
+          + pressMute()
+          + start()
+          + update()
+          - insertPlayerBox()
+          + setStage()
+          + setController()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.LoginView {
+          + username : TextField
+          + password : PasswordField
+          + textField : Text
+          + muteButton : ImageView
+          + pane : Pane
+          - stage : Stage
+          - name : String
+          - psword : String
+          + LoginView()
+          + LoginView()
+          + show()
+          + pressKey()
+          + pressLogIn()
+          + pressRegister()
+          + pressMute()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.MainMenuView {
+          - stage : Stage
+          + muteButton : ImageView
+          + MainMenuView()
+          + MainMenuView()
+          + show()
+          + pressJoinLobby()
+          + pressCreateLobby()
+          + pressLoadGame()
+          + pressExitGame()
+          + pressMute()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      interface counterfeiters.views.Observer {
+          {abstract} + setStage()
+          {abstract} + setController()
+          {abstract} + update()
+          {abstract} + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PlayerCardView {
+          - stage : Stage
+          + playerCardView : FlowPane
+          + scrollPane : ScrollPane
+          + PlayerCardView()
+          + PlayerCardView()
+          + show()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PopUpBahamasView {
+          - stage : Stage
+          + anchorpane : AnchorPane
+          + txtValue : TextField
+          + textField : Text
+          + btnAdd : Button
+          + btnReduce : Button
+          + PopUpBahamasView()
+          + PopUpBahamasView()
+          + pressReduce()
+          + pressAdd()
+          + show()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.PopUpLaunderMoneyView {
+          + txtQualityOne : TextField
+          + txtQualityTwo : TextField
+          + txtQualityThree : TextField
+          + anchorpane : AnchorPane
+          + txtField : Text
+          + vboxOne : VBox
+          + buttonsQualityOne : HBox
+          + buttonsQualityTwo : HBox
+          + buttonsQualityThree : HBox
+          - qualityOne : int
+          - qualityTwo : int
+          - qualityThree : int
+          - currentAmount : int
+          - strQualityOne : String
+          - strQualityTwo : String
+          - strQualityThree : String
+          - stage : Stage
+          + PopUpLaunderMoneyView()
+          + PopUpLaunderMoneyView()
+          + getValues()
+          + counterPlus()
+          + counterMin()
+          + pressLaunder()
+          + plusQualityOne()
+          + minQualityOne()
+          + plusQualityTwo()
+          + minQualityTwo()
+          + plusQualityThree()
+          + minQualityThree()
+          + show()
+          + setStage()
+          + setController()
+          + update()
+          + qualityAvailability()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.RegisterView {
+          + username : TextField
+          + password : PasswordField
+          + passwordCheck : PasswordField
+          + textField : Text
+          + muteButton : ImageView
+          - name : String
+          - psword : String
+          - pswordCheck : String
+          - stage : Stage
+          + RegisterView()
+          + RegisterView()
+          + show()
+          + pressRegister()
+          + pressMute()
+          + setStage()
+          + setController()
+          + update()
+          + keyPressed()
+          + start()
+          + backToMenu()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.RulesView {
+          - stage : Stage
+          - pane : Pane
+          + RulesView()
+          + RulesView()
+          + show()
+          + pressClose()
+          + pressNext()
+          + pressPrevious()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.ScoreboardView {
+          + firstPlayer : ImageView
+          + secondPlayer : ImageView
+          + thirdPlayer : ImageView
+          + firstPlayerName : Text
+          + secondPlayerName : Text
+          + thirdPlayerName : Text
+          + firstPlayerCash : Text
+          + secondPlayerCash : Text
+          + thirdPlayerCash : Text
+          + muteButton : ImageView
+          - stage : Stage
+          - name : Text
+          + ScoreboardView()
+          + ScoreboardView()
+          + show()
+          + showScores()
+          + pressExitGame()
+          + pressRules()
+          + pressMute()
+          + setStage()
+          + setController()
+          + update()
+          + start()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace views {
+      class counterfeiters.views.ViewUtilities {
+          {static} + screenWidth : double
+          {static} + screenHeight : double
+          {static} + getBackground()
+          {static} + loadFxml()
+          {static} + showPopup()
+      }
+    }
+  }
+  
+
+  counterfeiters.views.BoardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.BoardView o-- counterfeiters.controllers.BoardController : boardcontroller
+  counterfeiters.views.GameListView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.GameListView o-- counterfeiters.controllers.GameListController : controller
+  counterfeiters.views.LobbyListView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LobbyListView o-- counterfeiters.controllers.LobbyListController : controller
+  counterfeiters.views.LobbyView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LobbyView o-- counterfeiters.controllers.LobbyController : controller
+  counterfeiters.views.LoginView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.LoginView o-- counterfeiters.controllers.LoginController : controller
+  counterfeiters.views.MainMenuView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.MainMenuView o-- counterfeiters.controllers.MainMenuController : controller
+  counterfeiters.views.PlayerCardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PlayerCardView o-- counterfeiters.controllers.PlayerCardController : controller
+  counterfeiters.views.PopUpBahamasView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PopUpBahamasView o-- counterfeiters.controllers.PopUpBahamasController : controller
+  counterfeiters.views.PopUpLaunderMoneyView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.PopUpLaunderMoneyView o-- counterfeiters.controllers.PopUpLaunderMoneyController : controller
+  counterfeiters.views.RegisterView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.RegisterView o-- counterfeiters.controllers.RegisterController : controller
+  counterfeiters.views.RulesView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.RulesView o-- counterfeiters.controllers.RulesController : controller
+  counterfeiters.views.ScoreboardView .up.|> counterfeiters.views.Observer
+  counterfeiters.views.ScoreboardView o-- counterfeiters.controllers.ScoreboardController : controller
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

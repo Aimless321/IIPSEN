@@ -1,0 +1,294 @@
+@startuml
+
+title __CONTROLLERS's Class Diagram__\n
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.AccountController {
+          + AccountController()
+          + checkCredentials()
+          + loginPressed()
+          + getUsername()
+          + registerObserver()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.ApplicationController {
+          - stage : Stage
+          + ApplicationController()
+          + loadView()
+          + quit()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.BoardController {
+          - listener : ListenerRegistration
+          - lobbyDeleted : boolean
+          + BoardController()
+          + createFromSaved()
+          + registerObserver()
+          + registerListeners()
+          - fillMarket()
+          + updateMoneyOnPosition()
+          + checkActionField()
+          + henchmanPlaced()
+          + getActionFieldButtonId()
+          + deleteBoard()
+          + prepareView()
+          + rulesPressed()
+          + advancePolice()
+          + printMoney()
+          + openBahamas()
+          + makePurchase()
+          + checkCard()
+          + makeFirstPlayer()
+          + transferMoneySupermarket()
+          + transferMoneyHealer()
+          + givePlayerCard()
+          + endGame()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.GameController {
+          + GameController()
+          + registerObserver()
+          + deleteGame()
+          + createGame()
+          - givePlayerCards()
+          + loadFromSavedGame()
+          + joinGame()
+          + joinLoadedGame()
+          + updateData()
+          + setStartRound()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.GameListController {
+          + GameListController()
+          + registerObserver()
+          + registerListeners()
+          + updateGamesModel()
+          + leaveButtonPressed()
+          + gameSelected()
+          + rulesButtonPressed()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LobbyController {
+          - listener : ListenerRegistration
+          + LobbyController()
+          + registerObserver()
+          + registerListeners()
+          + leaveButtonPressed()
+          + rulesButtonPressed()
+          + startButtonPressed()
+          - gameDeleted()
+          + startTheGame()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LobbyListController {
+          - listener : ListenerRegistration
+          + LobbyListController()
+          + registerObserver()
+          + registerListeners()
+          + updateLobbiesModel()
+          + leaveButtonPressed()
+          + clickLobby()
+          + clickFullLobby()
+          + rulesButtonPressed()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.LoginController {
+          + LoginController()
+          + loginButtonPressed()
+          + registerButtonPressed()
+          + registerObserver()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.MainMenuController {
+          + MainMenuController()
+          + createLobbyPressed()
+          + joinLobbyPressed()
+          + loadGamePressed()
+          + exitButtonPressed()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PlayerCardController {
+          - player : int
+          + PlayerCardController()
+          + registerObserver()
+          + makeCardView()
+          + setPlayerID()
+          + checkPlayer()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PopUpBahamasController {
+          - btn : Button
+          + PopUpBahamasController()
+          + bahamas()
+          + addAmountToBahamas()
+          + reduceAmountFromBahamas()
+          + placeHenchman()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.PopUpLaunderMoneyController {
+          - btn : Button
+          + PopUpLaunderMoneyController()
+          + launderMoney()
+          + transferMoney()
+          + checkQualityQuantity()
+          + getMaxAmount()
+          + qualityCheck()
+          + checkAmount()
+          + getLaunderType()
+          + policePosition()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      enum LaunderType {
+        HEALER
+        SUPERMARKET
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.RegisterController {
+          + RegisterController()
+          + registerButtonPressed()
+          + backToLoginButtonPressed()
+          + registerObserver()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.RulesController {
+          + RulesController()
+          + nextButtonPressed()
+          + closeButtonPressed()
+          + previousButtonPressed()
+      }
+    }
+  }
+  
+
+  namespace counterfeiters {
+    namespace controllers {
+      class counterfeiters.controllers.ScoreboardController {
+          + ScoreboardController()
+          + registerObserver()
+          + loadScores()
+          + getScores()
+          + exitButtonPressed()
+          + rulesButtonPressed()
+      }
+    }
+  }
+  
+
+  counterfeiters.controllers.AccountController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.AccountController o-- counterfeiters.models.Account : account
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.MainMenuController : mainMenuController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LoginController : loginController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.RegisterController : registerController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LobbyController : lobbyController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.LobbyListController : lobbyListController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.ScoreboardController : scoreboardController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.BoardController : boardController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.GameController : gameController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.RulesController : rulesController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.AccountController : accountController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.GameListController : gameListController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PopUpLaunderMoneyController : popUpLaunderMoneyController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PopUpBahamasController : popUpBahamasController
+  counterfeiters.controllers.ApplicationController o-- counterfeiters.controllers.PlayerCardController : playerCardController
+  counterfeiters.controllers.BoardController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.BoardController o-- counterfeiters.models.Board : board
+  counterfeiters.controllers.GameController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.GameController o-- counterfeiters.models.Game : game
+  counterfeiters.controllers.GameListController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.GameListController o-- counterfeiters.models.FirebaseModel : firebaseModel
+  counterfeiters.controllers.LobbyController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.models.FirebaseModel : firebaseModel
+  counterfeiters.controllers.LobbyListController o-- counterfeiters.models.Game : chosenGame
+  counterfeiters.controllers.LoginController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.MainMenuController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.PlayerCardController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.PopUpBahamasController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.PopUpLaunderMoneyController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.PopUpLaunderMoneyController o-- counterfeiters.controllers.PopUpLaunderMoneyController.LaunderType : type
+  counterfeiters.controllers.PopUpLaunderMoneyController +-down- counterfeiters.controllers.PopUpLaunderMoneyController.LaunderType
+  counterfeiters.controllers.RegisterController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.RulesController o-- counterfeiters.controllers.ApplicationController : app
+  counterfeiters.controllers.RulesController o-- counterfeiters.models.Rules : rules
+  counterfeiters.controllers.ScoreboardController o-- counterfeiters.controllers.ApplicationController : app
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
