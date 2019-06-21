@@ -34,6 +34,9 @@ public class MainMenuView implements Observer {
         show();
     }
 
+    /**
+     * Loads the view from fxml and shows it to the stage.
+     */
     public void show() {
         Parent root = ViewUtilities.loadFxml("/views/main-menu.fxml", stage, controller);
 

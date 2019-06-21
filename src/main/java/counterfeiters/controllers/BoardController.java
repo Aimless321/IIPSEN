@@ -26,6 +26,11 @@ public class BoardController {
         board.blackmarket.shuffleMarket();
     }
 
+    /**
+     * Loads the saved game from firebase, and overwrites the current board.
+     * @param gameid gameid to load
+     * @return Board that was saved in firebase.
+     */
     public Board createFromSaved(String gameid) {
         FirebaseService fb = FirebaseService.getInstance();
         DocumentSnapshot documentSnapshot = fb.get("games", gameid);
@@ -40,6 +45,9 @@ public class BoardController {
         board.registerObserver(observer);
     }
 
+    /**
+     * Register the firebase listener on the current game that is being played.
+     */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -110,6 +118,13 @@ public class BoardController {
         return board.checkMoney(MoneyType.REAL, money);
     }
 
+    /**
+     * Places a henchman on a button, and disabled that button.
+     * Increments the turn, calculates the middle position of the button.
+     * Checks if this was the last henchman.
+     * And finally updates the firebase.
+     * @param btn the button that was pressed to trigger this
+     */
     public void henchmanPlaced(Button btn) {
         //Go to the next turn
         board.game.nextTurn();
@@ -133,6 +148,12 @@ public class BoardController {
         board.notifyAllObservers();
     }
 
+    /**
+     * Get the actionfield id from a button.
+     * Used to disable the buttons that already have a henchman on them.
+     * @param btn button to retreive the id from
+     * @return class string of the actionfield
+     */
     public String getActionFieldButtonId(Button btn) {
         //Only get the classes that start with 'actionfield-'
         FilteredList<String> classList = btn.getStyleClass().filtered(
@@ -141,6 +162,9 @@ public class BoardController {
         return classList.get(0);
     }
 
+    /**
+     * Overwrites the current board with a completly new one.
+     */
     public void deleteBoard() {
         board = new Board();
     }

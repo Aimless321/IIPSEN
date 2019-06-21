@@ -24,11 +24,17 @@ public class GameController {
         game.registerObserver(observer);
     }
 
+    /**
+     * Create a new game model, so all of the old data is gone.
+     */
     public void deleteGame() {
         game = new Game();
     }
 
-
+    /**
+     * Creates a new game with one player in it.
+     * @param player the host of the new game
+     */
     public void createGame(Player player) {
         //Add cards to host
         givePlayerCards(player);
@@ -41,11 +47,20 @@ public class GameController {
         app.boardController.board.game = game;
     }
 
+    /**
+     * Gives the standard cards to the player.
+     * All players receive one printer and a random printerupgrade at the start.
+     * @param player
+     */
     private void givePlayerCards(Player player) {
         player.addCard(app.boardController.givePlayerCard(new Printer()));
         player.addCard(app.boardController.givePlayerCard(new PrinterUpgrade()));
     }
 
+    /**
+     * Load a saved game, and open a lobby for it.
+     * @param game the game that has to be loaded.
+     */
     public void loadFromSavedGame(Game game) {
         this.game = game;
 
@@ -62,6 +77,11 @@ public class GameController {
         app.lobbyController.registerListeners();
     }
 
+    /**
+     * Join a game (lobby), and update the firebase.
+     * Lets the localplayer join a lobby, and pushes the changes to firebase.
+     * @param gameid
+     */
     public void joinGame(String gameid) {
         FirebaseService fb = FirebaseService.getInstance();
         Game game = fb.get("lobbies", gameid).toObject(Game.class);
@@ -79,6 +99,12 @@ public class GameController {
         app.lobbyController.registerListeners();
     }
 
+    /**
+     * Called when a loaded game is joined.
+     * The difference with joining a normal game, is that the player does not need cards
+     * and has a fixed playerid from lastgame.
+     * @param gameid
+     */
     public void joinLoadedGame(String gameid) {
         FirebaseService fb = FirebaseService.getInstance();
         Board board = fb.get("games", gameid).toObject(Board.class);
@@ -91,14 +117,18 @@ public class GameController {
         app.lobbyController.registerListeners();
     }
 
+    /**
+     * Update all of the data that is stored in firebase in the model.
+     * @param updateGame
+     */
     public void updateData(Game updateGame) {
         game.updateData(updateGame);
     }
 
+    /**
+     * Called when the start button is pressed on the lobbyview.
+     */
     public void setStartRound() {
         game.startGame();
-    }
-    public void startGame(){
-        app.loadView(BoardView.class, app.boardController);
     }
 }

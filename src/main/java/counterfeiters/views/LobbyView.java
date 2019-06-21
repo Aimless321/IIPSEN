@@ -51,6 +51,9 @@ public class LobbyView implements Observer {
         show();
     }
 
+    /**
+     * Loads the view from fxml and shows it to the stage.
+     */
     public void show() {
         Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage, controller);
 
@@ -103,8 +106,9 @@ public class LobbyView implements Observer {
     }
 
     /**
-     * Updates and checks if the player is the host, if so adds the start button
-     * @param observable is the game from the lobby
+     * Updates and checks if the player is the host, if so adds the start button.
+     * Shows all the players in the lobby on the screen.
+     * @param observable is the game model which contains the data of the lobby
      */
     @Override
     public void update(Observable observable) {
@@ -139,7 +143,11 @@ public class LobbyView implements Observer {
         //startButton.setDisable(false);
     }
 
-    public void insertPlayerBox(Player player) {
+    /**
+     * Loads a player box into the view
+     * @param player the player to show in the view
+     */
+    private void insertPlayerBox(Player player) {
         Text number = new Text(player.getPlayerId() + ".");
         number.setFont(new Font(30));
         number.setFill(Color.WHITE);
