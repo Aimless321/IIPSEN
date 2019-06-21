@@ -94,11 +94,6 @@ public class ScoreboardView implements Observer {
     }
 
     @FXML
-    public void pressBackMenu() {
-        controller.menuButtonPressed();
-    }
-
-    @FXML
     public void pressExitGame() { controller.exitButtonPressed(); }
 
     @FXML
