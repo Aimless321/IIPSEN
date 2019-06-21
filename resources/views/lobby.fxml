@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LobbyView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" styleClass="root-pane" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.LobbyView">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" AnchorPane.bottomAnchor="980.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#663a11d9" height="600.0" layoutX="1085.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="500.0" AnchorPane.bottomAnchor="980.0" AnchorPane.leftAnchor="1085.0" AnchorPane.rightAnchor="900.0" AnchorPane.topAnchor="249.0" />
@@ -47,7 +47,7 @@
             <Font size="50.0" />
          </font>
       </Text>
-      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="637.0" spacing="15" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="889.0" AnchorPane.topAnchor="240.0">
+      <VBox fx:id="players" layoutX="394.0" layoutY="240.0" prefHeight="600.0" prefWidth="637.0" spacing="15" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="889.0" AnchorPane.topAnchor="240.0">
       </VBox>
    </children>
 </AnchorPane>
