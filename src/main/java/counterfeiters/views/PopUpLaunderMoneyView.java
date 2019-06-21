@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -169,7 +168,7 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/popUp_Launder.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/popup_launder.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");

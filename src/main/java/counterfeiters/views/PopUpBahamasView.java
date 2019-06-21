@@ -93,7 +93,7 @@ public class PopUpBahamasView implements Observer{
 
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/popUp_bahamas.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/popup_bahamas.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");

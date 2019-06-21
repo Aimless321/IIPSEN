@@ -42,12 +42,12 @@ public class ScoreboardController {
     }
 
     public void menuButtonPressed() {
-        app.gameController.deleteGame();
-        app.boardController.deleteBoard();
-
         //Delete game from fb
         FirebaseService fb = FirebaseService.getInstance();
         fb.delete("games", app.boardController.board.game.getGameId());
+
+        app.gameController.deleteGame();
+        app.boardController.deleteBoard();
 
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
