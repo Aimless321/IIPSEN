@@ -239,6 +239,7 @@ public class BoardView implements Observer {
         updateMoney(board);
 
         setCurrentPlayerShadow(board);
+        setSunglasses(board);
     }
 
     public void updateBlackMarket(Board board) {
@@ -277,6 +278,9 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * Removes all of the henchmen from the board and enbaled all of the buttons again.
+     */
     public void resetHenchman() {
         Set<Node> nodes = pane.lookupAll(".henchman");
 
@@ -308,6 +312,10 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * Adds all of the henchmen that have been placed to the board, and disables the buttons.
+     * @param board
+     */
     public void addHenchman(Board board) {
         for (Henchman henchman : board.getHenchmen()) {
             VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
@@ -368,6 +376,10 @@ public class BoardView implements Observer {
         this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
     }
 
+    /**
+     * Adds a shadow to the players who's turn it is.
+     * @param board the board model
+     */
     public void setCurrentPlayerShadow(Board board) {
         String[] profilePictures = {"#profile-croc", "#profile-deer", "#profile-herron", "#profile-hippo"};
         for(int i = 0; i < profilePictures.length; i++) {
@@ -383,6 +395,22 @@ public class BoardView implements Observer {
         Player currentPlayer = board.getCurrentPlayer();
         ImageView profilePicture = (ImageView) pane.lookup("#profile-" + currentPlayer.getCharacterName());
         profilePicture.setEffect(shadow);
+    }
+
+    /**
+     * Adds glasses to the player's profile picture who starts a round.
+     * Resets the other images first, so we dont get doubles.
+     * @param board the board model
+     */
+    public void setSunglasses(Board board) {
+        for (Player player : board.game.getPlayers()) {
+            ImageView profilePicture = (ImageView) pane.lookup("#profile-" + player.getCharacterName());
+            profilePicture.setImage(player.getCharacterImagePath());
+        }
+
+        Player firstPlayer = board.firstPlayerPawn.getFirstPlayer();
+        ImageView profilePicture = (ImageView) pane.lookup("#profile-" + firstPlayer.getCharacterName());
+        profilePicture.setImage(firstPlayer.getCharacterGlassesImagePath());
     }
 
     @Override

@@ -102,6 +102,11 @@ public class Board implements Observable, EventListener {
         fb.setClass("games", game.getGameId(), this);
     }
 
+    /**
+     * Updates all the data for every model that is connected to this class.
+     * Called when firebase has an update.
+     * @param updateBoard the board that has the updated data.
+     */
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
 
@@ -114,6 +119,10 @@ public class Board implements Observable, EventListener {
         notifyAllObservers();
     }
 
+    /**
+     * Checks if the round has to be ended.
+     * If so resets the turn back to 0, and increments the round.
+     */
     public void checkEndRound() {
         if(!game.checkEndRound() ) {
             return;
@@ -224,6 +233,9 @@ public class Board implements Observable, EventListener {
             return true;
     }
 
+    /**
+     * Sets the host as firstplayer if not done yet.
+     */
     public void prepareFirstPlayer() {
         if(firstPlayerPawn.getFirstPlayer() != null) {
             return;

@@ -21,10 +21,17 @@ import java.util.concurrent.ExecutionException;
  * @author Wesley Bijleveld, Melissa Basgol
  */
 public class FirebaseService {
-    public static FirebaseService instance = null;
+    /**
+     * Singleton pattern instance of this class
+     */
+    private static FirebaseService instance = null;
 
     private Firestore db;
 
+    /**
+     * Opens the firestore connection.
+     * Only gets called by the getInstance once, so we don't have multiple connections open at once.
+     */
     private FirebaseService() {
         InputStream serviceAccount =
                 getClass().getResourceAsStream("/firebase-creds.json");
@@ -154,12 +161,23 @@ public class FirebaseService {
         return executeQuery(collectionData);
     }
 
+    /**
+     * Get all the documents from a collection and order by the startTime of the game.
+     * @param collection name of the collection
+     * @return List of all the documents sorted by the startTime
+     */
     public List<QueryDocumentSnapshot> getAllDocumentsAndOrder(String collection) {
         ApiFuture<QuerySnapshot> collectionData = db.collection(collection).orderBy("game.startTime", Query.Direction.DESCENDING).get();
 
         return executeQuery(collectionData);
     }
 
+    /**
+     * Helper function for the getAllDocumentsFromCollection and getAllDocumentsAndOrder methods.
+     * Executes a QuerySnapshot ApiFuture and correctly handles the errors.
+     * @param collectionData the query it has to execute
+     * @return List of QueryDocumentSnapshots that match the query.
+     */
     private List<QueryDocumentSnapshot> executeQuery(ApiFuture<QuerySnapshot> collectionData) {
         try {
             if(collectionData != null) {

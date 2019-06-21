@@ -31,11 +31,14 @@ public class Player{
         this.realMoney = new RealMoney();
         this.bahamasBank = new BahamasBank();
 
-        //TODO: Remove for real version
-        bahamasBank.setTotalBankMoney(250);
-        realMoney.setTotalMoney(100);
+        //Standard money
+        realMoney.setTotalMoney(40);
     }
 
+    /**
+     * Leave the lobby this player is currently in.
+     * @param game current game model
+     */
     public void leaveLobby(Game game) {
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -60,6 +63,10 @@ public class Player{
         return score;
     }
 
+    /**
+     * Gets the character name from the playerId.
+     * @return the character name of this player
+     */
     @Exclude
     public String getCharacterName() {
         String charaterName;
@@ -86,9 +93,23 @@ public class Player{
         return charaterName;
     }
 
+    /**
+     * Gets the profile picture of the character.
+     * @return Image of the profile picture
+     */
     @Exclude
     public Image getCharacterImagePath() {
         String imagePath = "/players/" + getCharacterName() + ".jpg";
+        return new Image(getClass().getResourceAsStream(imagePath));
+    }
+
+    /**
+     * Gets the profile picture with glasses of the character.
+     * @return Image of the profile picture with glasses
+     */
+    @Exclude
+    public Image getCharacterGlassesImagePath() {
+        String imagePath = "/players/" + getCharacterName() + "-glasses.jpg";
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 

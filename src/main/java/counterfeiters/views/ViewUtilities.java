@@ -71,6 +71,13 @@ public class ViewUtilities {
         return null;
     }
 
+    /**
+     * Creates an Alert popup with a certain type, title and header.
+     * @param type AlertType type of the alert
+     * @param title of the alert
+     * @param header header text of the alert
+     * @return Alert which can be shown
+     */
     public static Alert showPopup(Alert.AlertType type, String title, String header) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
