@@ -184,6 +184,7 @@ public class Game implements Observable {
         this.round = updateGame.getRound();
         this.turn = updateGame.getTurn();
         this.numPlayers = updateGame.numPlayers;
+        this.startTime = startTime;
 
         notifyAllObservers();
     }
