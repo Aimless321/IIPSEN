@@ -125,7 +125,6 @@ public class LobbyListView implements Observer {
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
             if (updatedGames.size() == 0 || updatedGames.isEmpty()) {
-                System.out.println("er zijn geen lobbies");
                 noLobbies();
 
                 return;

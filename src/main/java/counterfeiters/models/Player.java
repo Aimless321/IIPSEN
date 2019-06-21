@@ -1,8 +1,6 @@
 package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
-import com.google.type.Money;
-import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import javafx.scene.image.Image;
 

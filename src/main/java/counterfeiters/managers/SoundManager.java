@@ -2,8 +2,6 @@ package counterfeiters.managers;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 public class SoundManager {
     public static boolean muteSound = false;

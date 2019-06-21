@@ -4,7 +4,6 @@ import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.Board;
 import counterfeiters.models.Game;
 import counterfeiters.models.Player;
-import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
 import counterfeiters.views.RulesView;
 

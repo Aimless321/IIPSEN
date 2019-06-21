@@ -6,7 +6,6 @@ import com.google.cloud.firestore.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
-import com.google.firestore.v1beta1.StructuredQuery;
 
 import java.io.IOException;
 import java.io.InputStream;

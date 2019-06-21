@@ -5,9 +5,9 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
 import counterfeiters.views.ScoreboardView;
 import javafx.collections.transformation.FilteredList;
-import counterfeiters.views.RulesView;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 

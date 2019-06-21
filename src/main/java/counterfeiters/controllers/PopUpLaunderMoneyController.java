@@ -1,7 +1,7 @@
 package counterfeiters.controllers;
 
-import counterfeiters.models.MoneyType;
 import com.google.cloud.firestore.annotation.Exclude;
+import counterfeiters.models.MoneyType;
 import counterfeiters.views.PopUpLaunderMoneyView;
 import javafx.scene.control.Button;
 

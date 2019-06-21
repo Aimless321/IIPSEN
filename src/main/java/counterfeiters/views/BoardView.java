@@ -2,8 +2,8 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
 import counterfeiters.controllers.PopUpLaunderMoneyController;
-import counterfeiters.managers.SoundManager;
 import counterfeiters.events.EventHandler;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -250,7 +249,6 @@ public class BoardView implements Observer {
         }
 
         for (int j = blackMarketView.getChildren().size()-1; j >= cardRow.size(); j--) {
-            System.out.println("Removing card " + j);
             blackMarketView.getChildren().remove(j);
         }
 
@@ -344,7 +342,6 @@ public class BoardView implements Observer {
         //FOR LOOP
         HashMap<String, String> map = boardcontroller.board.getPlayersAndCards();
         for (Map.Entry playerValues : map.entrySet()) {
-            System.out.println("Key: " + playerValues.getKey() + " & Value: " + playerValues.getValue());
             switch (playerValues.getKey().toString()) {
                 case "1":
                     crocplayer.setText(playerValues.getValue().toString());

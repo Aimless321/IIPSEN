@@ -2,7 +2,6 @@ package counterfeiters.controllers;
 
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
-import counterfeiters.views.BoardView;
 import counterfeiters.views.Observer;
 
 /**
