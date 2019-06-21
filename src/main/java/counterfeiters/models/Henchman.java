@@ -1,7 +1,13 @@
 package counterfeiters.models;
 
+/**
+ * Model that stores all of the data that is needed to show a henchman on the screen.
+ */
 public class Henchman {
     private String owner;
+    /**
+     * Btn where the henchman is placed on
+     */
     private String btnId;
     public double x;
     public double y;
