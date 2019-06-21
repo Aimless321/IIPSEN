@@ -64,8 +64,6 @@ public class LobbyController {
         listener.remove();
 
         Game game = app.gameController.game;
-
-        String localUsername = app.accountController.getUsername();
         
         Player player = game.localPlayer;
         player.leaveLobby(game);
@@ -81,7 +79,7 @@ public class LobbyController {
     }
 
     public void startButtonPressed() {
-        app.gameController.setStartRound(1);
+        app.gameController.setStartRound();
     }
 
     /**

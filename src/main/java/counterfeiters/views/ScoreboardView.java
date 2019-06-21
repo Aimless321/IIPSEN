@@ -1,12 +1,14 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.ScoreboardController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -32,6 +34,9 @@ public class ScoreboardView implements Observer {
     public Text secondPlayerCash;
     public Text thirdPlayerCash;
 
+    public ImageView muteButton;
+
+
 
     private Stage stage;
     private ScoreboardController controller;
@@ -55,6 +60,12 @@ public class ScoreboardView implements Observer {
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
         pane.setBackground(ViewUtilities.getBackground("/background/scoreboard.png"));
+
+        pane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.M) {
+                SoundManager.toggleMute();
+            }
+        });
 
         //Show it on the screen
         stage.getScene().setRoot(pane);
@@ -83,16 +94,23 @@ public class ScoreboardView implements Observer {
     }
 
     @FXML
-    public void pressBackMenu() {
-        controller.menuButtonPressed();
-    }
-
-    @FXML
     public void pressExitGame() { controller.exitButtonPressed(); }
 
     @FXML
     public void pressRules() {
         controller.rulesButtonPressed();
+    }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(1);
+        }
+        else {
+            muteButton.setOpacity(0.5);
+        }
     }
 
     @Override

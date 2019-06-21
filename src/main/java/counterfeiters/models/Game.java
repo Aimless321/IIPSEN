@@ -8,7 +8,10 @@ import javafx.application.Platform;
 
 import java.util.*;
 
-
+/**
+ * The game model stores all of the game data, like turn, round, player etc.
+ * Used for the lobbyview and is also connected to the board.
+ */
 public class Game implements Observable {
     private String gameId;
     private String lobbyName;
@@ -16,16 +19,25 @@ public class Game implements Observable {
     private ArrayList<Player> players = new ArrayList<>();
     private int round = 0;
     private int turn = 0;
-    private Player firstPlayer;
+    private Player firstPlayer = null;
+    /**
+     * The player that is playing on this client.
+     */
     @Exclude
     public Player localPlayer;
     private Date startTime;
     private ArrayList<Observer> observers = new ArrayList<>();
 
+    //Empty constructor for firebase
     public Game() {
 
     }
 
+    /**
+     * Create a new game with the player as host.
+     * Sets the lobby name correctly, and pushes it to the firebase so other can join it.
+     * @param player player that is the host.
+     */
     public void createNewGame(Player player) {
 
         //Get the firebase service
@@ -62,7 +74,7 @@ public class Game implements Observable {
 
         for (int i = 0; i < players.size(); i++) {
             String name = players.get(i).getUserName();
-            int score = (players.get(i).getScore());
+            int score = players.get(i).getRealMoney().getTotalMoney() + players.get(i).getBahamasBank().getTotalBankMoney();
             scores.put(name, score);
         }
 
@@ -82,6 +94,10 @@ public class Game implements Observable {
         return sortedScores;
     }
 
+    /**
+     * Adds a player to the game and updates the firebase.
+     * @param player
+     */
     public void addPlayer(Player player) {
         numPlayers++;
         players.add(player);
@@ -91,12 +107,22 @@ public class Game implements Observable {
         updateFirebase();
     }
 
-    public void roundChanged(int numRound) {
-        setRound(numRound);
+    /**
+     * Start the game, pass a startTime and set the round to 1.
+     */
+    public void startGame() {
+        //Set the starttime
+        this.startTime = new Date();
+
+        //Set round to 1, so the game starts for everyone
+        this.round = 1;
         updateFirebase();
     }
 
-
+    /**
+     * Remove a player from the game.
+     * @param player the player to remove.
+     */
     public void removePlayer(Player player) {
         players.remove(player);
 
@@ -107,7 +133,11 @@ public class Game implements Observable {
         updateFirebase();
     }
 
-    public void resetPlayerNumbers() {
+    /**
+     * Called when a player leaves, moves all of the players to the lowest playerid possible.
+     * Without this if for example the 2nd player leaves, and someone else joins you would get two player 3's.
+     */
+    private void resetPlayerNumbers() {
         //Start from the first player
         for(int i = 1; i < players.size(); i++) {
             Player player = players.get(i);
@@ -154,6 +184,7 @@ public class Game implements Observable {
         this.round = updateGame.getRound();
         this.turn = updateGame.getTurn();
         this.numPlayers = updateGame.numPlayers;
+        this.startTime = updateGame.startTime;
 
         notifyAllObservers();
     }
@@ -161,7 +192,7 @@ public class Game implements Observable {
     /**
      * Get a player from a username.
      * @param username username of the player.
-     * @return Player
+     * @return Player or null if the players has not been found
      */
     @Exclude
     public Player getPlayerFromUserName(String username) {
@@ -183,8 +214,18 @@ public class Game implements Observable {
         }
     }
 
+    /**
+     * Gets the player who's turn it is.
+     * @param firstPlayerPawn the firstplayerpawn where the player that starts the round is stored.
+     * @return player who's turn it is.
+     */
     @Exclude
     public Player getCurrentPlayer(FirstPlayerPawn firstPlayerPawn) {
+        //Store the current first player, so it only updates at round end
+        if(firstPlayer == null) {
+            this.firstPlayer = firstPlayerPawn.getFirstPlayer();
+        }
+
         if(turn == 0) {
             this.firstPlayer = firstPlayerPawn.getFirstPlayer();
             return firstPlayerPawn.getFirstPlayer();
@@ -197,6 +238,11 @@ public class Game implements Observable {
         return current;
     }
 
+    /**
+     * Checks if it is the localplayer's turn
+     * @param firstPlayerPawn the firstplayerpawn where the player that starts the round is stored.
+     * @return true/false
+     */
     public boolean checkYourTurn(FirstPlayerPawn firstPlayerPawn) {
         return localPlayer.getPlayerId() == getCurrentPlayer(firstPlayerPawn).getPlayerId();
     }
@@ -206,18 +252,14 @@ public class Game implements Observable {
     }
 
     /**
-     * Based on the indicated character, the correct method will be called for updating the money.
+     * The correct method will be called for updating the money.
+     * The moneyType will always be real money.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 09-06-2019
      * */
-    public void updateMoney(int qId, String character, int amount){
-        if (character.equals("+")){
-            localPlayer.updateMoneyPlus(qId, amount);
-        }
-        if (character.equals("-")){
-            localPlayer.updateMoneyReduce(qId, amount);
-        }
+    public void updateMoney(int amount){
+        localPlayer.updateMoneyPlus(MoneyType.REAL, amount);
     }
 
     /**

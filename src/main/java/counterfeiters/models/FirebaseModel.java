@@ -26,7 +26,7 @@ public class FirebaseModel implements Observable {
     }
 
     public FirebaseModel(ArrayList<DocumentSnapshot> lobbies,ArrayList<Observer> observers) {
-            this.lobbies = lobbies;
+        this.lobbies = lobbies;
 
     }
 
@@ -48,12 +48,6 @@ public class FirebaseModel implements Observable {
         this.gameslist.clear();
         this.lobbies.clear();
 
-
-
-        // retrieve all documents in lobbies
-        if(fb.getAllDocumentsFromCollection("lobbies")==null) {
-
-        }
         this.lobbies.addAll(fb.getAllDocumentsFromCollection("lobbies"));
 
 
@@ -64,7 +58,7 @@ public class FirebaseModel implements Observable {
         notifyAllObservers();
     }
 
-    public void updateGames() {
+    public void updateGames(String username) {
         FirebaseService fb = FirebaseService.getInstance();
         lobbyOrGame = "game";
         this.gameslist.clear();
@@ -72,13 +66,19 @@ public class FirebaseModel implements Observable {
 
 
         // retrieve all documents in lobbies
-        this.lobbies.addAll(fb.getAllDocumentsFromCollection("games"));
+        this.lobbies.addAll(fb.getAllDocumentsAndOrder("games"));
 
 
         for (DocumentSnapshot doc: lobbies) {
             Game game = doc.toObject(Board.class).game;
-            this.gameslist.add(game);
+
+            //Only add the game if the player is the host
+            Player host = game.getPlayers().get(0);
+            if(host.getUserName().equals(username)) {
+                this.gameslist.add(game);
+            }
         }
+
         notifyAllObservers();
     }
 
@@ -110,6 +110,5 @@ public class FirebaseModel implements Observable {
     public String lobbyOrGame() {
         return lobbyOrGame;
     }
-
 
 }

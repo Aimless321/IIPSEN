@@ -1,6 +1,7 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyListController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
@@ -9,21 +10,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 /**
  * View for the lobbylist screen
@@ -39,6 +36,8 @@ public class LobbyListView implements Observer {
     public ScrollPane scrollPane;
     @FXML
     public VBox vBox;
+    public ImageView muteButton;
+
 
     private Stage stage;
     private LobbyListController controller;
@@ -67,6 +66,12 @@ public class LobbyListView implements Observer {
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
 
+        pane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.M) {
+                SoundManager.toggleMute();
+            }
+        });
+
         //Show it on the screen
         stage.getScene().setRoot(pane);
     }
@@ -74,7 +79,20 @@ public class LobbyListView implements Observer {
 
     @FXML
     public void pressRules() {
+        controller.rulesButtonPressed();
 
+    }
+
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(1);
+        }
+        else {
+            muteButton.setOpacity(0.5);
+        }
     }
 
     @FXML
@@ -82,10 +100,6 @@ public class LobbyListView implements Observer {
         controller.leaveButtonPressed();
     }
 
-    @FXML
-    public void clickOnLobby() {
-        //lobbyList.getItem()
-    }
 
     @Override
     public void setStage(Stage stage) {
@@ -105,20 +119,22 @@ public class LobbyListView implements Observer {
             games.clear();
 
 
-
             //Add new games for lobbylist
 
 
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-            if (updatedGames.size() != 0 && !updatedGames.isEmpty()) {
-                for (Game game : updatedGames) {
+            if (updatedGames.size() == 0 || updatedGames.isEmpty()) {
+                noLobbies();
+
+                return;
+            }
+
+            for (Game game : updatedGames) {
+                if (game.getRound() != 1) {
                     Platform.runLater(() ->
                             addLobbyInView(game));
                 }
-            } else {
-                System.out.println("er zijn geen lobbies");
-                noLobbies();
             }
         }
     }
@@ -137,7 +153,7 @@ public class LobbyListView implements Observer {
 
         HBox horBox = new HBox(region1, noLobby,  region2);
         horBox.getStyleClass().add("hbox");
-        horBox.setStyle("-fx-background-color: transparent");
+        horBox.setStyle("-fx-background-color: black");
         horBox.setAlignment(Pos.CENTER);
 
         vBox.getChildren().add(horBox);
@@ -177,15 +193,14 @@ public class LobbyListView implements Observer {
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    if(mouseEvent.getClickCount() == 2){
-                        if(game.getNumPlayers() <4){
-                            controller.clickLobby(game.getGameId());
-                        }
-                        else {
+                if(!mouseEvent.getButton().equals(MouseButton.PRIMARY) || mouseEvent.getClickCount() != 2) {
+                    return;
+                }
 
-                        }
-                    }
+                if(game.getNumPlayers() < game.getPlayers().size()) {
+                    controller.clickFullLobby(game);
+                } else {
+                    controller.clickLobby(game.getGameId());
                 }
             }
         });

@@ -2,6 +2,7 @@ package counterfeiters.models;
 
 import com.google.cloud.firestore.annotation.Exclude;
 import counterfeiters.events.EventHandler;
+import counterfeiters.events.EventListener;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.views.Observer;
 import javafx.application.Platform;
@@ -9,7 +10,7 @@ import javafx.application.Platform;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Board implements Observable{
+public class Board implements Observable, EventListener {
     private ArrayList<Observer> observers = new ArrayList<>();
     public BlackMarket blackmarket = new BlackMarket();
     public PolicePawn policePawn = new PolicePawn(4);
@@ -27,6 +28,7 @@ public class Board implements Observable{
         observers.add(observer);
 
         EventHandler.getInstance().registerListener(blackmarket);
+        EventHandler.getInstance().registerListener(this);
     }
 
     @Override
@@ -37,58 +39,55 @@ public class Board implements Observable{
     }
 
     public void prepareBlackMarket() {
+        if(blackmarket.cardRow.size() > 0) {
+            return;
+        }
+        
         blackmarket.refill();
         notifyAllObservers();
 
         updateFirebase();
     }
 
-    public void placeHenchman(double posX, double posY, String player) {
-        henchmen.add(new Henchman(posX, posY, player));
+    public void placeHenchman(double posX, double posY, String player, String buttonId) {
+        henchmen.add(new Henchman(posX, posY, player, buttonId));
     }
 
 
     /**
-     * This method checks whether the user has enough money, If this is the case, the money wil de deducted from his account.
+     * This method check wheter the totalMoney is more than the give amount.
+     * if its true the method 'updateMoneyReduce' will be called.
      *
      * @author Ali Rezaa Ghariebiyan
-     * @version 11-06-2019
+     * @version 20-06-2019
      * */
-    public boolean checkMoney(int id, int bedrag){
-        if (game.localPlayer.realMoney.getTotalMoney() >= bedrag){
-            game.localPlayer.updateMoneyReduce(id, bedrag);
+    public boolean checkMoney(MoneyType type, int amount){
+        if (game.localPlayer.realMoney.getTotalMoney() >= amount){
+            game.localPlayer.updateMoneyReduce(type, amount);
             return true;
         }
-            return false;
+
+        return false;
     }
 
 
-    public int[] printMoney()
-    {
-
-        int[] print = new int[2];
-        int printerCounter = 0;
-        int upgradeCounter = 0;
-
-        ArrayList<Card> cards = game.localPlayer.getCards();
-
-        for (Card card : cards) {
-            if(card.getName().equals("printer")) {
-                printerCounter = printerCounter + 2;
+    /**
+     * Checks if the user has a 'diner' at the end of the round. If true the user will get 50 real money.
+     *
+     * @author Ali Rezaa Ghariebiyan, Robin van den Berg
+     * @version 20-06-2019
+     * */
+    public void giveMoneyOnEnd(String cardName){
+        //Give money for each for each card
+        for (Player player : game.getPlayers()) {
+            for (Card card : player.getCards()) {
+                if (card.getName().equals(cardName)) {
+                    player.updateMoneyPlus(MoneyType.REAL, 50);
+                }
             }
-            if(card.getName().equals("upgrade")) {
-                upgradeCounter++;
-            }
-
         }
-
-        print[0] = upgradeCounter;
-        print[1] = printerCounter;
-
-        return print;
-
     }
-
+  
     public boolean checkYourTurn() {
         return game.checkYourTurn(firstPlayerPawn);
     }
@@ -103,6 +102,11 @@ public class Board implements Observable{
         fb.setClass("games", game.getGameId(), this);
     }
 
+    /**
+     * Updates all the data for every model that is connected to this class.
+     * Called when firebase has an update.
+     * @param updateBoard the board that has the updated data.
+     */
     public void updateData(Board updateBoard) {
         this.henchmen = updateBoard.getHenchmen();
 
@@ -115,8 +119,12 @@ public class Board implements Observable{
         notifyAllObservers();
     }
 
+    /**
+     * Checks if the round has to be ended.
+     * If so resets the turn back to 0, and increments the round.
+     */
     public void checkEndRound() {
-        if(!game.checkEndRound()) {
+        if(!game.checkEndRound() ) {
             return;
         }
 
@@ -130,17 +138,29 @@ public class Board implements Observable{
         EventHandler.getInstance().endRound();
     }
 
-    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    /**
+     * Calculates the given bills and gives it to the player.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
+    public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int result = (qualityOne + qualityTwo + qualityThree) * 50;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 
-    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    /**
+     * Calculates the given bills and gives it to the player.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
+    public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         int resultQualityOne = qualityOne * 20;
         int resultQualityTwo = qualityTwo * 30;
         int resultQualityThree = qualityThree * 40;
@@ -148,36 +168,41 @@ public class Board implements Observable{
         int result = resultQualityOne + resultQualityTwo + resultQualityThree;
 
         game.localPlayer.updateMoneyPlus(qualityId, result);
-        game.localPlayer.updateMoneyReduce(1, qualityOne);
-        game.localPlayer.updateMoneyReduce(2, qualityTwo);
-        game.localPlayer.updateMoneyReduce(3, qualityThree);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_ONE, qualityOne);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_TWO, qualityTwo);
+        game.localPlayer.updateMoneyReduce(MoneyType.FAKE_THREE, qualityThree);
         notifyAllObservers();
     }
 
-    public void makePurchase(int cardNumber) {
-        Card card = blackmarket.cardRow.get(cardNumber);
-        System.out.println("gotten Card: " + card);
-        game.localPlayer.addCard(card);
-        System.out.println("added card to player");
-        blackmarket.makeCardPurchased(cardNumber);
-        System.out.println("card removed");
-    }
+    public boolean makePurchase(int cardNumber) {
+        Card card;
 
-//    public void soundWrong(){
-//        String musicFile = "/sounds/wrong.mp3";
-//
-//        Media sound = new Media(new File(musicFile).toURI().toString());
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.play();
-//    }
+
+        try {
+            card = blackmarket.cardRow.get(cardNumber);
+        }catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
+        game.localPlayer.addCard(card);
+        blackmarket.makeCardPurchased(cardNumber);
+
+        return true;
+    }
 
     public void advancePolice() {
         policePawn.advance();
+        //Checking if the policepawn is on "Godfather", if so the player loses half of his realmoney
+        if (policePawn.godfatherCheck()) {
+            for(Player player : game.getPlayers()) {
+                player.updateMoneyReduce(MoneyType.REAL,player.getRealMoney().getTotalMoney()/2);
+            }
+        }
         notifyAllObservers();
     }
 
     public void makeFirstPlayer(){
-        firstPlayerPawn.setFirstPlayer(game.localPlayer);
+        firstPlayerPawn.setNextFirstPlayer(game.localPlayer);
     }
 
     public ArrayList<Henchman> getHenchmen() {
@@ -192,8 +217,15 @@ public class Board implements Observable{
         this.game = game;
     }
 
-    public boolean checkQualityQuantity(int amount, String quality) {
 
+    /**
+     * This method checks whether the quality provided is equal to the number of bills the player has.
+     * If this is true it will return false.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 20-06-2019
+     * */
+    public boolean checkQualityQuantity(int amount, String quality) {
         if (game.localPlayer.getFakeMoney().getQuality(quality) == amount){
             return false;
         }
@@ -201,10 +233,18 @@ public class Board implements Observable{
             return true;
     }
 
+    /**
+     * Sets the host as firstplayer if not done yet.
+     */
     public void prepareFirstPlayer() {
+        if(firstPlayerPawn.getFirstPlayer() != null) {
+            return;
+        }
+
         Player host = game.getPlayers().get(0);
         firstPlayerPawn.setFirstPlayer(host);
     }
+
 
     @Exclude
     public void setPlayersAndCards() {
@@ -217,5 +257,22 @@ public class Board implements Observable{
     @Exclude
     public HashMap<String,String> getPlayersAndCards() {
         return hmap;
+    }
+
+    @Override
+    public void onRoundStart() {
+
+    }
+
+    @Override
+    public void onRoundEnd() {
+        giveMoneyOnEnd("diner");
+    }
+
+
+    @Override
+    public void onGameEnd() {
+        giveMoneyOnEnd("scratchcard");
+
     }
 }

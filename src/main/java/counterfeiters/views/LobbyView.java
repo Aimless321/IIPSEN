@@ -1,16 +1,17 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.LobbyController;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.Game;
 import counterfeiters.models.Observable;
 import counterfeiters.models.Player;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -32,6 +33,8 @@ public class LobbyView implements Observer {
 
     @FXML
     public Button startButton;
+    public ImageView muteButton;
+
 
     private Stage stage;
     private LobbyController controller;
@@ -48,12 +51,21 @@ public class LobbyView implements Observer {
         show();
     }
 
+    /**
+     * Loads the view from fxml and shows it to the stage.
+     */
     public void show() {
         Parent root = ViewUtilities.loadFxml("/views/lobby.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/standard.png"));
+
+        pane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.M) {
+                SoundManager.toggleMute();
+            }
+        });
 
         //Show it on the screen
         stage.getScene().setRoot(pane);
@@ -74,6 +86,19 @@ public class LobbyView implements Observer {
         controller.rulesButtonPressed();
     }
 
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
+
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(1);
+        }
+        else {
+            muteButton.setOpacity(0.5);
+        }
+    }
+
+
     @Override
     public void start() {
         startButton.setVisible(false);
@@ -81,8 +106,9 @@ public class LobbyView implements Observer {
     }
 
     /**
-     * Updates and checks if the player is the host, if so adds the start button
-     * @param observable is the game from the lobby
+     * Updates and checks if the player is the host, if so adds the start button.
+     * Shows all the players in the lobby on the screen.
+     * @param observable is the game model which contains the data of the lobby
      */
     @Override
     public void update(Observable observable) {
@@ -99,9 +125,7 @@ public class LobbyView implements Observer {
             insertPlayerBox(player);
         }
 
-        //TODO: Check if this player is the host and if there are 3 or more players
         if(game.checkHost()) {
-
             if (playerList.size()>=3){
                 startButton.setText("Start");
                 //startButton.setText("Start");
@@ -119,7 +143,11 @@ public class LobbyView implements Observer {
         //startButton.setDisable(false);
     }
 
-    public void insertPlayerBox(Player player) {
+    /**
+     * Loads a player box into the view
+     * @param player the player to show in the view
+     */
+    private void insertPlayerBox(Player player) {
         Text number = new Text(player.getPlayerId() + ".");
         number.setFont(new Font(30));
         number.setFill(Color.WHITE);

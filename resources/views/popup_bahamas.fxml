@@ -3,11 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-
 <AnchorPane fx:id="anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.PopUpBahamasView">
    <children>
       <HBox layoutY="50.0" prefHeight="100.0" prefWidth="400.0">
@@ -17,25 +14,25 @@
                   <Insets left="100.0" />
                </HBox.margin>
                <children>
-                  <TextField prefWidth="200.0" />
+                  <TextField fx:id="txtValue" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" styleClass="red-button" text="Reduce">
+                        <Button fx:id="btnReduce" mnemonicParsing="false" onMouseClicked="#pressReduce" prefHeight="20.0" prefWidth="80.0" styleClass="red-button" text="Withdraw">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="20.0" prefWidth="80.0" styleClass="green-button" text="Add ">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onMouseClicked="#pressAdd" prefHeight="20.0" prefWidth="80.0" styleClass="green-button" text="Deposit">
                            <HBox.margin>
                               <Insets left="40.0" top="20.0" />
                            </HBox.margin>
                         </Button>
                      </children>
                   </HBox>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="199.13671875" />
                </children>
             </VBox>
          </children>
       </HBox>
+      <Text fx:id="textField" layoutX="8.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="383.13671875" />
    </children>
 </AnchorPane>

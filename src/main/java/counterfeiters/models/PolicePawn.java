@@ -12,7 +12,8 @@ public class PolicePawn{
     HashMap<Integer, Integer> ycoordinates= new HashMap<Integer, Integer>();
 
     public PolicePawn() {
-
+        fillXCoordinates();
+        fillYCoordinates();
     }
 
     public PolicePawn(int players) {
@@ -40,6 +41,42 @@ public class PolicePawn{
         for (int i = 0; i < 19; i++) {
             ycoordinates.put(i + 1, values[i]);
         }
+    }
+
+    public int qualityCheck() {
+        if (pawnPosition >= 11 && pawnPosition < 13) {
+            return 1;
+        }
+        else if (pawnPosition >= 13 && pawnPosition <17) {
+            return 2;
+        }
+        else if (pawnPosition>=17) {
+            return 3;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public boolean godfatherCheck() {
+        if (pawnPosition == 10 || pawnPosition == 16) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean planeCheck() {
+        if (pawnPosition == 15) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean endCheck(){
+        if (pawnPosition == 19){
+            return true;
+        }
+        return false;
     }
 
     @Exclude

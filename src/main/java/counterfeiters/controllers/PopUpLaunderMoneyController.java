@@ -1,35 +1,56 @@
 package counterfeiters.controllers;
 
-import counterfeiters.views.Observer;
+import com.google.cloud.firestore.annotation.Exclude;
+import counterfeiters.models.MoneyType;
 import counterfeiters.views.PopUpLaunderMoneyView;
+import javafx.scene.control.Button;
+
+/**
+ * This controller only loads the correct views and provides further link to the BoardController(class) and model.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 05-06-2019
+ * */
 
 public class PopUpLaunderMoneyController {
     private ApplicationController app;
 
     public enum LaunderType {HEALER, SUPERMARKET}
     private LaunderType type;
+    private Button btn;
 
     public PopUpLaunderMoneyController(ApplicationController app) {
         this.app = app;
     }
 
-    public void launderMoney(LaunderType type) {
+    public void launderMoney(LaunderType type, Button btn) {
         this.type = type;
+        this.btn = btn;
 
         app.loadView(PopUpLaunderMoneyView.class, app.popUpLaunderMoneyController);
     }
 
-    public void transferMoney(int qualityId, int qualityOne, int qualityTwo, int qualityThree){
+    /**
+     * Checks which launderType it is.
+     *
+     * @author Ali Rezaa
+     * @version 20-06-2019
+     * */
+    public void transferMoney(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree){
         if (type == LaunderType.SUPERMARKET){
             app.boardController.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
+            app.boardController.advancePolice();
         }
 
         if (type == LaunderType.HEALER){
             app.boardController.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
-        }
-    }
 
-    public void registerObserver(Observer observer) {app.accountController.registerObserver(observer);
+            if(btn.getStyleClass().contains("police")) {
+                app.boardController.advancePolice();
+            }
+        }
+
+        app.boardController.henchmanPlaced(btn);
     }
 
     public boolean checkQualityQuantity(String quality, int amount) {
@@ -40,6 +61,12 @@ public class PopUpLaunderMoneyController {
             return false;
     }
 
+    /**
+     * Checks wich Laundertype it is.
+     *
+     * @author Ali Rezaa, Wesley Bijleveld
+     * @version 20-06-2019
+     * */
     public int getMaxAmount() {
         if(type == LaunderType.SUPERMARKET) {
             return 3;
@@ -49,8 +76,21 @@ public class PopUpLaunderMoneyController {
 
         return 0;
     }
+    public int qualityCheck() {
+
+        return app.boardController.board.policePawn.qualityCheck();
+    }
 
     public boolean checkAmount(int curAmount) {
         return curAmount <= getMaxAmount();
+    }
+
+    @Exclude
+    public LaunderType getLaunderType() {
+        return type;
+    }
+
+    public int policePosition() {
+        return app.boardController.board.policePawn.getPawnPosition();
     }
 }

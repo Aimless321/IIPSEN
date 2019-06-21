@@ -1,15 +1,18 @@
 package counterfeiters.controllers;
 
-import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.EventListener;
+import com.google.cloud.firestore.FirestoreException;
+import com.google.cloud.firestore.ListenerRegistration;
+import com.google.cloud.firestore.QuerySnapshot;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.FirebaseModel;
 import counterfeiters.models.Game;
 import counterfeiters.views.LobbyView;
 import counterfeiters.views.MainMenuView;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 /**
  * This controller loads the linked views and directs the chosen game(when lobby clicked) to the gamecontroller adn the lobbycontroller
@@ -55,7 +58,6 @@ public class LobbyListController {
                 if(querySnapshot != null) {
                     //To the model for update
                     updateLobbiesModel();
-                    System.out.println("Something happened");
                 }
             }
         });
@@ -78,18 +80,21 @@ public class LobbyListController {
         FirebaseService fb = FirebaseService.getInstance();
         Game game = fb.get("lobbies", chosenGame).toObject(Game.class);
 
-            app.gameController.joinGame(chosenGame);
-            app.loadView(LobbyView.class, app.lobbyController);
+        app.gameController.joinGame(chosenGame);
+        app.loadView(LobbyView.class, app.lobbyController);
+    }
 
+    public void clickFullLobby(Game game) {
+        if(game.getPlayerFromUserName(app.accountController.getUsername()) == null) {
+            return;
+        }
+
+        app.gameController.joinLoadedGame(game.getGameId());
+        app.loadView(LobbyView.class, app.lobbyController);
     }
 
     public void rulesButtonPressed() {
-        //TODO: Go to the rules view
+        app.loadView(RulesView.class, app.rulesController);
     }
 
 }
-
-
-
-
-

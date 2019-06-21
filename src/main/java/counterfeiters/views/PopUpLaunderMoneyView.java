@@ -1,18 +1,29 @@
 package counterfeiters.views;
 
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.models.MoneyType;
 import counterfeiters.models.Observable;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+/**
+ * The PopUpLaunderMoneyView will be created by giving the primarystage and PopUpLaunderMoneyController as arguments.
+ *
+ * With this view it will be possible to Launder money from the boardview.
+ *
+ * @author Ali Rezaa Ghariebiyan
+ * @version 20-06-2019
+ * */
 
 public class PopUpLaunderMoneyView implements Observer{
 
@@ -22,6 +33,10 @@ public class PopUpLaunderMoneyView implements Observer{
     public TextField txtQualityThree;
     public AnchorPane anchorpane;
     public Text txtField;
+    public VBox vboxOne;
+    public HBox buttonsQualityOne;
+    public HBox buttonsQualityTwo;
+    public HBox buttonsQualityThree;
 
     // Values from textfield.
     private int qualityOne;
@@ -33,7 +48,6 @@ public class PopUpLaunderMoneyView implements Observer{
     private String strQualityOne = "qualityOne";
     private String strQualityTwo = "qualityTwo";
     private String strQualityThree = "qualityThree";
-    private int realMoney = 4;
 
     private Stage stage;
     private PopUpLaunderMoneyController controller;
@@ -105,10 +119,16 @@ public class PopUpLaunderMoneyView implements Observer{
         }
     }
 
+    /**
+     * If the total number of tickets is no more than may be exchanged. The money will be converted and added to the 'real money'.
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 17-06-2019
+     * */
     @FXML
-    public void pressLaunder(MouseEvent mouseEvent) {
+    public void pressLaunder() {
         if (controller.checkAmount(getValues())){
-            controller.transferMoney(realMoney, qualityOne, qualityTwo, qualityThree);
+            controller.transferMoney(MoneyType.REAL, qualityOne, qualityTwo, qualityThree);
 
             Stage stage = (Stage) anchorpane.getScene().getWindow();
             stage.close();
@@ -118,37 +138,37 @@ public class PopUpLaunderMoneyView implements Observer{
     }
 
     @FXML
-    public void plusQualityOne(MouseEvent mouseEvent) {
+    public void plusQualityOne() {
         counterPlus(strQualityOne, txtQualityOne);
     }
 
     @FXML
-    public void minQualityOne(MouseEvent mouseEvent) {
+    public void minQualityOne() {
         counterMin(txtQualityOne);
     }
 
     @FXML
-    public void plusQualityTwo(MouseEvent mouseEvent) {
+    public void plusQualityTwo() {
         counterPlus(strQualityTwo, txtQualityTwo);
     }
 
     @FXML
-    public void minQualityTwo(MouseEvent mouseEvent) {
+    public void minQualityTwo() {
         counterMin(txtQualityTwo);
     }
 
     @FXML
-    public void plusQualityThree(MouseEvent mouseEvent) {
+    public void plusQualityThree() {
         counterPlus(strQualityThree, txtQualityThree);
     }
 
     @FXML
-    public void minQualityThree(MouseEvent mouseEvent) {
+    public void minQualityThree() {
         counterMin(txtQualityThree);
     }
 
     public void show() {
-        Parent root = ViewUtilities.loadFxml("/views/popUp_Launder.fxml", stage, controller);
+        Parent root = ViewUtilities.loadFxml("/views/popup_launder.fxml", stage, controller);
 
         //Find root pane and set background
         Pane pane = (Pane)root.lookup("AnchorPane");
@@ -173,14 +193,54 @@ public class PopUpLaunderMoneyView implements Observer{
     public void setController(Object controller) {
         PopUpLaunderMoneyController popUpLaunderMoneyController = (PopUpLaunderMoneyController) controller;
         this.controller = popUpLaunderMoneyController;
-        popUpLaunderMoneyController.registerObserver(this);
     }
 
     @Override
     public void update(Observable observable) {
     }
 
+   @FXML
+   public void qualityAvailability(int i) {
+       if (controller.getLaunderType() == PopUpLaunderMoneyController.LaunderType.SUPERMARKET) {
+           switch (i) {
+               case 0:
+               txtQualityOne.setDisable(false);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+               break;
+               case 1:
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(false);
+               txtQualityThree.setDisable(false);
+               buttonsQualityOne.setDisable(true);
+               break;
+               case 2:
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(false);
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
+               break;
+               case 3:
+               txtQualityOne.setDisable(true);
+               txtQualityTwo.setDisable(true);
+               txtQualityThree.setDisable(true);
+               buttonsQualityOne.setDisable(true);
+               buttonsQualityTwo.setDisable(true);
+               buttonsQualityThree.setDisable(true);
+
+                   break;
+           }}
+           else {
+           txtQualityOne.setDisable(false);
+           txtQualityTwo.setDisable(false);
+           txtQualityThree.setDisable(false);
+       }
+   }
+
+
     @Override
     public void start() {
+        qualityAvailability(controller.qualityCheck());
     }
 }

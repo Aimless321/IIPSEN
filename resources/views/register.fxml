@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" stylesheets="/style.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="counterfeiters.views.RegisterView">
@@ -39,6 +41,14 @@
                </VBox.margin>
             </Text>
          </children>
-      </VBox>
+      </VBox>      
+      <ImageView fx:id="muteButton" fitHeight="40.0" fitWidth="40.0" layoutX="941.0" layoutY="712.0" onMouseClicked="#pressMute" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D />
+         </viewport>
+         <image>
+            <Image url="@/icons/mute-button.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

@@ -5,10 +5,12 @@ import com.google.cloud.firestore.ListenerRegistration;
 import counterfeiters.firebase.FirebaseService;
 import counterfeiters.models.*;
 import counterfeiters.views.Observer;
+import counterfeiters.views.RulesView;
+import counterfeiters.views.ScoreboardView;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Button;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BoardController {
@@ -20,10 +22,15 @@ public class BoardController {
     public BoardController(ApplicationController applicationController) {
         this.app = applicationController;
 
-        fillMarket(3);
+        fillMarket(4);
         board.blackmarket.shuffleMarket();
     }
 
+    /**
+     * Loads the saved game from firebase, and overwrites the current board.
+     * @param gameid gameid to load
+     * @return Board that was saved in firebase.
+     */
     public Board createFromSaved(String gameid) {
         FirebaseService fb = FirebaseService.getInstance();
         DocumentSnapshot documentSnapshot = fb.get("games", gameid);
@@ -38,6 +45,9 @@ public class BoardController {
         board.registerObserver(observer);
     }
 
+    /**
+     * Register the firebase listener on the current game that is being played.
+     */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
 
@@ -50,8 +60,6 @@ public class BoardController {
                     }
 
                     if (documentSnapshot != null && documentSnapshot.exists()) {
-                        System.out.println("Updating board");
-
                         Board updateBoard = documentSnapshot.toObject(Board.class);
                         board.updateData(updateBoard);
                     }
@@ -67,14 +75,13 @@ public class BoardController {
     private void fillMarket(int spelers) {
         HashMap<Card, Integer> map = new HashMap();
 
-        map.put(new Printer(), 9);
+        map.put(new Printer(), 6);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.HOLOGRAM), 3);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.PAPER), 4);
         map.put(new PrinterUpgrade(PrinterUpgrade.UpgradeType.PAINT), 4);
         map.put(new Diner(), 4);
         map.put(new PlaneTicket(), 3);
         map.put(new ScratchCard(), 3);
-        map.put(new Lawyer("good"), 1);
 
         if (spelers == 4) {
             for (Card n : map.keySet()) {
@@ -90,36 +97,38 @@ public class BoardController {
     }
 
     /**
-     * By giving an Id, right character and amount. You can add or reduce money and the money will be updated in the indicated part.
-     * Calling the correct type of money is based on the given id.
-     * Adding or reducing money depends on de given character.
+     * By giving an amount. You can add or reduce money and the money will be updated in the indicated part.
      *
      * @author Ali Rezaa Ghariebiyan
-     * @version 09-06-2019
+     * @version 20-06-2019
      * */
-    public void updateMoneyOnPosition(int qId, String character, int amount){
-        Player player = app.gameController.game.localPlayer;
-        app.gameController.updateMoney(qId, character, amount);
+    public void updateMoneyOnPosition(int amount){
+        app.gameController.game.updateMoney(amount);
     }
 
     /**
-     * By giving the right moneyQuality and quantity, the method for the check can be called up.
+     * By giving the right amount, the method for the check can be called up.
      *
      * @author Ali Rezaa Ghariebiyan
      * @version 11-06-2019
      * */
-    public boolean checkActionField(int moneyId, String id){
-        int money = Integer.parseInt(id);
+    public boolean checkActionField(String amount){
+        int money = Integer.parseInt(amount);
 
-        if (board.checkMoney(moneyId, money)) {
-            //TODO: Fout
-            app.gameController.game.notifyAllObservers();
-            return true;
-        }
-        return false;
+        return board.checkMoney(MoneyType.REAL, money);
     }
 
+    /**
+     * Places a henchman on a button, and disabled that button.
+     * Increments the turn, calculates the middle position of the button.
+     * Checks if this was the last henchman.
+     * And finally updates the firebase.
+     * @param btn the button that was pressed to trigger this
+     */
     public void henchmanPlaced(Button btn) {
+        //Go to the next turn
+        board.game.nextTurn();
+
         if(!lobbyDeleted) {
             app.gameController.game.delete();
         }
@@ -131,7 +140,7 @@ public class BoardController {
         double posY = bounds.getMinY() + btn.getHeight() / 5;
 
         Player player = app.gameController.game.localPlayer;
-        board.placeHenchman(posX, posY, player.getCharacterName());
+        board.placeHenchman(posX, posY, player.getCharacterName(), getActionFieldButtonId(btn));
 
         board.checkEndRound();
 
@@ -139,11 +148,38 @@ public class BoardController {
         board.notifyAllObservers();
     }
 
+    /**
+     * Get the actionfield id from a button.
+     * Used to disable the buttons that already have a henchman on them.
+     * @param btn button to retreive the id from
+     * @return class string of the actionfield
+     */
+    public String getActionFieldButtonId(Button btn) {
+        //Only get the classes that start with 'actionfield-'
+        FilteredList<String> classList = btn.getStyleClass().filtered(
+                styleClass -> (styleClass.matches("actionfield-.*")));
+
+        return classList.get(0);
+    }
+
+    /**
+     * Overwrites the current board with a completly new one.
+     */
+    public void deleteBoard() {
+        board = new Board();
+    }
+
     public void prepareView() {
         board.prepareFirstPlayer();
         board.prepareBlackMarket();
         board.setPlayersAndCards();
-        //app.gameController.game.notifyAllObservers(); //Voert alle updates uit in de game.
+    }
+
+    public void rulesPressed()
+    {
+
+        app.loadView(RulesView.class, app.rulesController);
+
     }
 
     public void advancePolice() {
@@ -151,13 +187,15 @@ public class BoardController {
     }
 
     public void printMoney() {
-
-        int[] print = board.printMoney();
-        board.game.localPlayer.updateMoneyPlus(print[0], print[1]);
+        board.game.localPlayer.printMoney();
     }
 
-    public void makePurchase(String cardNumber ) {
-        board.makePurchase(Integer.parseInt(cardNumber));
+    public void openBahamas(Button btn) {
+        app.popUpBahamasController.bahamas(btn);
+    }
+
+    public boolean makePurchase(String cardNumber ) {
+        return board.makePurchase(Integer.parseInt(cardNumber));
     }
 
     public boolean checkCard(Card card) {
@@ -168,15 +206,19 @@ public class BoardController {
         board.makeFirstPlayer();
     }
 
-    public void transferMoneySupermarket(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneySupermarket(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         board.transferMoneySupermarket(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
-    public void transferMoneyHealer(int qualityId, int qualityOne, int qualityTwo, int qualityThree) {
+    public void transferMoneyHealer(MoneyType qualityId, int qualityOne, int qualityTwo, int qualityThree) {
         board.transferMoneyHealer(qualityId, qualityOne, qualityTwo, qualityThree);
     }
 
     public Card givePlayerCard(Card card) {
         return board.blackmarket.givePlayerCard(card);
+    }
+
+    public void endGame(){
+        app.loadView(ScoreboardView.class, app.scoreboardController);
     }
 }

@@ -2,17 +2,18 @@ package counterfeiters.views;
 
 import counterfeiters.controllers.BoardController;
 import counterfeiters.controllers.PopUpLaunderMoneyController;
+import counterfeiters.events.EventHandler;
+import counterfeiters.managers.SoundManager;
 import counterfeiters.models.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -31,6 +32,7 @@ public class BoardView implements Observer {
     public HBox blackMarketView;
     public ImageView policePawn;
     public Pane pane;
+    public ImageView muteButton;
     public Text qualityOneMoney;
     public Text qualityTwoMoney;
     public Text qualityThreeMoney;
@@ -41,14 +43,6 @@ public class BoardView implements Observer {
     public Text herronplayer;
     public Text hippoplayer;
     public Pane hippopane;
-
-    private String plus = "+";
-    private String min = "-";
-    private int qualityOne = 1;
-    private int qualityTwo = 2;
-    private int qualityThree = 3;
-    private int realMoney = 4;
-    private int bahamasBank = 5;
 
     private Stage stage;
     private BoardController boardcontroller;
@@ -71,6 +65,15 @@ public class BoardView implements Observer {
         Pane pane = (Pane)root.lookup("Pane");
         pane.setBackground(ViewUtilities.getBackground("/background/game.png"));
 
+        pane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.M) {
+                SoundManager.toggleMute();
+            } else if (event.getCode() == KeyCode.F11) {
+                stage.setFullScreen(!stage.isFullScreen());
+            }
+        });
+
+
         //Show it on the screen
         stage.getScene().setRoot(pane);
     }
@@ -84,48 +87,36 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
+        if(boardcontroller.checkActionField(btn.getId())) {
+            if(!boardcontroller.makePurchase(btn.getStyleClass().get(1))) {
+                return;
+            }
 
-        if(boardcontroller.checkActionField(4, btn.getId())) {
-            boardcontroller.makePurchase(btn.getStyleClass().get(1));
             placeHenchman(btn);
         }
-
-
-
     }
 
     @FXML
     public void actionFieldLaunder(MouseEvent mouseEvent) {
-
         if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
-        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET);
-
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.advancePolice();
-
-        placeHenchman(btn);
+        // Based on the given type the right method will be called.
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.SUPERMARKET, btn);
     }
 
     @FXML
     public void actionFieldHealer(MouseEvent mouseEvent) {
-
         if(!boardcontroller.board.checkYourTurn()) {
             return;
         }
 
-        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER);
-
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().contains("police")) {
-            boardcontroller.advancePolice();
-        }
-
-        placeHenchman(btn);
+        boardcontroller.app.popUpLaunderMoneyController.launderMoney(PopUpLaunderMoneyController.LaunderType.HEALER, btn);
     }
 
     @FXML
@@ -137,7 +128,7 @@ public class BoardView implements Observer {
 
         Button btn = (Button) mouseEvent.getSource();
 
-        boardcontroller.updateMoneyOnPosition(realMoney, plus, Integer.parseInt(btn.getId()));
+        boardcontroller.updateMoneyOnPosition(Integer.parseInt(btn.getId()));
 
         if (btn.getStyleClass().contains("glasses")) {
             boardcontroller.makeFirstPlayer();
@@ -153,20 +144,21 @@ public class BoardView implements Observer {
             return;
         }
 
-        boardcontroller.app.popUpBahamasController.bahamas();
+        if(boardcontroller.board.policePawn.planeCheck()) {
+            return;
+        }
 
         Button btn = (Button) mouseEvent.getSource();
 
-        if(btn.getStyleClass().contains("ticket") && !boardcontroller.checkCard(new PlaneTicket())) {
-            System.out.println("player has no ticket!");
-            return;
-        }
-        else if(!btn.getStyleClass().contains("ticket")
-                && !boardcontroller.checkActionField(4, btn.getId())) {
-            return;
-        }
+        if(btn.getStyleClass().contains("ticket")) {
+            if(!boardcontroller.checkCard(new PlaneTicket())) {
+                return;
+            }
 
-        placeHenchman(btn);
+            boardcontroller.openBahamas(btn);
+        } else if (boardcontroller.checkActionField(btn.getId())) {
+            boardcontroller.openBahamas(btn);
+        }
     }
 
     @FXML
@@ -181,7 +173,6 @@ public class BoardView implements Observer {
         boardcontroller.printMoney();
 
         if(btn.getStyleClass().contains("police")) {
-
             boardcontroller.advancePolice();
         }
 
@@ -191,10 +182,19 @@ public class BoardView implements Observer {
 
     @FXML
     public void pressRules(MouseEvent mouseEvent) {
+        boardcontroller.rulesPressed();
+    }
 
+    @FXML
+    public void pressMute(MouseEvent mouseEvent) {
+        SoundManager.toggleMute();
 
-        Button btn = (Button) mouseEvent.getSource();
-        placeHenchman(btn);
+        if (SoundManager.muteSound) {
+            muteButton.setOpacity(1);
+        }
+        else {
+            muteButton.setOpacity(0.5);
+        }
     }
 
     @FXML
@@ -206,15 +206,11 @@ public class BoardView implements Observer {
             return;
         }
 
-
-
         boardcontroller.app.playerCardController.setPlayerID(player);
         boardcontroller.app.loadView(PlayerCardView.class, boardcontroller.app.playerCardController);
     }
 
     public void placeHenchman(Button btn) {
-        boardcontroller.board.game.nextTurn();
-
         boardcontroller.henchmanPlaced(btn);
     }
 
@@ -233,7 +229,6 @@ public class BoardView implements Observer {
 
         Board board = (Board) observable;
 
-
         updateBlackMarket(board);
         updatePolicePawn(board);
 
@@ -243,16 +238,20 @@ public class BoardView implements Observer {
         updateMoney(board);
 
         setCurrentPlayerShadow(board);
+        setSunglasses(board);
     }
 
     public void updateBlackMarket(Board board) {
-        for (int i = 0; i < 7; i++) {
-            try {
-                ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
-            }catch (NullPointerException e) {
-                System.out.println("no image");
-            }
+        ArrayList<Card> cardRow = board.blackmarket.cardRow;
+
+        for (int i = 0; i < cardRow.size(); i++) {
+            ((ImageView) blackMarketView.getChildren().get(i)).setImage(board.blackmarket.getCard(i).getImage());
         }
+
+        for (int j = blackMarketView.getChildren().size()-1; j >= cardRow.size(); j--) {
+            blackMarketView.getChildren().remove(j);
+        }
+
     }
 
     public void updatePolicePawn(Board board) {
@@ -261,15 +260,25 @@ public class BoardView implements Observer {
 
         Bounds bounds = policePawn.screenToLocal(policePawn.getLayoutBounds());
 
+
         try {
             policePawn.setX(bounds.getMinX());
 
             //Pawn is too low, so set it a big higher
-            policePawn.setY(bounds.getMaxY()-20);
+            policePawn.setY(bounds.getMinY());
         } catch (NullPointerException e) {}
 
+        if (board.policePawn.endCheck()) {
+            board.game.localPlayer.updateMoneyReduce(MoneyType.REAL,board.game.localPlayer.getRealMoney().getTotalMoney()/2);
+            EventHandler.getInstance().endRound();
+            EventHandler.getInstance().endGame();
+            boardcontroller.endGame();
+        }
     }
 
+    /**
+     * Removes all of the henchmen from the board and enbaled all of the buttons again.
+     */
     public void resetHenchman() {
         Set<Node> nodes = pane.lookupAll(".henchman");
 
@@ -290,8 +299,21 @@ public class BoardView implements Observer {
                 children.add(0, newHenchman);
             }
         }
+
+        //Enable all of the action field buttons again (21 buttons)
+        for(int i = 0; i <= 21; i++) {
+            Button btn = (Button) pane.lookup(".actionfield-" + i);
+
+            if(btn != null) {
+                btn.setDisable(false);
+            }
+        }
     }
 
+    /**
+     * Adds all of the henchmen that have been placed to the board, and disables the buttons.
+     * @param board
+     */
     public void addHenchman(Board board) {
         for (Henchman henchman : board.getHenchmen()) {
             VBox henchmanbox = (VBox) pane.lookup("#henchman-" + henchman.getOwner());
@@ -306,6 +328,13 @@ public class BoardView implements Observer {
             henchmanImage.getStyleClass().add("henchman");
 
             pane.getChildren().add(henchmanImage);
+
+            //Disable the button that it's placed on
+            Button btn = (Button) pane.lookup("." + henchman.getBtnId());
+
+            if(btn != null) {
+                btn.setDisable(true);
+            }
         }
     }
 
@@ -313,7 +342,6 @@ public class BoardView implements Observer {
         //FOR LOOP
         HashMap<String, String> map = boardcontroller.board.getPlayersAndCards();
         for (Map.Entry playerValues : map.entrySet()) {
-            System.out.println("Key: " + playerValues.getKey() + " & Value: " + playerValues.getValue());
             switch (playerValues.getKey().toString()) {
                 case "1":
                     crocplayer.setText(playerValues.getValue().toString());
@@ -331,6 +359,12 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * This method sets the money textfields in the boardview
+     *
+     * @author Ali Rezaa Ghariebiyan
+     * @version 11-06-2019
+     * */
     public void updateMoney(Board board) {
         this.qualityOneMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityOne()));
         this.qualityTwoMoney.setText(String.valueOf(board.game.localPlayer.getFakeMoney().getQualityTwo()));
@@ -339,6 +373,10 @@ public class BoardView implements Observer {
         this.totalBankMoney.setText(String.valueOf(board.game.localPlayer.getBahamasBank().getTotalBankMoney()));
     }
 
+    /**
+     * Adds a shadow to the players who's turn it is.
+     * @param board the board model
+     */
     public void setCurrentPlayerShadow(Board board) {
         String[] profilePictures = {"#profile-croc", "#profile-deer", "#profile-herron", "#profile-hippo"};
         for(int i = 0; i < profilePictures.length; i++) {
@@ -356,6 +394,22 @@ public class BoardView implements Observer {
         profilePicture.setEffect(shadow);
     }
 
+    /**
+     * Adds glasses to the player's profile picture who starts a round.
+     * Resets the other images first, so we dont get doubles.
+     * @param board the board model
+     */
+    public void setSunglasses(Board board) {
+        for (Player player : board.game.getPlayers()) {
+            ImageView profilePicture = (ImageView) pane.lookup("#profile-" + player.getCharacterName());
+            profilePicture.setImage(player.getCharacterImagePath());
+        }
+
+        Player firstPlayer = board.firstPlayerPawn.getFirstPlayer();
+        ImageView profilePicture = (ImageView) pane.lookup("#profile-" + firstPlayer.getCharacterName());
+        profilePicture.setImage(firstPlayer.getCharacterGlassesImagePath());
+    }
+
     @Override
     public void start() {
         for (int i = 0; i < 7; i++) {
@@ -370,7 +424,6 @@ public class BoardView implements Observer {
         playersAndCards();
 
         boardcontroller.registerListeners();
-
 
     }
 }
