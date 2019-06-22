@@ -71,6 +71,12 @@ public class ScoreboardView implements Observer {
         stage.getScene().setRoot(pane);
     }
 
+    /**
+     * This method sets the ordered players based on scores, on the right place in the view
+     *
+     * @author Robin van den Berg
+     */
+
     public void showScores() {
 
         Map<String, Integer> data = controller.getScores(controller.loadScores().getPlayers());
