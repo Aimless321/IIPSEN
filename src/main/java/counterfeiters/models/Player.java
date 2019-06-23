@@ -111,6 +111,12 @@ public class Player{
         return new Image(getClass().getResourceAsStream(imagePath));
     }
 
+    /**
+     * Prints the money based on the upgrades and printers
+     *
+     * @author Robin van den Berg, Leander Loomans, Wesley Bijleveld
+     */
+
     public void printMoney()
     {
         int printerCounter = 0;

@@ -1,5 +1,11 @@
 package counterfeiters.models;
 
+/**
+ * The model containing the rules.
+ *
+ * @author Robin van den Berg
+ */
+
 public class Rules {
 
     String page;

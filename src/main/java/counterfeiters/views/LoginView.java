@@ -74,6 +74,12 @@ public class LoginView implements Observer {
 
     }
 
+    /**
+     * Gets the name and the password from the fields and pass it to the controller.
+     *
+     * @author Robin van den Berg
+     */
+
     @FXML
     public void pressLogIn()
     {

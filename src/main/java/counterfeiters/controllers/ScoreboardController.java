@@ -27,6 +27,13 @@ public class ScoreboardController {
         app.gameController.registerObserver(observer);
     }
 
+    /**
+     *  returns the game ID of the game, so the view knows what gamescores to load
+     *
+     * @author Robin van den Berg
+     * @return the game of the players
+     */
+
     public Game loadScores() {
 
         app.gameController.game.getScores(app.gameController.game.getPlayers());
@@ -35,6 +42,14 @@ public class ScoreboardController {
 
         return fb.get("games",app.boardController.board.game.getGameId()).toObject(Board.class).game;
     }
+
+    /**
+     * Used as bridge between the view and the game model, to load the map with scores and players.
+     *
+     * @author Robin van den Berg
+     * @param players the players of the game
+     * @return the scores of the players and themselves
+     */
 
     public Map<String,Integer> getScores(ArrayList<Player> players) {
         return app.gameController.game.getScores(players);
