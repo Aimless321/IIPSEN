@@ -20,6 +20,15 @@ public class PlayerCardController {
         app.accountController.registerObserver(observer);
     }
 
+    /**
+     * This method adds all cards that the player owns to the Flowpane.
+     * For every card, an imageview is created.
+     * Next, the image of the card is added to the imageview.
+     * The imageview is added to the Flowpane and when all cards are inserted the Flowpane is returned.
+     * @author: Leander Loomans
+     * @param playerCardView
+     * @return
+     */
     public FlowPane makeCardView(FlowPane playerCardView) {
         ArrayList<Card> cardRow = app.gameController.game.getPlayers().get(player).getCards();
         for (int i = 0; i < cardRow.size(); i++) {
