@@ -45,7 +45,6 @@ public class GameListView implements Observer{
     private List<Game> games = new ArrayList<>();
 
     private int counter = 0;
-    private String chosenGame;
 
 
     //Need an empty constructor for FXML
@@ -122,14 +121,10 @@ public class GameListView implements Observer{
             Platform.runLater(() -> vBox.getChildren().clear());
             games.clear();
 
-
             //Add new rows for lobbylist
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
-
-
-
-
+            //If the size of the list with games is not 0 the game will be be added to the view
             if (updatedGames.size() != 0) {
                 for (Game game : updatedGames) {
                     Platform.runLater(() ->
@@ -161,6 +156,10 @@ public class GameListView implements Observer{
 
     }
 
+    /**
+     * Inserts the game into the game list as a row
+     * @param game is the game that it is going to be inserted
+     */
     public void addGameInView(Game game){
 
         vBox.setStyle("-fx-background-color: transparent");
@@ -191,10 +190,10 @@ public class GameListView implements Observer{
         icon.setFitWidth(25);
 
         HBox horBox = new HBox(lobbyName, region1, region2, startTime, numPlayers, icon, new Label("  "));
+        horBox.getStyleClass().addAll("hbox","hbox:hover");
         horBox.setAlignment(Pos.CENTER_LEFT);
 
 
-        horBox.setStyle("-fx-cursor: hand");
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -206,25 +205,7 @@ public class GameListView implements Observer{
             }
         });
 
-        //Add hover effects (doesnt work in css)
-        horBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-
-                    }
-                }
-            });
-        horBox.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-
-                }
-            }
-        });
-
-
+        // Even and odd rows get different backgrounds
         horBox.setStyle("-fx-pref-height: 60");
         horBox.setStyle("-fx-pref-width: 980");
 

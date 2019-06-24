@@ -13,6 +13,12 @@ import counterfeiters.views.RulesView;
 
 import javax.annotation.Nullable;
 
+/**
+ * This controller loads the linked views and directs the chosen game(when game clicked) to the gamecontroller adn the lobbycontroller
+ *
+ * @author Melissa basgol
+ * */
+
 public class GameListController {
 
     private ApplicationController app;
@@ -29,7 +35,7 @@ public class GameListController {
     }
 
     /**
-     * Create the firebase listener, for the collection lobbies.
+     * Create the firebase listener, for the collection games.
      */
     public void registerListeners() {
         FirebaseService fb = FirebaseService.getInstance();
@@ -55,7 +61,6 @@ public class GameListController {
     }
 
     public void leaveButtonPressed() {
-        //TODO: Go to the MainMenuView
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
 
