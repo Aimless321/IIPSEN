@@ -250,7 +250,6 @@ public class Board implements Observable, EventListener {
     public void setPlayersAndCards() {
         for (Player player : game.getPlayers()) {
             hmap.put(String.valueOf(player.getPlayerId()), player.getUserName());
-            //String charachtertext = player.getCharacterName() + "player";
         }
     }
 
