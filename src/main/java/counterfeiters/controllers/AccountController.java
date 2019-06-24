@@ -35,6 +35,15 @@ public class AccountController {
         else {return false;}
     }
 
+    /**
+     * return true if username and password are correct, else false
+     *
+     * @param username username of the player
+     * @param password password of the player
+     * @author Robin van den Berg
+     * @return returns true or false, depending on the input
+     */
+
     public boolean loginPressed(String username, String password)
     {
         if(account.checkCredentials(username, password))

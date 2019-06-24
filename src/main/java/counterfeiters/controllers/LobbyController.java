@@ -96,7 +96,6 @@ public class LobbyController {
             //Remove the old game data, by creating a new game
             app.gameController.deleteGame();
 
-            //TODO: Go to the lobbylistview, not the mainmenu
             app.loadView(MainMenuView.class, app.mainMenuController);
         });
 

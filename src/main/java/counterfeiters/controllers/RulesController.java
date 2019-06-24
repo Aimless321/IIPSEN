@@ -3,7 +3,7 @@ package counterfeiters.controllers;
 import counterfeiters.models.Rules;
 
 /**
- * Dit is de controller die de applicatiecontroller-methode nodig heeft om te werken.
+ * The link between the rules model and the rules view
  *
  * @author Robin van den Berg.
  */

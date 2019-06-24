@@ -16,6 +16,14 @@ public class LoginController {
         this.app = applicationController;
     }
 
+
+    /**
+     *  Shows the main menu if username and password are both correct.
+     *
+     * @param username the username of the player
+     * @param password the password of the player
+     * @author Robin van den Berg
+     */
     public void loginButtonPressed(String username, String password)
     {
         if(app.accountController.loginPressed(username, password))
