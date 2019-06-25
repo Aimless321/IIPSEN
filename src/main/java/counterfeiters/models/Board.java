@@ -174,6 +174,15 @@ public class Board implements Observable, EventListener {
         notifyAllObservers();
     }
 
+
+    /**
+     * This method ensures the purchase of a card.
+     * It takes the number of the card that is to be purchased and adds that card to the player.
+     * The card is then 'purchased' from the black market.
+     * @param cardNumber
+     * @return
+     * @author: LeanderLoomans
+     */
     public boolean makePurchase(int cardNumber) {
         Card card;
 
