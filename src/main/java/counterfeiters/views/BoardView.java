@@ -197,6 +197,11 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * This method loads the view showing the cards of the relevant player.
+     * @author: LeanderLoomans
+     * @param mouseEvent
+     */
     @FXML
     public void pressCards(MouseEvent mouseEvent) {
         ImageView img = (ImageView) mouseEvent.getSource();
@@ -416,6 +421,7 @@ public class BoardView implements Observer {
 
     @Override
     public void start() {
+        //create imageviews for the cards
         for (int i = 0; i < 7; i++) {
             ImageView imageview = new ImageView();
             imageview.setFitWidth(111);

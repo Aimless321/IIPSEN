@@ -15,6 +15,12 @@ public class BlackMarket implements EventListener {
         marketList = updateBlackMarket.getMarketList();
     }
 
+    /**
+     * This method takes the first card from marketList and adds it to cardRow.
+     * The card will be removed from marketList.
+     * @author: LeanderLoomans
+     * @param card
+     */
     public void addToMarket(Card card) {
         marketList.add(card);
     }
@@ -48,6 +54,14 @@ public class BlackMarket implements EventListener {
         }
     }
 
+    /**
+     * This method gives the correct card to the player.
+     * It loops through the marketList until it finds an object that matches cardtype.
+     * That card is removed from the marketList and returned.
+     * @param cardtype
+     * @return
+     * @author: LeanderLoomans
+     */
     public Card givePlayerCard(Card cardtype) {
         for (Card n : marketList) {
             if (n.getClass() == cardtype.getClass()) {
@@ -68,6 +82,7 @@ public class BlackMarket implements EventListener {
         cardRow.remove(position);
     }
 
+    //a blank card to ensure that there is an empty space in the market
     public void makeCardPurchased(int position) {
         cardRow.set(position, new BlancCard());
     }
@@ -82,7 +97,7 @@ public class BlackMarket implements EventListener {
 
     @Override
     public void onRoundEnd() {
-        //Remove first 2 cards
+        //Remove first 2 existing cards
         if (cardRow.size()>1) {
             cardRow.remove(0);
             cardRow.remove(0);
