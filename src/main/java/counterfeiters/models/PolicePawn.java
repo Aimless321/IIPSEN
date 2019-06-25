@@ -43,6 +43,16 @@ public class PolicePawn{
         }
     }
 
+    /**
+    According to the position of the police pawn,
+     laundering money from certain qualities fake money at the supermarket will be blocked
+     returning 1 means: there can no longer quality one fake money be laundered
+     returning 2 means: there can no longer quality two fake money be laundered
+     returning 3 means: there can no longer quality three fake money be laundered
+     returning 0 means: all quality fake moneys can be laundered
+
+     @author Melissa Basgol
+     */
     public int qualityCheck() {
         if (pawnPosition >= 11 && pawnPosition < 13) {
             return 1;
@@ -58,6 +68,11 @@ public class PolicePawn{
         }
     }
 
+    /**
+     Returns true if the police pawn is on "godfather"
+
+     @author Melissa Basgol
+     */
     public boolean godfatherCheck() {
         if (pawnPosition == 10 || pawnPosition == 16) {
             return true;
@@ -65,6 +80,11 @@ public class PolicePawn{
         return false;
     }
 
+    /**
+     Returns true if the police pawn is on the position that blocks flying to the Bahamas
+
+     @author Melissa Basgol
+     */
     public boolean planeCheck() {
         if (pawnPosition == 15) {
             return true;
@@ -72,6 +92,12 @@ public class PolicePawn{
         return false;
     }
 
+
+    /**
+     Returns true if the police pawn is on the last position so that it knows that the game has to end
+
+     @author Melissa Basgol
+     */
     public boolean endCheck(){
         if (pawnPosition == 19){
             return true;

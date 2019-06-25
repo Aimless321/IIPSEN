@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class LobbyListView implements Observer {
 
-
     @FXML
     public Pane pane;
     @FXML
@@ -45,7 +44,6 @@ public class LobbyListView implements Observer {
 
 
     private int counter = 0;
-    private String chosenGame;
 
     //Need an empty constructor for FXML
     public LobbyListView() {
@@ -120,8 +118,6 @@ public class LobbyListView implements Observer {
 
 
             //Add new games for lobbylist
-
-
             ArrayList<Game> updatedGames = firebaseModel.getGames();
 
             if (updatedGames.size() == 0 || updatedGames.isEmpty()) {
@@ -130,6 +126,10 @@ public class LobbyListView implements Observer {
                 return;
             }
 
+            /*For game in the updatedGames list,
+            if the game hasn't started (round is not 1) it will be added to the view.
+            When the round is bigger than 1, it is already deleted from the collection "lobbies" in firebase
+            */
             for (Game game : updatedGames) {
                 if (game.getRound() != 1) {
                     Platform.runLater(() ->
@@ -160,8 +160,8 @@ public class LobbyListView implements Observer {
     }
 
     /**
-     * Inserts the game into the lobby as a row
-     * @param game is the game that it is going to insert
+     * Inserts the game into the lobbylist as a row
+     * @param game is the game that it is going to be inserted
      */
     public void addLobbyInView(Game game){
 
@@ -190,6 +190,8 @@ public class LobbyListView implements Observer {
         horBox.getStyleClass().addAll("hbox","hbox:hover");
         horBox.setAlignment(Pos.CENTER);
 
+
+        //When a hbox is double clicked, the game id will be retrieved so that the correct lobby can be loaded
         horBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -205,6 +207,7 @@ public class LobbyListView implements Observer {
             }
         });
 
+        // Even and odd rows get different backgrounds
         if (counter %2 == 0) {
             horBox.setStyle("-fx-background-image: url(background/light_back.JPG)");
         }
@@ -212,6 +215,7 @@ public class LobbyListView implements Observer {
             horBox.setStyle("-fx-background-image: url(background/dark_back.JPG)");
         }
 
+        // When a lobby is full, the hbox becomes red
         if(game.getNumPlayers()>=4){
             horBox.setStyle("-fx-background-image: url(background/red-back.JPG)");
             numPlayers.setTextFill(Color.DARKRED);

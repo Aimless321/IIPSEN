@@ -15,7 +15,8 @@ import counterfeiters.views.RulesView;
 import javax.annotation.Nullable;
 
 /**
- * This controller loads the linked views and directs the chosen game(when lobby clicked) to the gamecontroller adn the lobbycontroller
+ * This controller loads the linked views and directs the chosen game(when lobby clicked)
+ * to the gamecontroller and the lobbycontroller
  *
  * @author Melissa basgol
  * */
@@ -23,7 +24,6 @@ import javax.annotation.Nullable;
 public class LobbyListController {
     private ApplicationController app;
     public FirebaseModel firebaseModel;
-    public Game chosenGame ;
     private ListenerRegistration listener;
 
     public LobbyListController(ApplicationController applicationController) {
@@ -70,9 +70,9 @@ public class LobbyListController {
     public void leaveButtonPressed() {
         listener.remove();
 
-        //TODO: Go to the MainMenuView
         app.loadView(MainMenuView.class, app.mainMenuController);
     }
+
 
     public void clickLobby(String chosenGame){
         listener.remove();

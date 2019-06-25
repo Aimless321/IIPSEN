@@ -343,8 +343,12 @@ public class BoardView implements Observer {
         }
     }
 
+    /**
+     * The player username will be displayed at the correct position where the players' icon and cards are displayed
+     *
+     * @author Melissa Basgol
+     */
     public void playersAndCards() {
-        //FOR LOOP
         HashMap<String, String> map = boardcontroller.board.getPlayersAndCards();
         for (Map.Entry playerValues : map.entrySet()) {
             switch (playerValues.getKey().toString()) {
